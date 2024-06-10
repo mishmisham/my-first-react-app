@@ -1,0 +1,28 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "serve": "node server.js",
+    "clear": "node clearDB.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.41",
+    "@sequelize/sqlite3": "^7.0.0-alpha.41",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "jose": "^5.4.0",
+    "ws": "^8.17.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^6.0.4"
+  }
+}

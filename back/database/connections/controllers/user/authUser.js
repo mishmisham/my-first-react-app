@@ -1,4 +1,4 @@
-import { db } from '../../userDB.js';
+import { userDB } from '../../userDB.js';
 import { responseTemplate } from '../../interface/responseTemplate.js';
 import { validateEmptyFields } from './utils/validateEmptyFields.js';
 import { encryptPassword } from './utils/encryptPassword.js';
@@ -12,7 +12,7 @@ import {
 } from './config.js';
 const {
     users,
-} = db.data;
+} = userDB.data;
 
 const checkAuthErrors = async(req) => {
 
@@ -87,13 +87,8 @@ const initUserSession = async (userData) => {
         secret,
     }
 
-    const newSession = await users.session.create();
-    await users.content.update({
-       ...session
-    }, {
-        where: {
-            id: newSession.id
-        }
+    await users.session.create({
+        ...session
     });
 
     return {

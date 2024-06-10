@@ -1,9 +1,9 @@
-import { db } from '../../db.js';
+import { userDB } from '../../userDB.js';
 import { responseTemplate } from '../../interface/responseTemplate.js';
 
 const {
     accessList
-} = db.data;
+} = userDB.data;
 
 export const renameAccessGroup = async (params) => {
     await accessList.groups.update({

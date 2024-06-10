@@ -1,9 +1,9 @@
-import { db } from '../../db.js';
+import { userDB } from '../../userDB.js';
 import { responseTemplate } from '../../interface/responseTemplate.js';
 
 const {
     accessList
-} = db.data;
+} = userDB.data;
 
 export const grantAccessGroupToUser = async (params) => {
 
@@ -22,17 +22,10 @@ export const grantAccessGroupToUser = async (params) => {
         }
     }
    
-    const newItem = await accessList.users.create();
-    await accessList.groups.update({
-            user_id,
-        },
-        {
-            where: {
-                id: newItem.id
-            }
-        }
-    );
-
+    await accessList.users.create({
+        user_id,
+    });
+   
     return {
         ...responseTemplate,
         message: 'success'

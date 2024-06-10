@@ -1,11 +1,11 @@
-import { db } from '../../userDB.js';
+import { userDB } from '../../userDB.js';
 import { responseTemplate } from '../../interface/responseTemplate.js';
 import { validateEmptyFields } from './utils/validateEmptyFields.js';
 import { encryptPassword } from './utils/encryptPassword.js';
 
 const {
     users,
-} = db.data;
+} = userDB.data;
 
 const validateUser = async(req) => {
     const fields = ['email', 'name', 'password'];
@@ -47,16 +47,10 @@ export const createUser = async (req) => {
         password,
     } = data;
 
-    const newUser = await users.content.create();
-
-    await users.content.update({
+    await users.content.create({
         name: JSON.stringify(name),
         email: JSON.stringify(email),
         password: encryptPassword(JSON.stringify(password)),
-    }, {
-        where: {
-            id: newUser.id
-        }
     });
     
     return {

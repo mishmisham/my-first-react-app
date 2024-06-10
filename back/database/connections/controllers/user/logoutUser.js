@@ -1,7 +1,7 @@
-import { db } from '../../userDB.js';
+import { userDB } from '../../userDB.js';
 const {
     users,
-} = db.data;
+} = userDB.data;
 
 export const logoutUser = async (id) => {
     await users.session.destroy({

@@ -1,10 +1,10 @@
 import { Sequelize } from '@sequelize/core';
 import { SqliteDialect } from '@sequelize/sqlite3';
 
-import { userTable } from './models/userTable.js';
-import { userSessionTable } from './models/userSessionTable.js';
-import { userAccessListTable } from './models/userAccessListTable.js';
-import { accessGroupTable } from './models/accessGroupTable.js';
+import { userTable } from './schema/userTable.js';
+import { userSessionTable } from './schema/userSessionTable.js';
+import { userAccessListTable } from './schema/userAccessListTable.js';
+import { accessGroupTable } from './schema/accessGroupTable.js';
 
 const sequelize = new Sequelize({
   dialect: SqliteDialect,

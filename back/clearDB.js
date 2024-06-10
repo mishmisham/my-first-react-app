@@ -29,7 +29,5 @@ userDB.sequelize.sync({force: true}).then(async () => {
     });
   }
   
-  
-
 
 }); 

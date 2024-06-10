@@ -17,6 +17,9 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.19.2",
+    "express-graphql": "^0.12.0",
+    "faker": "^6.6.6",
+    "graphql": "^15.8.0",
     "http": "^0.0.1-security",
     "jose": "^5.4.0",
     "ws": "^8.17.0"
@@ -24,5 +27,8 @@
   "optionalDependencies": {
     "bufferutil": "^4.0.8",
     "utf-8-validate": "^6.0.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }

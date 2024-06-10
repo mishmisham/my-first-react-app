@@ -1,7 +1,7 @@
 {
-  "hash": "c4a774f1ababc0112df2",
+  "hash": "224ca8a4614eea8550c6",
   "publicPath": "/client/",
-  "outputPath": "/Users/admin/Documents/vCode/stones/front/dist/client",
+  "outputPath": "/Users/admin/Documents/vCode/stones/dist/client",
   "assetsByChunkName": {
     "client": [
       "client.css",

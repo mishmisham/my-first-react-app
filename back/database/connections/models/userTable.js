@@ -12,7 +12,7 @@ export const userTable = (sequelize) => {
 		},
         email: {
 			type: DataTypes.STRING,
-			defaultValue: ''
+			defaultValue: '',
 		},
         password: {
 			type: DataTypes.STRING,

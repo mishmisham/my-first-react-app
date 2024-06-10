@@ -15,7 +15,7 @@ export default async (req) => {
 
     const store = configureStore({
         reducer: reducers,
-        // middleware:()=>[applyMiddleware(withExtraArgument(axiosInstance))],
+        middleware: ()=>[withExtraArgument(axiosInstance)],
         devTools: process.env.NODE_ENV !== 'production',
     });
     

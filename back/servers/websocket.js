@@ -72,5 +72,5 @@ export const websocketServer = (port) => {
     });
 
     wss.on('connection', onConnect);
-    console.log(`Websocket server on ${port}`);
+    console.log("WebSocket on ws://localhost:%s", port)
 }

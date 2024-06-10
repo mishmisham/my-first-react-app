@@ -1,4 +1,4 @@
-import { db } from '../../db.js';
+import { db } from '../../userDB.js';
 import { responseTemplate } from '../../interface/responseTemplate.js';
 import { validateEmptyFields } from './utils/validateEmptyFields.js';
 import { encryptPassword } from './utils/encryptPassword.js';

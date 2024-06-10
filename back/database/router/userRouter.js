@@ -4,7 +4,7 @@ import {
     authtorizeUser,
     createNewUser,
     logOutUser
- } from '../db/controllers/userController.js'
+ } from '../connections/controllers/userController.js'
 
 const userPath = '/user/';
 

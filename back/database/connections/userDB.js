@@ -8,10 +8,10 @@ import { accessGroupTable } from './models/accessGroupTable.js';
 
 const sequelize = new Sequelize({
   dialect: SqliteDialect,
-  storage: './src/db/db.sqlite'
+  storage: './database/db/users.sqlite'
 });
 
-export const db = {
+export const userDB = {
   Sequelize,
   sequelize,
   data: {

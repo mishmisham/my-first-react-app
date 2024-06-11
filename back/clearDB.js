@@ -1,11 +1,11 @@
-import { userDB } from './database/connections/userDB.js';
+import { userDB } from './database/connections/user/userDB.js';
 import { faker } from '@faker-js/faker';
 
 const DEMO_LIST_COUNT = 10;
 
 userDB.sequelize.sync({force: true}).then(async () => {
 
-  console.log('Drop and Resync with { force: false }');
+  console.log('Drop and Resync with { force: true }');
 
   const {
     users, accessList

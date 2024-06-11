@@ -1,6 +1,6 @@
 import { DataTypes } from '@sequelize/core';
 
-export const accessGroupTable = (sequelize) => {
+export const AccessGroup = (sequelize) => {
     const accessGroup = sequelize.define('access_group', {
         id: {
 			type: DataTypes.INTEGER,
@@ -9,9 +9,16 @@ export const accessGroupTable = (sequelize) => {
 		},
 		name: {
 			type: DataTypes.STRING,
-			defaultValue: 'new access group'
+			defaultValue: 'New access group'
 		},
     });
+
+	accessGroup.associate = function (models) {
+		accessGroup.hasMany(models.UserAccessList, {
+			foreignKey: 'group_id',
+			as: 'users'
+		});
+	};
 
     return accessGroup;
 }

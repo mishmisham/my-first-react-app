@@ -6,13 +6,22 @@ export const userType = gql`
         name: String!
         email: String!
         password: String!
-        access: [UserAccessList!]
-        sessions: [UserSession!]
+    }
+
+    type UserPublic {
+        id: Int!
+        name: String!
     }
 
     extend type Mutation {
         register(input: RegisterInput!): RegisterResponse
         login(input: LoginInput!): LoginResponse
+    }
+
+    extend type Query {
+        getAllUsers: [UserPublic!]
+        getUserByID(id: Int!): UserPublic
+        getUserByEmail(email: String!): UserPublic
     }
 
     type RegisterResponse {

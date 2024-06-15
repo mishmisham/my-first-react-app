@@ -36,5 +36,10 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1"
+  },
+  "imports": {
+    "#db/*": "./database/connections/*",
+    "#userDB/*": "./database/connections/user/*",
+    "#userDB_fun/*": "./database/connections/user/controllers/*"
   }
 }

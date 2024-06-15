@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server-express';
-import { userType } from './user.js';
+import { userType } from './user/user.js';
+import { accessGroupType } from './user/accessGroup.js';
 
 const rootType = gql`
     type Query {
@@ -10,7 +11,8 @@ const rootType = gql`
     }
 `;
 
-export const schemas = [
+export const typeDefs = [
     rootType,
-    userType
+    userType,
+    accessGroupType
 ];

@@ -3,9 +3,9 @@ import cors from 'cors';
 import http, { createServer } from 'http';
 import { ApolloServer } from 'apollo-server-express';
 
-import { typeDefs } from './schemas';
-import { resolvers } from './resolvers';
-import { context } from './context';
+import { typeDefs } from './schemas/index.js';
+import { resolvers } from './resolvers/index.js';
+import { context } from './context/index.js';
 
 const app = express();
 
@@ -23,6 +23,8 @@ const apolloServer = new ApolloServer({
     },
   },
 });
+
+await apolloServer.start()
 
 apolloServer.applyMiddleware({ app, path: '/ql' });
 

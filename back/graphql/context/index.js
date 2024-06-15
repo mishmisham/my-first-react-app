@@ -1,7 +1,7 @@
 
 
 
-import { User } from '../../database/connections/user/model/user';
+import { User } from '../../database/connections/user/model/user.js';
 
 import jwt from 'jsonwebtoken';
 import { AuthenticationError } from 'apollo-server-express';
@@ -20,7 +20,7 @@ const verifyToken = async (token) => {
 };
 
 export const context = async ({ req }) => {
-  const token = (req.headers && req.headers.authorization) || '';
-  const user = await verifyToken(token)
-  return { user };
+  // const token = (req.headers && req.headers.authorization) || '';
+  // const user = await verifyToken(token)
+  return { user : 'user' };
 };

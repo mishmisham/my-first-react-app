@@ -6,21 +6,6 @@ import { server } from '../graphql/server.js';
 
 dotenv.config();
 
-// const QueryRoot = new graphql.GraphQLObjectType({
-//     name: 'Query',
-//     fields: () => ({
-//         hello: {
-//             type: graphql.GraphQLString,
-//             resolve: () => "Hello world!"
-//         }
-//     })
-// })
-
-// const schema = new graphql.GraphQLSchema({ query: QueryRoot });
-
-
-
-
 export const graphQLServer = (port) => {
     process.on('uncaughtException', (err) => {
       console.error(`${(new Date()).toUTCString()} uncaughtException:`, err);

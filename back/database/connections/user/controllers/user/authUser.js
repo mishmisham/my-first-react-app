@@ -4,7 +4,7 @@ import { validateEmptyFields } from './utils/validateEmptyFields.js';
 import { encryptPassword } from './utils/encryptPassword.js';
 import { logoutUser } from './logoutUser.js';
 import { generateRandomString } from './utils/generateRandomString.js';
-import { generateJWT } from './utils/generateJWT.js';
+// import { generateJWT } from './utils/generateJWT.js';
 import {
     ACCESS_TOKEN_TIMEOUT,
     REFRESH_TOKEN_TIMEOUT,
@@ -65,17 +65,19 @@ const initUserSession = async (userData) => {
     const expireAccess = nowTime + ACCESS_TOKEN_TIMEOUT;
     const expireRefresh = nowTime + REFRESH_TOKEN_TIMEOUT;
     
-    const accessToken = await generateJWT({
-        iss: userData.id, 
-        sub: 'auth',
-        exp: expireAccess,
-    }, secret);
+    const accessToken = 'qwerty'
+    //  await generateJWT({
+    //     iss: userData.id, 
+    //     sub: 'auth',
+    //     exp: expireAccess,
+    // }, secret);
 
-    const refreshToken = await generateJWT({
-        iss: userData.id, 
-        sub: 'auth',
-        exp: expireRefresh,
-    }, secret);
+    const refreshToken = 'qwerty'
+    //  await generateJWT({
+    //     iss: userData.id, 
+    //     sub: 'auth',
+    //     exp: expireRefresh,
+    // }, secret);
 
     const session = {
         user_id: userData.id,

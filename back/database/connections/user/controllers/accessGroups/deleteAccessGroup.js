@@ -12,6 +12,12 @@ export const deleteAccessGroup = async (input) => {
         }
     });
 
+    await accessList.users.destroy({
+        where: {
+            group_id: id
+        }
+    });
+
     return {
         deleted: true
     };

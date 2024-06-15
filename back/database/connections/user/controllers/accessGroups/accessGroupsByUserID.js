@@ -1,5 +1,4 @@
-import { userDB } from '../../userDB.js';
-import { responseTemplate } from '../../interface/responseTemplate.js';
+import { userDB } from '#userDB/userDB.js';
 
 const {
     accessList
@@ -13,10 +12,7 @@ export const accessGroupsByUserID = async (id) => {
     });
 
     return {
-        ...responseTemplate,
-        data: {
-            count,
-            rows,
-        }
+        count,
+        rows,
     }
 }

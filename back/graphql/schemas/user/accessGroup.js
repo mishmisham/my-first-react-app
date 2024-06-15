@@ -10,11 +10,26 @@ export const accessGroupType = gql`
         createAccessGroup(input: AccessGroupCreateInput!): AccessGroup
         updateAccessGroup(input: AccessGroupInput!): AccessGroup
         deleteAccessGroup(input: AccessGroupInput!): AccessGroupDeleteResponse
+        grantAccessGroupToUser(input: GrantAccessListType!): GrantAccessListType
+        removeUserFromAccessGroup(input: GrantAccessListType!): Boolean
     }
 
     extend type Query {
         getAllAccessGroups: [AccessGroup!]
         getAccessGroup(id: Int!): AccessGroup!
+        accessGroupsByUserID(id: Int!): UserAccesGroupList!
+    }
+
+
+
+    type UserAccesGroupList {
+        rows: [AccessGroup!]
+        count: Int!
+    }
+
+    input GrantAccessListType {
+        user_id: Int!
+        group_id: Int!
     }
 
     input AccessGroupCreateInput {

@@ -2,9 +2,14 @@ import { AuthenticationError, ApolloError } from 'apollo-server-express';
 
 import { getAccessGroup } from '#userDB_fun/accessGroups/getAccessGroup.js';
 import { getAllAccessGroups } from '#userDB_fun/accessGroups/getAllAccessGroups.js';
+import { accessGroupsByUserID } from '#userDB_fun/accessGroups/accessGroupsByUserID.js';
+
 import { createAccessGroup } from '#userDB_fun/accessGroups/createAccessGroup.js';
 import { updateAccessGroup } from '#userDB_fun/accessGroups/updateAccessGroup.js';
 import { deleteAccessGroup } from '#userDB_fun/accessGroups/deleteAccessGroup.js';
+
+import { grantAccessGroupToUser } from '#userDB_fun/accessGroups/grantAccessGroupToUser.js';
+import { removeUserFromAccessGroup } from '#userDB_fun/accessGroups/grantAccessGroupToUser.js';
 
 export const accessGroupResolvers = {
     Mutation: {
@@ -25,7 +30,17 @@ export const accessGroupResolvers = {
         async deleteAccessGroup(root, { input }, { user = null }) {
             const result = await deleteAccessGroup(input);
             return result;
-        }
+        },
+
+        async grantAccessGroupToUser(root, { input }, { user = null }) {
+            const result = await grantAccessGroupToUser(input);
+            return result;
+        },
+
+        async removeUserFromAccessGroup(root, { input }, { user = null }) {
+            const result = await removeUserFromAccessGroup(input);
+            return result;
+        },
     },
 
     Query: {
@@ -37,6 +52,11 @@ export const accessGroupResolvers = {
         async getAccessGroup(root, { input }, context) {
             const accessGroup = await getAccessGroup(input);
             return accessGroup;
+        },
+
+        async accessGroupsByUserID(root, { input }, { user = null }) {
+            const result = await accessGroupsByUserID(input.id);
+            return result;
         },
     }
 };

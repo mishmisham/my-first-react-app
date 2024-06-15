@@ -6,7 +6,7 @@ import {
 } from './user/createUser.js';
 import {
     logoutUser
-} from './user/logoutUser.js';
+} from './userSession/logoutUser.js';
 
 export const authtorizeUser = async (req, res) => {
     try {

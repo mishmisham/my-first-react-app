@@ -9,7 +9,7 @@ import { updateAccessGroup } from '#userDB_fun/accessGroups/updateAccessGroup.js
 import { deleteAccessGroup } from '#userDB_fun/accessGroups/deleteAccessGroup.js';
 
 import { grantAccessGroupToUser } from '#userDB_fun/accessGroups/grantAccessGroupToUser.js';
-import { removeUserFromAccessGroup } from '#userDB_fun/accessGroups/grantAccessGroupToUser.js';
+import { removeUserFromAccessGroup } from '#userDB_fun/accessGroups/removeUserFromAccessGroup.js';
 
 export const accessGroupResolvers = {
     Mutation: {

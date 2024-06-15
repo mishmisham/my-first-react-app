@@ -10,7 +10,7 @@ export const accessGroupType = gql`
         createAccessGroup(input: AccessGroupCreateInput!): AccessGroup
         updateAccessGroup(input: AccessGroupInput!): AccessGroup
         deleteAccessGroup(input: AccessGroupInput!): AccessGroupDeleteResponse
-        grantAccessGroupToUser(input: GrantAccessListType!): GrantAccessListType
+        grantAccessGroupToUser(input: GrantAccessListType!): Boolean
         removeUserFromAccessGroup(input: GrantAccessListType!): Boolean
     }
 

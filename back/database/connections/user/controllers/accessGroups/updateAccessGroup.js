@@ -5,7 +5,6 @@ const {
 } = userDB.data;
 
 export const updateAccessGroup = async (input) => {
-
     const { name, id } = input;
     const result = await accessList.groups.update(
         { name },

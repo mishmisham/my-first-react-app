@@ -16,6 +16,7 @@ export const userType = gql`
     extend type Mutation {
         register(input: RegisterInput!): RegisterResponse
         login(input: LoginInput!): LoginResponse
+        logout(input: UserAuthData!): Boolean
     }
 
     extend type Query {
@@ -41,10 +42,16 @@ export const userType = gql`
         password: String!
     }
 
+    input UserAuthData {
+        id: Int!
+        token: String!
+    }
+
     type LoginResponse {
         id: Int!
         name: String!
         email: String!
-        token: String!
+        refreshToken: String
+        accessToken: String!
     }
 `;

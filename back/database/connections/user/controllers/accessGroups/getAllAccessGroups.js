@@ -4,7 +4,7 @@ const {
     accessList
 } = userDB.data;
 
-export const getAllAccessGroups = async (input) => {
+export const getAllAccessGroups = async () => {
     const accessGroups =  await accessList.groups.findAll();
     return accessGroups;
 }

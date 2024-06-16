@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import loadable from '@loadable/component'
 
 const PageFirst = () => {
@@ -20,9 +20,7 @@ const PageFirst = () => {
   }
 
   return (
-    <div className='bg-color'>
-      <Link to="/second">second</Link>
-      <br/>
+    <div>
       <span onClick={refreshMode}>Change</span>
       <DynamiComponent />
     </div>

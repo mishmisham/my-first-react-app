@@ -2,12 +2,14 @@ import React from "react";
 import Layout from '../layouts/default';
 import PageFirst from "../pages/PageFirst";
 import PageSecond from "../pages/PageSecond";
+import AuthPage from "../pages/AuthPage/AuthPage";
 import { json, useLoaderData }from "react-router-dom";
 import { fetchCurrentUser } from '../store/actions/index'
 
 export const routesArray = [
     {
       path: "/",
+      name: 'Home',
       loader() {
         return json({ message: "Welcome to React Router!" });
       },
@@ -28,7 +30,7 @@ export const routesArray = [
     },
     {
         path: "/second",
-
+        name: 'Second page',
         loader() {
           return json({ message: "Welcome to React Router!" });
         },
@@ -42,4 +44,13 @@ export const routesArray = [
             </Layout>;
         },
     },
+    {
+      path: '/auth',
+      name: 'Auth',
+      Component() {
+        return <Layout>
+          <AuthPage />
+        </Layout>
+      }
+    }
 ];

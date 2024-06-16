@@ -1,14 +1,16 @@
 {
-  "hash": "c4a774f1ababc0112df2",
+  "hash": "6ac9cf0733fde68f2780",
   "publicPath": "/client/",
   "outputPath": "/Users/admin/Documents/vCode/stones/front/dist/client",
   "assetsByChunkName": {
     "client": [
       "client.css",
-      "client.js"
+      "client.js",
+      "client.4f7254f3fe2d8a58c9ea.hot-update.js"
     ],
     "runtime": [
-      "runtime.js"
+      "runtime.js",
+      "runtime.4f7254f3fe2d8a58c9ea.hot-update.js"
     ],
     "components-componentA": [
       "components-componentA.js"
@@ -47,7 +49,7 @@
     {
       "type": "asset",
       "name": "runtime.js",
-      "size": 119836,
+      "size": 121581,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -68,13 +70,93 @@
     {
       "type": "asset",
       "name": "client.js",
-      "size": 31270,
+      "size": 57845,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "javascriptModule": false
       },
+      "chunkNames": [
+        "client"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "client"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "src_components_combined_registerForm_registerForm_jsx.js",
+      "size": 13903,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "javascriptModule": false
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_registerForm_registerForm_jsx"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "src_components_combined_authForm_authForm_jsx.js",
+      "size": 13352,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "javascriptModule": false
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_authForm_authForm_jsx"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "client.4f7254f3fe2d8a58c9ea.hot-update.js",
+      "size": 12128,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "4f7254f3fe2d8a58c9ea"
+      },
+      "chunkNames": [
+        "client"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "client"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "client.css",
+      "size": 9861,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {},
       "chunkNames": [
         "client"
       ],
@@ -142,6 +224,48 @@
     },
     {
       "type": "asset",
+      "name": "src_components_combined_registerForm_registerForm_jsx.4f7254f3fe2d8a58c9ea.hot-update.js",
+      "size": 5292,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "4f7254f3fe2d8a58c9ea"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_registerForm_registerForm_jsx"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "src_components_combined_authForm_authForm_jsx.4f7254f3fe2d8a58c9ea.hot-update.js",
+      "size": 5228,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "4f7254f3fe2d8a58c9ea"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_authForm_authForm_jsx"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
       "name": "favicon.ico",
       "size": 3870,
       "emitted": false,
@@ -156,6 +280,40 @@
       "auxiliaryChunkNames": [],
       "auxiliaryChunkIdHints": [],
       "chunks": [],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "src_components_combined_registerForm_registerForm_jsx.css",
+      "size": 2984,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {},
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_registerForm_registerForm_jsx"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "src_components_combined_authForm_authForm_jsx.css",
+      "size": 2924,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {},
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "src_components_combined_authForm_authForm_jsx"
+      ],
       "auxiliaryChunks": []
     },
     {
@@ -220,20 +378,24 @@
     },
     {
       "type": "asset",
-      "name": "client.css",
-      "size": 1055,
+      "name": "runtime.4f7254f3fe2d8a58c9ea.hot-update.js",
+      "size": 723,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
-      "info": {},
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "4f7254f3fe2d8a58c9ea"
+      },
       "chunkNames": [
-        "client"
+        "runtime"
       ],
       "chunkIdHints": [],
       "auxiliaryChunkNames": [],
       "auxiliaryChunkIdHints": [],
       "chunks": [
-        "client"
+        "runtime"
       ],
       "auxiliaryChunks": []
     },
@@ -247,6 +409,25 @@
       "info": {
         "copied": true,
         "sourceFilename": "public/manifest.json"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "runtime.4f7254f3fe2d8a58c9ea.hot-update.json",
+      "size": 144,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "hotModuleReplacement": true,
+        "immutable": true,
+        "fullhash": "4f7254f3fe2d8a58c9ea"
       },
       "chunkNames": [],
       "chunkIdHints": [],
@@ -287,6 +468,9 @@
           "name": "runtime.js"
         },
         {
+          "name": "runtime.4f7254f3fe2d8a58c9ea.hot-update.js"
+        },
+        {
           "name": "vendor.js"
         },
         {
@@ -294,6 +478,9 @@
         },
         {
           "name": "client.js"
+        },
+        {
+          "name": "client.4f7254f3fe2d8a58c9ea.hot-update.js"
         }
       ],
       "filteredAssets": 0,
@@ -344,13 +531,15 @@
       "id": "client",
       "files": [
         "client.css",
-        "client.js"
+        "client.js",
+        "client.4f7254f3fe2d8a58c9ea.hot-update.js"
       ]
     },
     {
       "id": "runtime",
       "files": [
-        "runtime.js"
+        "runtime.js",
+        "runtime.4f7254f3fe2d8a58c9ea.hot-update.js"
       ]
     },
     {
@@ -363,6 +552,22 @@
       "id": "components-componentB",
       "files": [
         "components-componentB.js"
+      ]
+    },
+    {
+      "id": "src_components_combined_authForm_authForm_jsx",
+      "files": [
+        "src_components_combined_authForm_authForm_jsx.css",
+        "src_components_combined_authForm_authForm_jsx.js",
+        "src_components_combined_authForm_authForm_jsx.4f7254f3fe2d8a58c9ea.hot-update.js"
+      ]
+    },
+    {
+      "id": "src_components_combined_registerForm_registerForm_jsx",
+      "files": [
+        "src_components_combined_registerForm_registerForm_jsx.css",
+        "src_components_combined_registerForm_registerForm_jsx.js",
+        "src_components_combined_registerForm_registerForm_jsx.4f7254f3fe2d8a58c9ea.hot-update.js"
       ]
     },
     {

@@ -14,8 +14,6 @@ const PageSecond = () => {
   }
   return (
     <div>
-      <h1>Second</h1>
-      <Link to="/">home</Link>
       <span onClick={setter}>{mode ? 'da' : 'net'}</span>
       <Suspense>
         <Comp />

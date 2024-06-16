@@ -1,0 +1,44 @@
+$linkColor: #420068
+$borderWidth: 2px
+
+$hoverLinkColor: lighten($linkColor, 25)
+$hoverLinkBackgroundColor: lighten($linkColor, 72)
+
+$activeLinkColor: lighten($linkColor, 15)
+$activeLinkBackgroundColor: lighten($linkColor, 75)
+
+.nav-menu
+    width: 100%
+    display: flex
+    justify-content: center
+    background: #ffffff5e
+    margin: 0 auto 32px
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1)
+
+    &_item
+        padding: 6px 32px
+        display: flex
+        align-content: center
+        align-items: center
+        justify-content: center
+        color: $linkColor
+        font-weight: 300
+        transition: .15s
+        border-left: $borderWidth solid transparent
+        border-right: $borderWidth solid transparent
+        margin-left: -$borderWidth
+
+        &:first-of-type
+            margin-left: 0
+
+        &:hover
+            color: $hoverLinkColor
+            background: $hoverLinkBackgroundColor
+            border-left: $borderWidth solid $hoverLinkColor
+            border-right: $borderWidth solid $hoverLinkColor
+        
+        &.active
+            color: $activeLinkColor
+            background: $activeLinkBackgroundColor
+            border-left: $borderWidth solid $activeLinkColor
+            border-right: $borderWidth solid $activeLinkColor

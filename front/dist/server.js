@@ -9,6 +9,17 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/primitives/Preloader/preloader.jsx":
+/*!***********************************************************!*\
+  !*** ./src/components/primitives/Preloader/preloader.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _preloader_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./preloader.sass */ \"./src/components/primitives/Preloader/preloader.sass\");\n\n\nconst Preloader = props => {\n  const color = props.color || '#e43725';\n  const iconSize = props.iconSize || '64px';\n  const height = props.height || 'auto';\n  const background = props.background || 'transparent';\n  const computedStyle = {\n    height,\n    background\n  };\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    style: computedStyle,\n    className: \"preloader\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"svg\", {\n    width: iconSize,\n    height: iconSize,\n    version: \"1.1\",\n    id: \"L7\",\n    xmlns: \"http://www.w3.org/2000/svg\",\n    x: \"0px\",\n    y: \"0px\",\n    viewBox: \"0 0 100 100\",\n    enableBackground: \"new 0 0 100 100\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"path\", {\n    fill: color,\n    d: \"M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3 c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"animateTransform\", {\n    attributeName: \"transform\",\n    attributeType: \"XML\",\n    type: \"rotate\",\n    dur: \"2s\",\n    from: \"0 50 50\",\n    to: \"360 50 50\",\n    repeatCount: \"indefinite\"\n  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"path\", {\n    fill: color,\n    d: \"M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7 c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"animateTransform\", {\n    attributeName: \"transform\",\n    attributeType: \"XML\",\n    type: \"rotate\",\n    dur: \"1s\",\n    from: \"0 50 50\",\n    to: \"-360 50 50\",\n    repeatCount: \"indefinite\"\n  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"path\", {\n    fill: color,\n    d: \"M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5 L82,35.7z\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"animateTransform\", {\n    attributeName: \"transform\",\n    attributeType: \"XML\",\n    type: \"rotate\",\n    dur: \"2s\",\n    from: \"0 50 50\",\n    to: \"360 50 50\",\n    repeatCount: \"indefinite\"\n  }))));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Preloader);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/components/primitives/Preloader/preloader.jsx");
+
+/***/ }),
+
 /***/ "./src/layouts/default.jsx":
 /*!*********************************!*\
   !*** ./src/layouts/default.jsx ***!
@@ -16,7 +27,40 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_helmet_async__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet-async */ \"react-helmet-async\");\n/* harmony import */ var react_helmet_async__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _default_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./default.sass */ \"./src/layouts/default.sass\");\n/* harmony import */ var _websocket_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../websocket/client */ \"./websocket/client.js\");\n\n\n\n\nconst Layout = ({\n  children,\n  title,\n  description\n}) => {\n  _websocket_client__WEBPACK_IMPORTED_MODULE_3__[\"default\"].addEventListener(\"open\", ev => {\n    (0,_websocket_client__WEBPACK_IMPORTED_MODULE_3__.websocketSendEcho)('lorem!');\n  });\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__.HelmetProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__.Helmet, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"title\", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"meta\", {\n    name: \"description\",\n    content: description\n  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, children)));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/default.jsx");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_helmet_async__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet-async */ \"react-helmet-async\");\n/* harmony import */ var react_helmet_async__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _default_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./default.sass */ \"./src/layouts/default.sass\");\n/* harmony import */ var _parts_NavMenu_navMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/NavMenu/navMenu */ \"./src/layouts/parts/NavMenu/navMenu.jsx\");\n/* harmony import */ var _parts_defaultFooter_defaultFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/defaultFooter/defaultFooter */ \"./src/layouts/parts/defaultFooter/defaultFooter.jsx\");\n/* harmony import */ var _websocket_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../websocket/client */ \"./websocket/client.js\");\n\n\n\n\n\n\nconst Layout = ({\n  children,\n  title,\n  description\n}) => {\n  _websocket_client__WEBPACK_IMPORTED_MODULE_5__[\"default\"].addEventListener(\"open\", ev => {\n    (0,_websocket_client__WEBPACK_IMPORTED_MODULE_5__.websocketSendEcho)('lorem!');\n  });\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__.HelmetProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_1__.Helmet, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"title\", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"meta\", {\n    name: \"description\",\n    content: description\n  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"header\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_NavMenu_navMenu__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"content\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"content_page\"\n  }, children)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_defaultFooter_defaultFooter__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null)));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/default.jsx");
+
+/***/ }),
+
+/***/ "./src/layouts/parts/NavMenu/navMenu.jsx":
+/*!***********************************************!*\
+  !*** ./src/layouts/parts/NavMenu/navMenu.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _routes_routesData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../routes/routesData */ \"./src/routes/routesData.js\");\n/* harmony import */ var _navMenu_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navMenu.sass */ \"./src/layouts/parts/NavMenu/navMenu.sass\");\n\n\n\n\nconst NavMenu = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"nav\", {\n    className: \"nav-menu\"\n  }, _routes_routesData__WEBPACK_IMPORTED_MODULE_2__.routesArray.map((item, key) => {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {\n      className: \"nav-menu_item\",\n      to: item.path,\n      key: key\n    }, item.name);\n  }));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavMenu);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/parts/NavMenu/navMenu.jsx");
+
+/***/ }),
+
+/***/ "./src/layouts/parts/defaultFooter/defaultFooter.jsx":
+/*!***********************************************************!*\
+  !*** ./src/layouts/parts/defaultFooter/defaultFooter.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _defaultFooter_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultFooter.sass */ \"./src/layouts/parts/defaultFooter/defaultFooter.sass\");\n\n\nconst DefaultFooter = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"footer\", {\n    className: \"default-footer\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"section\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"p\", null, \"\\xA9 Hello world \", new Date().getFullYear())));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DefaultFooter);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/parts/defaultFooter/defaultFooter.jsx");
+
+/***/ }),
+
+/***/ "./src/pages/AuthPage/AuthPage.jsx":
+/*!*****************************************!*\
+  !*** ./src/pages/AuthPage/AuthPage.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ \"./src/components/primitives/Preloader/preloader.jsx\");\n/* harmony import */ var _authPage_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authPage.sass */ \"./src/pages/AuthPage/authPage.sass\");\n\n\n\nconst AuthPage = () => {\n  const [authMode, setAuthMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);\n  const [modeText, setModeText] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Register account');\n  const CurrentForm = authMode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"src_components_combined_authForm_authForm_jsx\").then(__webpack_require__.bind(__webpack_require__, /*! @/components/combined/authForm/authForm */ \"./src/components/combined/authForm/authForm.jsx\"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"src_components_combined_registerForm_registerForm_jsx\").then(__webpack_require__.bind(__webpack_require__, /*! @/components/combined/registerForm/registerForm */ \"./src/components/combined/registerForm/registerForm.jsx\")));\n  const changeMode = () => {\n    const newMode = !authMode;\n    const newText = newMode ? 'Register account' : 'Go to authorization';\n    setAuthMode(newMode);\n    setModeText(newText);\n  };\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {\n    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      height: \"300px\"\n    })\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CurrentForm, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"button\", {\n    className: \"auth-page_auth-btn\",\n    onClick: changeMode\n  }, modeText));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthPage);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/AuthPage/AuthPage.jsx");
 
 /***/ }),
 
@@ -27,7 +71,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _loadable_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @loadable/component */ \"@loadable/component\");\n/* harmony import */ var _loadable_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_loadable_component__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nconst PageFirst = () => {\n  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('componentA');\n  const refreshMode = () => {\n    console.log('click');\n    const newMode = mode === 'componentA' ? 'componentB' : 'componentA';\n    setMode(newMode);\n  };\n  let DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_2___default()({\n    resolved: {},\n    chunkName() {\n      return \"components-componentA\";\n    },\n    isReady(props) {\n      const key = this.resolve(props);\n      if (this.resolved[key] !== true) {\n        return false;\n      }\n      if (true) {\n        return !!__webpack_require__.m[key];\n      }\n      return false;\n    },\n    importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\")),\n    requireAsync(props) {\n      const key = this.resolve(props);\n      this.resolved[key] = false;\n      return this.importAsync(props).then(resolved => {\n        this.resolved[key] = true;\n        return resolved;\n      });\n    },\n    requireSync(props) {\n      const id = this.resolve(props);\n      if (true) {\n        return __webpack_require__(id);\n      }\n      return eval('module.require')(id);\n    },\n    resolve() {\n      if (true) {\n        return /*require.resolve*/(/*! ../components/componentA */ \"./src/components/componentA.jsx\");\n      }\n      return eval('require.resolve')(\"../components/componentA\");\n    }\n  });\n  if (mode === 'componentA') {\n    DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_2___default()({\n      resolved: {},\n      chunkName() {\n        return \"components-componentB\";\n      },\n      isReady(props) {\n        const key = this.resolve(props);\n        if (this.resolved[key] !== true) {\n          return false;\n        }\n        if (true) {\n          return !!__webpack_require__.m[key];\n        }\n        return false;\n      },\n      importAsync: () => __webpack_require__.e(/*! import() | components-componentB */ \"components-componentB\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentB */ \"./src/components/componentB.jsx\")),\n      requireAsync(props) {\n        const key = this.resolve(props);\n        this.resolved[key] = false;\n        return this.importAsync(props).then(resolved => {\n          this.resolved[key] = true;\n          return resolved;\n        });\n      },\n      requireSync(props) {\n        const id = this.resolve(props);\n        if (true) {\n          return __webpack_require__(id);\n        }\n        return eval('module.require')(id);\n      },\n      resolve() {\n        if (true) {\n          return /*require.resolve*/(/*! ../components/componentB */ \"./src/components/componentB.jsx\");\n        }\n        return eval('require.resolve')(\"../components/componentB\");\n      }\n    });\n  } else {\n    DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_2___default()({\n      resolved: {},\n      chunkName() {\n        return \"components-componentA\";\n      },\n      isReady(props) {\n        const key = this.resolve(props);\n        if (this.resolved[key] !== true) {\n          return false;\n        }\n        if (true) {\n          return !!__webpack_require__.m[key];\n        }\n        return false;\n      },\n      importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\")),\n      requireAsync(props) {\n        const key = this.resolve(props);\n        this.resolved[key] = false;\n        return this.importAsync(props).then(resolved => {\n          this.resolved[key] = true;\n          return resolved;\n        });\n      },\n      requireSync(props) {\n        const id = this.resolve(props);\n        if (true) {\n          return __webpack_require__(id);\n        }\n        return eval('module.require')(id);\n      },\n      resolve() {\n        if (true) {\n          return /*require.resolve*/(/*! ../components/componentA */ \"./src/components/componentA.jsx\");\n        }\n        return eval('require.resolve')(\"../components/componentA\");\n      }\n    });\n  }\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"bg-color\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {\n    to: \"/second\"\n  }, \"second\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"br\", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"span\", {\n    onClick: refreshMode\n  }, \"Change\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DynamiComponent, null));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageFirst);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/PageFirst.jsx");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _loadable_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @loadable/component */ \"@loadable/component\");\n/* harmony import */ var _loadable_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_loadable_component__WEBPACK_IMPORTED_MODULE_1__);\n\n\nconst PageFirst = () => {\n  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('componentA');\n  const refreshMode = () => {\n    console.log('click');\n    const newMode = mode === 'componentA' ? 'componentB' : 'componentA';\n    setMode(newMode);\n  };\n  let DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_1___default()({\n    resolved: {},\n    chunkName() {\n      return \"components-componentA\";\n    },\n    isReady(props) {\n      const key = this.resolve(props);\n      if (this.resolved[key] !== true) {\n        return false;\n      }\n      if (true) {\n        return !!__webpack_require__.m[key];\n      }\n      return false;\n    },\n    importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\")),\n    requireAsync(props) {\n      const key = this.resolve(props);\n      this.resolved[key] = false;\n      return this.importAsync(props).then(resolved => {\n        this.resolved[key] = true;\n        return resolved;\n      });\n    },\n    requireSync(props) {\n      const id = this.resolve(props);\n      if (true) {\n        return __webpack_require__(id);\n      }\n      return eval('module.require')(id);\n    },\n    resolve() {\n      if (true) {\n        return /*require.resolve*/(/*! ../components/componentA */ \"./src/components/componentA.jsx\");\n      }\n      return eval('require.resolve')(\"../components/componentA\");\n    }\n  });\n  if (mode === 'componentA') {\n    DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_1___default()({\n      resolved: {},\n      chunkName() {\n        return \"components-componentB\";\n      },\n      isReady(props) {\n        const key = this.resolve(props);\n        if (this.resolved[key] !== true) {\n          return false;\n        }\n        if (true) {\n          return !!__webpack_require__.m[key];\n        }\n        return false;\n      },\n      importAsync: () => __webpack_require__.e(/*! import() | components-componentB */ \"components-componentB\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentB */ \"./src/components/componentB.jsx\")),\n      requireAsync(props) {\n        const key = this.resolve(props);\n        this.resolved[key] = false;\n        return this.importAsync(props).then(resolved => {\n          this.resolved[key] = true;\n          return resolved;\n        });\n      },\n      requireSync(props) {\n        const id = this.resolve(props);\n        if (true) {\n          return __webpack_require__(id);\n        }\n        return eval('module.require')(id);\n      },\n      resolve() {\n        if (true) {\n          return /*require.resolve*/(/*! ../components/componentB */ \"./src/components/componentB.jsx\");\n        }\n        return eval('require.resolve')(\"../components/componentB\");\n      }\n    });\n  } else {\n    DynamiComponent = _loadable_component__WEBPACK_IMPORTED_MODULE_1___default()({\n      resolved: {},\n      chunkName() {\n        return \"components-componentA\";\n      },\n      isReady(props) {\n        const key = this.resolve(props);\n        if (this.resolved[key] !== true) {\n          return false;\n        }\n        if (true) {\n          return !!__webpack_require__.m[key];\n        }\n        return false;\n      },\n      importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\")),\n      requireAsync(props) {\n        const key = this.resolve(props);\n        this.resolved[key] = false;\n        return this.importAsync(props).then(resolved => {\n          this.resolved[key] = true;\n          return resolved;\n        });\n      },\n      requireSync(props) {\n        const id = this.resolve(props);\n        if (true) {\n          return __webpack_require__(id);\n        }\n        return eval('module.require')(id);\n      },\n      resolve() {\n        if (true) {\n          return /*require.resolve*/(/*! ../components/componentA */ \"./src/components/componentA.jsx\");\n        }\n        return eval('require.resolve')(\"../components/componentA\");\n      }\n    });\n  }\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"span\", {\n    onClick: refreshMode\n  }, \"Change\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DynamiComponent, null));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageFirst);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/PageFirst.jsx");
 
 /***/ }),
 
@@ -38,7 +82,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nconst PageSecond = () => {\n  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);\n  let Comp = mode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"components-componentB\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentB */ \"./src/components/componentB.jsx\")));\n  const setter = () => {\n    console.log('mode', mode);\n    setMode(!mode);\n  };\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"Second\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {\n    to: \"/\"\n  }, \"home\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"span\", {\n    onClick: setter\n  }, mode ? 'da' : 'net'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Comp, null)));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageSecond);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/PageSecond.jsx");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nconst PageSecond = () => {\n  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);\n  let Comp = mode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"components-componentA\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ \"./src/components/componentA.jsx\"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ \"components-componentB\").then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentB */ \"./src/components/componentB.jsx\")));\n  const setter = () => {\n    console.log('mode', mode);\n    setMode(!mode);\n  };\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"span\", {\n    onClick: setter\n  }, mode ? 'da' : 'net'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Comp, null)));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageSecond);\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/PageSecond.jsx");
 
 /***/ }),
 
@@ -49,7 +93,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   routesArray: () => (/* binding */ routesArray)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _layouts_default__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/default */ \"./src/layouts/default.jsx\");\n/* harmony import */ var _pages_PageFirst__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/PageFirst */ \"./src/pages/PageFirst.jsx\");\n/* harmony import */ var _pages_PageSecond__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/PageSecond */ \"./src/pages/PageSecond.jsx\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _store_actions_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/actions/index */ \"./src/store/actions/index.js\");\n\n\n\n\n\n\nconst routesArray = [{\n  path: \"/\",\n  loader() {\n    return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.json)({\n      message: \"Welcome to React Router!\"\n    });\n  },\n  loadData: ({\n    dispatch\n  }) => dispatch((0,_store_actions_index__WEBPACK_IMPORTED_MODULE_5__.fetchCurrentUser)()),\n  Component() {\n    // let data = useLoaderData();\n    // console.log(data)\n\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_layouts_default__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      title: \"Homepage\",\n      description: \"home page seo description\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageFirst__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null));\n  }\n}, {\n  path: \"/second\",\n  loader() {\n    return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.json)({\n      message: \"Welcome to React Router!\"\n    });\n  },\n  Component() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_layouts_default__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      title: \"Second page\",\n      description: \"other page seo description\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageSecond__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n  }\n}];\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/routes/routesData.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   routesArray: () => (/* binding */ routesArray)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _layouts_default__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/default */ \"./src/layouts/default.jsx\");\n/* harmony import */ var _pages_PageFirst__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/PageFirst */ \"./src/pages/PageFirst.jsx\");\n/* harmony import */ var _pages_PageSecond__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/PageSecond */ \"./src/pages/PageSecond.jsx\");\n/* harmony import */ var _pages_AuthPage_AuthPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/AuthPage/AuthPage */ \"./src/pages/AuthPage/AuthPage.jsx\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _store_actions_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store/actions/index */ \"./src/store/actions/index.js\");\n\n\n\n\n\n\n\nconst routesArray = [{\n  path: \"/\",\n  name: 'Home',\n  loader() {\n    return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.json)({\n      message: \"Welcome to React Router!\"\n    });\n  },\n  loadData: ({\n    dispatch\n  }) => dispatch((0,_store_actions_index__WEBPACK_IMPORTED_MODULE_6__.fetchCurrentUser)()),\n  Component() {\n    // let data = useLoaderData();\n    // console.log(data)\n\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_layouts_default__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      title: \"Homepage\",\n      description: \"home page seo description\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageFirst__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null));\n  }\n}, {\n  path: \"/second\",\n  name: 'Second page',\n  loader() {\n    return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.json)({\n      message: \"Welcome to React Router!\"\n    });\n  },\n  Component() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_layouts_default__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      title: \"Second page\",\n      description: \"other page seo description\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageSecond__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n  }\n}, {\n  path: '/auth',\n  name: 'Auth',\n  Component() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_layouts_default__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_AuthPage_AuthPage__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null));\n  }\n}];\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/routes/routesData.js");
 
 /***/ }),
 
@@ -177,9 +221,9 @@ eval("const webpack = __webpack_require__(/*! webpack */ \"webpack\");\nconst {\
 /*!*********************************!*\
   !*** ./webpack/webpack.base.js ***!
   \*********************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const scriptExtensions = /\\.(tsx|ts|js|jsx|mjs)$/;\nconst imageExtensions = /\\.(bmp|gif|jpg|jpeg|png)$/;\nconst fontsExtension = /\\.(eot|otf|ttf|woff|woff2)$/;\nmodule.exports = {\n  resolve: {\n    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']\n  },\n  module: {\n    rules: [{\n      test: scriptExtensions,\n      exclude: /node_modules/,\n      use: 'babel-loader'\n    }, {\n      test: fontsExtension,\n      type: 'asset'\n    }, {\n      test: /\\.svg/,\n      type: 'asset/inline'\n    }, {\n      test: imageExtensions,\n      type: 'asset/resource'\n    }]\n  }\n};\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/webpack/webpack.base.js");
+eval("const path = __webpack_require__(/*! path */ \"path\");\nconst scriptExtensions = /\\.(tsx|ts|js|jsx|mjs)$/;\nconst imageExtensions = /\\.(bmp|gif|jpg|jpeg|png)$/;\nconst fontsExtension = /\\.(eot|otf|ttf|woff|woff2)$/;\nmodule.exports = {\n  resolve: {\n    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],\n    alias: {\n      '@': path.resolve(__dirname, '../src/')\n    }\n  },\n  module: {\n    rules: [{\n      test: scriptExtensions,\n      exclude: /node_modules/,\n      use: 'babel-loader'\n    }, {\n      test: fontsExtension,\n      type: 'asset'\n    }, {\n      test: /\\.svg/,\n      type: 'asset/inline'\n    }, {\n      test: imageExtensions,\n      type: 'asset/resource'\n    }]\n  }\n};\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/webpack/webpack.base.js");
 
 /***/ }),
 
@@ -194,6 +238,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/components/primitives/Preloader/preloader.sass":
+/*!************************************************************!*\
+  !*** ./src/components/primitives/Preloader/preloader.sass ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/components/primitives/Preloader/preloader.sass");
+
+/***/ }),
+
 /***/ "./src/layouts/default.sass":
 /*!**********************************!*\
   !*** ./src/layouts/default.sass ***!
@@ -202,6 +257,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/default.sass");
+
+/***/ }),
+
+/***/ "./src/layouts/parts/NavMenu/navMenu.sass":
+/*!************************************************!*\
+  !*** ./src/layouts/parts/NavMenu/navMenu.sass ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/parts/NavMenu/navMenu.sass");
+
+/***/ }),
+
+/***/ "./src/layouts/parts/defaultFooter/defaultFooter.sass":
+/*!************************************************************!*\
+  !*** ./src/layouts/parts/defaultFooter/defaultFooter.sass ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/layouts/parts/defaultFooter/defaultFooter.sass");
+
+/***/ }),
+
+/***/ "./src/pages/AuthPage/authPage.sass":
+/*!******************************************!*\
+  !*** ./src/pages/AuthPage/authPage.sass ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=Users/admin/Documents/vCode/stones/front/src/pages/AuthPage/authPage.sass");
 
 /***/ }),
 
@@ -561,7 +649,7 @@ module.exports = require("path");
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return undefined;
+/******/ 			return "" + chunkId + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -584,6 +672,92 @@ module.exports = require("path");
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
 /******/ 		__webpack_require__.p = "";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/css loading */
+/******/ 	(() => {
+/******/ 		if (typeof document === "undefined") return;
+/******/ 		var createStylesheet = (chunkId, fullhref, oldTag, resolve, reject) => {
+/******/ 			var linkTag = document.createElement("link");
+/******/ 		
+/******/ 			linkTag.rel = "stylesheet";
+/******/ 			linkTag.type = "text/css";
+/******/ 			if (__webpack_require__.nc) {
+/******/ 				linkTag.nonce = __webpack_require__.nc;
+/******/ 			}
+/******/ 			var onLinkComplete = (event) => {
+/******/ 				// avoid mem leaks.
+/******/ 				linkTag.onerror = linkTag.onload = null;
+/******/ 				if (event.type === 'load') {
+/******/ 					resolve();
+/******/ 				} else {
+/******/ 					var errorType = event && event.type;
+/******/ 					var realHref = event && event.target && event.target.href || fullhref;
+/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + errorType + ": " + realHref + ")");
+/******/ 					err.name = "ChunkLoadError";
+/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
+/******/ 					err.type = errorType;
+/******/ 					err.request = realHref;
+/******/ 					if (linkTag.parentNode) linkTag.parentNode.removeChild(linkTag)
+/******/ 					reject(err);
+/******/ 				}
+/******/ 			}
+/******/ 			linkTag.onerror = linkTag.onload = onLinkComplete;
+/******/ 			linkTag.href = fullhref;
+/******/ 		
+/******/ 		
+/******/ 			if (oldTag) {
+/******/ 				oldTag.parentNode.insertBefore(linkTag, oldTag.nextSibling);
+/******/ 			} else {
+/******/ 				document.head.appendChild(linkTag);
+/******/ 			}
+/******/ 			return linkTag;
+/******/ 		};
+/******/ 		var findStylesheet = (href, fullhref) => {
+/******/ 			var existingLinkTags = document.getElementsByTagName("link");
+/******/ 			for(var i = 0; i < existingLinkTags.length; i++) {
+/******/ 				var tag = existingLinkTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
+/******/ 				if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return tag;
+/******/ 			}
+/******/ 			var existingStyleTags = document.getElementsByTagName("style");
+/******/ 			for(var i = 0; i < existingStyleTags.length; i++) {
+/******/ 				var tag = existingStyleTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href");
+/******/ 				if(dataHref === href || dataHref === fullhref) return tag;
+/******/ 			}
+/******/ 		};
+/******/ 		var loadStylesheet = (chunkId) => {
+/******/ 			return new Promise((resolve, reject) => {
+/******/ 				var href = __webpack_require__.miniCssF(chunkId);
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				if(findStylesheet(href, fullhref)) return resolve();
+/******/ 				createStylesheet(chunkId, fullhref, null, resolve, reject);
+/******/ 			});
+/******/ 		}
+/******/ 		// object to store loaded CSS chunks
+/******/ 		var installedCssChunks = {
+/******/ 			"server": 0
+/******/ 		};
+/******/ 		
+/******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
+/******/ 			var cssChunks = {"src_components_combined_authForm_authForm_jsx":1,"src_components_combined_registerForm_registerForm_jsx":1};
+/******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
+/******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
+/******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {
+/******/ 					installedCssChunks[chunkId] = 0;
+/******/ 				}, (e) => {
+/******/ 					delete installedCssChunks[chunkId];
+/******/ 					throw e;
+/******/ 				}));
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		// no hmr
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/require chunk loading */

@@ -13,9 +13,6 @@ import {
   InMemoryCache
 } from '@apollo/client';
 import serializeJavascript from "serialize-javascript";
-
-// import { getDataFromTree } from "@apollo/client/react/ssr";
-
 import { createFetchRequest } from './request';
 import { renderToPipeableStream } from 'react-dom/server';
 export default async (req, res, store, contextData) => {
@@ -85,6 +82,4 @@ export default async (req, res, store, contextData) => {
       }
     }
   );
-
-
 };

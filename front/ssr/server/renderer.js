@@ -1,6 +1,5 @@
 import React from "react";
 import { Provider } from 'react-redux'
-import { ServerStyleSheet } from "styled-components";
 import { routesArray } from '../../src/routes/routesData.js';
 import {
   createStaticHandler,
@@ -21,8 +20,6 @@ import { createFetchRequest } from './request';
 import { renderToPipeableStream } from 'react-dom/server';
 export default async (req, res, store, contextData) => {
   
-  const sheet = new ServerStyleSheet();
-
   const apolloClient = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
@@ -56,28 +53,23 @@ export default async (req, res, store, contextData) => {
         </head>
         <body>
           <div id="root">
-            <Provider store={store}>
-              <ApolloProvider client={apolloClient}>
+            <ApolloProvider client={apolloClient}>
+              <Provider store={store}>
                 <StaticRouterProvider
                   router={router}
                   context={context}
                   location={req.url}
                 />
-              </ApolloProvider>
-            </Provider>
+              </Provider>
+            </ApolloProvider>
           </div>
         </body>
       </html>
     );
   }
 
-
-  /*
-  const dataTree = await getDataFromTree(content)
-  */
-
   const { pipe, abort } = renderToPipeableStream(
-    sheet.collectStyles(<App/>),
+    <App/>,
     {
       bootstrapScripts: [
         '/client/vendor.js',

@@ -15,13 +15,13 @@ export const userResolvers = {
       return result
     },
 
-    async login(root, { input }, context) {
+    async login(root, input, context) {
       const { email, password } = input;
       const result = await authUser({ email, password });
       return result;
     },
 
-    async logout (root, { input }, context) { 
+    async logout (root, input, context) { 
       const result = await logoutUser(input.id);
       return result;
     }
@@ -33,12 +33,12 @@ export const userResolvers = {
       return result;
     },
 
-    async getUserByID(_, { input }, context) {
+    async getUserByID(_, input, context) {
       const result = await getUserByID(input.id);
       return result;
     },
    
-    async getUserByEmail(_, { input }, context) {
+    async getUserByEmail(_, input, context) {
       const { email } = input;
       const result = await getUserByEmail(email);
       return result;

@@ -29,7 +29,7 @@ const UserItem = ({ id }) => {
 
   console.log(data);
 
-  return (<div>sssssss</div>)
+  return (<div>{data.getUserByID.name}</div>)
 
 }
 

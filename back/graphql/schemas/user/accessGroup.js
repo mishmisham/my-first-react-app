@@ -20,8 +20,6 @@ export const accessGroupType = gql`
         accessGroupsByUserID(id: Int!): UserAccesGroupList!
     }
 
-
-
     type UserAccesGroupList {
         rows: [AccessGroup!]
         count: Int!

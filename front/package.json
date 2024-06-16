@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.10.5",
     "@loadable/component": "^5.15.0",
     "@loadable/server": "^5.15.0",
     "@reduxjs/toolkit": "^2.2.5",
@@ -28,9 +29,9 @@
   "scripts": {
     "start": "rm -rf dist && webpack --mode=development --config webpack/dev/webpack.dev.server.js --config webpack/dev/webpack.dev.client.js && node dist/server.js",
     "startWatch": "npm-run-all --parallel startWatch:*",
-    "startWatch:server": "nodemon --watch dist --exec node dist/server.js",
     "startWatch:build-server": "webpack --config webpack/dev/webpack.dev.server.js --watch",
     "startWatch:build-client": "webpack --config  webpack/dev/webpack.dev.client.js --watch --no-cache",
+    "startWatch:server": "nodemon --watch ./dist --exec node ./dist/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

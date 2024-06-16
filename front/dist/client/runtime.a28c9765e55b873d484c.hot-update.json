@@ -1,1 +1,0 @@
-{"c":["client","runtime"],"r":["src_components_componentA_jsx"],"m":["./src/components lazy recursive ^\\.\\/.*$","./src/components weak recursive ^\\.\\/.*$"]}

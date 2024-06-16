@@ -1,7 +1,6 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, Suspense, lazy, useEffect } from 'react';
 import Preloader from '@/components/primitives/Preloader/preloader';
 import './authPage.sass';
-
 
 const AuthPage = () => {
 
@@ -20,16 +19,16 @@ const AuthPage = () => {
   return (
     <>
 
-    <Suspense fallback={ <Preloader height='300px' />}>
-      <CurrentForm />
-    </Suspense>
+      <Suspense fallback={ <Preloader height='300px' />}>
+        <CurrentForm />
+      </Suspense>
 
-    <button 
-      className='auth-page_auth-btn'
-      onClick={changeMode}
-    >
-        {modeText}
-    </button>
+      <button 
+        className='auth-page_auth-btn'
+        onClick={changeMode}
+      >
+        { modeText }  
+      </button>
     
     </>
   );

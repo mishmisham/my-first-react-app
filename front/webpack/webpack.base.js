@@ -4,6 +4,7 @@ const imageExtensions = /\.(bmp|gif|jpg|jpeg|png)$/;
 const fontsExtension = /\.(eot|otf|ttf|woff|woff2)$/;
 
 module.exports = {
+  devtool: false,
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {

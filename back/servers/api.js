@@ -17,6 +17,6 @@ app.use('/api/', userRouter);
 export const apiServer = (port) => {
     const server = http.createServer(app);
     server.listen( port, function () {
-        console.log("JSON API listening at http://localhost:%s/api/", port)
+        console.log("🚀 JSON API listening at http://localhost:%s/api/", port)
     });
 }

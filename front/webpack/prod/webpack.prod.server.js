@@ -38,6 +38,7 @@ const serverConfig = {
     libraryTarget: 'commonjs2',
     chunkFilename: 'chunks/[name].js',
     assetModuleFilename: 'assets/[hash][ext][query]',
+    globalObject: `typeof self !== 'undefined' ? self : this`
   },
   externals: [webpackNodeExternals()],
 };

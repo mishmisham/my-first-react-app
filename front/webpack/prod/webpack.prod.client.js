@@ -36,6 +36,7 @@ const clientConfig = {
     filename: '[name].[chunkhash:8].js',
     chunkFilename: '[name].[chunkhash:8].js',
     assetModuleFilename: 'assets/[hash][ext][query]',
+    globalObject: `typeof self !== 'undefined' ? self : this`
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -55,7 +56,7 @@ const clientConfig = {
     // Add any plugins required here for example: Bundle Analyzer, Copy Plugin etc
   ],
   optimization: {
-    runtimeChunk: 'single', // creates a runtime file to be shared for all generated chunks.
+    chunkIds: 'named',
     splitChunks: {
       chunks: 'all', // This indicates which chunks will be selected for optimization.
       automaticNameDelimiter: '-',

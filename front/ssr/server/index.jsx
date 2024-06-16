@@ -34,7 +34,7 @@ app.get("*", async (req, res) => {
 
   const context = {};
   const store = await createStore(req);
-  const content = await renderer(req, res, store, context);
+  await renderer(req, res, store, context);
 
   try {
 
@@ -45,8 +45,6 @@ app.get("*", async (req, res) => {
     if (context.notFound) {
       res.status(404);
     }
-
-    res.send(content);
 
   } catch (err) {
     console.log("error in rendering server side:", err);

@@ -6,17 +6,17 @@ const PageSecond = () => {
 
   const [mode, setMode] = useState(false);
 
-  let Comp = mode ? lazy(()=> import('../components/componentA')) : lazy(()=> import('../components/componentB'))
+  const CompA = mode ? lazy(()=> import('../components/componentA')) : lazy(()=> import('../components/componentB'))
 
-  const setter = () => {
-    console.log('mode', mode)
-    setMode(!mode)
-  }
+  // const setter = () => {
+  //   console.log('mode', mode)
+  //   setMode(!mode)
+  // }
   return (
     <div>
-      <span onClick={setter}>{mode ? 'da' : 'net'}</span>
+      <span onClick={()=>{}}>{mode ? 'da' : 'net'}</span>
       <Suspense>
-        <Comp />
+        <CompA />
       </Suspense>
     </div>
   );

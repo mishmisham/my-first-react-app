@@ -16,7 +16,7 @@ export default async (req) => {
     const store = configureStore({
         reducer: reducers,
         middleware: ()=>[withExtraArgument(axiosInstance)],
-        devTools: process.env.NODE_ENV !== 'production',
+        // devTools: process.env.NODE_ENV !== 'production',
     });
     
     const PromiseArray = matchRoutes(routesArray, req.path);

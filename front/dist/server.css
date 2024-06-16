@@ -45,6 +45,7 @@ button {
   flex-direction: column;
   border-radius: 32px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.5s ease-out;
 }
 /*!*********************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/NavMenu/navMenu.sass ***!
@@ -66,24 +67,17 @@ button {
   color: #420068;
   font-weight: 300;
   transition: 0.15s;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  margin-left: -2px;
 }
 .nav-menu_item:first-of-type {
   margin-left: 0;
 }
 .nav-menu_item:hover {
-  color: #9300e8;
-  background: #f1d8ff;
-  border-left: 2px solid #9300e8;
-  border-right: 2px solid #9300e8;
+  color: black;
+  background: #fcf7ff;
 }
 .nav-menu_item.active {
-  color: #7300b5;
-  background: #f6e8ff;
-  border-left: 2px solid #7300b5;
-  border-right: 2px solid #7300b5;
+  color: #11001c;
+  background: white;
 }
 /*!*********************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/defaultFooter/defaultFooter.sass ***!

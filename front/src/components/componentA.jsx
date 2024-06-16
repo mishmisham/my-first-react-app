@@ -1,5 +1,6 @@
 import React from 'react'
+import './componentA.sass';
 
-const ComponentA = () => <div>Hello A</div>
+const ComponentA = () => <div className="component-a">Hello A</div>
 
 export default ComponentA

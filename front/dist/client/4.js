@@ -1,34 +1,25 @@
 "use strict";
-exports.id = "src_components_combined_registerForm_registerForm_jsx";
-exports.ids = ["src_components_combined_registerForm_registerForm_jsx"];
-exports.modules = {
+(Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[4],{
 
-/***/ "./src/components/combined/registerForm/registerForm.jsx":
-/*!***************************************************************!*\
-  !*** ./src/components/combined/registerForm/registerForm.jsx ***!
-  \***************************************************************/
+/***/ "./src/components/combined/authForm/authForm.jsx":
+/*!*******************************************************!*\
+  !*** ./src/components/combined/authForm/authForm.jsx ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
-/* harmony import */ var _registerForm_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./registerForm.sass */ "./src/components/combined/registerForm/registerForm.sass");
+/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/authForm/authForm.sass");
 
 
 
-const RegisterForm = () => {
+const AuthForm = () => {
   const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    name: {
-      value: '',
-      label: 'Name',
-      placeholder: 'Enter your name',
-      type: 'text',
-      field: 'name'
-    },
     email: {
       value: '',
       label: 'Email',
@@ -53,8 +44,8 @@ const RegisterForm = () => {
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "register-form"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Registration"), Object.keys(authData).map((inputKey, key) => {
+    className: "auth-form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Please login"), Object.keys(authData).map((inputKey, key) => {
     const {
       value,
       label,
@@ -72,7 +63,7 @@ const RegisterForm = () => {
     });
   }));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RegisterForm);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthForm);
 
 /***/ }),
 
@@ -86,7 +77,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _inputText_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inputText.sass */ "./src/components/primitives/inputText/inputText.sass");
 
@@ -110,10 +101,10 @@ const InputText = props => {
 
 /***/ }),
 
-/***/ "./src/components/combined/registerForm/registerForm.sass":
-/*!****************************************************************!*\
-  !*** ./src/components/combined/registerForm/registerForm.sass ***!
-  \****************************************************************/
+/***/ "./src/components/combined/authForm/authForm.sass":
+/*!********************************************************!*\
+  !*** ./src/components/combined/authForm/authForm.sass ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -134,5 +125,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-};
-;
+}]);

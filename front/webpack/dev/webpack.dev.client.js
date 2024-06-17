@@ -7,6 +7,9 @@ const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 const BUILD_DIR = resolvePath('dist');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+const isDevelopment = process.env.NODE_ENV !== 'production'
 const clientConfig = {
   target: 'web',
   mode: 'development',
@@ -47,6 +50,14 @@ const clientConfig = {
       patterns: [
           { from: 'public' }
       ]
+    }),
+    new webpack.DefinePlugin({
+      process: {
+        env: {
+          NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+          browser: true
+        },
+      },
     })
   ],
   optimization: {

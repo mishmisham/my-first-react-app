@@ -39,31 +39,49 @@ query Query($id: Int!) {
 
 `));
 const UserItem = ({
-  id
+  id,
+  onNoData
 }) => {
-  const {
+  const [currentID, setCurrentID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const [getUser, {
+    loading,
+    error,
     data
-  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useSuspenseQuery)(USER_QUERY, {
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useLazyQuery)(USER_QUERY, {
     variables: {
-      id
+      id: id
     }
   });
-  console.log(data);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, data.getUserByID.name);
+  const ready = data && !loading;
+  if (!data && !loading && id !== currentID) {
+    getUser();
+    setCurrentID(id);
+  }
+  if (data) {
+    console.log(id, data);
+  }
+  if (error) {
+    onNoData();
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, ready && !error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, data.getUserByID.name));
 };
 const PageSecond = () => {
   const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [currentID, setCurrentID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
   const CompA = mode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "components-componentA").then(__webpack_require__.bind(__webpack_require__, /*! @/components/componentA */ "./src/components/componentA.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "components-componentB").then(__webpack_require__.bind(__webpack_require__, /*! @/components/componentB */ "./src/components/componentB.jsx")));
   const setter = () => {
     const newMode = !mode;
+    const newID = currentID + 1;
     setMode(newMode);
+    setCurrentID(newID);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__["default"], {
       height: "100px"
     })
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(UserItem, {
-    id: 2
+    id: currentID,
+    onNoData: e => setCurrentID(1)
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     onClick: setter
   }, mode ? 'da' : 'net'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
@@ -78,3 +96,4 @@ const PageSecond = () => {
 
 };
 ;
+//# sourceMappingURL=src_pages_PageSecond_jsx.js.map

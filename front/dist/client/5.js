@@ -13,12 +13,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
-/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/authForm/authForm.sass");
+/* harmony import */ var _authSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authSubmitButton */ "./src/components/combined/authForm/authSubmitButton.jsx");
+/* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
+/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/authForm/authForm.sass");
+
 
 
 
 const AuthForm = () => {
+  const [showChild, setShowChild] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  console.log('1', ({"NODE_ENV":"development","browser":true}));
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    console.log('2', ({"NODE_ENV":"development","browser":true}));
+    setShowChild(true);
+  }, []);
   const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     email: {
       value: '',
@@ -53,7 +61,7 @@ const AuthForm = () => {
       type,
       field
     } = authData[inputKey];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__["default"], {
       value: value,
       label: label,
       placeholder: placeholder,
@@ -61,9 +69,76 @@ const AuthForm = () => {
       key: key,
       onInput: newValue => onInput(newValue, field)
     });
+  }), showChild && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    authData: authData
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthForm);
+
+/***/ }),
+
+/***/ "./src/components/combined/authForm/authSubmitButton.jsx":
+/*!***************************************************************!*\
+  !*** ./src/components/combined/authForm/authSubmitButton.jsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+let _ = t => t,
+  _t;
+
+
+const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)(_t || (_t = _`
+    mutation AuthAction($input: LoginInput!) {
+        login(input: $input) {
+            id
+            name
+            email
+            refreshToken
+            accessToken
+        }
+    }
+`));
+const AuthSubmitButton = ({
+  authData
+}) => {
+  const [login, {
+    data,
+    loading,
+    error
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(AUTH_ACTION);
+  const submit = () => {
+    const {
+      email,
+      password
+    } = authData;
+    login({
+      variables: {
+        input: {
+          email: email.value,
+          password: password.value
+        }
+      }
+    });
+    console.log(data, loading, error);
+  };
+  const computedStyle = {
+    marginTop: '12px'
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: submit,
+    className: "btn btn--submit",
+    style: computedStyle
+  }, "Login");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthSubmitButton);
 
 /***/ }),
 
@@ -126,3 +201,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
+//# sourceMappingURL=5.js.map

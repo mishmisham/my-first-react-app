@@ -4,7 +4,7 @@ import './default.sass';
 import NavMenu from './parts/NavMenu/navMenu';
 import DefaultFooter from './parts/defaultFooter/defaultFooter';
 
-import websocketClient, { websocketSendEcho, websocketSendPing } from '../../websocket/client';
+import websocketClient, { websocketSendEcho, websocketSendPing } from '@/websocket/client';
 
 const Layout = ({ children, title, description }) => {
 

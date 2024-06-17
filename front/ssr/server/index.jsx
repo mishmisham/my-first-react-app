@@ -7,7 +7,7 @@ import webpack from "webpack";
 import WebpackDevMiddleware from "webpack-dev-middleware";
 import WebpackHotMiddleware from "webpack-hot-middleware";
 import renderer from "./renderer.js";
-import createStore from './createStore';
+import createStore from './createStore.js';
 
 dotenv.config();
 

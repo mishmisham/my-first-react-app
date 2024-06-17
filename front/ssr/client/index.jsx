@@ -24,15 +24,13 @@ const renderApp = () => {
     ssrForceFetchDelay: 100,
   });
 
-  
   const router = createBrowserRouter(routesArray);
+
   ReactDOM.hydrateRoot(
     document.querySelector('#root'),
-    <React.StrictMode>
       <ApolloProvider client={client}>
         <RouterProvider router={router}/>
       </ApolloProvider>
-    </React.StrictMode>
   );
 }
 

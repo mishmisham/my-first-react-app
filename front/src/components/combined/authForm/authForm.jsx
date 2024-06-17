@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import AuthSubmitButton from './authSubmitButton';
 import InputText from '@/components/primitives/inputText/InputText';
 import './authForm.sass';
 
 const AuthForm = () => {
+
+    // client-only - just for render login button
+    const [showChild, setShowChild] = useState(false);
+    useEffect(() => {
+        setShowChild(true);
+    }, []);
 
     const [authData, setAuthData] = useState({
         email: {
@@ -57,7 +63,8 @@ const AuthForm = () => {
                     />
                 )
             })}
-            
+
+            {showChild && <AuthSubmitButton authData={authData}/>}
         </div>
     )
 }

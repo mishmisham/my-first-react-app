@@ -96,17 +96,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/index */ "./src/store/actions/index.js");
 /* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
 
-// import Layout from '../layouts/default';
-// import PageFirst from "../pages/PageFirst";
-// import PageSecond from "../pages/PageSecond";
-// import AuthPage from "../pages/AuthPage/AuthPage";
 
 
 
-const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_layouts_default_jsx").then(__webpack_require__.bind(__webpack_require__, /*! ../layouts/default */ "./src/layouts/default.jsx")));
-const HomePage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageFirst_jsx").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/PageFirst */ "./src/pages/PageFirst.jsx")));
-const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageSecond_jsx").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/PageSecond */ "./src/pages/PageSecond.jsx")));
-const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_AuthPage_AuthPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
+const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_layouts_default_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/layouts/default */ "./src/layouts/default.jsx")));
+const HomePage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageFirst_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageFirst */ "./src/pages/PageFirst.jsx")));
+const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageSecond_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageSecond */ "./src/pages/PageSecond.jsx")));
+const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_AuthPage_AuthPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
 const routesArray = [{
   path: "/",
   name: 'Home',
@@ -126,6 +122,7 @@ const routesArray = [{
       title: "Homepage",
       description: "home page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
@@ -144,6 +141,7 @@ const routesArray = [{
       title: "Second page",
       description: "other page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
@@ -156,6 +154,7 @@ const routesArray = [{
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
       title: "Login"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
@@ -399,7 +398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var webpack_hot_middleware__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! webpack-hot-middleware */ "webpack-hot-middleware");
 /* harmony import */ var webpack_hot_middleware__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(webpack_hot_middleware__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _renderer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./renderer.js */ "./ssr/server/renderer.js");
-/* harmony import */ var _createStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./createStore */ "./ssr/server/createStore.js");
+/* harmony import */ var _createStore_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./createStore.js */ "./ssr/server/createStore.js");
 /* eslint @typescript-eslint/no-var-requires: 0 */
 
 
@@ -425,7 +424,7 @@ app.use(compression__WEBPACK_IMPORTED_MODULE_1___default()());
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"]("dist"));
 app.get("*", async (req, res) => {
   const context = {};
-  const store = await (0,_createStore__WEBPACK_IMPORTED_MODULE_7__["default"])(req);
+  const store = await (0,_createStore_js__WEBPACK_IMPORTED_MODULE_7__["default"])(req);
   await (0,_renderer_js__WEBPACK_IMPORTED_MODULE_6__["default"])(req, res, store, context);
   try {
     if (context.url) {
@@ -503,6 +502,10 @@ __webpack_require__.r(__webpack_exports__);
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
       rel: "stylesheet",
       href: "/client/client.css"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/client/favicon.ico"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("title", null, "App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("body", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       id: "root"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloProvider, {
@@ -526,6 +529,7 @@ __webpack_require__.r(__webpack_exports__);
       `,
     onShellReady() {
       res.setHeader('content-type', 'text/html');
+      ({"NODE_ENV":"development","browser":false}).window = 'null';
       pipe(res);
     }
   });
@@ -546,7 +550,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function createFetchRequest(req, res) {
   let origin = `${req.protocol}://${req.get("host")}`;
-  // Note: This had to take originalUrl into account for presumably vite's proxying
   let url = new URL(req.originalUrl || req.url, origin);
   let controller = new AbortController();
   res.on("close", () => controller.abort());
@@ -593,6 +596,10 @@ const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 const BUILD_DIR = resolvePath('dist');
 const MiniCssExtractPlugin = __webpack_require__(/*! mini-css-extract-plugin */ "mini-css-extract-plugin");
 const CopyWebpackPlugin = __webpack_require__(/*! copy-webpack-plugin */ "copy-webpack-plugin");
+const dotenv = (__webpack_require__(/*! dotenv */ "dotenv").config)({
+  path: __dirname + '/.env'
+});
+const isDevelopment = "development" !== 'production';
 const clientConfig = {
   target: 'web',
   mode: 'development',
@@ -629,6 +636,13 @@ const clientConfig = {
     patterns: [{
       from: 'public'
     }]
+  }), new webpack.DefinePlugin({
+    process: {
+      env: {
+        NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+        browser: true
+      }
+    }
   })],
   optimization: {
     chunkIds: 'natural',
@@ -655,23 +669,37 @@ module.exports = merge(baseConfig, clientConfig);
   \*********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+const webpack = __webpack_require__(/*! webpack */ "webpack");
 const path = __webpack_require__(/*! path */ "path");
 const scriptExtensions = /\.(tsx|ts|js|jsx|mjs)$/;
 const imageExtensions = /\.(bmp|gif|jpg|jpeg|png)$/;
 const fontsExtension = /\.(eot|otf|ttf|woff|woff2)$/;
 module.exports = {
-  devtool: false,
+  // devtool: false,
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, '../src/')
+      '@': path.resolve(__dirname, '../src/'),
+      '@/pages': path.resolve(__dirname, '../src/pages'),
+      '@/layouts': path.resolve(__dirname, '../src/layouts'),
+      '@/component': path.resolve(__dirname, '../src/components'),
+      '@/store': path.resolve(__dirname, '../src/store'),
+      '@/router': path.resolve(__dirname, '../src/routes'),
+      '@/graphql': path.resolve(__dirname, '../src/graphql'),
+      '@/websocket': path.resolve(__dirname, '../src/websocket')
     }
   },
   module: {
     rules: [{
       test: scriptExtensions,
       exclude: /node_modules/,
-      use: 'babel-loader'
+      use: {
+        loader: 'babel-loader',
+        options: {
+          sourceMaps: true
+        }
+      }
     }, {
       test: fontsExtension,
       type: 'asset'
@@ -1197,3 +1225,4 @@ module.exports = require("path");
 /******/ 	
 /******/ })()
 ;
+//# sourceMappingURL=server.js.map

@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _default_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./default.sass */ "./src/layouts/default.sass");
 /* harmony import */ var _parts_NavMenu_navMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/NavMenu/navMenu */ "./src/layouts/parts/NavMenu/navMenu.jsx");
 /* harmony import */ var _parts_defaultFooter_defaultFooter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/defaultFooter/defaultFooter */ "./src/layouts/parts/defaultFooter/defaultFooter.jsx");
-/* harmony import */ var _websocket_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../websocket/client */ "./websocket/client.js");
+/* harmony import */ var _websocket_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/websocket/client */ "./src/websocket/client.js");
 
 
 
@@ -107,10 +107,10 @@ const DefaultFooter = () => {
 
 /***/ }),
 
-/***/ "./websocket/client.js":
-/*!*****************************!*\
-  !*** ./websocket/client.js ***!
-  \*****************************/
+/***/ "./src/websocket/client.js":
+/*!*********************************!*\
+  !*** ./src/websocket/client.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -186,3 +186,4 @@ __webpack_require__.r(__webpack_exports__);
 
 };
 ;
+//# sourceMappingURL=src_layouts_default_jsx.js.map

@@ -30,22 +30,46 @@ button {
 }
 
 .content {
-  max-width: 720px;
+  max-width: 520px;
   width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 155px);
+  align-content: center;
+  align-items: center;
 }
 .content_page {
-  margin: 0;
-  padding: 60px;
+  margin: auto;
+  padding: 24px;
   background: #eeeded;
   display: flex;
   flex-direction: column;
   border-radius: 32px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
   transition: max-height 0.5s ease-out;
+  width: 100%;
+}
+
+.btn {
+  width: auto;
+  display: flex;
+  flex: 0 1 auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 24px;
+  font-size: 16px;
+  border-radius: 24px;
+  transition: 0.15s;
+}
+.btn--submit {
+  background: #1a0941;
+  color: #fff;
+}
+.btn--submit:hover {
+  background: #2a0e6a;
 }
 /*!*********************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/NavMenu/navMenu.sass ***!
@@ -54,9 +78,8 @@ button {
   width: 100%;
   display: flex;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.368627451);
+  background: #eaeaea;
   margin: 0 auto 32px;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
 }
 .nav-menu_item {
   padding: 6px 32px;
@@ -64,7 +87,7 @@ button {
   align-content: center;
   align-items: center;
   justify-content: center;
-  color: #420068;
+  color: #444;
   font-weight: 300;
   transition: 0.15s;
 }
@@ -72,11 +95,11 @@ button {
   margin-left: 0;
 }
 .nav-menu_item:hover {
-  color: black;
-  background: #fcf7ff;
+  color: #040404;
+  background: white;
 }
 .nav-menu_item.active {
-  color: #11001c;
+  color: #1e1e1e;
   background: white;
 }
 /*!*********************************************************************************************************************************************!*\
@@ -100,3 +123,5 @@ button {
   color: #555;
   text-align: center;
 }
+
+/*# sourceMappingURL=src_layouts_default_jsx.css.map*/

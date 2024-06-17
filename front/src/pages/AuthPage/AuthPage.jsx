@@ -5,15 +5,12 @@ import './authPage.sass';
 const AuthPage = () => {
 
   const [authMode, setAuthMode] = useState(true);
-  const [modeText, setModeText] = useState('Register account');
 
   const CurrentForm = authMode ? lazy(()=> import('@/components/combined/authForm/authForm')) : lazy(()=> import('@/components/combined/registerForm/registerForm'));
 
   const changeMode = () => {
     const newMode = !authMode;
-    const newText = newMode ? 'Register account' : 'Go to authorization';
     setAuthMode(newMode);
-    setModeText(newText);
   }
   
   return (
@@ -24,10 +21,10 @@ const AuthPage = () => {
       </Suspense>
 
       <button 
-        className='auth-page_auth-btn'
+        className="auth-page_auth-btn btn"
         onClick={changeMode}
       >
-        { modeText }  
+        { authMode ? 'Create account' : 'Go to login'}  
       </button>
     
     </>

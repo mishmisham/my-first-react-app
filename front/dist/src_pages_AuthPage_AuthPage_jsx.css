@@ -2,18 +2,14 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/AuthPage/authPage.sass ***!
   \***************************************************************************************************************************/
 .auth-page_auth-btn {
-  margin: 24px auto 0;
+  margin: 12px auto 0;
   width: 100%;
-  padding: 12px 32px;
   border: 1px solid #420068;
   color: #420068;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 12px;
-  transition: 0.15s;
-  height: 32px;
 }
 .auth-page_auth-btn:hover {
   border: 1px solid #7300b5;
   color: #7300b5;
 }
+
+/*# sourceMappingURL=src_pages_AuthPage_AuthPage_jsx.css.map*/

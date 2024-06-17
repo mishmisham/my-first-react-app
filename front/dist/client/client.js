@@ -94,17 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/actions/index */ "./src/store/actions/index.js");
 /* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
 
-// import Layout from '../layouts/default';
-// import PageFirst from "../pages/PageFirst";
-// import PageSecond from "../pages/PageSecond";
-// import AuthPage from "../pages/AuthPage/AuthPage";
 
 
 
-const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(4)]).then(__webpack_require__.bind(__webpack_require__, /*! ../layouts/default */ "./src/layouts/default.jsx")));
-const HomePage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(8)]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/PageFirst */ "./src/pages/PageFirst.jsx")));
-const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(9)]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/PageSecond */ "./src/pages/PageSecond.jsx")));
-const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
+const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(4)]).then(__webpack_require__.bind(__webpack_require__, /*! @/layouts/default */ "./src/layouts/default.jsx")));
+const HomePage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(8)]).then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageFirst */ "./src/pages/PageFirst.jsx")));
+const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(9)]).then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageSecond */ "./src/pages/PageSecond.jsx")));
+const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(__webpack_require__, /*! @/pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
 const routesArray = [{
   path: "/",
   name: 'Home',
@@ -124,6 +120,7 @@ const routesArray = [{
       title: "Homepage",
       description: "home page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
@@ -142,6 +139,7 @@ const routesArray = [{
       title: "Second page",
       description: "other page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
@@ -154,6 +152,7 @@ const routesArray = [{
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
       title: "Login"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
@@ -243,11 +242,11 @@ const renderApp = () => {
     ssrForceFetchDelay: 100
   });
   const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.createBrowserRouter)(_src_routes_routesData__WEBPACK_IMPORTED_MODULE_2__.routesArray);
-  react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot(document.querySelector('#root'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_7__.ApolloProvider, {
+  react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot(document.querySelector('#root'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_7__.ApolloProvider, {
     client: client
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.RouterProvider, {
     router: router
-  }))));
+  })));
 };
 renderApp();
 
@@ -677,3 +676,4 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
+//# sourceMappingURL=client.js.map

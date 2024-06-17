@@ -51193,87 +51193,6 @@ var ApolloProvider = function (_a) {
 
 /***/ }),
 
-/***/ "./node_modules/@apollo/client/react/hooks/constants.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/hooks/constants.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   skipToken: () => (/* binding */ skipToken)
-/* harmony export */ });
-var skipToken = Symbol.for("apollo.skipToken");
-//# sourceMappingURL=constants.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@apollo/client/react/hooks/internal/__use.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/hooks/internal/__use.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-var rehackt__WEBPACK_IMPORTED_MODULE_0___namespace_cache;
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   __use: () => (/* binding */ __use)
-/* harmony export */ });
-/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utilities/index.js */ "./node_modules/@apollo/client/utilities/promises/decoration.js");
-/* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
-
-
-// Prevent webpack from complaining about our feature detection of the
-// use property of the React namespace, which is expected not
-// to exist when using current stable versions, and that's fine.
-var useKey = "use";
-var realHook = /*#__PURE__*/ (rehackt__WEBPACK_IMPORTED_MODULE_0___namespace_cache || (rehackt__WEBPACK_IMPORTED_MODULE_0___namespace_cache = __webpack_require__.t(rehackt__WEBPACK_IMPORTED_MODULE_0__, 2)))[useKey];
-// This is named with two underscores to allow this hook to evade typical rules of
-// hooks (i.e. it can be used conditionally)
-var __use = realHook ||
-    function __use(promise) {
-        var statefulPromise = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_1__.wrapPromiseWithState)(promise);
-        switch (statefulPromise.status) {
-            case "pending":
-                throw statefulPromise;
-            case "rejected":
-                throw statefulPromise.reason;
-            case "fulfilled":
-                return statefulPromise.value;
-        }
-    };
-//# sourceMappingURL=__use.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@apollo/client/react/hooks/internal/useDeepMemo.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/hooks/internal/useDeepMemo.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useDeepMemo: () => (/* binding */ useDeepMemo)
-/* harmony export */ });
-/* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
-/* harmony import */ var _wry_equality__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wry/equality */ "./node_modules/@wry/equality/lib/index.js");
-
-
-function useDeepMemo(memoFn, deps) {
-    var ref = rehackt__WEBPACK_IMPORTED_MODULE_0__.useRef();
-    if (!ref.current || !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_1__.equal)(ref.current.deps, deps)) {
-        ref.current = { value: memoFn(), deps: deps };
-    }
-    return ref.current.value;
-}
-//# sourceMappingURL=useDeepMemo.js.map
-
-/***/ }),
-
 /***/ "./node_modules/@apollo/client/react/hooks/internal/wrapHook.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@apollo/client/react/hooks/internal/wrapHook.js ***!
@@ -51373,586 +51292,956 @@ function useApolloClient(override) {
 
 /***/ }),
 
-/***/ "./node_modules/@apollo/client/react/hooks/useSuspenseQuery.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/hooks/useSuspenseQuery.js ***!
-  \*********************************************************************/
+/***/ "./node_modules/@apollo/client/react/hooks/useLazyQuery.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@apollo/client/react/hooks/useLazyQuery.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   toApolloError: () => (/* binding */ toApolloError),
-/* harmony export */   useSuspenseQuery: () => (/* binding */ useSuspenseQuery),
-/* harmony export */   useWatchQueryOptions: () => (/* binding */ useWatchQueryOptions)
+/* harmony export */   useLazyQuery: () => (/* binding */ useLazyQuery)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
 /* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
-/* harmony import */ var _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/globals/index.js */ "./node_modules/@apollo/client/utilities/globals/index.js");
-/* harmony import */ var _core_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/index.js */ "./node_modules/@apollo/client/core/networkStatus.js");
-/* harmony import */ var _core_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/index.js */ "./node_modules/@apollo/client/errors/index.js");
-/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/arrays.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/mergeOptions.js");
+/* harmony import */ var _useQuery_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useQuery.js */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
 /* harmony import */ var _useApolloClient_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useApolloClient.js */ "./node_modules/@apollo/client/react/hooks/useApolloClient.js");
-/* harmony import */ var _parser_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../parser/index.js */ "./node_modules/@apollo/client/react/parser/index.js");
-/* harmony import */ var _internal_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./internal/index.js */ "./node_modules/@apollo/client/react/hooks/internal/wrapHook.js");
-/* harmony import */ var _internal_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./internal/index.js */ "./node_modules/@apollo/client/react/hooks/internal/__use.js");
-/* harmony import */ var _internal_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./internal/index.js */ "./node_modules/@apollo/client/react/hooks/internal/useDeepMemo.js");
-/* harmony import */ var _internal_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../internal/index.js */ "./node_modules/@apollo/client/react/internal/cache/getSuspenseCache.js");
-/* harmony import */ var _cache_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../cache/index.js */ "./node_modules/@apollo/client/utilities/common/canonicalStringify.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./constants.js */ "./node_modules/@apollo/client/react/hooks/constants.js");
 
 
 
 
 
-
-
-
-
-
-
-function useSuspenseQuery(query, options) {
-    if (options === void 0) { options = Object.create(null); }
-    return (0,_internal_index_js__WEBPACK_IMPORTED_MODULE_2__.wrapHook)("useSuspenseQuery", _useSuspenseQuery, (0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_3__.useApolloClient)(typeof options === "object" ? options.client : undefined))(query, options);
+// The following methods, when called will execute the query, regardless of
+// whether the useLazyQuery execute function was called before.
+var EAGER_METHODS = [
+    "refetch",
+    "reobserve",
+    "fetchMore",
+    "updateQuery",
+    "startPolling",
+    "subscribeToMore",
+];
+/**
+ * A hook for imperatively executing queries in an Apollo application, e.g. in response to user interaction.
+ *
+ * > Refer to the [Queries - Manual execution with useLazyQuery](https://www.apollographql.com/docs/react/data/queries#manual-execution-with-uselazyquery) section for a more in-depth overview of `useLazyQuery`.
+ *
+ * @example
+ * ```jsx
+ * import { gql, useLazyQuery } from "@apollo/client";
+ *
+ * const GET_GREETING = gql`
+ *   query GetGreeting($language: String!) {
+ *     greeting(language: $language) {
+ *       message
+ *     }
+ *   }
+ * `;
+ *
+ * function Hello() {
+ *   const [loadGreeting, { called, loading, data }] = useLazyQuery(
+ *     GET_GREETING,
+ *     { variables: { language: "english" } }
+ *   );
+ *   if (called && loading) return <p>Loading ...</p>
+ *   if (!called) {
+ *     return <button onClick={() => loadGreeting()}>Load greeting</button>
+ *   }
+ *   return <h1>Hello {data.greeting.message}!</h1>;
+ * }
+ * ```
+ * @since 3.0.0
+ *
+ * @param query - A GraphQL query document parsed into an AST by `gql`.
+ * @param options - Default options to control how the query is executed.
+ * @returns A tuple in the form of `[execute, result]`
+ */
+function useLazyQuery(query, options) {
+    var _a;
+    var execOptionsRef = rehackt__WEBPACK_IMPORTED_MODULE_0__.useRef();
+    var optionsRef = rehackt__WEBPACK_IMPORTED_MODULE_0__.useRef();
+    var queryRef = rehackt__WEBPACK_IMPORTED_MODULE_0__.useRef();
+    var merged = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_1__.mergeOptions)(options, execOptionsRef.current || {});
+    var document = (_a = merged === null || merged === void 0 ? void 0 : merged.query) !== null && _a !== void 0 ? _a : query;
+    // Use refs to track options and the used query to ensure the `execute`
+    // function remains referentially stable between renders.
+    optionsRef.current = options;
+    queryRef.current = document;
+    var internalState = (0,_useQuery_js__WEBPACK_IMPORTED_MODULE_2__.useInternalState)((0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_3__.useApolloClient)(options && options.client), document);
+    var useQueryResult = internalState.useQuery((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({}, merged), { skip: !execOptionsRef.current }));
+    var initialFetchPolicy = useQueryResult.observable.options.initialFetchPolicy ||
+        internalState.getDefaultFetchPolicy();
+    var forceUpdateState = internalState.forceUpdateState, obsQueryFields = internalState.obsQueryFields;
+    // We use useMemo here to make sure the eager methods have a stable identity.
+    var eagerMethods = rehackt__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
+        var eagerMethods = {};
+        var _loop_1 = function (key) {
+            var method = obsQueryFields[key];
+            eagerMethods[key] = function () {
+                if (!execOptionsRef.current) {
+                    execOptionsRef.current = Object.create(null);
+                    // Only the first time populating execOptionsRef.current matters here.
+                    forceUpdateState();
+                }
+                // @ts-expect-error this is just too generic to type
+                return method.apply(this, arguments);
+            };
+        };
+        for (var _i = 0, EAGER_METHODS_1 = EAGER_METHODS; _i < EAGER_METHODS_1.length; _i++) {
+            var key = EAGER_METHODS_1[_i];
+            _loop_1(key);
+        }
+        return eagerMethods;
+    }, [forceUpdateState, obsQueryFields]);
+    var called = !!execOptionsRef.current;
+    var result = rehackt__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () { return ((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({}, useQueryResult), eagerMethods), { called: called })); }, [useQueryResult, eagerMethods, called]);
+    var execute = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (executeOptions) {
+        execOptionsRef.current =
+            executeOptions ? (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({}, executeOptions), { fetchPolicy: executeOptions.fetchPolicy || initialFetchPolicy }) : {
+                fetchPolicy: initialFetchPolicy,
+            };
+        var options = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_1__.mergeOptions)(optionsRef.current, (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({ query: queryRef.current }, execOptionsRef.current));
+        var promise = internalState
+            .executeQuery((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({}, options), { skip: false }))
+            .then(function (queryResult) { return Object.assign(queryResult, eagerMethods); });
+        // Because the return value of `useLazyQuery` is usually floated, we need
+        // to catch the promise to prevent unhandled rejections.
+        promise.catch(function () { });
+        return promise;
+    }, [eagerMethods, initialFetchPolicy, internalState]);
+    return [execute, result];
 }
-function _useSuspenseQuery(query, options) {
-    var client = (0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_3__.useApolloClient)(options.client);
-    var suspenseCache = (0,_internal_index_js__WEBPACK_IMPORTED_MODULE_4__.getSuspenseCache)(client);
-    var watchQueryOptions = useWatchQueryOptions({
+//# sourceMappingURL=useLazyQuery.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@apollo/client/react/hooks/useMutation.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@apollo/client/react/hooks/useMutation.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useMutation: () => (/* binding */ useMutation)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/mergeOptions.js");
+/* harmony import */ var _wry_equality__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wry/equality */ "./node_modules/@wry/equality/lib/index.js");
+/* harmony import */ var _parser_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parser/index.js */ "./node_modules/@apollo/client/react/parser/index.js");
+/* harmony import */ var _errors_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../errors/index.js */ "./node_modules/@apollo/client/errors/index.js");
+/* harmony import */ var _useApolloClient_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useApolloClient.js */ "./node_modules/@apollo/client/react/hooks/useApolloClient.js");
+
+
+
+
+
+
+
+/**
+ *
+ *
+ * > Refer to the [Mutations](https://www.apollographql.com/docs/react/data/mutations/) section for a more in-depth overview of `useMutation`.
+ *
+ * @example
+ * ```jsx
+ * import { gql, useMutation } from '@apollo/client';
+ *
+ * const ADD_TODO = gql`
+ *   mutation AddTodo($type: String!) {
+ *     addTodo(type: $type) {
+ *       id
+ *       type
+ *     }
+ *   }
+ * `;
+ *
+ * function AddTodo() {
+ *   let input;
+ *   const [addTodo, { data }] = useMutation(ADD_TODO);
+ *
+ *   return (
+ *     <div>
+ *       <form
+ *         onSubmit={e => {
+ *           e.preventDefault();
+ *           addTodo({ variables: { type: input.value } });
+ *           input.value = '';
+ *         }}
+ *       >
+ *         <input
+ *           ref={node => {
+ *             input = node;
+ *           }}
+ *         />
+ *         <button type="submit">Add Todo</button>
+ *       </form>
+ *     </div>
+ *   );
+ * }
+ * ```
+ * @since 3.0.0
+ * @param mutation - A GraphQL mutation document parsed into an AST by `gql`.
+ * @param options - Options to control how the mutation is executed.
+ * @returns A tuple in the form of `[mutate, result]`
+ */
+function useMutation(mutation, options) {
+    var client = (0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_2__.useApolloClient)(options === null || options === void 0 ? void 0 : options.client);
+    (0,_parser_index_js__WEBPACK_IMPORTED_MODULE_3__.verifyDocumentType)(mutation, _parser_index_js__WEBPACK_IMPORTED_MODULE_3__.DocumentType.Mutation);
+    var _a = rehackt__WEBPACK_IMPORTED_MODULE_0__.useState({
+        called: false,
+        loading: false,
         client: client,
-        query: query,
+    }), result = _a[0], setResult = _a[1];
+    var ref = rehackt__WEBPACK_IMPORTED_MODULE_0__.useRef({
+        result: result,
+        mutationId: 0,
+        isMounted: true,
+        client: client,
+        mutation: mutation,
         options: options,
     });
-    var fetchPolicy = watchQueryOptions.fetchPolicy, variables = watchQueryOptions.variables;
-    var _a = options.queryKey, queryKey = _a === void 0 ? [] : _a;
-    var cacheKey = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__spreadArray)([
-        query,
-        (0,_cache_index_js__WEBPACK_IMPORTED_MODULE_6__.canonicalStringify)(variables)
-    ], [].concat(queryKey), true);
-    var queryRef = suspenseCache.getQueryRef(cacheKey, function () {
-        return client.watchQuery(watchQueryOptions);
+    rehackt__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect(function () {
+        Object.assign(ref.current, { client: client, options: options, mutation: mutation });
     });
-    var _b = rehackt__WEBPACK_IMPORTED_MODULE_0__.useState([queryRef.key, queryRef.promise]), current = _b[0], setPromise = _b[1];
-    // This saves us a re-execution of the render function when a variable changed.
-    if (current[0] !== queryRef.key) {
-        current[0] = queryRef.key;
-        current[1] = queryRef.promise;
-    }
-    var promise = current[1];
-    if (queryRef.didChangeOptions(watchQueryOptions)) {
-        current[1] = promise = queryRef.applyOptions(watchQueryOptions);
-    }
-    rehackt__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-        var dispose = queryRef.retain();
-        var removeListener = queryRef.listen(function (promise) {
-            setPromise([queryRef.key, promise]);
-        });
-        return function () {
-            removeListener();
-            dispose();
-        };
-    }, [queryRef]);
-    var skipResult = rehackt__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
-        var error = toApolloError(queryRef.result);
-        return {
-            loading: false,
-            data: queryRef.result.data,
-            networkStatus: error ? _core_index_js__WEBPACK_IMPORTED_MODULE_7__.NetworkStatus.error : _core_index_js__WEBPACK_IMPORTED_MODULE_7__.NetworkStatus.ready,
-            error: error,
-        };
-    }, [queryRef.result]);
-    var result = fetchPolicy === "standby" ? skipResult : (0,_internal_index_js__WEBPACK_IMPORTED_MODULE_8__.__use)(promise);
-    var fetchMore = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (options) {
-        var promise = queryRef.fetchMore(options);
-        setPromise([queryRef.key, queryRef.promise]);
-        return promise;
-    }, [queryRef]);
-    var refetch = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (variables) {
-        var promise = queryRef.refetch(variables);
-        setPromise([queryRef.key, queryRef.promise]);
-        return promise;
-    }, [queryRef]);
-    var subscribeToMore = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (options) { return queryRef.observable.subscribeToMore(options); }, [queryRef]);
-    return rehackt__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
-        return {
-            client: client,
-            data: result.data,
-            error: toApolloError(result),
-            networkStatus: result.networkStatus,
-            fetchMore: fetchMore,
-            refetch: refetch,
-            subscribeToMore: subscribeToMore,
-        };
-    }, [client, fetchMore, refetch, result, subscribeToMore]);
-}
-function validateOptions(options) {
-    var query = options.query, fetchPolicy = options.fetchPolicy, returnPartialData = options.returnPartialData;
-    (0,_parser_index_js__WEBPACK_IMPORTED_MODULE_9__.verifyDocumentType)(query, _parser_index_js__WEBPACK_IMPORTED_MODULE_9__.DocumentType.Query);
-    validateFetchPolicy(fetchPolicy);
-    validatePartialDataReturn(fetchPolicy, returnPartialData);
-}
-function validateFetchPolicy(fetchPolicy) {
-    if (fetchPolicy === void 0) { fetchPolicy = "cache-first"; }
-    var supportedFetchPolicies = [
-        "cache-first",
-        "network-only",
-        "no-cache",
-        "cache-and-network",
-    ];
-    (0,_utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_1__.invariant)(supportedFetchPolicies.includes(fetchPolicy), 56, fetchPolicy);
-}
-function validatePartialDataReturn(fetchPolicy, returnPartialData) {
-    if (fetchPolicy === "no-cache" && returnPartialData) {
-        globalThis.__DEV__ !== false && _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_1__.invariant.warn(57);
-    }
-}
-function toApolloError(result) {
-    return (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_10__.isNonEmptyArray)(result.errors) ?
-        new _core_index_js__WEBPACK_IMPORTED_MODULE_11__.ApolloError({ graphQLErrors: result.errors })
-        : result.error;
-}
-function useWatchQueryOptions(_a) {
-    var client = _a.client, query = _a.query, options = _a.options;
-    return (0,_internal_index_js__WEBPACK_IMPORTED_MODULE_12__.useDeepMemo)(function () {
-        var _a;
-        if (options === _constants_js__WEBPACK_IMPORTED_MODULE_13__.skipToken) {
-            return { query: query, fetchPolicy: "standby" };
+    var execute = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (executeOptions) {
+        if (executeOptions === void 0) { executeOptions = {}; }
+        var _a = ref.current, options = _a.options, mutation = _a.mutation;
+        var baseOptions = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({}, options), { mutation: mutation });
+        var client = executeOptions.client || ref.current.client;
+        if (!ref.current.result.loading &&
+            !baseOptions.ignoreResults &&
+            ref.current.isMounted) {
+            setResult((ref.current.result = {
+                loading: true,
+                error: void 0,
+                data: void 0,
+                called: true,
+                client: client,
+            }));
         }
-        var fetchPolicy = options.fetchPolicy ||
-            ((_a = client.defaultOptions.watchQuery) === null || _a === void 0 ? void 0 : _a.fetchPolicy) ||
-            "cache-first";
-        var watchQueryOptions = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_5__.__assign)({}, options), { fetchPolicy: fetchPolicy, query: query, notifyOnNetworkStatusChange: false, nextFetchPolicy: void 0 });
-        if (globalThis.__DEV__ !== false) {
-            validateOptions(watchQueryOptions);
-        }
-        // Assign the updated fetch policy after our validation since `standby` is
-        // not a supported fetch policy on its own without the use of `skip`.
-        if (options.skip) {
-            watchQueryOptions.fetchPolicy = "standby";
-        }
-        return watchQueryOptions;
-    }, [client, options, query]);
-}
-//# sourceMappingURL=useSuspenseQuery.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@apollo/client/react/internal/cache/QueryReference.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/internal/cache/QueryReference.js ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   InternalQueryReference: () => (/* binding */ InternalQueryReference),
-/* harmony export */   assertWrappedQueryRef: () => (/* binding */ assertWrappedQueryRef),
-/* harmony export */   getWrappedPromise: () => (/* binding */ getWrappedPromise),
-/* harmony export */   unwrapQueryRef: () => (/* binding */ unwrapQueryRef),
-/* harmony export */   updateWrappedQueryRef: () => (/* binding */ updateWrappedQueryRef),
-/* harmony export */   wrapQueryRef: () => (/* binding */ wrapQueryRef)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
-/* harmony import */ var _wry_equality__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wry/equality */ "./node_modules/@wry/equality/lib/index.js");
-/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utilities/index.js */ "./node_modules/@apollo/client/utilities/promises/decoration.js");
-/* harmony import */ var _utilities_globals_invariantWrappers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utilities/globals/invariantWrappers.js */ "./node_modules/@apollo/client/utilities/globals/invariantWrappers.js");
-
-
-
-
-
-var QUERY_REFERENCE_SYMBOL = Symbol();
-var PROMISE_SYMBOL = Symbol();
-function wrapQueryRef(internalQueryRef) {
-    var _a;
-    var ref = (_a = {
-            toPromise: function () {
-                // We avoid resolving this promise with the query data because we want to
-                // discourage using the server data directly from the queryRef. Instead,
-                // the data should be accessed through `useReadQuery`. When the server
-                // data is needed, its better to use `client.query()` directly.
-                //
-                // Here we resolve with the ref itself to make using this in React Router
-                // or TanStack Router `loader` functions a bit more ergonomic e.g.
-                //
-                // function loader() {
-                //   return { queryRef: await preloadQuery(query).toPromise() }
-                // }
-                return getWrappedPromise(ref).then(function () { return ref; });
+        var mutationId = ++ref.current.mutationId;
+        var clientOptions = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_5__.mergeOptions)(baseOptions, executeOptions);
+        return client
+            .mutate(clientOptions)
+            .then(function (response) {
+            var _a, _b;
+            var data = response.data, errors = response.errors;
+            var error = errors && errors.length > 0 ?
+                new _errors_index_js__WEBPACK_IMPORTED_MODULE_6__.ApolloError({ graphQLErrors: errors })
+                : void 0;
+            var onError = executeOptions.onError || ((_a = ref.current.options) === null || _a === void 0 ? void 0 : _a.onError);
+            if (error && onError) {
+                onError(error, clientOptions);
             }
-        },
-        _a[QUERY_REFERENCE_SYMBOL] = internalQueryRef,
-        _a[PROMISE_SYMBOL] = internalQueryRef.promise,
-        _a);
-    return ref;
-}
-function assertWrappedQueryRef(queryRef) {
-    (0,_utilities_globals_invariantWrappers_js__WEBPACK_IMPORTED_MODULE_1__.invariant)(!queryRef || QUERY_REFERENCE_SYMBOL in queryRef, 59);
-}
-function getWrappedPromise(queryRef) {
-    var internalQueryRef = unwrapQueryRef(queryRef);
-    return internalQueryRef.promise.status === "fulfilled" ?
-        internalQueryRef.promise
-        : queryRef[PROMISE_SYMBOL];
-}
-function unwrapQueryRef(queryRef) {
-    return queryRef[QUERY_REFERENCE_SYMBOL];
-}
-function updateWrappedQueryRef(queryRef, promise) {
-    queryRef[PROMISE_SYMBOL] = promise;
-}
-var OBSERVED_CHANGED_OPTIONS = [
-    "canonizeResults",
-    "context",
-    "errorPolicy",
-    "fetchPolicy",
-    "refetchWritePolicy",
-    "returnPartialData",
-];
-var InternalQueryReference = /** @class */ (function () {
-    function InternalQueryReference(observable, options) {
-        var _this = this;
-        this.key = {};
-        this.listeners = new Set();
-        this.references = 0;
-        this.softReferences = 0;
-        this.handleNext = this.handleNext.bind(this);
-        this.handleError = this.handleError.bind(this);
-        this.dispose = this.dispose.bind(this);
-        this.observable = observable;
-        if (options.onDispose) {
-            this.onDispose = options.onDispose;
-        }
-        this.setResult();
-        this.subscribeToQuery();
-        // Start a timer that will automatically dispose of the query if the
-        // suspended resource does not use this queryRef in the given time. This
-        // helps prevent memory leaks when a component has unmounted before the
-        // query has finished loading.
-        var startDisposeTimer = function () {
-            var _a;
-            if (!_this.references) {
-                _this.autoDisposeTimeoutId = setTimeout(_this.dispose, (_a = options.autoDisposeTimeoutMs) !== null && _a !== void 0 ? _a : 30000);
-            }
-        };
-        // We wait until the request has settled to ensure we don't dispose of the
-        // query ref before the request finishes, otherwise we would leave the
-        // promise in a pending state rendering the suspense boundary indefinitely.
-        this.promise.then(startDisposeTimer, startDisposeTimer);
-    }
-    Object.defineProperty(InternalQueryReference.prototype, "disposed", {
-        get: function () {
-            return this.subscription.closed;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(InternalQueryReference.prototype, "watchQueryOptions", {
-        get: function () {
-            return this.observable.options;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    InternalQueryReference.prototype.reinitialize = function () {
-        var observable = this.observable;
-        var originalFetchPolicy = this.watchQueryOptions.fetchPolicy;
-        var avoidNetworkRequests = originalFetchPolicy === "no-cache" || originalFetchPolicy === "standby";
-        try {
-            if (avoidNetworkRequests) {
-                observable.silentSetOptions({ fetchPolicy: "standby" });
-            }
-            else {
-                observable.resetLastResults();
-                observable.silentSetOptions({ fetchPolicy: "cache-first" });
-            }
-            this.subscribeToQuery();
-            if (avoidNetworkRequests) {
-                return;
-            }
-            observable.resetDiff();
-            this.setResult();
-        }
-        finally {
-            observable.silentSetOptions({ fetchPolicy: originalFetchPolicy });
-        }
-    };
-    InternalQueryReference.prototype.retain = function () {
-        var _this = this;
-        this.references++;
-        clearTimeout(this.autoDisposeTimeoutId);
-        var disposed = false;
-        return function () {
-            if (disposed) {
-                return;
-            }
-            disposed = true;
-            _this.references--;
-            setTimeout(function () {
-                if (!_this.references) {
-                    _this.dispose();
+            if (mutationId === ref.current.mutationId &&
+                !clientOptions.ignoreResults) {
+                var result_1 = {
+                    called: true,
+                    loading: false,
+                    data: data,
+                    error: error,
+                    client: client,
+                };
+                if (ref.current.isMounted && !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_1__.equal)(ref.current.result, result_1)) {
+                    setResult((ref.current.result = result_1));
                 }
-            });
-        };
-    };
-    InternalQueryReference.prototype.softRetain = function () {
-        var _this = this;
-        this.softReferences++;
-        var disposed = false;
-        return function () {
-            // Tracking if this has already been called helps ensure that
-            // multiple calls to this function won't decrement the reference
-            // counter more than it should. Subsequent calls just result in a noop.
-            if (disposed) {
-                return;
             }
-            disposed = true;
-            _this.softReferences--;
-            setTimeout(function () {
-                if (!_this.softReferences && !_this.references) {
-                    _this.dispose();
-                }
-            });
-        };
-    };
-    InternalQueryReference.prototype.didChangeOptions = function (watchQueryOptions) {
-        var _this = this;
-        return OBSERVED_CHANGED_OPTIONS.some(function (option) {
-            return option in watchQueryOptions &&
-                !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_0__.equal)(_this.watchQueryOptions[option], watchQueryOptions[option]);
-        });
-    };
-    InternalQueryReference.prototype.applyOptions = function (watchQueryOptions) {
-        var _a = this.watchQueryOptions, currentFetchPolicy = _a.fetchPolicy, currentCanonizeResults = _a.canonizeResults;
-        // "standby" is used when `skip` is set to `true`. Detect when we've
-        // enabled the query (i.e. `skip` is `false`) to execute a network request.
-        if (currentFetchPolicy === "standby" &&
-            currentFetchPolicy !== watchQueryOptions.fetchPolicy) {
-            this.initiateFetch(this.observable.reobserve(watchQueryOptions));
-        }
-        else {
-            this.observable.silentSetOptions(watchQueryOptions);
-            if (currentCanonizeResults !== watchQueryOptions.canonizeResults) {
-                this.result = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_2__.__assign)({}, this.result), this.observable.getCurrentResult());
-                this.promise = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_3__.createFulfilledPromise)(this.result);
+            var onCompleted = executeOptions.onCompleted || ((_b = ref.current.options) === null || _b === void 0 ? void 0 : _b.onCompleted);
+            if (!error) {
+                onCompleted === null || onCompleted === void 0 ? void 0 : onCompleted(response.data, clientOptions);
             }
-        }
-        return this.promise;
-    };
-    InternalQueryReference.prototype.listen = function (listener) {
-        var _this = this;
-        this.listeners.add(listener);
-        return function () {
-            _this.listeners.delete(listener);
-        };
-    };
-    InternalQueryReference.prototype.refetch = function (variables) {
-        return this.initiateFetch(this.observable.refetch(variables));
-    };
-    InternalQueryReference.prototype.fetchMore = function (options) {
-        return this.initiateFetch(this.observable.fetchMore(options));
-    };
-    InternalQueryReference.prototype.dispose = function () {
-        this.subscription.unsubscribe();
-        this.onDispose();
-    };
-    InternalQueryReference.prototype.onDispose = function () {
-        // noop. overridable by options
-    };
-    InternalQueryReference.prototype.handleNext = function (result) {
-        var _a;
-        switch (this.promise.status) {
-            case "pending": {
-                // Maintain the last successful `data` value if the next result does not
-                // have one.
-                if (result.data === void 0) {
-                    result.data = this.result.data;
-                }
-                this.result = result;
-                (_a = this.resolve) === null || _a === void 0 ? void 0 : _a.call(this, result);
-                break;
-            }
-            default: {
-                // This occurs when switching to a result that is fully cached when this
-                // class is instantiated. ObservableQuery will run reobserve when
-                // subscribing, which delivers a result from the cache.
-                if (result.data === this.result.data &&
-                    result.networkStatus === this.result.networkStatus) {
-                    return;
-                }
-                // Maintain the last successful `data` value if the next result does not
-                // have one.
-                if (result.data === void 0) {
-                    result.data = this.result.data;
-                }
-                this.result = result;
-                this.promise = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_3__.createFulfilledPromise)(result);
-                this.deliver(this.promise);
-                break;
-            }
-        }
-    };
-    InternalQueryReference.prototype.handleError = function (error) {
-        var _a;
-        this.subscription.unsubscribe();
-        this.subscription = this.observable.resubscribeAfterError(this.handleNext, this.handleError);
-        switch (this.promise.status) {
-            case "pending": {
-                (_a = this.reject) === null || _a === void 0 ? void 0 : _a.call(this, error);
-                break;
-            }
-            default: {
-                this.promise = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_3__.createRejectedPromise)(error);
-                this.deliver(this.promise);
-            }
-        }
-    };
-    InternalQueryReference.prototype.deliver = function (promise) {
-        this.listeners.forEach(function (listener) { return listener(promise); });
-    };
-    InternalQueryReference.prototype.initiateFetch = function (returnedPromise) {
-        var _this = this;
-        this.promise = this.createPendingPromise();
-        this.promise.catch(function () { });
-        // If the data returned from the fetch is deeply equal to the data already
-        // in the cache, `handleNext` will not be triggered leaving the promise we
-        // created in a pending state forever. To avoid this situtation, we attempt
-        // to resolve the promise if `handleNext` hasn't been run to ensure the
-        // promise is resolved correctly.
-        returnedPromise
-            .then(function () {
-            // In the case of `fetchMore`, this promise is resolved before a cache
-            // result is emitted due to the fact that `fetchMore` sets a `no-cache`
-            // fetch policy and runs `cache.batch` in its `.then` handler. Because
-            // the timing is different, we accidentally run this update twice
-            // causing an additional re-render with the `fetchMore` result by
-            // itself. By wrapping in `setTimeout`, this should provide a short
-            // delay to allow the `QueryInfo.notify` handler to run before this
-            // promise is checked.
-            // See https://github.com/apollographql/apollo-client/issues/11315 for
-            // more information
-            setTimeout(function () {
-                var _a;
-                if (_this.promise.status === "pending") {
-                    // Use the current result from the observable instead of the value
-                    // resolved from the promise. This avoids issues in some cases where
-                    // the raw resolved value should not be the emitted value, such as
-                    // when a `fetchMore` call returns an empty array after it has
-                    // reached the end of the list.
-                    //
-                    // See the following for more information:
-                    // https://github.com/apollographql/apollo-client/issues/11642
-                    _this.result = _this.observable.getCurrentResult();
-                    (_a = _this.resolve) === null || _a === void 0 ? void 0 : _a.call(_this, _this.result);
-                }
-            });
+            return response;
         })
-            .catch(function () { });
-        return returnedPromise;
-    };
-    InternalQueryReference.prototype.subscribeToQuery = function () {
-        var _this = this;
-        this.subscription = this.observable
-            .filter(function (result) { return !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_0__.equal)(result.data, {}) && !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_0__.equal)(result, _this.result); })
-            .subscribe(this.handleNext, this.handleError);
-    };
-    InternalQueryReference.prototype.setResult = function () {
-        // Don't save this result as last result to prevent delivery of last result
-        // when first subscribing
-        var result = this.observable.getCurrentResult(false);
-        if ((0,_wry_equality__WEBPACK_IMPORTED_MODULE_0__.equal)(result, this.result)) {
-            return;
+            .catch(function (error) {
+            var _a;
+            if (mutationId === ref.current.mutationId && ref.current.isMounted) {
+                var result_2 = {
+                    loading: false,
+                    error: error,
+                    data: void 0,
+                    called: true,
+                    client: client,
+                };
+                if (!(0,_wry_equality__WEBPACK_IMPORTED_MODULE_1__.equal)(ref.current.result, result_2)) {
+                    setResult((ref.current.result = result_2));
+                }
+            }
+            var onError = executeOptions.onError || ((_a = ref.current.options) === null || _a === void 0 ? void 0 : _a.onError);
+            if (onError) {
+                onError(error, clientOptions);
+                // TODO(brian): why are we returning this here???
+                return { data: void 0, errors: error };
+            }
+            throw error;
+        });
+    }, []);
+    var reset = rehackt__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
+        if (ref.current.isMounted) {
+            var result_3 = {
+                called: false,
+                loading: false,
+                client: ref.current.client,
+            };
+            Object.assign(ref.current, { mutationId: 0, result: result_3 });
+            setResult(result_3);
         }
-        this.result = result;
-        this.promise =
-            (result.data &&
-                (!result.partial || this.watchQueryOptions.returnPartialData)) ?
-                (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_3__.createFulfilledPromise)(result)
-                : this.createPendingPromise();
-    };
-    InternalQueryReference.prototype.createPendingPromise = function () {
-        var _this = this;
-        return (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_3__.wrapPromiseWithState)(new Promise(function (resolve, reject) {
-            _this.resolve = resolve;
-            _this.reject = reject;
-        }));
-    };
-    return InternalQueryReference;
-}());
-
-//# sourceMappingURL=QueryReference.js.map
+    }, []);
+    rehackt__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+        var current = ref.current;
+        current.isMounted = true;
+        return function () {
+            current.isMounted = false;
+        };
+    }, []);
+    return [execute, (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__assign)({ reset: reset }, result)];
+}
+//# sourceMappingURL=useMutation.js.map
 
 /***/ }),
 
-/***/ "./node_modules/@apollo/client/react/internal/cache/SuspenseCache.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/internal/cache/SuspenseCache.js ***!
-  \***************************************************************************/
+/***/ "./node_modules/@apollo/client/react/hooks/useQuery.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@apollo/client/react/hooks/useQuery.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   SuspenseCache: () => (/* binding */ SuspenseCache)
+/* harmony export */   useInternalState: () => (/* binding */ useInternalState),
+/* harmony export */   useQuery: () => (/* binding */ useQuery)
 /* harmony export */ });
-/* harmony import */ var _wry_trie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wry/trie */ "./node_modules/@wry/trie/lib/index.js");
-/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/canUse.js");
-/* harmony import */ var _QueryReference_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QueryReference.js */ "./node_modules/@apollo/client/react/internal/cache/QueryReference.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/globals/index.js */ "./node_modules/@apollo/client/utilities/globals/index.js");
+/* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
+/* harmony import */ var _useSyncExternalStore_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./useSyncExternalStore.js */ "./node_modules/@apollo/client/react/hooks/useSyncExternalStore.js");
+/* harmony import */ var _wry_equality__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wry/equality */ "./node_modules/@wry/equality/lib/index.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/mergeOptions.js");
+/* harmony import */ var _context_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../context/index.js */ "./node_modules/@apollo/client/react/context/ApolloContext.js");
+/* harmony import */ var _errors_index_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../errors/index.js */ "./node_modules/@apollo/client/errors/index.js");
+/* harmony import */ var _core_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/index.js */ "./node_modules/@apollo/client/core/networkStatus.js");
+/* harmony import */ var _parser_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../parser/index.js */ "./node_modules/@apollo/client/react/parser/index.js");
+/* harmony import */ var _useApolloClient_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useApolloClient.js */ "./node_modules/@apollo/client/react/hooks/useApolloClient.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/maybeDeepFreeze.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/canUse.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/compact.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/arrays.js");
+/* harmony import */ var _internal_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./internal/index.js */ "./node_modules/@apollo/client/react/hooks/internal/wrapHook.js");
 
 
 
-var SuspenseCache = /** @class */ (function () {
-    function SuspenseCache(options) {
-        if (options === void 0) { options = Object.create(null); }
-        this.queryRefs = new _wry_trie__WEBPACK_IMPORTED_MODULE_0__.Trie(_utilities_index_js__WEBPACK_IMPORTED_MODULE_1__.canUseWeakMap);
-        this.options = options;
+
+
+
+
+
+
+
+
+
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+/**
+ * A hook for executing queries in an Apollo application.
+ *
+ * To run a query within a React component, call `useQuery` and pass it a GraphQL query document.
+ *
+ * When your component renders, `useQuery` returns an object from Apollo Client that contains `loading`, `error`, and `data` properties you can use to render your UI.
+ *
+ * > Refer to the [Queries](https://www.apollographql.com/docs/react/data/queries) section for a more in-depth overview of `useQuery`.
+ *
+ * @example
+ * ```jsx
+ * import { gql, useQuery } from '@apollo/client';
+ *
+ * const GET_GREETING = gql`
+ *   query GetGreeting($language: String!) {
+ *     greeting(language: $language) {
+ *       message
+ *     }
+ *   }
+ * `;
+ *
+ * function Hello() {
+ *   const { loading, error, data } = useQuery(GET_GREETING, {
+ *     variables: { language: 'english' },
+ *   });
+ *   if (loading) return <p>Loading ...</p>;
+ *   return <h1>Hello {data.greeting.message}!</h1>;
+ * }
+ * ```
+ * @since 3.0.0
+ * @param query - A GraphQL query document parsed into an AST by `gql`.
+ * @param options - Options to control how the query is executed.
+ * @returns Query result object
+ */
+function useQuery(query, options) {
+    if (options === void 0) { options = Object.create(null); }
+    return (0,_internal_index_js__WEBPACK_IMPORTED_MODULE_3__.wrapHook)("useQuery", _useQuery, (0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_4__.useApolloClient)(options && options.client))(query, options);
+}
+function _useQuery(query, options) {
+    return useInternalState((0,_useApolloClient_js__WEBPACK_IMPORTED_MODULE_4__.useApolloClient)(options.client), query).useQuery(options);
+}
+function useInternalState(client, query) {
+    // By default, InternalState.prototype.forceUpdate is an empty function, but
+    // we replace it here (before anyone has had a chance to see this state yet)
+    // with a function that unconditionally forces an update, using the latest
+    // setTick function. Updating this state by calling state.forceUpdate or the
+    // uSES notification callback are the only way we trigger React component updates.
+    var forceUpdateState = rehackt__WEBPACK_IMPORTED_MODULE_1__.useReducer(function (tick) { return tick + 1; }, 0)[1];
+    function createInternalState(previous) {
+        return Object.assign(new InternalState(client, query, previous), {
+            forceUpdateState: forceUpdateState,
+        });
     }
-    SuspenseCache.prototype.getQueryRef = function (cacheKey, createObservable) {
-        var ref = this.queryRefs.lookupArray(cacheKey);
-        if (!ref.current) {
-            ref.current = new _QueryReference_js__WEBPACK_IMPORTED_MODULE_2__.InternalQueryReference(createObservable(), {
-                autoDisposeTimeoutMs: this.options.autoDisposeTimeoutMs,
-                onDispose: function () {
-                    delete ref.current;
+    var _a = rehackt__WEBPACK_IMPORTED_MODULE_1__.useState(createInternalState), state = _a[0], updateState = _a[1];
+    if (client !== state.client || query !== state.query) {
+        // If the client or query have changed, we need to create a new InternalState.
+        // This will trigger a re-render with the new state, but it will also continue
+        // to run the current render function to completion.
+        // Since we sometimes trigger some side-effects in the render function, we
+        // re-assign `state` to the new state to ensure that those side-effects are
+        // triggered with the new state.
+        updateState((state = createInternalState(state)));
+    }
+    return state;
+}
+var InternalState = /** @class */ (function () {
+    function InternalState(client, query, previous) {
+        var _this = this;
+        this.client = client;
+        this.query = query;
+        /**
+         * Will be overwritten by the `useSyncExternalStore` "force update" method
+         * whenever it is available and reset to `forceUpdateState` when it isn't.
+         */
+        this.forceUpdate = function () { return _this.forceUpdateState(); };
+        this.ssrDisabledResult = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_5__.maybeDeepFreeze)({
+            loading: true,
+            data: void 0,
+            error: void 0,
+            networkStatus: _core_index_js__WEBPACK_IMPORTED_MODULE_6__.NetworkStatus.loading,
+        });
+        this.skipStandbyResult = (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_5__.maybeDeepFreeze)({
+            loading: false,
+            data: void 0,
+            error: void 0,
+            networkStatus: _core_index_js__WEBPACK_IMPORTED_MODULE_6__.NetworkStatus.ready,
+        });
+        // This cache allows the referential stability of this.result (as returned by
+        // getCurrentResult) to translate into referential stability of the resulting
+        // QueryResult object returned by toQueryResult.
+        this.toQueryResultCache = new (_utilities_index_js__WEBPACK_IMPORTED_MODULE_7__.canUseWeakMap ? WeakMap : Map)();
+        (0,_parser_index_js__WEBPACK_IMPORTED_MODULE_8__.verifyDocumentType)(query, _parser_index_js__WEBPACK_IMPORTED_MODULE_8__.DocumentType.Query);
+        // Reuse previousData from previous InternalState (if any) to provide
+        // continuity of previousData even if/when the query or client changes.
+        var previousResult = previous && previous.result;
+        var previousData = previousResult && previousResult.data;
+        if (previousData) {
+            this.previousData = previousData;
+        }
+    }
+    /**
+     * Forces an update using local component state.
+     * As this is not batched with `useSyncExternalStore` updates,
+     * this is only used as a fallback if the `useSyncExternalStore` "force update"
+     * method is not registered at the moment.
+     * See https://github.com/facebook/react/issues/25191
+     *  */
+    InternalState.prototype.forceUpdateState = function () {
+        // Replaced (in useInternalState) with a method that triggers an update.
+        globalThis.__DEV__ !== false && _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_0__.invariant.warn(51);
+    };
+    InternalState.prototype.executeQuery = function (options) {
+        var _this = this;
+        var _a;
+        if (options.query) {
+            Object.assign(this, { query: options.query });
+        }
+        this.watchQueryOptions = this.createWatchQueryOptions((this.queryHookOptions = options));
+        var concast = this.observable.reobserveAsConcast(this.getObsQueryOptions());
+        // Make sure getCurrentResult returns a fresh ApolloQueryResult<TData>,
+        // but save the current data as this.previousData, just like setResult
+        // usually does.
+        this.previousData = ((_a = this.result) === null || _a === void 0 ? void 0 : _a.data) || this.previousData;
+        this.result = void 0;
+        this.forceUpdate();
+        return new Promise(function (resolve) {
+            var result;
+            // Subscribe to the concast independently of the ObservableQuery in case
+            // the component gets unmounted before the promise resolves. This prevents
+            // the concast from terminating early and resolving with `undefined` when
+            // there are no more subscribers for the concast.
+            concast.subscribe({
+                next: function (value) {
+                    result = value;
+                },
+                error: function () {
+                    resolve(_this.toQueryResult(_this.observable.getCurrentResult()));
+                },
+                complete: function () {
+                    resolve(_this.toQueryResult(result));
                 },
             });
+        });
+    };
+    // Methods beginning with use- should be called according to the standard
+    // rules of React hooks: only at the top level of the calling function, and
+    // without any dynamic conditional logic.
+    InternalState.prototype.useQuery = function (options) {
+        var _this = this;
+        // The renderPromises field gets initialized here in the useQuery method, at
+        // the beginning of everything (for a given component rendering, at least),
+        // so we can safely use this.renderPromises in other/later InternalState
+        // methods without worrying it might be uninitialized. Even after
+        // initialization, this.renderPromises is usually undefined (unless SSR is
+        // happening), but that's fine as long as it has been initialized that way,
+        // rather than left uninitialized.
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        this.renderPromises = rehackt__WEBPACK_IMPORTED_MODULE_1__.useContext((0,_context_index_js__WEBPACK_IMPORTED_MODULE_9__.getApolloContext)()).renderPromises;
+        this.useOptions(options);
+        var obsQuery = this.useObservableQuery();
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        var result = (0,_useSyncExternalStore_js__WEBPACK_IMPORTED_MODULE_10__.useSyncExternalStore)(
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        rehackt__WEBPACK_IMPORTED_MODULE_1__.useCallback(function (handleStoreChange) {
+            if (_this.renderPromises) {
+                return function () { };
+            }
+            _this.forceUpdate = handleStoreChange;
+            var onNext = function () {
+                var previousResult = _this.result;
+                // We use `getCurrentResult()` instead of the onNext argument because
+                // the values differ slightly. Specifically, loading results will have
+                // an empty object for data instead of `undefined` for some reason.
+                var result = obsQuery.getCurrentResult();
+                // Make sure we're not attempting to re-render similar results
+                if (previousResult &&
+                    previousResult.loading === result.loading &&
+                    previousResult.networkStatus === result.networkStatus &&
+                    (0,_wry_equality__WEBPACK_IMPORTED_MODULE_2__.equal)(previousResult.data, result.data)) {
+                    return;
+                }
+                _this.setResult(result);
+            };
+            var onError = function (error) {
+                subscription.unsubscribe();
+                subscription = obsQuery.resubscribeAfterError(onNext, onError);
+                if (!hasOwnProperty.call(error, "graphQLErrors")) {
+                    // The error is not a GraphQL error
+                    throw error;
+                }
+                var previousResult = _this.result;
+                if (!previousResult ||
+                    (previousResult && previousResult.loading) ||
+                    !(0,_wry_equality__WEBPACK_IMPORTED_MODULE_2__.equal)(error, previousResult.error)) {
+                    _this.setResult({
+                        data: (previousResult && previousResult.data),
+                        error: error,
+                        loading: false,
+                        networkStatus: _core_index_js__WEBPACK_IMPORTED_MODULE_6__.NetworkStatus.error,
+                    });
+                }
+            };
+            var subscription = obsQuery.subscribe(onNext, onError);
+            // Do the "unsubscribe" with a short delay.
+            // This way, an existing subscription can be reused without an additional
+            // request if "unsubscribe"  and "resubscribe" to the same ObservableQuery
+            // happen in very fast succession.
+            return function () {
+                setTimeout(function () { return subscription.unsubscribe(); });
+                _this.forceUpdate = function () { return _this.forceUpdateState(); };
+            };
+        }, [
+            // We memoize the subscribe function using useCallback and the following
+            // dependency keys, because the subscribe function reference is all that
+            // useSyncExternalStore uses internally as a dependency key for the
+            // useEffect ultimately responsible for the subscription, so we are
+            // effectively passing this dependency array to that useEffect buried
+            // inside useSyncExternalStore, as desired.
+            obsQuery,
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            this.renderPromises,
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            this.client.disableNetworkFetches,
+        ]), function () { return _this.getCurrentResult(); }, function () { return _this.getCurrentResult(); });
+        // TODO Remove this method when we remove support for options.partialRefetch.
+        this.unsafeHandlePartialRefetch(result);
+        return this.toQueryResult(result);
+    };
+    InternalState.prototype.useOptions = function (options) {
+        var _a;
+        var watchQueryOptions = this.createWatchQueryOptions((this.queryHookOptions = options));
+        // Update this.watchQueryOptions, but only when they have changed, which
+        // allows us to depend on the referential stability of
+        // this.watchQueryOptions elsewhere.
+        var currentWatchQueryOptions = this.watchQueryOptions;
+        if (!(0,_wry_equality__WEBPACK_IMPORTED_MODULE_2__.equal)(watchQueryOptions, currentWatchQueryOptions)) {
+            this.watchQueryOptions = watchQueryOptions;
+            if (currentWatchQueryOptions && this.observable) {
+                // Though it might be tempting to postpone this reobserve call to the
+                // useEffect block, we need getCurrentResult to return an appropriate
+                // loading:true result synchronously (later within the same call to
+                // useQuery). Since we already have this.observable here (not true for
+                // the very first call to useQuery), we are not initiating any new
+                // subscriptions, though it does feel less than ideal that reobserve
+                // (potentially) kicks off a network request (for example, when the
+                // variables have changed), which is technically a side-effect.
+                this.observable.reobserve(this.getObsQueryOptions());
+                // Make sure getCurrentResult returns a fresh ApolloQueryResult<TData>,
+                // but save the current data as this.previousData, just like setResult
+                // usually does.
+                this.previousData = ((_a = this.result) === null || _a === void 0 ? void 0 : _a.data) || this.previousData;
+                this.result = void 0;
+            }
         }
-        return ref.current;
+        // Make sure state.onCompleted and state.onError always reflect the latest
+        // options.onCompleted and options.onError callbacks provided to useQuery,
+        // since those functions are often recreated every time useQuery is called.
+        // Like the forceUpdate method, the versions of these methods inherited from
+        // InternalState.prototype are empty no-ops, but we can override them on the
+        // base state object (without modifying the prototype).
+        this.onCompleted =
+            options.onCompleted || InternalState.prototype.onCompleted;
+        this.onError = options.onError || InternalState.prototype.onError;
+        if ((this.renderPromises || this.client.disableNetworkFetches) &&
+            this.queryHookOptions.ssr === false &&
+            !this.queryHookOptions.skip) {
+            // If SSR has been explicitly disabled, and this function has been called
+            // on the server side, return the default loading state.
+            this.result = this.ssrDisabledResult;
+        }
+        else if (this.queryHookOptions.skip ||
+            this.watchQueryOptions.fetchPolicy === "standby") {
+            // When skipping a query (ie. we're not querying for data but still want to
+            // render children), make sure the `data` is cleared out and `loading` is
+            // set to `false` (since we aren't loading anything).
+            //
+            // NOTE: We no longer think this is the correct behavior. Skipping should
+            // not automatically set `data` to `undefined`, but instead leave the
+            // previous data in place. In other words, skipping should not mandate that
+            // previously received data is all of a sudden removed. Unfortunately,
+            // changing this is breaking, so we'll have to wait until Apollo Client 4.0
+            // to address this.
+            this.result = this.skipStandbyResult;
+        }
+        else if (this.result === this.ssrDisabledResult ||
+            this.result === this.skipStandbyResult) {
+            this.result = void 0;
+        }
     };
-    SuspenseCache.prototype.add = function (cacheKey, queryRef) {
-        var ref = this.queryRefs.lookupArray(cacheKey);
-        ref.current = queryRef;
+    InternalState.prototype.getObsQueryOptions = function () {
+        var toMerge = [];
+        var globalDefaults = this.client.defaultOptions.watchQuery;
+        if (globalDefaults)
+            toMerge.push(globalDefaults);
+        if (this.queryHookOptions.defaultOptions) {
+            toMerge.push(this.queryHookOptions.defaultOptions);
+        }
+        // We use compact rather than mergeOptions for this part of the merge,
+        // because we want watchQueryOptions.variables (if defined) to replace
+        // this.observable.options.variables whole. This replacement allows
+        // removing variables by removing them from the variables input to
+        // useQuery. If the variables were always merged together (rather than
+        // replaced), there would be no way to remove existing variables.
+        // However, the variables from options.defaultOptions and globalDefaults
+        // (if provided) should be merged, to ensure individual defaulted
+        // variables always have values, if not otherwise defined in
+        // observable.options or watchQueryOptions.
+        toMerge.push((0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_11__.compact)(this.observable && this.observable.options, this.watchQueryOptions));
+        return toMerge.reduce(_utilities_index_js__WEBPACK_IMPORTED_MODULE_12__.mergeOptions);
     };
-    return SuspenseCache;
+    // A function to massage options before passing them to ObservableQuery.
+    InternalState.prototype.createWatchQueryOptions = function (_a) {
+        var _b;
+        if (_a === void 0) { _a = {}; }
+        var skip = _a.skip, ssr = _a.ssr, onCompleted = _a.onCompleted, onError = _a.onError, defaultOptions = _a.defaultOptions, 
+        // The above options are useQuery-specific, so this ...otherOptions spread
+        // makes otherOptions almost a WatchQueryOptions object, except for the
+        // query property that we add below.
+        otherOptions = (0,tslib__WEBPACK_IMPORTED_MODULE_13__.__rest)(_a, ["skip", "ssr", "onCompleted", "onError", "defaultOptions"]);
+        // This Object.assign is safe because otherOptions is a fresh ...rest object
+        // that did not exist until just now, so modifications are still allowed.
+        var watchQueryOptions = Object.assign(otherOptions, { query: this.query });
+        if (this.renderPromises &&
+            (watchQueryOptions.fetchPolicy === "network-only" ||
+                watchQueryOptions.fetchPolicy === "cache-and-network")) {
+            // this behavior was added to react-apollo without explanation in this PR
+            // https://github.com/apollographql/react-apollo/pull/1579
+            watchQueryOptions.fetchPolicy = "cache-first";
+        }
+        if (!watchQueryOptions.variables) {
+            watchQueryOptions.variables = {};
+        }
+        if (skip) {
+            var _c = watchQueryOptions.fetchPolicy, fetchPolicy = _c === void 0 ? this.getDefaultFetchPolicy() : _c, _d = watchQueryOptions.initialFetchPolicy, initialFetchPolicy = _d === void 0 ? fetchPolicy : _d;
+            // When skipping, we set watchQueryOptions.fetchPolicy initially to
+            // "standby", but we also need/want to preserve the initial non-standby
+            // fetchPolicy that would have been used if not skipping.
+            Object.assign(watchQueryOptions, {
+                initialFetchPolicy: initialFetchPolicy,
+                fetchPolicy: "standby",
+            });
+        }
+        else if (!watchQueryOptions.fetchPolicy) {
+            watchQueryOptions.fetchPolicy =
+                ((_b = this.observable) === null || _b === void 0 ? void 0 : _b.options.initialFetchPolicy) ||
+                    this.getDefaultFetchPolicy();
+        }
+        return watchQueryOptions;
+    };
+    InternalState.prototype.getDefaultFetchPolicy = function () {
+        var _a, _b;
+        return (((_a = this.queryHookOptions.defaultOptions) === null || _a === void 0 ? void 0 : _a.fetchPolicy) ||
+            ((_b = this.client.defaultOptions.watchQuery) === null || _b === void 0 ? void 0 : _b.fetchPolicy) ||
+            "cache-first");
+    };
+    // Defining these methods as no-ops on the prototype allows us to call
+    // state.onCompleted and/or state.onError without worrying about whether a
+    // callback was provided.
+    InternalState.prototype.onCompleted = function (data) { };
+    InternalState.prototype.onError = function (error) { };
+    InternalState.prototype.useObservableQuery = function () {
+        // See if there is an existing observable that was used to fetch the same
+        // data and if so, use it instead since it will contain the proper queryId
+        // to fetch the result set. This is used during SSR.
+        var obsQuery = (this.observable =
+            (this.renderPromises &&
+                this.renderPromises.getSSRObservable(this.watchQueryOptions)) ||
+                this.observable || // Reuse this.observable if possible (and not SSR)
+                this.client.watchQuery(this.getObsQueryOptions()));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        this.obsQueryFields = rehackt__WEBPACK_IMPORTED_MODULE_1__.useMemo(function () { return ({
+            refetch: obsQuery.refetch.bind(obsQuery),
+            reobserve: obsQuery.reobserve.bind(obsQuery),
+            fetchMore: obsQuery.fetchMore.bind(obsQuery),
+            updateQuery: obsQuery.updateQuery.bind(obsQuery),
+            startPolling: obsQuery.startPolling.bind(obsQuery),
+            stopPolling: obsQuery.stopPolling.bind(obsQuery),
+            subscribeToMore: obsQuery.subscribeToMore.bind(obsQuery),
+        }); }, [obsQuery]);
+        var ssrAllowed = !(this.queryHookOptions.ssr === false || this.queryHookOptions.skip);
+        if (this.renderPromises && ssrAllowed) {
+            this.renderPromises.registerSSRObservable(obsQuery);
+            if (obsQuery.getCurrentResult().loading) {
+                // TODO: This is a legacy API which could probably be cleaned up
+                this.renderPromises.addObservableQueryPromise(obsQuery);
+            }
+        }
+        return obsQuery;
+    };
+    InternalState.prototype.setResult = function (nextResult) {
+        var previousResult = this.result;
+        if (previousResult && previousResult.data) {
+            this.previousData = previousResult.data;
+        }
+        this.result = nextResult;
+        // Calling state.setResult always triggers an update, though some call sites
+        // perform additional equality checks before committing to an update.
+        this.forceUpdate();
+        this.handleErrorOrCompleted(nextResult, previousResult);
+    };
+    InternalState.prototype.handleErrorOrCompleted = function (result, previousResult) {
+        var _this = this;
+        if (!result.loading) {
+            var error_1 = this.toApolloError(result);
+            // wait a tick in case we are in the middle of rendering a component
+            Promise.resolve()
+                .then(function () {
+                if (error_1) {
+                    _this.onError(error_1);
+                }
+                else if (result.data &&
+                    (previousResult === null || previousResult === void 0 ? void 0 : previousResult.networkStatus) !== result.networkStatus &&
+                    result.networkStatus === _core_index_js__WEBPACK_IMPORTED_MODULE_6__.NetworkStatus.ready) {
+                    _this.onCompleted(result.data);
+                }
+            })
+                .catch(function (error) {
+                globalThis.__DEV__ !== false && _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_0__.invariant.warn(error);
+            });
+        }
+    };
+    InternalState.prototype.toApolloError = function (result) {
+        return (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_14__.isNonEmptyArray)(result.errors) ?
+            new _errors_index_js__WEBPACK_IMPORTED_MODULE_15__.ApolloError({ graphQLErrors: result.errors })
+            : result.error;
+    };
+    InternalState.prototype.getCurrentResult = function () {
+        // Using this.result as a cache ensures getCurrentResult continues returning
+        // the same (===) result object, unless state.setResult has been called, or
+        // we're doing server rendering and therefore override the result below.
+        if (!this.result) {
+            this.handleErrorOrCompleted((this.result = this.observable.getCurrentResult()));
+        }
+        return this.result;
+    };
+    InternalState.prototype.toQueryResult = function (result) {
+        var queryResult = this.toQueryResultCache.get(result);
+        if (queryResult)
+            return queryResult;
+        var data = result.data, partial = result.partial, resultWithoutPartial = (0,tslib__WEBPACK_IMPORTED_MODULE_13__.__rest)(result, ["data", "partial"]);
+        this.toQueryResultCache.set(result, (queryResult = (0,tslib__WEBPACK_IMPORTED_MODULE_13__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_13__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_13__.__assign)({ data: data }, resultWithoutPartial), this.obsQueryFields), { client: this.client, observable: this.observable, variables: this.observable.variables, called: !this.queryHookOptions.skip, previousData: this.previousData })));
+        if (!queryResult.error && (0,_utilities_index_js__WEBPACK_IMPORTED_MODULE_14__.isNonEmptyArray)(result.errors)) {
+            // Until a set naming convention for networkError and graphQLErrors is
+            // decided upon, we map errors (graphQLErrors) to the error options.
+            // TODO: Is it possible for both result.error and result.errors to be
+            // defined here?
+            queryResult.error = new _errors_index_js__WEBPACK_IMPORTED_MODULE_15__.ApolloError({ graphQLErrors: result.errors });
+        }
+        return queryResult;
+    };
+    InternalState.prototype.unsafeHandlePartialRefetch = function (result) {
+        // WARNING: SIDE-EFFECTS IN THE RENDER FUNCTION
+        //
+        // TODO: This code should be removed when the partialRefetch option is
+        // removed. I was unable to get this hook to behave reasonably in certain
+        // edge cases when this block was put in an effect.
+        if (result.partial &&
+            this.queryHookOptions.partialRefetch &&
+            !result.loading &&
+            (!result.data || Object.keys(result.data).length === 0) &&
+            this.observable.options.fetchPolicy !== "cache-only") {
+            Object.assign(result, {
+                loading: true,
+                networkStatus: _core_index_js__WEBPACK_IMPORTED_MODULE_6__.NetworkStatus.refetch,
+            });
+            this.observable.refetch();
+        }
+    };
+    return InternalState;
 }());
-
-//# sourceMappingURL=SuspenseCache.js.map
+//# sourceMappingURL=useQuery.js.map
 
 /***/ }),
 
-/***/ "./node_modules/@apollo/client/react/internal/cache/getSuspenseCache.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@apollo/client/react/internal/cache/getSuspenseCache.js ***!
-  \******************************************************************************/
+/***/ "./node_modules/@apollo/client/react/hooks/useSyncExternalStore.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@apollo/client/react/hooks/useSyncExternalStore.js ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+var rehackt__WEBPACK_IMPORTED_MODULE_1___namespace_cache;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getSuspenseCache: () => (/* binding */ getSuspenseCache)
+/* harmony export */   useSyncExternalStore: () => (/* binding */ useSyncExternalStore)
 /* harmony export */ });
-/* harmony import */ var _SuspenseCache_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SuspenseCache.js */ "./node_modules/@apollo/client/react/internal/cache/SuspenseCache.js");
+/* harmony import */ var _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/globals/index.js */ "./node_modules/@apollo/client/utilities/globals/index.js");
+/* harmony import */ var rehackt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rehackt */ "./node_modules/rehackt/index.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/@apollo/client/utilities/common/canUse.js");
 
-var suspenseCacheSymbol = Symbol.for("apollo.suspenseCache");
-function getSuspenseCache(client) {
-    var _a;
-    if (!client[suspenseCacheSymbol]) {
-        client[suspenseCacheSymbol] = new _SuspenseCache_js__WEBPACK_IMPORTED_MODULE_0__.SuspenseCache((_a = client.defaultOptions.react) === null || _a === void 0 ? void 0 : _a.suspense);
+
+
+var didWarnUncachedGetSnapshot = false;
+// Prevent webpack from complaining about our feature detection of the
+// useSyncExternalStore property of the React namespace, which is expected not
+// to exist when using React 17 and earlier, and that's fine.
+var uSESKey = "useSyncExternalStore";
+var realHook = /*#__PURE__*/ (rehackt__WEBPACK_IMPORTED_MODULE_1___namespace_cache || (rehackt__WEBPACK_IMPORTED_MODULE_1___namespace_cache = __webpack_require__.t(rehackt__WEBPACK_IMPORTED_MODULE_1__, 2)))[uSESKey];
+// Adapted from https://www.npmjs.com/package/use-sync-external-store, with
+// Apollo Client deviations called out by "// DEVIATION ..." comments.
+// When/if React.useSyncExternalStore is defined, delegate fully to it.
+var useSyncExternalStore = realHook ||
+    (function (subscribe, getSnapshot, getServerSnapshot) {
+        // Read the current snapshot from the store on every render. Again, this
+        // breaks the rules of React, and only works here because of specific
+        // implementation details, most importantly that updates are
+        // always synchronous.
+        var value = getSnapshot();
+        if (
+        // DEVIATION: Using __DEV__
+        globalThis.__DEV__ !== false &&
+            !didWarnUncachedGetSnapshot &&
+            // DEVIATION: Not using Object.is because we know our snapshots will never
+            // be exotic primitive values like NaN, which is !== itself.
+            value !== getSnapshot()) {
+            didWarnUncachedGetSnapshot = true;
+            // DEVIATION: Using invariant.error instead of console.error directly.
+            globalThis.__DEV__ !== false && _utilities_globals_index_js__WEBPACK_IMPORTED_MODULE_0__.invariant.error(58);
+        }
+        // Because updates are synchronous, we don't queue them. Instead we force a
+        // re-render whenever the subscribed state changes by updating an some
+        // arbitrary useState hook. Then, during render, we call getSnapshot to read
+        // the current value.
+        //
+        // Because we don't actually use the state returned by the useState hook, we
+        // can save a bit of memory by storing other stuff in that slot.
+        //
+        // To implement the early bailout, we need to track some things on a mutable
+        // object. Usually, we would put that in a useRef hook, but we can stash it in
+        // our useState hook instead.
+        //
+        // To force a re-render, we call forceUpdate({inst}). That works because the
+        // new object always fails an equality check.
+        var _a = rehackt__WEBPACK_IMPORTED_MODULE_1__.useState({
+            inst: { value: value, getSnapshot: getSnapshot },
+        }), inst = _a[0].inst, forceUpdate = _a[1];
+        // Track the latest getSnapshot function with a ref. This needs to be updated
+        // in the layout phase so we can access it during the tearing check that
+        // happens on subscribe.
+        if (_utilities_index_js__WEBPACK_IMPORTED_MODULE_2__.canUseLayoutEffect) {
+            // DEVIATION: We avoid calling useLayoutEffect when !canUseLayoutEffect,
+            // which may seem like a conditional hook, but this code ends up behaving
+            // unconditionally (one way or the other) because canUseLayoutEffect is
+            // constant.
+            rehackt__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(function () {
+                Object.assign(inst, { value: value, getSnapshot: getSnapshot });
+                // Whenever getSnapshot or subscribe changes, we need to check in the
+                // commit phase if there was an interleaved mutation. In concurrent mode
+                // this can happen all the time, but even in synchronous mode, an earlier
+                // effect may have mutated the store.
+                if (checkIfSnapshotChanged(inst)) {
+                    // Force a re-render.
+                    forceUpdate({ inst: inst });
+                }
+                // React Hook React.useLayoutEffect has a missing dependency: 'inst'. Either include it or remove the dependency array.
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [subscribe, value, getSnapshot]);
+        }
+        else {
+            Object.assign(inst, { value: value, getSnapshot: getSnapshot });
+        }
+        rehackt__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+            // Check for changes right before subscribing. Subsequent changes will be
+            // detected in the subscription handler.
+            if (checkIfSnapshotChanged(inst)) {
+                // Force a re-render.
+                forceUpdate({ inst: inst });
+            }
+            // Subscribe to the store and return a clean-up function.
+            return subscribe(function handleStoreChange() {
+                // TODO: Because there is no cross-renderer API for batching updates, it's
+                // up to the consumer of this library to wrap their subscription event
+                // with unstable_batchedUpdates. Should we try to detect when this isn't
+                // the case and print a warning in development?
+                // The store changed. Check if the snapshot changed since the last time we
+                // read from the store.
+                if (checkIfSnapshotChanged(inst)) {
+                    // Force a re-render.
+                    forceUpdate({ inst: inst });
+                }
+            });
+            // React Hook React.useEffect has a missing dependency: 'inst'. Either include it or remove the dependency array.
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [subscribe]);
+        return value;
+    });
+function checkIfSnapshotChanged(_a) {
+    var value = _a.value, getSnapshot = _a.getSnapshot;
+    try {
+        return value !== getSnapshot();
     }
-    return client[suspenseCacheSymbol];
+    catch (_b) {
+        return true;
+    }
 }
-//# sourceMappingURL=getSuspenseCache.js.map
+//# sourceMappingURL=useSyncExternalStore.js.map
 
 /***/ }),
 
@@ -54732,62 +55021,6 @@ function fixObservableSubclass(subclass) {
     return subclass;
 }
 //# sourceMappingURL=subclassing.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@apollo/client/utilities/promises/decoration.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@apollo/client/utilities/promises/decoration.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createFulfilledPromise: () => (/* binding */ createFulfilledPromise),
-/* harmony export */   createRejectedPromise: () => (/* binding */ createRejectedPromise),
-/* harmony export */   isStatefulPromise: () => (/* binding */ isStatefulPromise),
-/* harmony export */   wrapPromiseWithState: () => (/* binding */ wrapPromiseWithState)
-/* harmony export */ });
-function createFulfilledPromise(value) {
-    var promise = Promise.resolve(value);
-    promise.status = "fulfilled";
-    promise.value = value;
-    return promise;
-}
-function createRejectedPromise(reason) {
-    var promise = Promise.reject(reason);
-    // prevent potential edge cases leaking unhandled error rejections
-    promise.catch(function () { });
-    promise.status = "rejected";
-    promise.reason = reason;
-    return promise;
-}
-function isStatefulPromise(promise) {
-    return "status" in promise;
-}
-function wrapPromiseWithState(promise) {
-    if (isStatefulPromise(promise)) {
-        return promise;
-    }
-    var pendingPromise = promise;
-    pendingPromise.status = "pending";
-    pendingPromise.then(function (value) {
-        if (pendingPromise.status === "pending") {
-            var fulfilledPromise = pendingPromise;
-            fulfilledPromise.status = "fulfilled";
-            fulfilledPromise.value = value;
-        }
-    }, function (reason) {
-        if (pendingPromise.status === "pending") {
-            var rejectedPromise = pendingPromise;
-            rejectedPromise.status = "rejected";
-            rejectedPromise.reason = reason;
-        }
-    });
-    return promise;
-}
-//# sourceMappingURL=decoration.js.map
 
 /***/ }),
 
@@ -63009,3 +63242,4 @@ if (hasSymbols()) {
 /***/ })
 
 }]);
+//# sourceMappingURL=vendor.js.map

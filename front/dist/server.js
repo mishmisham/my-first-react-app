@@ -529,7 +529,6 @@ __webpack_require__.r(__webpack_exports__);
       `,
     onShellReady() {
       res.setHeader('content-type', 'text/html');
-      ({"NODE_ENV":"development","browser":false}).window = 'null';
       pipe(res);
     }
   });

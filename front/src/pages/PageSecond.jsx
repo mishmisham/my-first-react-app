@@ -1,5 +1,6 @@
 import React from 'react';
-import { Suspense, lazy, useState, useMemo } from 'react';
+import { Suspense, lazy, useState } from 'react';
+import { ClientOnly } from "react-client-only";
 import Preloader from '@/components/primitives/Preloader/preloader';
 import {
   gql,
@@ -72,12 +73,15 @@ const PageSecond = () => {
 
   return (
     <div>
-      <Suspense fallback={ <Preloader height='100px' />}>
-        <UserItem
-          id={currentID}
-          onNoData={e=>setCurrentID(1)}
-        />
-      </Suspense>
+      
+        <Suspense fallback={ <Preloader height='100px' />}>
+        <ClientOnly>
+          <UserItem
+            id={currentID}
+            onNoData={e=>setCurrentID(1)}
+          />
+          </ClientOnly>
+        </Suspense>
       <span onClick={setter}>{mode ? 'da' : 'net'}</span>
       <Suspense fallback={ <Preloader height='100px' />}>
         <CompA />

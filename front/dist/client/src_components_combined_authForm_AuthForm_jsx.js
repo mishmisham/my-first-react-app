@@ -23,10 +23,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const AuthForm = () => {
+  // client-only - just for render login button
   const [showChild, setShowChild] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  console.log('1', ({"NODE_ENV":"development","browser":false}));
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    console.log('2', ({"NODE_ENV":"development","browser":false}));
     setShowChild(true);
   }, []);
   const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({

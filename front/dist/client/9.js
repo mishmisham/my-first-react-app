@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[9],{
 
-/***/ "./src/pages/PageSecond.jsx":
-/*!**********************************!*\
-  !*** ./src/pages/PageSecond.jsx ***!
-  \**********************************/
+/***/ "./src/pages/PageFirst.jsx":
+/*!*********************************!*\
+  !*** ./src/pages/PageFirst.jsx ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,84 +13,138 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useLazyQuery.js");
-let _ = t => t,
-  _t;
+/* harmony import */ var _loadable_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @loadable/component */ "./node_modules/@loadable/component/dist/esm/loadable.esm.mjs");
 
 
-
-
-
-const USER_QUERY = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql)(_t || (_t = _`
-query Query($id: Int!) {
-
-  getUserByID(id: $id) {
-    name
-  }
-
-  getAllUsers {
-    name
-    id
-  }
-}
-
-`));
-const UserItem = ({
-  id,
-  onNoData
-}) => {
-  const [currentID, setCurrentID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
-  const [getUser, {
-    loading,
-    error,
-    data
-  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useLazyQuery)(USER_QUERY, {
-    variables: {
-      id: id
+const PageFirst = () => {
+  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('componentA');
+  const refreshMode = () => {
+    console.log('click');
+    const newMode = mode === 'componentA' ? 'componentB' : 'componentA';
+    setMode(newMode);
+  };
+  let DynamiComponent = (0,_loadable_component__WEBPACK_IMPORTED_MODULE_1__["default"])({
+    resolved: {},
+    chunkName() {
+      return "components-componentA";
+    },
+    isReady(props) {
+      const key = this.resolve(props);
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+      if (true) {
+        return !!__webpack_require__.m[key];
+      }
+      return false;
+    },
+    importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ 1).then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ "./src/components/componentA.jsx")),
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then(resolved => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
+    requireSync(props) {
+      const id = this.resolve(props);
+      if (true) {
+        return __webpack_require__(id);
+      }
+      return eval('module.require')(id);
+    },
+    resolve() {
+      if (true) {
+        return /*require.resolve*/(/*! ../components/componentA */ "./src/components/componentA.jsx");
+      }
+      return eval('require.resolve')("../components/componentA");
     }
   });
-  const ready = data && !loading;
-  if (!data && !loading && id !== currentID) {
-    getUser();
-    setCurrentID(id);
+  if (mode === 'componentA') {
+    DynamiComponent = (0,_loadable_component__WEBPACK_IMPORTED_MODULE_1__["default"])({
+      resolved: {},
+      chunkName() {
+        return "components-componentB";
+      },
+      isReady(props) {
+        const key = this.resolve(props);
+        if (this.resolved[key] !== true) {
+          return false;
+        }
+        if (true) {
+          return !!__webpack_require__.m[key];
+        }
+        return false;
+      },
+      importAsync: () => __webpack_require__.e(/*! import() | components-componentB */ 2).then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentB */ "./src/components/componentB.jsx")),
+      requireAsync(props) {
+        const key = this.resolve(props);
+        this.resolved[key] = false;
+        return this.importAsync(props).then(resolved => {
+          this.resolved[key] = true;
+          return resolved;
+        });
+      },
+      requireSync(props) {
+        const id = this.resolve(props);
+        if (true) {
+          return __webpack_require__(id);
+        }
+        return eval('module.require')(id);
+      },
+      resolve() {
+        if (true) {
+          return /*require.resolve*/(/*! ../components/componentB */ "./src/components/componentB.jsx");
+        }
+        return eval('require.resolve')("../components/componentB");
+      }
+    });
+  } else {
+    DynamiComponent = (0,_loadable_component__WEBPACK_IMPORTED_MODULE_1__["default"])({
+      resolved: {},
+      chunkName() {
+        return "components-componentA";
+      },
+      isReady(props) {
+        const key = this.resolve(props);
+        if (this.resolved[key] !== true) {
+          return false;
+        }
+        if (true) {
+          return !!__webpack_require__.m[key];
+        }
+        return false;
+      },
+      importAsync: () => __webpack_require__.e(/*! import() | components-componentA */ 1).then(__webpack_require__.bind(__webpack_require__, /*! ../components/componentA */ "./src/components/componentA.jsx")),
+      requireAsync(props) {
+        const key = this.resolve(props);
+        this.resolved[key] = false;
+        return this.importAsync(props).then(resolved => {
+          this.resolved[key] = true;
+          return resolved;
+        });
+      },
+      requireSync(props) {
+        const id = this.resolve(props);
+        if (true) {
+          return __webpack_require__(id);
+        }
+        return eval('module.require')(id);
+      },
+      resolve() {
+        if (true) {
+          return /*require.resolve*/(/*! ../components/componentA */ "./src/components/componentA.jsx");
+        }
+        return eval('require.resolve')("../components/componentA");
+      }
+    });
   }
-  if (data) {
-    console.log(id, data);
-  }
-  if (error) {
-    onNoData();
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, ready && !error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, data.getUserByID.name));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    onClick: refreshMode
+  }, "Change"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DynamiComponent, null));
 };
-const PageSecond = () => {
-  const [mode, setMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [currentID, setCurrentID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
-  const CompA = mode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(__webpack_require__, /*! @/components/componentA */ "./src/components/componentA.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(__webpack_require__, /*! @/components/componentB */ "./src/components/componentB.jsx")));
-  const setter = () => {
-    const newMode = !mode;
-    const newID = currentID + 1;
-    setMode(newMode);
-    setCurrentID(newID);
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      height: "100px"
-    })
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(UserItem, {
-    id: currentID,
-    onNoData: e => setCurrentID(1)
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    onClick: setter
-  }, mode ? 'da' : 'net'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      height: "100px"
-    })
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CompA, null)));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageSecond);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PageFirst);
 
 /***/ })
 

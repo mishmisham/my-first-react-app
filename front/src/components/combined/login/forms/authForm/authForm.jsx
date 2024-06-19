@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AuthSubmitButton from './authSubmitButton';
 import InputText from '@/components/primitives/inputText/InputText';
+import { authFormFields } from './authFormFields';
 import './authForm.sass';
 import { ClientOnly } from "react-client-only";
 
 const AuthForm = () => {
 
-    const [authData, setAuthData] = useState({
-        email: {
-            value: '',
-            label: 'Email',
-            placeholder: 'Enter your email',
-            type: 'text',
-            field: 'email'
-        },
-        password: {
-            value: '',
-            label: 'Password',
-            placeholder: 'Enter your password',
-            type: 'password',
-            field: 'password'
-        }
-    });
+    const [authData, setAuthData] = useState({...authFormFields});
 
     const onInput = (val, field) => {
         const fieldObject = authData[field];

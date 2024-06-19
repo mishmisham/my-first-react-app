@@ -2,33 +2,15 @@ import React, { useState } from 'react';
 import RegisterSubmitButton from './registerSubmitButton';
 import InputText from '@/components/primitives/inputText/InputText';
 import { ClientOnly } from "react-client-only";
+import { registerFormFields } from './registerFormFields'
+
 import './registerForm.sass';
 
 const RegisterForm = () => {
 
-    const [registerData, setRegisterData] = useState({
-        name: {
-            value: '',
-            label: 'Name',
-            placeholder: 'Enter your name',
-            type: 'text',
-            field: 'name'
-        },
-        email: {
-            value: '',
-            label: 'Email',
-            placeholder: 'Enter your email',
-            type: 'text',
-            field: 'email'
-        },
-        password: {
-            value: '',
-            label: 'Password',
-            placeholder: 'Enter your password',
-            type: 'password',
-            field: 'password'
-        }
-    });
+    const [registerData, setRegisterData] = useState(
+        JSON.parse(JSON.stringify({...registerFormFields}))
+    );
 
     const onInput = (val, field) => {
         const fieldObject = registerData[field];
@@ -39,6 +21,12 @@ const RegisterForm = () => {
             [field]: fieldObject
         });
     };
+
+    const clearFormValues = () => {
+        setRegisterData({
+            ...registerFormFields
+        });
+    }
 
     return (
         <div className='register-form'>
@@ -65,7 +53,10 @@ const RegisterForm = () => {
             })}
             
             <ClientOnly>
-                <RegisterSubmitButton registerData={registerData}/>
+                <RegisterSubmitButton
+                    registerData={registerData}
+                    clearFormValues={clearFormValues}
+                />
             </ClientOnly>
         </div>
     )

@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[6],{
 
-/***/ "./src/components/combined/registerForm/registerForm.jsx":
-/*!***************************************************************!*\
-  !*** ./src/components/combined/registerForm/registerForm.jsx ***!
-  \***************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerForm.jsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerForm.jsx ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,10 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _registerSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerSubmitButton */ "./src/components/combined/registerForm/registerSubmitButton.jsx");
+/* harmony import */ var _registerSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerSubmitButton */ "./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx");
 /* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _registerForm_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./registerForm.sass */ "./src/components/combined/registerForm/registerForm.sass");
+/* harmony import */ var _registerFormFields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./registerFormFields */ "./src/components/combined/login/forms/registerForm/registerFormFields.js");
+/* harmony import */ var _registerForm_sass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registerForm.sass */ "./src/components/combined/login/forms/registerForm/registerForm.sass");
+
 
 
 
@@ -24,27 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const RegisterForm = () => {
   const [registerData, setRegisterData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    name: {
-      value: '',
-      label: 'Name',
-      placeholder: 'Enter your name',
-      type: 'text',
-      field: 'name'
-    },
-    email: {
-      value: '',
-      label: 'Email',
-      placeholder: 'Enter your email',
-      type: 'text',
-      field: 'email'
-    },
-    password: {
-      value: '',
-      label: 'Password',
-      placeholder: 'Enter your password',
-      type: 'password',
-      field: 'password'
-    }
+    ..._registerFormFields__WEBPACK_IMPORTED_MODULE_4__.registerFormFields
   });
   const onInput = (val, field) => {
     const fieldObject = registerData[field];
@@ -80,10 +62,46 @@ const RegisterForm = () => {
 
 /***/ }),
 
-/***/ "./src/components/combined/registerForm/registerSubmitButton.jsx":
-/*!***********************************************************************!*\
-  !*** ./src/components/combined/registerForm/registerSubmitButton.jsx ***!
-  \***********************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerFormFields.js":
+/*!********************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerFormFields.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   registerFormFields: () => (/* binding */ registerFormFields)
+/* harmony export */ });
+const registerFormFields = {
+  name: {
+    value: '',
+    label: 'Name',
+    placeholder: 'Enter your name',
+    type: 'text',
+    field: 'name'
+  },
+  email: {
+    value: '',
+    label: 'Email',
+    placeholder: 'Enter your email',
+    type: 'text',
+    field: 'email'
+  },
+  password: {
+    value: '',
+    label: 'Password',
+    placeholder: 'Enter your password',
+    type: 'password',
+    field: 'password'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx":
+/*!***********************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -92,10 +110,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
 let _ = t => t,
   _t;
+
 
 
 const REGISTER_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)(_t || (_t = _`
@@ -141,11 +162,7 @@ const RegisterSubmitButton = ({
   }, "Register");
 };
 RegisterSubmitButton.propTypes = {
-  registerData: {
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }
+  registerData: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RegisterSubmitButton);
 
@@ -185,10 +202,10 @@ const InputText = props => {
 
 /***/ }),
 
-/***/ "./src/components/combined/registerForm/registerForm.sass":
-/*!****************************************************************!*\
-  !*** ./src/components/combined/registerForm/registerForm.sass ***!
-  \****************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerForm.sass":
+/*!****************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerForm.sass ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

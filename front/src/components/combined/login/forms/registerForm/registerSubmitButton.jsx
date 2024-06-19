@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { LoginFormsContext } from '../../loginFormsContext';
 
 import {
     gql,
@@ -15,16 +16,16 @@ const REGISTER_ACTION = gql`
     }
 `;
 
-
-
-const RegisterSubmitButton = ({registerData}) => {
+const RegisterSubmitButton = ({registerData, clearFormValues}) => {
 
     const [login, { data, loading, error }] = useMutation(REGISTER_ACTION);
 
-    const submit = () => {
+    const loginFormsContext = useContext(LoginFormsContext);
+
+    const submit = async () => {
         const { email, password, name } = registerData;
 
-        login({
+        await login({
             variables: {
                 input: {
                     name: name.value,
@@ -34,13 +35,16 @@ const RegisterSubmitButton = ({registerData}) => {
             } 
         });
 
-        console.log(data, loading, error)
+        loginFormsContext.changeAuthMode(true);
+       
+        clearFormValues();
+        
+        // console.log(data, loading, error)
     }
 
     const computedStyle = {
         marginTop: '12px'
     }
-
 
     return (
         <button
@@ -54,7 +58,8 @@ const RegisterSubmitButton = ({registerData}) => {
 }
 
 RegisterSubmitButton.propTypes = {
-    registerData: PropTypes.object
+    registerData: PropTypes.object,
+    clearFormValues: PropTypes.func,
 }
 
 export default RegisterSubmitButton;

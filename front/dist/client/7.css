@@ -1,13 +1,13 @@
-/*!***************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/AuthPage/authPage.sass ***!
-  \***************************************************************************************************************************/
-.auth-page_auth-btn {
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/combined/login/loginForms.sass ***!
+  \****************************************************************************************************************************************/
+.login-forms_mode-btn {
   margin: 12px auto 0;
   width: 100%;
   border: 1px solid #420068;
   color: #420068;
 }
-.auth-page_auth-btn:hover {
+.login-forms_mode-btn:hover {
   border: 1px solid #7300b5;
   color: #7300b5;
 }

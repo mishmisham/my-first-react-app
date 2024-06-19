@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[5],{
 
-/***/ "./src/components/combined/authForm/authForm.jsx":
-/*!*******************************************************!*\
-  !*** ./src/components/combined/authForm/authForm.jsx ***!
-  \*******************************************************/
+/***/ "./src/components/combined/login/forms/authForm/authForm.jsx":
+/*!*******************************************************************!*\
+  !*** ./src/components/combined/login/forms/authForm/authForm.jsx ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,10 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _authSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authSubmitButton */ "./src/components/combined/authForm/authSubmitButton.jsx");
+/* harmony import */ var _authSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authSubmitButton */ "./src/components/combined/login/forms/authForm/authSubmitButton.jsx");
 /* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
-/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/authForm/authForm.sass");
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
+/* harmony import */ var _authFormFields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authFormFields */ "./src/components/combined/login/forms/authForm/authFormFields.js");
+/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/login/forms/authForm/authForm.sass");
+/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
+
 
 
 
@@ -24,20 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const AuthForm = () => {
   const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    email: {
-      value: '',
-      label: 'Email',
-      placeholder: 'Enter your email',
-      type: 'text',
-      field: 'email'
-    },
-    password: {
-      value: '',
-      label: 'Password',
-      placeholder: 'Enter your password',
-      type: 'password',
-      field: 'password'
-    }
+    ..._authFormFields__WEBPACK_IMPORTED_MODULE_3__.authFormFields
   });
   const onInput = (val, field) => {
     const fieldObject = authData[field];
@@ -65,7 +54,7 @@ const AuthForm = () => {
       key: key,
       onInput: newValue => onInput(newValue, field)
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_4__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_5__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     authData: authData
   })));
 };
@@ -73,10 +62,39 @@ const AuthForm = () => {
 
 /***/ }),
 
-/***/ "./src/components/combined/authForm/authSubmitButton.jsx":
-/*!***************************************************************!*\
-  !*** ./src/components/combined/authForm/authSubmitButton.jsx ***!
-  \***************************************************************/
+/***/ "./src/components/combined/login/forms/authForm/authFormFields.js":
+/*!************************************************************************!*\
+  !*** ./src/components/combined/login/forms/authForm/authFormFields.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   authFormFields: () => (/* binding */ authFormFields)
+/* harmony export */ });
+const authFormFields = {
+  email: {
+    value: '',
+    label: 'Email',
+    placeholder: 'Enter your email',
+    type: 'text',
+    field: 'email'
+  },
+  password: {
+    value: '',
+    label: 'Password',
+    placeholder: 'Enter your password',
+    type: 'password',
+    field: 'password'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/components/combined/login/forms/authForm/authSubmitButton.jsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/combined/login/forms/authForm/authSubmitButton.jsx ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -172,10 +190,10 @@ const InputText = props => {
 
 /***/ }),
 
-/***/ "./src/components/combined/authForm/authForm.sass":
-/*!********************************************************!*\
-  !*** ./src/components/combined/authForm/authForm.sass ***!
-  \********************************************************/
+/***/ "./src/components/combined/login/forms/authForm/authForm.sass":
+/*!********************************************************************!*\
+  !*** ./src/components/combined/login/forms/authForm/authForm.sass ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

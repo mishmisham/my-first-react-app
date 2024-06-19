@@ -826,6 +826,17 @@ module.exports = require("mini-css-extract-plugin");
 
 /***/ }),
 
+/***/ "prop-types":
+/*!*****************************!*\
+  !*** external "prop-types" ***!
+  \*****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("prop-types");
+
+/***/ }),
+
 /***/ "react":
 /*!************************!*\
   !*** external "react" ***!
@@ -1164,7 +1175,7 @@ module.exports = require("path");
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"src_layouts_default_jsx":1,"src_pages_AuthPage_AuthPage_jsx":1,"components-componentA":1,"src_components_combined_authForm_authForm_jsx":1,"src_components_combined_registerForm_registerForm_jsx":1};
+/******/ 			var cssChunks = {"src_layouts_default_jsx":1,"components-componentA":1,"src_components_combined_login_LoginForms_jsx":1,"src_components_combined_login_forms_authForm_authForm_jsx":1,"src_components_combined_login_forms_registerForm_registerForm_jsx":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {

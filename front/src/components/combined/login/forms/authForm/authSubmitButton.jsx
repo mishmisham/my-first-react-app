@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 import {
     gql,
     useMutation
@@ -16,13 +18,13 @@ const AUTH_ACTION = gql`
     }
 `;
 
-
-
 const AuthSubmitButton = ({authData}) => {
+
+    const navigate = useNavigate();
 
     const [login, { data, loading, error }] = useMutation(AUTH_ACTION);
 
-    const submit = () => {
+    const submit = async () => {
         const { email, password } = authData;
 
         login({
@@ -33,15 +35,14 @@ const AuthSubmitButton = ({authData}) => {
                 }
             } 
         });
-
-        console.log(data, loading, error)
+        
+        navigate('/');
+        // console.log(data, loading, error)
     }
 
     const computedStyle = {
         marginTop: '12px'
     }
-
-    
 
     return (
         <button
@@ -52,6 +53,10 @@ const AuthSubmitButton = ({authData}) => {
             Login
         </button>
     )
+}
+
+AuthSubmitButton.propTypes = {
+    authData: PropTypes.object
 }
 
 export default AuthSubmitButton;

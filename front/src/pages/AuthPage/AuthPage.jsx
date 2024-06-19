@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy, useEffect } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import Preloader from '@/components/primitives/Preloader/preloader';
 import './authPage.sass';
 

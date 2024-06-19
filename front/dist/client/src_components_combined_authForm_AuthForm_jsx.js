@@ -18,16 +18,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _authSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authSubmitButton */ "./src/components/combined/authForm/authSubmitButton.jsx");
 /* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
 /* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/authForm/authForm.sass");
+/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-client-only */ "react-client-only");
+/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_client_only__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
 
 const AuthForm = () => {
-  // client-only - just for render login button
-  const [showChild, setShowChild] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setShowChild(true);
-  }, []);
   const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     email: {
       value: '',
@@ -70,9 +68,9 @@ const AuthForm = () => {
       key: key,
       onInput: newValue => onInput(newValue, field)
     });
-  }), showChild && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_4__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     authData: authData
-  }));
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthForm);
 

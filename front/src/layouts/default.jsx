@@ -13,8 +13,7 @@ const Layout = ({ children, title, description }) => {
   });
 
   return (
-    <>
-      <HelmetProvider>
+    <HelmetProvider>
         <Helmet>
           <title>{title}</title>
           <meta name="description" content={description} />
@@ -33,7 +32,6 @@ const Layout = ({ children, title, description }) => {
         <DefaultFooter />
         
       </HelmetProvider>
-    </>
   )
 }
 

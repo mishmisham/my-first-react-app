@@ -62162,6 +62162,40 @@ function isObjRef(value) {
 
 /***/ }),
 
+/***/ "./node_modules/react-client-only/index.mjs":
+/*!**************************************************!*\
+  !*** ./node_modules/react-client-only/index.mjs ***!
+  \**************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ClientOnly: () => (/* binding */ ClientOnly),
+/* harmony export */   useClientOnly: () => (/* binding */ useClientOnly)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+/** React component that renders its children client-side only / after first mount */
+const ClientOnly = ({ children }) => {
+    const hasMounted = useClientOnly();
+    if (!hasMounted) {
+        return null;
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children });
+};
+/** React hook that returns true if the component has mounted client-side */
+const useClientOnly = () => {
+    const [hasMounted, setHasMounted] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        setHasMounted(true);
+    }, []);
+    return hasMounted;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/ts-invariant/lib/invariant.js":
 /*!****************************************************!*\
   !*** ./node_modules/ts-invariant/lib/invariant.js ***!

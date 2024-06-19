@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
+import RegisterSubmitButton from './registerSubmitButton';
 import InputText from '@/components/primitives/inputText/InputText';
+import { ClientOnly } from "react-client-only";
 import './registerForm.sass';
 
 const RegisterForm = () => {
 
-    const [authData, setAuthData] = useState({
+    const [registerData, setRegisterData] = useState({
         name: {
             value: '',
             label: 'Name',
@@ -30,11 +31,11 @@ const RegisterForm = () => {
     });
 
     const onInput = (val, field) => {
-        const fieldObject = authData[field];
+        const fieldObject = registerData[field];
         fieldObject.value = val;
 
-        setAuthData({
-            ...authData,
+        setRegisterData({
+            ...registerData,
             [field]: fieldObject
         });
     };
@@ -42,14 +43,14 @@ const RegisterForm = () => {
     return (
         <div className='register-form'>
             <h2>Registration</h2>
-            {Object.keys(authData).map((inputKey, key) => {
+            {Object.keys(registerData).map((inputKey, key) => {
                 const  {
                     value,
                     label,
                     placeholder,
                     type,
                     field
-                } = authData[inputKey];
+                } = registerData[inputKey];
 
                 return (
                     <InputText
@@ -63,6 +64,9 @@ const RegisterForm = () => {
                 )
             })}
             
+            <ClientOnly>
+                <RegisterSubmitButton registerData={registerData}/>
+            </ClientOnly>
         </div>
     )
 }

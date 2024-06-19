@@ -837,6 +837,17 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "react-client-only":
+/*!************************************!*\
+  !*** external "react-client-only" ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("react-client-only");
+
+/***/ }),
+
 /***/ "react-dom/server":
 /*!***********************************!*\
   !*** external "react-dom/server" ***!

@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Preloader = props => {
-  const color = props.color || '#e43725';
+  const color = props.color || '#9a6eff';
   const iconSize = props.iconSize || '64px';
   const height = props.height || 'auto';
   const background = props.background || 'transparent';
@@ -768,6 +768,17 @@ module.exports = require("@reduxjs/toolkit");
 
 "use strict";
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "classnames":
+/*!*****************************!*\
+  !*** external "classnames" ***!
+  \*****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("classnames");
 
 /***/ }),
 

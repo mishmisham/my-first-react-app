@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { LoginFormsContext } from '../../loginFormsContext';
-
+import { GlobalLayoutContext } from '@/layouts/parts/GlobalLayoutContext';
 import {
     gql,
     useMutation
@@ -21,26 +21,40 @@ const RegisterSubmitButton = ({registerData, clearFormValues}) => {
     const [login, { data, loading, error }] = useMutation(REGISTER_ACTION);
 
     const loginFormsContext = useContext(LoginFormsContext);
+    const layoutContext = useContext(GlobalLayoutContext);
 
     const submit = async () => {
         const { email, password, name } = registerData;
 
-        await login({
-            variables: {
-                input: {
-                    name: name.value,
-                    email: email.value,
-                    password: password.value
-                }
-            } 
-        });
-
-        loginFormsContext.changeAuthMode(true);
-       
-        clearFormValues();
-        
-        // console.log(data, loading, error)
+        try {
+            await login({
+                variables: {
+                    input: {
+                        name: name.value,
+                        email: email.value,
+                        password: password.value
+                    }
+                } 
+            });
+        } catch (err) {
+            layoutContext.showNotify({
+                text: 'error || data'
+            })
+        } finally {
+            console.log(data)
+            if (!error && !data?.errors?.length && !loading) {
+                clearFormValues();
+                loginFormsContext.changeAuthMode(true);
+            }
+        }
     }
+
+    // if (error || data?.errors.length) {
+    //     // console.log(data?.errors[0].message)
+    //     layoutContext.showNotify({
+    //         text: 'error || data'
+    //     })
+    // }
 
     const computedStyle = {
         marginTop: '12px'

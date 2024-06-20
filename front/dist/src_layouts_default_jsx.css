@@ -102,6 +102,51 @@ button {
   color: #1e1e1e;
   background: white;
 }
+/*!*********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/primitives/notifyComponent/notifyComponent.sass ***!
+  \*********************************************************************************************************************************************************/
+.notify-component {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.notify-component--visible {
+  display: flex;
+}
+.notify-component--hidden {
+  display: none;
+}
+.notify-component_inner {
+  width: calc(100% - 40px);
+  max-width: 240px;
+}
+.notify-component_inner-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+.notify-component_inner-content--error {
+  background: #f9cb8e;
+}
+.notify-component_inner-content--info {
+  background: #aae7fc;
+}
+.notify-component_inner-content-header {
+  display: flex;
+}
+.notify-component_inner-content-header-close {
+  cursor: pointer;
+  margin: auto 0 auto auto;
+  background: none;
+  text-align: center;
+}
+.notify-component_inner-content-body {
+  display: flex;
+  color: #333;
+  font-size: 16px;
+}
 /*!*********************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/defaultFooter/defaultFooter.sass ***!
   \*********************************************************************************************************************************************/

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './preloader.sass';
 
 const Preloader = (props) => {
-    const color = props.color || '#e43725';
+    const color = props.color || '#9a6eff';
     const iconSize = props.iconSize || '64px';
     const height = props.height || 'auto';
     const background = props.background || 'transparent';

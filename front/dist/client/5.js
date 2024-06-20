@@ -38,7 +38,7 @@ const AuthForm = () => {
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "auth-form"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Please login"), Object.keys(authData).map((inputKey, key) => {
+  }, Object.keys(authData).map((inputKey, key) => {
     const {
       value,
       label,
@@ -103,10 +103,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
 let _ = t => t,
   _t;
+
+
 
 
 const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)(_t || (_t = _`
@@ -123,24 +128,31 @@ const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)(_t || (_
 const AuthSubmitButton = ({
   authData
 }) => {
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
   const [login, {
     data,
     loading,
     error
-  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(AUTH_ACTION);
-  const submit = () => {
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(AUTH_ACTION);
+  const submit = async () => {
     const {
       email,
       password
     } = authData;
-    login({
-      variables: {
-        input: {
-          email: email.value,
-          password: password.value
+    try {
+      const res = await login({
+        variables: {
+          input: {
+            email: email.value,
+            password: password.value
+          }
         }
-      }
-    });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    // navigate('/');
     console.log(data, loading, error);
   };
   const computedStyle = {
@@ -151,6 +163,9 @@ const AuthSubmitButton = ({
     className: "btn btn--submit",
     style: computedStyle
   }, "Login");
+};
+AuthSubmitButton.propTypes = {
+  authData: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthSubmitButton);
 

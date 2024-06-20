@@ -29,7 +29,7 @@ const renderApp = () => {
   ReactDOM.hydrateRoot(
     document.querySelector('#root'),
       <ApolloProvider client={client}>
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} suppressHydrationWarning={true}/>
       </ApolloProvider>
   );
 }

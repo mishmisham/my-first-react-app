@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Preloader = props => {
-  const color = props.color || '#e43725';
+  const color = props.color || '#9a6eff';
   const iconSize = props.iconSize || '64px';
   const height = props.height || 'auto';
   const background = props.background || 'transparent';
@@ -245,7 +245,8 @@ const renderApp = () => {
   react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot(document.querySelector('#root'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_7__.ApolloProvider, {
     client: client
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.RouterProvider, {
-    router: router
+    router: router,
+    suppressHydrationWarning: true
   })));
 };
 renderApp();

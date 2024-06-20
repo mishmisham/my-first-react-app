@@ -12,12 +12,22 @@ const LoginForms = () => {
     setAuthMode(newMode);
   }
 
-  const contextData = useMemo(() => ({authMode, changeAuthMode}), []);
+  const contextData = useMemo(() => ({
+    authMode,
+    changeAuthMode,
+  }), []);
 
   const CurrentForm = authMode ? lazy(()=> import('./forms/authForm/authForm')) : lazy(()=> import('./forms/registerForm/registerForm'));
 
+  const buttonText = authMode ? 'Create account' : 'Go to login';
+  const titleText = authMode ? 'Please login' : 'Registration';
+
   return (
-    <>
+    <div className='login-forms'>
+      <h2>
+        { titleText }
+      </h2>
+
       <Suspense fallback={ <Preloader height='300px' />}>
         <LoginFormsContext.Provider value={contextData}>
           <CurrentForm/>
@@ -28,10 +38,10 @@ const LoginForms = () => {
         className="login-forms_mode-btn btn"
         onClick={e=>changeAuthMode()}
       >
-        { authMode ? 'Create account' : 'Go to login'}  
+        { buttonText }  
       </button>
     
-    </>
+    </div>
   );
 };
 

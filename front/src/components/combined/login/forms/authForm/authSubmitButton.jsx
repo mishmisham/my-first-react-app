@@ -27,17 +27,22 @@ const AuthSubmitButton = ({authData}) => {
     const submit = async () => {
         const { email, password } = authData;
 
-        login({
-            variables: {
-                input: {
-                    email: email.value,
-                    password: password.value
-                }
-            } 
-        });
+        try {
+            const res = await login({
+                variables: {
+                    input: {
+                        email: email.value,
+                        password: password.value
+                    }
+                } 
+            });
+        } catch (err) {
+            console.log(err)
+        }
         
-        navigate('/');
-        // console.log(data, loading, error)
+        
+        // navigate('/');
+        console.log(data, loading, error)
     }
 
     const computedStyle = {

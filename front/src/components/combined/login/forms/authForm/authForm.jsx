@@ -22,8 +22,6 @@ const AuthForm = () => {
     return (
         <div className='auth-form'>
             
-            <h2>Please login</h2>
-
             {Object.keys(authData).map((inputKey, key) => {
                 const  {
                     value,

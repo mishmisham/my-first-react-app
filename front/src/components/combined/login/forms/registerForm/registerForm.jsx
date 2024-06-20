@@ -30,7 +30,6 @@ const RegisterForm = () => {
 
     return (
         <div className='register-form'>
-            <h2>Registration</h2>
             {Object.keys(registerData).map((inputKey, key) => {
                 const  {
                     value,

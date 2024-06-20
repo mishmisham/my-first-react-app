@@ -22,23 +22,29 @@ __webpack_require__.r(__webpack_exports__);
 
 const LoginForms = () => {
   const [authMode, setAuthMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  const CurrentForm = authMode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/authForm/authForm */ "./src/components/combined/login/forms/authForm/authForm.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/registerForm/registerForm */ "./src/components/combined/login/forms/registerForm/registerForm.jsx")));
-  const changeMode = () => {
-    const newMode = !authMode;
+  const changeAuthMode = (mode = undefined) => {
+    const newMode = mode !== undefined ? mode : !authMode;
     setAuthMode(newMode);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  const contextData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    authMode,
+    changeAuthMode
+  }), []);
+  const CurrentForm = authMode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/authForm/authForm */ "./src/components/combined/login/forms/authForm/authForm.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/registerForm/registerForm */ "./src/components/combined/login/forms/registerForm/registerForm.jsx")));
+  const buttonText = authMode ? 'Create account' : 'Go to login';
+  const titleText = authMode ? 'Please login' : 'Registration';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "login-forms"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, titleText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__["default"], {
       height: "300px"
     })
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_loginFormsContext__WEBPACK_IMPORTED_MODULE_2__.LoginFormsContext.Provider, {
-    value: authMode
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CurrentForm, {
-    onSetAuth: changeMode
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    value: contextData
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CurrentForm, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "login-forms_mode-btn btn",
-    onClick: changeMode
-  }, authMode ? 'Create account' : 'Go to login'));
+    onClick: e => changeAuthMode()
+  }, buttonText));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginForms);
 
@@ -59,7 +65,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const LoginFormsContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
   authMode: true,
-  changeMode: () => {}
+  changeAuthMode: () => {}
 });
 
 /***/ }),

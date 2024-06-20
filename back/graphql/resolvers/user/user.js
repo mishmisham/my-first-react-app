@@ -9,20 +9,21 @@ import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
 export const userResolvers = {
   Mutation: {
 
-    async register(root, args, context) {
-      const { name, email, password } = args.input;
+    async register(root, { input }, context) {
+      const { name, email, password } = input;
       const result = await createUser({ name, email, password });
       return result
     },
 
-    async login(root, input, context) {
-      const { email, password } = input;
-      const result = await authUser({ email, password });
+    async login(root, { input }, context) {
+      const result = await authUser(input);
+      context.response.cookie('refresh', result.refreshToken);
       return result;
     },
 
-    async logout (root, input, context) { 
+    async logout (root, { input }, context) { 
       const result = await logoutUser(input.id);
+      context.response.cookie('refresh', '');
       return result;
     }
   },

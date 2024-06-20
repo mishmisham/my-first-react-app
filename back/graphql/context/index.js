@@ -19,8 +19,11 @@ const verifyToken = async (token) => {
   }
 };
 
-export const context = async ({ req }) => {
+export const context = async ({ req, res }) => {
   // const token = (req.headers && req.headers.authorization) || '';
   // const user = await verifyToken(token)
-  return { user : 'user' };
+  return { 
+    request: req,
+    response: res
+  };
 };

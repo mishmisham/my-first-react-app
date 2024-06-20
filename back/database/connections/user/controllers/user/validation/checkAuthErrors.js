@@ -1,8 +1,8 @@
 import { userDB } from '#userDB/userDB.js';
 import { validateEmptyFields } from './validateEmptyFields.js';
-import { encryptPassword } from '../utils/encryptPassword.js';
+import bcrypt from 'bcryptjs';
 
-export const checkAuthErrors = async(req) => {
+export const checkAuthErrors = async(input) => {
 
     const {
         users,
@@ -11,14 +11,14 @@ export const checkAuthErrors = async(req) => {
     const {
         email,
         password,
-    } = req;
+    } = input;
 
     const fields = ['email', 'password'];
     
     const errorList = [
-        ...validateEmptyFields(req, fields)
+        ...validateEmptyFields(input, fields)
     ];
-    
+
     if (errorList.length) {
         return {
             errorList,
@@ -26,13 +26,15 @@ export const checkAuthErrors = async(req) => {
         };
     }
 
-    const userData = await users.content.findOne({email: JSON.stringify(email)});
+    const userData = await users.content.findOne({ where: { email } });
 
     if (!userData) {
         errorList.push('Email not found');
     }
 
-    if (encryptPassword(JSON.stringify(password)) !== userData.password) {
+    const passwordOk = await bcrypt.compare(password, userData.password);
+
+    if (!passwordOk) {
         errorList.push('Incorrect password');
     }
 

@@ -17,7 +17,7 @@ export const  validateRegisterUser = async(req) => {
         return errorList;
     }
 
-    const issetEmail = await users.content.findOne({email: JSON.stringify(req.email)});
+    const issetEmail = await users.content.findOne({where: {email: req.email}});
 
     if (issetEmail) {
         errorList.push('This email has already been used');

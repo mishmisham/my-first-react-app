@@ -2,22 +2,13 @@ import { userDB } from '#userDB/userDB.js';
 import { initUserSession } from '#userDB_fun/userSession/initUserSession.js';
 import { checkAuthErrors } from './validation/checkAuthErrors.js';
 
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { AuthenticationError } from 'apollo-server-express';
 
+export const authUser = async (input, req) => {
+    const { errorList, userData } = await checkAuthErrors(input);
 
+    console.log(input)
 
-const {
-    users,
-} = userDB.data;
-
-
-
-export const authUser = async (req) => {
-    const data = req.body;
-
-    const { errorList, userData } = await checkAuthErrors(data);
+    console.log(errorList, userData)
 
     if (errorList.length) {
         return {
@@ -26,24 +17,20 @@ export const authUser = async (req) => {
         }
     }
 
-    // if (user && bcrypt.compareSync(password, user.password)) {
-
-    //   // todo - add secret generator
-    //   const token = jwt.sign({ id: user.id }, 'mySecret');
-
-    //   return { ...user.toJSON(), token };
-    // }
-
     const {
         accessToken,
         refreshToken
     } = await initUserSession(userData);
 
-    return {
+    const result = {
         id: userData.id,
         name: userData.name,
-        email: data.email,
+        email: input.email,
         accessToken,
         refreshToken
     }
+
+    console.log(result)
+
+    return result;
 }

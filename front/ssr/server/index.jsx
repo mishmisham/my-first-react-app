@@ -8,10 +8,18 @@ import WebpackDevMiddleware from "webpack-dev-middleware";
 import WebpackHotMiddleware from "webpack-hot-middleware";
 import renderer from "./renderer.js";
 import createStore from './createStore.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
+
+const corsOptions = {
+  origin: 'http://localhost',
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 if (process.env.NODE_ENV === "development") {
   const webpackConfig = require("../../webpack/dev/webpack.dev.client.js");

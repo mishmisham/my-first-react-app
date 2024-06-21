@@ -141,7 +141,6 @@ const RegisterSubmitButton = ({
   registerData,
   clearFormValues
 }) => {
-  var _data$errors;
   const [login, {
     data,
     loading,
@@ -149,32 +148,43 @@ const RegisterSubmitButton = ({
   }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation)(REGISTER_ACTION);
   const loginFormsContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_loginFormsContext__WEBPACK_IMPORTED_MODULE_1__.LoginFormsContext);
   const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__.GlobalLayoutContext);
-  const submit = () => {
+  const submit = async () => {
     const {
       email,
       password,
       name
     } = registerData;
-    login({
-      variables: {
-        input: {
-          name: name.value,
-          email: email.value,
-          password: password.value
+    try {
+      await login({
+        variables: {
+          input: {
+            name: name.value,
+            email: email.value,
+            password: password.value
+          }
         }
+      });
+    } catch (err) {
+      layoutContext.showNotify({
+        text: 'error || data'
+      });
+    } finally {
+      var _data$errors;
+      console.log(data);
+      if (!error && !(data !== null && data !== void 0 && (_data$errors = data.errors) !== null && _data$errors !== void 0 && _data$errors.length) && !loading) {
+        clearFormValues();
+        loginFormsContext.changeAuthMode(true);
       }
-    });
+    }
   };
-  if (!error && !(data !== null && data !== void 0 && (_data$errors = data.errors) !== null && _data$errors !== void 0 && _data$errors.length)) {
-    clearFormValues();
-    loginFormsContext.changeAuthMode(true);
-  }
-  if (error || data !== null && data !== void 0 && data.errors.length) {
-    // console.log(data?.errors[0].message)
-    layoutContext.showNotify({
-      text: 'error || data'
-    });
-  }
+
+  // if (error || data?.errors.length) {
+  //     // console.log(data?.errors[0].message)
+  //     layoutContext.showNotify({
+  //         text: 'error || data'
+  //     })
+  // }
+
   const computedStyle = {
     marginTop: '12px'
   };

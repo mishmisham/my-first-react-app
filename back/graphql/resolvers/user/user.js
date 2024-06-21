@@ -1,4 +1,4 @@
-
+import http from 'http';
 import { createUser } from '#userDB_fun/user/createUser.js';
 import { authUser } from '#userDB_fun/user/authUser.js';
 import { getAllUsers } from '#userDB_fun/user/getAllUsers.js';
@@ -17,13 +17,19 @@ export const userResolvers = {
 
     async login(root, { input }, context) {
       const result = await authUser(input);
-      context.response.cookie('refresh', result.refreshToken);
+
+      if (!result.errors) {
+        context.token = result.data.accessToken;
+        context.response.cookie('access', result.data.accessToken);
+        context.response.setHeader('Authorization', 'Bearer '+result.data.accessToken);
+      }
+     
       return result;
     },
 
     async logout (root, { input }, context) { 
       const result = await logoutUser(input.id);
-      context.response.cookie('refresh', '');
+      // context.response.cookie('refresh', '');
       return result;
     }
   },

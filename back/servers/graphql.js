@@ -1,6 +1,3 @@
-import express from 'express';
-import {graphqlHTTP} from 'express-graphql';
-import graphql from 'graphql';
 import dotenv from 'dotenv';
 import { server } from '../graphql/server.js';
 

@@ -111,10 +111,10 @@ const Layout = ({
     timeout: 5000
   });
   const showNotify = params => {
-    console.log(params);
     setDisplayNotify({
       ...displayNotify,
-      ...params
+      ...params,
+      show: true
     });
   };
   const onHideNotify = () => {

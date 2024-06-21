@@ -103,57 +103,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+/* harmony import */ var _layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/layouts/parts/GlobalLayoutContext */ "./src/layouts/parts/GlobalLayoutContext.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
 let _ = t => t,
   _t;
 
 
 
 
-const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)(_t || (_t = _`
+
+
+const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql)(_t || (_t = _`
     mutation AuthAction($input: LoginInput!) {
         login(input: $input) {
-            id
-            name
-            email
-            refreshToken
-            accessToken
+            data {
+                name
+                id
+                email
+                accessToken
+                refreshToken
+            }
+            errors {
+                message
+                errors
+            }
         }
     }
 `));
 const AuthSubmitButton = ({
   authData
 }) => {
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
-  const [login, {
-    data,
-    loading,
-    error
-  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(AUTH_ACTION);
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
+  const [login] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.useMutation)(AUTH_ACTION, {
+    onCompleted: (res, a) => {
+      console.log('s', res, a);
+      const {
+        login
+      } = res;
+      const {
+        errors,
+        data
+      } = login;
+      if (!errors) {
+        console.log(data);
+        // navigate('/');
+      } else {
+        layoutContext.showNotify({
+          text: errors.message
+        });
+      }
+    },
+    onError: ({
+      operation,
+      response,
+      graphQLErrors,
+      networkError
+    }) => {
+      layoutContext.showNotify({
+        text: 'graphql error' + graphQLErrors.join(' ')
+      });
+    }
+  });
+  const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__.GlobalLayoutContext);
   const submit = async () => {
     const {
       email,
       password
     } = authData;
-    try {
-      const res = await login({
-        variables: {
-          input: {
-            email: email.value,
-            password: password.value
-          }
+    login({
+      variables: {
+        input: {
+          email: email.value,
+          password: password.value
         }
-      });
-    } catch (err) {
-      console.log(err);
-    }
-
-    // navigate('/');
-    console.log(data, loading, error);
+      }
+    }).then(response => {
+      console.log('zcvzvx', js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('token'));
+      console.log('!!', response);
+    });
   };
   const computedStyle = {
     marginTop: '12px'
@@ -165,7 +197,7 @@ const AuthSubmitButton = ({
   }, "Login");
 };
 AuthSubmitButton.propTypes = {
-  authData: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)
+  authData: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().object)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthSubmitButton);
 
@@ -202,6 +234,25 @@ const InputText = props => {
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputText);
+
+/***/ }),
+
+/***/ "./src/layouts/parts/GlobalLayoutContext.js":
+/*!**************************************************!*\
+  !*** ./src/layouts/parts/GlobalLayoutContext.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GlobalLayoutContext: () => (/* binding */ GlobalLayoutContext)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const GlobalLayoutContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  showNotify: () => {}
+});
 
 /***/ }),
 

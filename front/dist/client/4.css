@@ -118,6 +118,7 @@ button {
 }
 .notify-component_inner {
   width: calc(100% - 40px);
+  flex: 1 0 auto;
   max-width: 240px;
 }
 .notify-component_inner-content {
@@ -128,13 +129,14 @@ button {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
 }
 .notify-component_inner-content--error {
-  background: #f9cb8e;
+  background: #f98ecb;
 }
 .notify-component_inner-content--info {
   background: #aae7fc;
 }
 .notify-component_inner-content-header {
   display: flex;
+  margin-bottom: 12px;
 }
 .notify-component_inner-content-header-close {
   cursor: pointer;

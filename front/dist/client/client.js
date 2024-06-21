@@ -220,31 +220,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _src_routes_routesData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/routes/routesData */ "./src/routes/routesData.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/core/ApolloClient.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/cache/inmemory/inMemoryCache.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/link/http/createHttpLink.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/context/ApolloProvider.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/link/http/createHttpLink.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/core/ApolloClient.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/cache/inmemory/inMemoryCache.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/context/ApolloProvider.js");
+/* harmony import */ var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client/link/context */ "./node_modules/@apollo/client/link/context/index.js");
+
 
 
 
 
 
 const renderApp = () => {
-  const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.ApolloClient({
-    cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.InMemoryCache().restore(window.__APOLLO_STATE__),
-    ssrMode: true,
-    link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.createHttpLink)({
-      uri: 'http://localhost:4000/ql/',
-      credentials: 'same-origin'
-    }),
-    ssrForceFetchDelay: 100
+  const httpLink = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.createHttpLink)({
+    uri: 'http://localhost:4000/ql/',
+    credentials: 'same-origin' // || same-origin
   });
-  const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.createBrowserRouter)(_src_routes_routesData__WEBPACK_IMPORTED_MODULE_2__.routesArray);
-  react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot(document.querySelector('#root'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_7__.ApolloProvider, {
+  const authLink = (0,_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__.setContext)((_, {
+    headers
+  }) => {
+    console.log('headers', headers);
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : ""
+      }
+    };
+  });
+  const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_5__.ApolloClient({
+    cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_6__.InMemoryCache().restore(window.__APOLLO_STATE__),
+    ssrMode: true,
+    link: authLink.concat(httpLink),
+    credentials: 'include',
+    ssrForceFetchDelay: 100,
+    request: operation => {
+      operation.setContext({
+        fetchOptions: {
+          credentials: 'include'
+        },
+        headers: {
+          cookie: headers && headers.cookie
+        }
+      });
+    }
+  });
+  const router = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.createBrowserRouter)(_src_routes_routesData__WEBPACK_IMPORTED_MODULE_2__.routesArray);
+  react_dom_client__WEBPACK_IMPORTED_MODULE_1__.hydrateRoot(document.querySelector('#root'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_8__.ApolloProvider, {
     client: client
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.RouterProvider, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.RouterProvider, {
     router: router,
     suppressHydrationWarning: true
   })));

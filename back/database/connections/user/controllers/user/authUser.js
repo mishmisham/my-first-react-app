@@ -3,7 +3,7 @@ import { initUserSession } from '#userDB_fun/userSession/initUserSession.js';
 import { checkAuthErrors } from './validation/checkAuthErrors.js';
 
 
-export const authUser = async (input, req) => {
+export const authUser = async (input) => {
     const { errorList, userData } = await checkAuthErrors(input);
 
     console.log(input)
@@ -12,8 +12,10 @@ export const authUser = async (input, req) => {
 
     if (errorList.length) {
         return {
-            message: errorList.join(', '),
-            errors: errorList
+            errors: {
+                message: errorList.join(',\n'),
+                errors: errorList
+            }
         }
     }
 
@@ -23,11 +25,13 @@ export const authUser = async (input, req) => {
     } = await initUserSession(userData);
 
     const result = {
-        id: userData.id,
-        name: userData.name,
-        email: input.email,
-        accessToken,
-        refreshToken
+        data: {
+            id: userData.id,
+            name: userData.name,
+            email: input.email,
+            accessToken,
+            refreshToken
+        }
     }
 
     console.log(result)

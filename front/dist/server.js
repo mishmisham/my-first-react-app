@@ -399,7 +399,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var webpack_hot_middleware__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(webpack_hot_middleware__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _renderer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./renderer.js */ "./ssr/server/renderer.js");
 /* harmony import */ var _createStore_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./createStore.js */ "./ssr/server/createStore.js");
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! cors */ "cors");
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_8__);
 /* eslint @typescript-eslint/no-var-requires: 0 */
+
 
 
 
@@ -411,6 +414,11 @@ __webpack_require__.r(__webpack_exports__);
 
 dotenv__WEBPACK_IMPORTED_MODULE_2___default().config();
 const app = express__WEBPACK_IMPORTED_MODULE_0___default()();
+const corsOptions = {
+  origin: 'http://localhost',
+  credentials: true
+};
+app.use(cors__WEBPACK_IMPORTED_MODULE_8___default()(corsOptions));
 if (true) {
   const webpackConfig = __webpack_require__(/*! ../../webpack/dev/webpack.dev.client.js */ "./webpack/dev/webpack.dev.client.js");
   const compiler = webpack__WEBPACK_IMPORTED_MODULE_3___default()(webpackConfig);
@@ -482,6 +490,7 @@ __webpack_require__.r(__webpack_exports__);
     link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.createHttpLink)({
       uri: 'http://localhost:4000/ql/',
       credentials: 'same-origin',
+      // ||  include
       headers: {
         cookie: req.header('Cookie')
       }
@@ -491,6 +500,7 @@ __webpack_require__.r(__webpack_exports__);
   const handler = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticHandler)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_2__.routesArray);
   const fetchRequest = (0,_request__WEBPACK_IMPORTED_MODULE_6__.createFetchRequest)(req, res);
   const context = await handler.query(fetchRequest);
+  console.log(context);
   const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticRouter)(handler.dataRoutes, context);
   const initialApolloState = apolloClient.extract();
   const App = () => {
@@ -804,6 +814,17 @@ module.exports = require("copy-webpack-plugin");
 
 /***/ }),
 
+/***/ "cors":
+/*!***********************!*\
+  !*** external "cors" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("cors");
+
+/***/ }),
+
 /***/ "dotenv":
 /*!*************************!*\
   !*** external "dotenv" ***!
@@ -823,6 +844,17 @@ module.exports = require("dotenv");
 
 "use strict";
 module.exports = require("express");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("js-cookie");
 
 /***/ }),
 

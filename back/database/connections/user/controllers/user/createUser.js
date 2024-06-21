@@ -10,8 +10,10 @@ export const createUser = async (input) => {
     const errorList = await validateRegisterUser(input);
     if (errorList.length) {
         return {
-            message: errorList.join(', '),
-            errors: errorList
+            error: {
+                message: errorList.join(', '),
+                errors: errorList
+            }
         }
     }
 

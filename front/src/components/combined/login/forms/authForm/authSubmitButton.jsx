@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setupUser } from "@/store/reducers/user/userReducer.js"
 import { useNavigate } from "react-router-dom";
 import { GlobalLayoutContext } from '@/layouts/parts/GlobalLayoutContext';
+import { runJWTRefresher } from '@/graphql/refreshJWT.js';
 import {
     gql,
     useMutation
@@ -65,6 +66,9 @@ const AuthSubmitButton = ({authData}) => {
             delete data.__typename;
 
             dispatch(setupUser(data));
+
+            runJWTRefresher();
+
             navigate('/');
         });
     }

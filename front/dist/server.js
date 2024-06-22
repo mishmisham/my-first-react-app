@@ -78,6 +78,25 @@ const Preloader = props => {
 
 /***/ }),
 
+/***/ "./src/config/config.js":
+/*!******************************!*\
+  !*** ./src/config/config.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ACCESS_TOKEN_TIMEOUT: () => (/* binding */ ACCESS_TOKEN_TIMEOUT),
+/* harmony export */   REFRESH_TOKEN_TIMEOUT: () => (/* binding */ REFRESH_TOKEN_TIMEOUT),
+/* harmony export */   SECRET_LENGTH: () => (/* binding */ SECRET_LENGTH)
+/* harmony export */ });
+const SECRET_LENGTH = 32;
+const ACCESS_TOKEN_TIMEOUT = 10 * 1000;
+const REFRESH_TOKEN_TIMEOUT = 24 * 60 * 60 * 1000;
+
+/***/ }),
+
 /***/ "./src/graphql/reAuthorizeWithJWT.js":
 /*!*******************************************!*\
   !*** ./src/graphql/reAuthorizeWithJWT.js ***!
@@ -89,8 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   reAuthorizeWithJWT: () => (/* binding */ reAuthorizeWithJWT)
 /* harmony export */ });
-/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! http */ "http");
-/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(http__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/config.js */ "./src/config/config.js");
 
 const REFETCH_WITH_ACCESS_TOKEN = `
     mutation ContinueWithAccessToken($input: ReAuthByTokenInput!) {
@@ -129,20 +147,11 @@ const reAuthorizeWithJWT = async (token, mode = 'accessToken', req = null, res =
       })
     });
     response = await response.json();
-
-    // console.log(res)
     const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.reAuthorize) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.reAuthorize) !== null && _response2 !== void 0 && _response2.errors);
     if (issetData && res) {
       res.cookie('token', response.data.reAuthorize.data.accessToken, {
-        // httpOnly: true,
-        // secure: true,
-        // path: '/',
-        maxAge: 999999999999999
+        maxAge: _config_config_js__WEBPACK_IMPORTED_MODULE_0__.ACCESS_TOKEN_TIMEOUT
       });
-
-      // console.log('------.1-res', req.headers.cookie)
-      // req.headers.cookie = 'token='+response.data.reAuthorize.data.accessToken;
-      // console.log('------.1-res', req.headers.cookie)
     }
     if (issetData) {
       return response.data.reAuthorize.data;
@@ -289,10 +298,6 @@ const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
   },
   reducers: {
     setupUser: (state, action) => {
-      // if (('refreshToken' in action.payload) && undefined !== window) {
-      //     localStorage.setItem('refreshToken', action.payload.refreshToken);
-      // }
-
       state.about = {
         ...state.about,
         ...action.payload
@@ -371,11 +376,11 @@ __webpack_require__.r(__webpack_exports__);
     // middleware: ()=>[withExtraArgument(axiosInstance)],
     // devTools: process.env.NODE_ENV !== 'production',
   });
-  console.log('HAS COOKIE', req.get('cookie'));
+
+  // пробуем авторизоваться на стороне сервера
   const accessToken = (0,_utils_getCookie_js__WEBPACK_IMPORTED_MODULE_7__.getCookie)('token', req.get('cookie'));
   if (accessToken) {
     const userData = await (0,_graphql_reAuthorizeWithJWT_js__WEBPACK_IMPORTED_MODULE_8__.reAuthorizeWithJWT)(accessToken, 'accessToken', req, res);
-    // console.log('userData', userData)
     if (userData) {
       store.dispatch((0,_store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_5__.setupUser)(userData));
     }
@@ -716,7 +721,8 @@ module.exports = {
       '@/router': path.resolve(__dirname, '../src/routes'),
       '@/graphql': path.resolve(__dirname, '../src/graphql'),
       '@/websocket': path.resolve(__dirname, '../src/websocket'),
-      '@/utils': path.resolve(__dirname, '../src/utils')
+      '@/utils': path.resolve(__dirname, '../src/utils'),
+      '@/config': path.resolve(__dirname, '../src/config')
     }
   },
   module: {
@@ -1048,17 +1054,6 @@ module.exports = require("webpack-hot-middleware");
 
 "use strict";
 module.exports = require("webpack-merge");
-
-/***/ }),
-
-/***/ "http":
-/*!***********************!*\
-  !*** external "http" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("http");
 
 /***/ }),
 

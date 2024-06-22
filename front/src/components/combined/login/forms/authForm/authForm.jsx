@@ -5,6 +5,7 @@ import { authFormFields } from './authFormFields';
 import './authForm.sass';
 import { ClientOnly } from "react-client-only";
 
+
 const AuthForm = () => {
 
     const [authData, setAuthData] = useState({...authFormFields});

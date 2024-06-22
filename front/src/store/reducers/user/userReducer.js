@@ -9,10 +9,6 @@ export const userSlice = createSlice({
     },
     reducers: {
         setupUser: (state, action) => {
-            // if (('refreshToken' in action.payload) && undefined !== window) {
-            //     localStorage.setItem('refreshToken', action.payload.refreshToken);
-            // }
-
             state.about = {
                 ...state.about,
                 ...action.payload

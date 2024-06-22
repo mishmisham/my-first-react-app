@@ -6,8 +6,9 @@ import { authUser } from '#userDB_fun/user/authUser.js';
 import { getAllUsers } from '#userDB_fun/user/getAllUsers.js';
 import { getUserByID } from '#userDB_fun/user/getUserByID.js';
 import { getUserByEmail } from '#userDB_fun/user/getUserByEmail.js';
-import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
 import { authUserByToken } from '#userDB_fun/user/authUserByToken.js';
+import { refreshTokens } from '#userDB_fun/userSession/refreshTokens.js';
+import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
 
 import {
   ACCESS_TOKEN_TIMEOUT,
@@ -55,9 +56,20 @@ export const userResolvers = {
       return result;
     },
 
+    async refreshTokens(root, { input }, context) {
+      
+      const result = await refreshTokens(input);
+
+      if (!result.errors) {
+        setContextToken(context, result.data.accessToken);
+      }
+
+      return result;
+    },
+
     async logout (root, { input }, context) { 
       const result = await logoutUser(input.id);
-      // context.response.cookie('refresh', '');
+      // context.response.cookie('token', '');
       return result;
     }
   },

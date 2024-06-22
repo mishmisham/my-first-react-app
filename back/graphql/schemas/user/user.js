@@ -23,6 +23,7 @@ export const userType = gql`
         login(input: LoginInput): LoginDataResp
         logout(input: UserAuthData): Boolean
         reAuthorize(input: ReAuthByTokenInput): LoginDataResp
+        refreshTokens(input: RefreshTokensInput): RefreshTokensResponse
     }
 
     extend type Query {
@@ -35,6 +36,20 @@ export const userType = gql`
         id: Int
         name: String
         email: String
+    }
+
+    type RefreshTokensResponse {
+       data: RefreshTokensResponseData
+       errors: ErrorResp
+    }
+
+    type RefreshTokensResponseData {
+        refreshToken: String
+        accessToken: String
+    }
+
+    input RefreshTokensInput {
+        refresh_token: String
     }
 
     input RegisterInput {

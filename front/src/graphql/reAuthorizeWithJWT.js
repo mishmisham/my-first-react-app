@@ -1,5 +1,4 @@
-import http from 'http';
-
+import { ACCESS_TOKEN_TIMEOUT } from '@/config/config.js';
 const REFETCH_WITH_ACCESS_TOKEN = `
     mutation ContinueWithAccessToken($input: ReAuthByTokenInput!) {
         reAuthorize(input: $input) {
@@ -41,7 +40,7 @@ export const reAuthorizeWithJWT = async (token, mode='accessToken', req=null, re
 
         if (issetData && res) {
             res.cookie('token', response.data.reAuthorize.data.accessToken, {
-                maxAge: 999999999999999,
+                maxAge: ACCESS_TOKEN_TIMEOUT,
             });
         }
         if (issetData) {

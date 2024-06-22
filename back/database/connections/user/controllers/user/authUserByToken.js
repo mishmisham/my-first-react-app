@@ -14,10 +14,7 @@ export const authUserByToken = async (input) => {
 
     const checkRule = mode === 'accessToken' ? { access_token: token } : { refresh_token: token };
     
-    console.log(checkRule)
-    
     const userSession = await users.session.findOne({ where: checkRule });
-    console.log(userSession)
 
     if (!userSession) {
         return null;
@@ -26,19 +23,17 @@ export const authUserByToken = async (input) => {
     const secret = mode === 'accessToken' ? process.env.STATIC_SECRET_FOR_ACCESS_TOKEN : userSession.secret; 
 
     const data = await jwt.verify(token, secret);
-    console.log(data)
     if (!data) {
         return null;
     }
 
     const nowTime = (new Date().getTime() / 1000);
-
     if (nowTime > data.exp) {
       return null;
     }
 
     const user = await getFullUserByID(data.id);
-    console.log(user.dataValues)
+
     const {
         accessToken,
         refreshToken

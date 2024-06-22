@@ -78,6 +78,169 @@ const Preloader = props => {
 
 /***/ }),
 
+/***/ "./src/config/config.js":
+/*!******************************!*\
+  !*** ./src/config/config.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ACCESS_TOKEN_TIMEOUT: () => (/* binding */ ACCESS_TOKEN_TIMEOUT),
+/* harmony export */   REFRESH_TOKEN_TIMEOUT: () => (/* binding */ REFRESH_TOKEN_TIMEOUT),
+/* harmony export */   SECRET_LENGTH: () => (/* binding */ SECRET_LENGTH)
+/* harmony export */ });
+const SECRET_LENGTH = 32;
+const ACCESS_TOKEN_TIMEOUT = 10 * 1000;
+const REFRESH_TOKEN_TIMEOUT = 24 * 60 * 60 * 1000;
+
+/***/ }),
+
+/***/ "./src/graphql/reAuthorizeWithJWT.js":
+/*!*******************************************!*\
+  !*** ./src/graphql/reAuthorizeWithJWT.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   reAuthorizeWithJWT: () => (/* binding */ reAuthorizeWithJWT)
+/* harmony export */ });
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/config.js */ "./src/config/config.js");
+
+const REFETCH_WITH_ACCESS_TOKEN = `
+    mutation ContinueWithAccessToken($input: ReAuthByTokenInput!) {
+        reAuthorize(input: $input) {
+            data {
+                name
+                id
+                email
+                refreshToken
+                accessToken
+            }
+            errors {
+                message
+                errors
+            }
+        }
+    }
+`;
+const reAuthorizeWithJWT = async (token, mode = 'accessToken', req = null, res = null) => {
+  const qlHost = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST;
+  try {
+    var _response, _response2;
+    let response = await fetch(qlHost, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: REFETCH_WITH_ACCESS_TOKEN,
+        variables: {
+          input: {
+            token,
+            mode
+          }
+        }
+      })
+    });
+    response = await response.json();
+    const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.reAuthorize) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.reAuthorize) !== null && _response2 !== void 0 && _response2.errors);
+    if (issetData && res) {
+      res.cookie('token', response.data.reAuthorize.data.accessToken, {
+        maxAge: _config_config_js__WEBPACK_IMPORTED_MODULE_0__.ACCESS_TOKEN_TIMEOUT
+      });
+    }
+    if (issetData) {
+      return response.data.reAuthorize.data;
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/graphql/refreshJWT.js":
+/*!***********************************!*\
+  !*** ./src/graphql/refreshJWT.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   refreshJWT: () => (/* binding */ refreshJWT),
+/* harmony export */   runJWTRefresher: () => (/* binding */ runJWTRefresher)
+/* harmony export */ });
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/config.js */ "./src/config/config.js");
+
+const REFRESH_JWT_TOKEN = `
+    mutation RefreshJWTToken($input: RefreshTokensInput!) {
+        refreshTokens(input: $input) {
+            data {
+                refreshToken
+                accessToken
+            }
+            errors {
+                message
+                errors
+            }
+        }
+    }
+`;
+const refreshJWT = async () => {
+  console.log('refresh token');
+  const qlHost = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST;
+  try {
+    var _response, _response2;
+    const refresh_token = localStorage.getItem('refreshToken');
+    if (!refresh_token) {
+      return;
+    }
+    let response = await fetch(qlHost, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: REFRESH_JWT_TOKEN,
+        variables: {
+          input: {
+            refresh_token
+          }
+        }
+      })
+    });
+    response = await response.json();
+    const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.reAuthorize) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.reAuthorize) !== null && _response2 !== void 0 && _response2.errors);
+    if (issetData && res) {
+      res.cookie('token', response.data.refreshTokens.data.accessToken, {
+        maxAge: _config_config_js__WEBPACK_IMPORTED_MODULE_0__.ACCESS_TOKEN_TIMEOUT
+      });
+    }
+    if (issetData) {
+      return response.data.refreshTokens.data;
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+const runJWTRefresher = () => {
+  // секунду на обновление токена
+  const safeRefreshTimeout = _config_config_js__WEBPACK_IMPORTED_MODULE_0__.ACCESS_TOKEN_TIMEOUT - 1000;
+  if (window.__refreshJWTTimeout__) {
+    clearTimeout(window.__refreshJWTTimeout__);
+  }
+  window.__refreshJWTTimeout__ = setTimeout(() => {
+    refreshJWT();
+    runJWTRefresher();
+  }, safeRefreshTimeout);
+};
+
+/***/ }),
+
 /***/ "./src/routes/routesData.js":
 /*!**********************************!*\
   !*** ./src/routes/routesData.js ***!
@@ -206,10 +369,6 @@ const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
   },
   reducers: {
     setupUser: (state, action) => {
-      // if (('refreshToken' in action.payload) && undefined !== window) {
-      //     localStorage.setItem('refreshToken', action.payload.refreshToken);
-      // }
-
       state.about = {
         ...state.about,
         ...action.payload
@@ -288,23 +447,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs");
 /* harmony import */ var _store_reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/store/reducers */ "./src/store/reducers/index.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+/* harmony import */ var _graphql_reAuthorizeWithJWT_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/graphql/reAuthorizeWithJWT.js */ "./src/graphql/reAuthorizeWithJWT.js");
+/* harmony import */ var _graphql_refreshJWT_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/graphql/refreshJWT.js */ "./src/graphql/refreshJWT.js");
 
 
+
+
+
+
+// авторизационные коррекции на фронте
+const onBeforeInitStoreMiddleware = async () => {
+  const currentState = window.__INITIAL_STATE__;
+  let isAuthorized = false;
+
+  // если авторизовались через куку на сервере - сохраним в localStorage новое значение
+  if ('refreshToken' in currentState.user.about) {
+    localStorage.setItem('refreshToken', currentState.user.about.refreshToken);
+    delete window.__INITIAL_STATE__.user.about.refreshToken;
+    isAuthorized = true;
+  }
+  if ('accessToken' in currentState.user.about) {
+    // Cookies.set('token', currentState.user.about.accessToken)
+    delete window.__INITIAL_STATE__.user.about.accessToken;
+    isAuthorized = true;
+  }
+
+  // если не авторизовались но в localStorage есть refreshToken - пробуем авторизоваться через него
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!('id' in currentState.user.about) && refreshToken) {
+    const userData = await (0,_graphql_reAuthorizeWithJWT_js__WEBPACK_IMPORTED_MODULE_2__.reAuthorizeWithJWT)(refreshToken, 'refreshToken');
+    if (userData) {
+      localStorage.setItem('refreshToken', userData.refreshToken);
+      js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('token', userData.accessToken);
+      delete userData.refreshToken;
+      delete userData.accessToken;
+      window.__INITIAL_STATE__.user.about = {
+        ...window.__INITIAL_STATE__.user.about,
+        ...userData
+      };
+      isAuthorized = true;
+    }
+  }
+  if (isAuthorized) {
+    // обновление access и refresh по таймауту
+    (0,_graphql_refreshJWT_js__WEBPACK_IMPORTED_MODULE_3__.runJWTRefresher)();
+  }
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (async () => {
-  const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
+  await onBeforeInitStoreMiddleware();
+  const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_4__.configureStore)({
     reducer: _store_reducers__WEBPACK_IMPORTED_MODULE_0__["default"],
     preloadedState: window.__INITIAL_STATE__
     // devTools: process.env.NODE_ENV !== 'production',
   });
   delete window.__INITIAL_STATE__;
-
-  // const refreshToken = localStorage.getItem('refreshToken');
-
-  // console.log('refreshToken', refreshToken)
-  // console.log('store', store)
-
   return store;
 });
 

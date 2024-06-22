@@ -1,8 +1,6 @@
 import { userDB } from '#userDB/userDB.js';
 import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
-import { generateRandomString } from './utils/generateRandomString.js';
-import jwt from 'jsonwebtoken';
-import { ACCESS_TOKEN_TIMEOUT, REFRESH_TOKEN_TIMEOUT, SECRET_LENGTH } from '#configs/config.js';
+import { createSessionObject } from './utils/createSessionObject.js';
 
 export const initUserSession = async (userData) => {
 
@@ -10,42 +8,20 @@ export const initUserSession = async (userData) => {
         users,
     } = userDB.data;
 
-    const userSession = await users.session.findOne({user_id: userData.id});
+    const userSession = await users.session.findOne({where: {user_id: userData.id}});
 
     if (userSession) {
         await logoutUser(userData.id);
     }
     
-    const secretAccess = process.env.STATIC_SECRET_FOR_ACCESS_TOKEN;
-    const secretRefresh = generateRandomString(SECRET_LENGTH);
-    const nowTime = Math.round(Date.now() / 1000);
-    const expireAccess = nowTime + ACCESS_TOKEN_TIMEOUT;
-    const expireRefresh = nowTime + REFRESH_TOKEN_TIMEOUT;
-
-    const accessToken = jwt.sign({ 
-        id: userData.id,
-        exp: expireAccess
-    }, secretAccess);
-
-    const refreshToken = jwt.sign({ 
-        id: userData.id,
-        exp: expireRefresh
-    }, secretRefresh);
-    
-    const session = {
-        user_id: userData.id,
-        access_token: accessToken,
-        refresh_token: refreshToken,
-        issued_at: nowTime,
-        secret: secretRefresh,
-    }
+    const session = createSessionObject(userData.id);
 
     await users.session.create({
         ...session
     });
 
     return {
-        accessToken,
-        refreshToken
+        accessToken: session.access_token,
+        refreshToken: session.refresh_token
     }
 }

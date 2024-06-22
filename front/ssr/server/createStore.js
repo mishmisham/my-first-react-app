@@ -21,6 +21,7 @@ export default async (req, res) => {
         // devTools: process.env.NODE_ENV !== 'production',
     });
 
+    // пробуем авторизоваться на стороне сервера
     const accessToken = getCookie('token', req.get('cookie'))
     if (accessToken) {
         const userData = await reAuthorizeWithJWT(accessToken, 'accessToken', req, res)

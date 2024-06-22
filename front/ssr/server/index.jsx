@@ -12,6 +12,8 @@ import cors from 'cors';
 
 dotenv.config();
 
+const port = process.env.FRONTEND_PORT;
+
 const app = express();
 
 const corsOptions = {
@@ -59,6 +61,6 @@ app.get("*", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(port, () => {
+  console.log("Listening on port "+port);
 });

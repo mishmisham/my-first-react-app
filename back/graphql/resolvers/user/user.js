@@ -1,4 +1,6 @@
 import http from 'http';
+import { v4 as uuidv4 } from 'uuid';
+
 import { createUser } from '#userDB_fun/user/createUser.js';
 import { authUser } from '#userDB_fun/user/authUser.js';
 import { getAllUsers } from '#userDB_fun/user/getAllUsers.js';
@@ -19,9 +21,17 @@ export const userResolvers = {
       const result = await authUser(input);
 
       if (!result.errors) {
+        
         context.token = result.data.accessToken;
         context.response.cookie('access', result.data.accessToken);
-        context.response.setHeader('Authorization', 'Bearer '+result.data.accessToken);
+
+        const sessionID = uuidv4();
+        context.response.cookie('session', sessionID, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
       }
      
       return result;

@@ -20,9 +20,11 @@ const verifyToken = async (token) => {
 };
 
 export const context = async ({ req, res }) => {
-  // const token = (req.headers && req.headers.authorization) || '';
   // const user = await verifyToken(token)
+  console.log('2', req.headers)
+  // const token = (req.headers && req.headers.authorization) || '';
   return { 
+    // token,
     request: req,
     response: res
   };

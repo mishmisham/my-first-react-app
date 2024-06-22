@@ -7,6 +7,8 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import { typeDefs } from './schemas/index.js';
 import { resolvers } from './resolvers/index.js';
 import { context } from './context/index.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 
@@ -28,7 +30,9 @@ const apolloServer = new ApolloServer({
       requestDidStart(requestContext) {
         return {
             willSendResponse({ response }) {
-                // response.http.headers.set('Access-Control-Allow-Origin', '*');
+              response.http.headers.set('Access-Control-Allow-Origin', process.env.CLIENT_HOST);
+              response.http.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+              response.http.headers.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
             },
         };
       },
@@ -41,7 +45,9 @@ await apolloServer.start()
 app.use(
   '/ql',
   cors({
-    // origin: "http://localhost:4000",
+    origin: [
+      process.env.CLIENT_HOST
+    ],
     credentials: true,
   }),
   express.json({ limit: '50mb' }),

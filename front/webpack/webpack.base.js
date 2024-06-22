@@ -1,9 +1,11 @@
 const webpack = require('webpack');
-
+const dotenv = require('dotenv').config({ path: '.env', safe: true });
 const path = require('path');
 const scriptExtensions = /\.(tsx|ts|js|jsx|mjs)$/;
 const imageExtensions = /\.(bmp|gif|jpg|jpeg|png)$/;
 const fontsExtension = /\.(eot|otf|ttf|woff|woff2)$/;
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   // devtool: false,
@@ -45,4 +47,14 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      process: JSON.stringify({
+        env: {
+          ...dotenv.parsed,
+          NODE_ENV: isDevelopment ? 'development' : 'production',
+        },
+      }),
+    })
+  ]
 };

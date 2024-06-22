@@ -140,24 +140,6 @@ const AuthSubmitButton = ({
 }) => {
   const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
   const [login] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.useMutation)(AUTH_ACTION, {
-    onCompleted: (res, a) => {
-      console.log('s', res, a);
-      const {
-        login
-      } = res;
-      const {
-        errors,
-        data
-      } = login;
-      if (!errors) {
-        console.log(data);
-        // navigate('/');
-      } else {
-        layoutContext.showNotify({
-          text: errors.message
-        });
-      }
-    },
     onError: ({
       operation,
       response,
@@ -183,8 +165,21 @@ const AuthSubmitButton = ({
         }
       }
     }).then(response => {
-      console.log('zcvzvx', js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get('token'));
-      console.log('!!', response);
+      const {
+        errors,
+        data
+      } = response.data.login;
+      if (errors) {
+        layoutContext.showNotify({
+          text: errors.message
+        });
+        return;
+      }
+
+      // console.log(data)
+      // Cookies.set('access', data.accessToken)
+      // localStorage.setItem('token', data.refreshToken)
+      // navigate('/');
     });
   };
   const computedStyle = {

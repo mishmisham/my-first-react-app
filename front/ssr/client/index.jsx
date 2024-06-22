@@ -17,12 +17,11 @@ import { setContext } from '@apollo/client/link/context';
 const renderApp = () => {
 
   const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/ql/',
-    credentials: 'same-origin',  // || same-origin
+    uri: process.env.GRAPHQL_HOST,
+    credentials: 'include',  // || same-origin
   });
 
   const authLink = setContext((_, { headers }) => {
-    console.log('headers', headers)
 
     const token = localStorage.getItem('token');
 

@@ -1,4 +1,4 @@
-const websocketClient = new WebSocket('ws://localhost:9000');
+const websocketClient = new WebSocket('ws://localhost:'+process.env.WS_PORT);
 
 websocketClient.onopen = function () {
     console.log('подключился');

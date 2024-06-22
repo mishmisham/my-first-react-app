@@ -413,6 +413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 dotenv__WEBPACK_IMPORTED_MODULE_2___default().config();
+const port = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.FRONTEND_PORT;
 const app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 const corsOptions = {
   origin: 'http://localhost',
@@ -445,8 +446,8 @@ app.get("*", async (req, res) => {
     console.log("error in rendering server side:", err);
   }
 });
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(port, () => {
+  console.log("Listening on port " + port);
 });
 
 /***/ }),
@@ -488,7 +489,7 @@ __webpack_require__.r(__webpack_exports__);
   const apolloClient = new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloClient({
     ssrMode: true,
     link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.createHttpLink)({
-      uri: 'http://localhost:4000/ql/',
+      uri: {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST,
       credentials: 'same-origin',
       // ||  include
       headers: {
@@ -500,7 +501,6 @@ __webpack_require__.r(__webpack_exports__);
   const handler = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticHandler)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_2__.routesArray);
   const fetchRequest = (0,_request__WEBPACK_IMPORTED_MODULE_6__.createFetchRequest)(req, res);
   const context = await handler.query(fetchRequest);
-  console.log(context);
   const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticRouter)(handler.dataRoutes, context);
   const initialApolloState = apolloClient.extract();
   const App = () => {
@@ -605,10 +605,6 @@ const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 const BUILD_DIR = resolvePath('dist');
 const MiniCssExtractPlugin = __webpack_require__(/*! mini-css-extract-plugin */ "mini-css-extract-plugin");
 const CopyWebpackPlugin = __webpack_require__(/*! copy-webpack-plugin */ "copy-webpack-plugin");
-const dotenv = (__webpack_require__(/*! dotenv */ "dotenv").config)({
-  path: __dirname + '/.env'
-});
-const isDevelopment = "development" !== 'production';
 const clientConfig = {
   target: 'web',
   mode: 'development',
@@ -645,13 +641,6 @@ const clientConfig = {
     patterns: [{
       from: 'public'
     }]
-  }), new webpack.DefinePlugin({
-    process: {
-      env: {
-        NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-        browser: true
-      }
-    }
   })],
   optimization: {
     chunkIds: 'natural',
@@ -679,10 +668,15 @@ module.exports = merge(baseConfig, clientConfig);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const webpack = __webpack_require__(/*! webpack */ "webpack");
+const dotenv = (__webpack_require__(/*! dotenv */ "dotenv").config)({
+  path: '.env',
+  safe: true
+});
 const path = __webpack_require__(/*! path */ "path");
 const scriptExtensions = /\.(tsx|ts|js|jsx|mjs)$/;
 const imageExtensions = /\.(bmp|gif|jpg|jpeg|png)$/;
 const fontsExtension = /\.(eot|otf|ttf|woff|woff2)$/;
+const isDevelopment = "development" !== 'production';
 module.exports = {
   // devtool: false,
   devtool: 'source-map',
@@ -719,7 +713,15 @@ module.exports = {
       test: imageExtensions,
       type: 'asset/resource'
     }]
-  }
+  },
+  plugins: [new webpack.DefinePlugin({
+    process: JSON.stringify({
+      env: {
+        ...dotenv.parsed,
+        NODE_ENV: isDevelopment ? 'development' : 'production'
+      }
+    })
+  })]
 };
 
 /***/ }),

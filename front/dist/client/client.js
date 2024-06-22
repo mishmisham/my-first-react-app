@@ -235,13 +235,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const renderApp = () => {
   const httpLink = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.createHttpLink)({
-    uri: 'http://localhost:4000/ql/',
-    credentials: 'same-origin' // || same-origin
+    uri: {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST,
+    credentials: 'include' // || same-origin
   });
   const authLink = (0,_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__.setContext)((_, {
     headers
   }) => {
-    console.log('headers', headers);
     const token = localStorage.getItem('token');
     return {
       headers: {

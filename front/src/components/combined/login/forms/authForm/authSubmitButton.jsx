@@ -32,21 +32,6 @@ const AuthSubmitButton = ({authData}) => {
     const navigate = useNavigate();
 
     const [login] = useMutation(AUTH_ACTION, {
-        onCompleted: (res, a) => {
-            console.log('s', res, a)
-            
-            const { login } = res;
-            const { errors, data } = login;
-            
-            if (!errors) {
-                console.log(data)
-                // navigate('/');
-            } else {
-                layoutContext.showNotify({
-                    text: errors.message
-                })
-            }
-        },
         onError: ({ operation, response, graphQLErrors, networkError }) => {
             layoutContext.showNotify({
                 text: 'graphql error' + graphQLErrors.join(' ')
@@ -66,8 +51,20 @@ const AuthSubmitButton = ({authData}) => {
             } 
         }).then(response=>{
 
-            console.log('zcvzvx', Cookies.get('token'))
-            console.log('!!', response)
+            const { errors, data } = response.data.login;
+            
+            if (errors) {
+                layoutContext.showNotify({
+                    text: errors.message
+                })
+
+                return;
+            }
+
+            // console.log(data)
+            // Cookies.set('access', data.accessToken)
+            // localStorage.setItem('token', data.refreshToken)
+            // navigate('/');
         });
     }
 

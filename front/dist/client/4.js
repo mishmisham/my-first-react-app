@@ -237,7 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   websocketSendEcho: () => (/* binding */ websocketSendEcho),
 /* harmony export */   websocketSendPing: () => (/* binding */ websocketSendPing)
 /* harmony export */ });
-const websocketClient = new WebSocket('ws://localhost:9000');
+const websocketClient = new WebSocket('ws://localhost:' + {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.WS_PORT);
 websocketClient.onopen = function () {
   console.log('подключился');
 };

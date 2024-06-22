@@ -20,7 +20,7 @@ export default async (req, res, store, contextData) => {
   const apolloClient = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-      uri: 'http://localhost:4000/ql/',
+      uri: process.env.GRAPHQL_HOST,
       credentials: 'same-origin', // ||  include
       headers: {
         cookie: req.header('Cookie'),
@@ -32,7 +32,6 @@ export default async (req, res, store, contextData) => {
   const handler = createStaticHandler(routesArray);
   const fetchRequest = createFetchRequest(req, res);
   const context = await handler.query(fetchRequest);
-  console.log(context)
   const router = createStaticRouter(
     handler.dataRoutes,
     context

@@ -2,13 +2,8 @@ import { userDB } from '#userDB/userDB.js';
 import { initUserSession } from '#userDB_fun/userSession/initUserSession.js';
 import { checkAuthErrors } from './validation/checkAuthErrors.js';
 
-
 export const authUser = async (input) => {
     const { errorList, userData } = await checkAuthErrors(input);
-
-    console.log(input)
-
-    console.log(errorList, userData)
 
     if (errorList.length) {
         return {
@@ -33,8 +28,6 @@ export const authUser = async (input) => {
             refreshToken
         }
     }
-
-    console.log(result)
 
     return result;
 }

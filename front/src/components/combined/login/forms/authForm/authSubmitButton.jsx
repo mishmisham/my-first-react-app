@@ -16,7 +16,6 @@ const AUTH_ACTION = gql`
                 name
                 id
                 email
-                accessToken
                 refreshToken
             }
             errors {
@@ -50,20 +49,17 @@ const AuthSubmitButton = ({authData}) => {
                 }
             } 
         }).then(response=>{
-
             const { errors, data } = response.data.login;
-            
             if (errors) {
                 layoutContext.showNotify({
                     text: errors.message
-                })
-
+                });
                 return;
             }
 
             // console.log(data)
-            // Cookies.set('access', data.accessToken)
-            // localStorage.setItem('token', data.refreshToken)
+
+            localStorage.setItem('refreshToken', data.refreshToken);
             // navigate('/');
         });
     }

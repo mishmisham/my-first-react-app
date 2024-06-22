@@ -1,5 +1,3 @@
-export const STATIC_SECRET_FOR_ACCESS_TOKEN = 'brgsiehrihslrnfvlhbserihf;szrnfviugserihgs;efve3298';
-
 export const generateRandomString = (length) => {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

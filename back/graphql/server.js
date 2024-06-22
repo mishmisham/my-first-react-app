@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import http, { createServer } from 'http';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServer } from '@apollo/server';
@@ -11,6 +12,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+app.use(cookieParser());
 
 const httpServer = http.createServer(app);
 
@@ -28,6 +31,7 @@ const apolloServer = new ApolloServer({
     ApolloServerPluginDrainHttpServer({ httpServer }),
     {
       requestDidStart(requestContext) {
+       
         return {
             willSendResponse({ response }) {
               response.http.headers.set('Access-Control-Allow-Origin', process.env.CLIENT_HOST);

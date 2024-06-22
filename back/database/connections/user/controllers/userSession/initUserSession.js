@@ -1,11 +1,8 @@
 import { userDB } from '#userDB/userDB.js';
 import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
-import { generateRandomString, STATIC_SECRET_FOR_ACCESS_TOKEN } from './utils/generateRandomString.js';
+import { generateRandomString } from './utils/generateRandomString.js';
 import jwt from 'jsonwebtoken';
-
-const SECRET_LENGTH = 32;
-const ACCESS_TOKEN_TIMEOUT = 3 * 60 * 1000;
-const REFRESH_TOKEN_TIMEOUT = 24 * 60 * 60 * 1000;
+import { ACCESS_TOKEN_TIMEOUT, REFRESH_TOKEN_TIMEOUT, SECRET_LENGTH } from '#configs/config.js';
 
 export const initUserSession = async (userData) => {
 
@@ -19,7 +16,7 @@ export const initUserSession = async (userData) => {
         await logoutUser(userData.id);
     }
     
-    const secretAccess = STATIC_SECRET_FOR_ACCESS_TOKEN;
+    const secretAccess = process.env.STATIC_SECRET_FOR_ACCESS_TOKEN;
     const secretRefresh = generateRandomString(SECRET_LENGTH);
     const nowTime = Math.round(Date.now() / 1000);
     const expireAccess = nowTime + ACCESS_TOKEN_TIMEOUT;
@@ -40,8 +37,6 @@ export const initUserSession = async (userData) => {
         access_token: accessToken,
         refresh_token: refreshToken,
         issued_at: nowTime,
-        refresh_expires_in: expireRefresh,
-        access_expires_in: expireAccess,
         secret: secretRefresh,
     }
 

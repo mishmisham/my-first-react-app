@@ -12,7 +12,7 @@ import {
   InMemoryCache
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
+import Cookies from 'js-cookie'
 
 const renderApp = () => {
 
@@ -22,13 +22,12 @@ const renderApp = () => {
   });
 
   const authLink = setContext((_, { headers }) => {
-
-    const token = localStorage.getItem('token');
-
+    // const token = Cookies.get('token');
+    // console.log(token)
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : "",
+        // authorization: token || '',
       }
     }
   });

@@ -125,7 +125,6 @@ const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql)(_t || (_
                 name
                 id
                 email
-                accessToken
                 refreshToken
             }
             errors {
@@ -177,8 +176,8 @@ const AuthSubmitButton = ({
       }
 
       // console.log(data)
-      // Cookies.set('access', data.accessToken)
-      // localStorage.setItem('token', data.refreshToken)
+
+      localStorage.setItem('refreshToken', data.refreshToken);
       // navigate('/');
     });
   };

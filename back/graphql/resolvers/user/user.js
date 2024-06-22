@@ -21,18 +21,16 @@ export const userResolvers = {
       const result = await authUser(input);
 
       if (!result.errors) {
-        
         context.token = result.data.accessToken;
-        context.response.cookie('access', result.data.accessToken);
-
-        const sessionID = uuidv4();
-        context.response.cookie('session', sessionID, {
+        context.response.cookie('token', result.data.accessToken, {
             httpOnly: true,
             secure: true,
             path: '/',
             maxAge: 1000 * 60 * 60 * 24 * 7,
         });
       }
+
+      console.log(context.user)
      
       return result;
     },

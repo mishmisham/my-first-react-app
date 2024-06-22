@@ -49,6 +49,10 @@ export const refreshJWT = async () => {
             // Cookies.set('token', response.data.refreshTokens.data.accessToken)
             localStorage.setItem('refreshToken', response.data.refreshTokens.data.refreshToken)
             return response.data.refreshTokens.data;
+        } else {
+            localStorage.removeItem('refreshToken');
+            Cookies.set('token', '');
+            // window.location.href = '/';
         }
 
         return null;

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setupUser } from "@/store/reducers/user/userReducer.js"
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie'
-
 import { GlobalLayoutContext } from '@/layouts/parts/GlobalLayoutContext';
 import {
     gql,
@@ -29,6 +29,7 @@ const AUTH_ACTION = gql`
 const AuthSubmitButton = ({authData}) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [login] = useMutation(AUTH_ACTION, {
         onError: ({ operation, response, graphQLErrors, networkError }) => {
@@ -50,6 +51,7 @@ const AuthSubmitButton = ({authData}) => {
             } 
         }).then(response=>{
             const { errors, data } = response.data.login;
+
             if (errors) {
                 layoutContext.showNotify({
                     text: errors.message
@@ -57,10 +59,13 @@ const AuthSubmitButton = ({authData}) => {
                 return;
             }
 
-            // console.log(data)
-
             localStorage.setItem('refreshToken', data.refreshToken);
-            // navigate('/');
+
+            delete data.refreshToken;
+            delete data.__typename;
+
+            dispatch(setupUser(data));
+            navigate('/');
         });
     }
 

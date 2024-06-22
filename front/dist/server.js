@@ -93,9 +93,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _store_actions_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/index */ "./src/store/actions/index.js");
-/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
-
+/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
 
 
 
@@ -111,9 +109,8 @@ const routesArray = [{
       message: "Welcome to React Router!"
     });
   },
-  loadData: ({
-    dispatch
-  }) => dispatch((0,_store_actions_index__WEBPACK_IMPORTED_MODULE_2__.fetchCurrentUser)()),
+  // loadData: ({ dispatch }) => dispatch(setupUser()),
+
   Component() {
     // let data = useLoaderData();
     // console.log(data)
@@ -123,7 +120,7 @@ const routesArray = [{
       description: "home page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(HomePage, null)));
@@ -142,7 +139,7 @@ const routesArray = [{
       description: "other page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SecondPage, null)));
@@ -155,112 +152,12 @@ const routesArray = [{
       title: "Login"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LoginPage, null)));
   }
 }];
-
-/***/ }),
-
-/***/ "./src/store/actions/index.js":
-/*!************************************!*\
-  !*** ./src/store/actions/index.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   FETCH_ADMINS: () => (/* binding */ FETCH_ADMINS),
-/* harmony export */   FETCH_CURRENT_USER: () => (/* binding */ FETCH_CURRENT_USER),
-/* harmony export */   FETCH_USERS: () => (/* binding */ FETCH_USERS),
-/* harmony export */   fetchAdmins: () => (/* binding */ fetchAdmins),
-/* harmony export */   fetchCurrentUser: () => (/* binding */ fetchCurrentUser),
-/* harmony export */   fetchUsers: () => (/* binding */ fetchUsers)
-/* harmony export */ });
-const FETCH_USERS = 'FETCH_USERS';
-const fetchUsers = () => async (dispatch, getState, api) => {
-  const res = {
-    lorem: 'chocopie'
-  };
-  dispatch({
-    type: FETCH_USERS,
-    payload: res
-  });
-};
-const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
-const fetchCurrentUser = () => async (dispatch, getState, api) => {
-  const res = {
-    lorem: 'ipsum'
-  };
-  dispatch({
-    type: FETCH_CURRENT_USER,
-    payload: res
-  });
-};
-const FETCH_ADMINS = 'FETCH_ADMINS';
-const fetchAdmins = () => async (dispatch, getState, api) => {
-  const res = {
-    lorem: 'opossum'
-  };
-  dispatch({
-    type: FETCH_ADMINS,
-    payload: res
-  });
-};
-
-/***/ }),
-
-/***/ "./src/store/reducers/adminsReducer.js":
-/*!*********************************************!*\
-  !*** ./src/store/reducers/adminsReducer.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/store/actions/index.js");
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = [], action) => {
-  switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__.FETCH_ADMINS:
-      return action.payload.data;
-    default:
-      return state;
-  }
-});
-
-/***/ }),
-
-/***/ "./src/store/reducers/authReducer.js":
-/*!*******************************************!*\
-  !*** ./src/store/reducers/authReducer.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/store/actions/index.js");
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = null, action) => {
-  switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__.FETCH_CURRENT_USER:
-      state.users.push('qwerty');
-      return {
-        ...state
-      };
-    default:
-      return state;
-  }
-});
 
 /***/ }),
 
@@ -277,42 +174,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _authReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authReducer */ "./src/store/reducers/authReducer.js");
-/* harmony import */ var _usersReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./usersReducer */ "./src/store/reducers/usersReducer.js");
-/* harmony import */ var _adminsReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./adminsReducer */ "./src/store/reducers/adminsReducer.js");
-
-
+/* harmony import */ var _user_userReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user/userReducer */ "./src/store/reducers/user/userReducer.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_0__.combineReducers)({
-  users: _usersReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  auth: _authReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  admins: _adminsReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  user: _user_userReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
 
-/***/ "./src/store/reducers/usersReducer.js":
-/*!********************************************!*\
-  !*** ./src/store/reducers/usersReducer.js ***!
-  \********************************************/
+/***/ "./src/store/reducers/user/userReducer.js":
+/*!************************************************!*\
+  !*** ./src/store/reducers/user/userReducer.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   setupUser: () => (/* binding */ setupUser),
+/* harmony export */   userSlice: () => (/* binding */ userSlice)
 /* harmony export */ });
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/store/actions/index.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "@reduxjs/toolkit");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = [], action) => {
-  switch (action.type) {
-    case _actions__WEBPACK_IMPORTED_MODULE_0__.FETCH_USERS:
-      return action.payload.data;
-    default:
-      return state;
+const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'user',
+  initialState: {
+    about: {
+      name: ''
+    }
+  },
+  reducers: {
+    setupUser: (state, action) => {
+      state.about = {
+        ...state.about,
+        ...action.payload
+      };
+    }
   }
 });
+const {
+  setupUser
+} = userSlice.actions;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userSlice.reducer);
 
 /***/ }),
 
@@ -534,8 +440,8 @@ __webpack_require__.r(__webpack_exports__);
   } = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_7__.renderToPipeableStream)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(App, null), {
     bootstrapScripts: ['/client/vendor.js', '/client/client.js'],
     bootstrapScriptContent: `
-        window.__APOLLO_STATE__=${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(initialApolloState)};
-        window.INITIAL_STATE = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState())};
+        window.__APOLLO_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(initialApolloState)};
+        window.__INITIAL_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState())};
       `,
     onShellReady() {
       res.setHeader('content-type', 'text/html');
@@ -846,17 +752,6 @@ module.exports = require("dotenv");
 
 "use strict";
 module.exports = require("express");
-
-/***/ }),
-
-/***/ "js-cookie":
-/*!****************************!*\
-  !*** external "js-cookie" ***!
-  \****************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("js-cookie");
 
 /***/ }),
 

@@ -1,10 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
+import { Provider } from 'react-redux';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { routesArray } from "../../src/routes/routesData";
+import { routesArray } from "@/routes/routesData";
 import {
   ApolloProvider,
   ApolloClient,
@@ -12,9 +13,9 @@ import {
   InMemoryCache
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Cookies from 'js-cookie'
+import createStore from './createStore';
 
-const renderApp = () => {
+const renderApp = async () => {
 
   const httpLink = createHttpLink({
     uri: process.env.GRAPHQL_HOST,
@@ -51,11 +52,14 @@ const renderApp = () => {
   });
 
   const router = createBrowserRouter(routesArray);
+  const store = await createStore();
 
   ReactDOM.hydrateRoot(
     document.querySelector('#root'),
       <ApolloProvider client={client}>
-        <RouterProvider router={router} suppressHydrationWarning={true}/>
+        <Provider store={store}>
+          <RouterProvider router={router} suppressHydrationWarning={true}/>
+        </Provider>
       </ApolloProvider>
   );
 }

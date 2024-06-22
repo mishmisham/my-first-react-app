@@ -1,5 +1,5 @@
 import React from "react";
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { routesArray } from '../../src/routes/routesData.js';
 import {
   createStaticHandler,
@@ -74,8 +74,8 @@ export default async (req, res, store, contextData) => {
         '/client/client.js',
       ],
       bootstrapScriptContent: `
-        window.__APOLLO_STATE__=${serializeJavascript(initialApolloState)};
-        window.INITIAL_STATE = ${serializeJavascript(store.getState())};
+        window.__APOLLO_STATE__ = ${serializeJavascript(initialApolloState)};
+        window.__INITIAL_STATE__ = ${serializeJavascript(store.getState())};
       `,
       onShellReady() {
         res.setHeader('content-type', 'text/html');

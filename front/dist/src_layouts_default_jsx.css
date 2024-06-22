@@ -20,6 +20,19 @@ body {
   background: rgb(217, 217, 217);
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #eaeaea;
+  margin: 0 0 32px;
+}
+.header-inner {
+  max-width: 520px;
+  margin: auto;
+  display: flex;
+}
+
 button {
   border: 0;
   display: flex;
@@ -75,11 +88,8 @@ button {
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/NavMenu/navMenu.sass ***!
   \*********************************************************************************************************************************/
 .nav-menu {
-  width: 100%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  background: #eaeaea;
-  margin: 0 auto 32px;
 }
 .nav-menu_item {
   padding: 6px 32px;

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import './default.sass';
 import NavMenu from './parts/NavMenu/navMenu';
+import UserShortInfo from './parts/userShortInfo/userShortInfo';
 import NotifyComponent from '@/components/primitives/notifyComponent/notifyComponent';
 import DefaultFooter from './parts/defaultFooter/defaultFooter';
 import {GlobalLayoutContext} from './parts/GlobalLayoutContext';
@@ -47,8 +48,14 @@ const Layout = ({ children, title, description }) => {
           <meta name="description" content={description} />
         </Helmet>
 
-        <header>
-          <NavMenu />
+        <header className="header">
+          <div className="header-inner">
+
+            <NavMenu />
+
+            <UserShortInfo />
+
+          </div>
         </header>
 
         <div className="content">

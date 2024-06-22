@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 
 import { json, useLoaderData }from "react-router-dom";
-import { fetchCurrentUser } from '../store/actions/index'
 import Preloader from '@/components/primitives/Preloader/preloader';
 
 const LayoutComponent = lazy(()=>import('@/layouts/default'));
@@ -17,7 +16,7 @@ export const routesArray = [
         return json({ message: "Welcome to React Router!" });
       },
 
-      loadData: ({ dispatch }) => dispatch(fetchCurrentUser()),
+      // loadData: ({ dispatch }) => dispatch(setupUser()),
 
       Component() {
         // let data = useLoaderData();

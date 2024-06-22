@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { routesArray } from '../../../routes/routesData';
 import './navMenu.sass';
+
 const NavMenu = () => {
+
     return (
         <nav className="nav-menu">
             {routesArray.map((item, key) => {

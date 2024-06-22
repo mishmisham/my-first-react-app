@@ -78,6 +78,83 @@ const Preloader = props => {
 
 /***/ }),
 
+/***/ "./src/graphql/reAuthorizeWithJWT.js":
+/*!*******************************************!*\
+  !*** ./src/graphql/reAuthorizeWithJWT.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   reAuthorizeWithJWT: () => (/* binding */ reAuthorizeWithJWT)
+/* harmony export */ });
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! http */ "http");
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(http__WEBPACK_IMPORTED_MODULE_0__);
+
+const REFETCH_WITH_ACCESS_TOKEN = `
+    mutation ContinueWithAccessToken($input: ReAuthByTokenInput!) {
+        reAuthorize(input: $input) {
+            data {
+                name
+                id
+                email
+                refreshToken
+                accessToken
+            }
+            errors {
+                message
+                errors
+            }
+        }
+    }
+`;
+const reAuthorizeWithJWT = async (token, mode = 'accessToken', req = null, res = null) => {
+  const qlHost = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST;
+  try {
+    var _response, _response2;
+    let response = await fetch(qlHost, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: REFETCH_WITH_ACCESS_TOKEN,
+        variables: {
+          input: {
+            token,
+            mode
+          }
+        }
+      })
+    });
+    response = await response.json();
+
+    // console.log(res)
+    const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.reAuthorize) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.reAuthorize) !== null && _response2 !== void 0 && _response2.errors);
+    if (issetData && res) {
+      res.cookie('token', response.data.reAuthorize.data.accessToken, {
+        // httpOnly: true,
+        // secure: true,
+        // path: '/',
+        maxAge: 999999999999999
+      });
+
+      // console.log('------.1-res', req.headers.cookie)
+      // req.headers.cookie = 'token='+response.data.reAuthorize.data.accessToken;
+      // console.log('------.1-res', req.headers.cookie)
+    }
+    if (issetData) {
+      return response.data.reAuthorize.data;
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
+/***/ }),
+
 /***/ "./src/routes/routesData.js":
 /*!**********************************!*\
   !*** ./src/routes/routesData.js ***!
@@ -104,13 +181,17 @@ const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() =>
 const routesArray = [{
   path: "/",
   name: 'Home',
-  loader() {
+  async loader() {
+    // console.log('LOADER', res)
     return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.json)({
       message: "Welcome to React Router!"
     });
   },
-  // loadData: ({ dispatch }) => dispatch(setupUser()),
-
+  loadData: async ({
+    dispatch
+  }) => {
+    // console.log('reload', res)
+  },
   Component() {
     // let data = useLoaderData();
     // console.log(data)
@@ -208,6 +289,10 @@ const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
   },
   reducers: {
     setupUser: (state, action) => {
+      // if (('refreshToken' in action.payload) && undefined !== window) {
+      //     localStorage.setItem('refreshToken', action.payload.refreshToken);
+      // }
+
       state.about = {
         ...state.about,
         ...action.payload
@@ -219,6 +304,24 @@ const {
   setupUser
 } = userSlice.actions;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userSlice.reducer);
+
+/***/ }),
+
+/***/ "./src/utils/getCookie.js":
+/*!********************************!*\
+  !*** ./src/utils/getCookie.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCookie: () => (/* binding */ getCookie)
+/* harmony export */ });
+const getCookie = (cookiename, cookie) => {
+  const cookiestring = RegExp(cookiename + "=[^;]+").exec(cookie);
+  return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : "");
+};
 
 /***/ }),
 
@@ -241,27 +344,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_store_reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../src/store/reducers */ "./src/store/reducers/index.js");
-/* harmony import */ var _src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../src/routes/routesData.js */ "./src/routes/routesData.js");
+/* harmony import */ var _store_reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/store/reducers */ "./src/store/reducers/index.js");
+/* harmony import */ var _store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/store/reducers/user/userReducer.js */ "./src/store/reducers/user/userReducer.js");
+/* harmony import */ var _routes_routesData_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/routes/routesData.js */ "./src/routes/routesData.js");
+/* harmony import */ var _utils_getCookie_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/utils/getCookie.js */ "./src/utils/getCookie.js");
+/* harmony import */ var _graphql_reAuthorizeWithJWT_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/graphql/reAuthorizeWithJWT.js */ "./src/graphql/reAuthorizeWithJWT.js");
 
 
 
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (async req => {
-  const axiosInstance = axios__WEBPACK_IMPORTED_MODULE_3___default().create({
-    baseURL: '/',
-    headers: {
-      cookie: req.get('cookie') || ''
-    }
-  });
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (async (req, res) => {
+  // const axiosInstance = axios.create({
+  //     baseURL: '/',
+  //     headers: {
+  //         cookie: req.get('cookie') || '',
+  //     },
+  // });
+
   const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.configureStore)({
-    reducer: _src_store_reducers__WEBPACK_IMPORTED_MODULE_4__["default"],
-    middleware: () => [(0,redux_thunk__WEBPACK_IMPORTED_MODULE_1__.withExtraArgument)(axiosInstance)]
+    reducer: _store_reducers__WEBPACK_IMPORTED_MODULE_4__["default"]
+    // middleware: ()=>[withExtraArgument(axiosInstance)],
     // devTools: process.env.NODE_ENV !== 'production',
   });
-  const PromiseArray = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.matchRoutes)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_5__.routesArray, req.path);
+  console.log('HAS COOKIE', req.get('cookie'));
+  const accessToken = (0,_utils_getCookie_js__WEBPACK_IMPORTED_MODULE_7__.getCookie)('token', req.get('cookie'));
+  if (accessToken) {
+    const userData = await (0,_graphql_reAuthorizeWithJWT_js__WEBPACK_IMPORTED_MODULE_8__.reAuthorizeWithJWT)(accessToken, 'accessToken', req, res);
+    // console.log('userData', userData)
+    if (userData) {
+      store.dispatch((0,_store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_5__.setupUser)(userData));
+    }
+  }
+  const PromiseArray = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.matchRoutes)(_routes_routesData_js__WEBPACK_IMPORTED_MODULE_6__.routesArray, req.path);
   let promises = [];
   const promiseList = PromiseArray ? PromiseArray.map(({
     route
@@ -339,7 +458,7 @@ app.use(compression__WEBPACK_IMPORTED_MODULE_1___default()());
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"]("dist"));
 app.get("*", async (req, res) => {
   const context = {};
-  const store = await (0,_createStore_js__WEBPACK_IMPORTED_MODULE_7__["default"])(req);
+  const store = await (0,_createStore_js__WEBPACK_IMPORTED_MODULE_7__["default"])(req, res);
   await (0,_renderer_js__WEBPACK_IMPORTED_MODULE_6__["default"])(req, res, store, context);
   try {
     if (context.url) {
@@ -596,7 +715,8 @@ module.exports = {
       '@/store': path.resolve(__dirname, '../src/store'),
       '@/router': path.resolve(__dirname, '../src/routes'),
       '@/graphql': path.resolve(__dirname, '../src/graphql'),
-      '@/websocket': path.resolve(__dirname, '../src/websocket')
+      '@/websocket': path.resolve(__dirname, '../src/websocket'),
+      '@/utils': path.resolve(__dirname, '../src/utils')
     }
   },
   module: {
@@ -928,6 +1048,17 @@ module.exports = require("webpack-hot-middleware");
 
 "use strict";
 module.exports = require("webpack-merge");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http");
 
 /***/ }),
 

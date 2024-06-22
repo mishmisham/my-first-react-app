@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-
 import { json, useLoaderData }from "react-router-dom";
 import Preloader from '@/components/primitives/Preloader/preloader';
 
@@ -12,11 +11,14 @@ export const routesArray = [
     {
       path: "/",
       name: 'Home',
-      loader() {
+      async loader() {
+        // console.log('LOADER', res)
         return json({ message: "Welcome to React Router!" });
       },
 
-      // loadData: ({ dispatch }) => dispatch(setupUser()),
+      loadData: async ({ dispatch }) => {
+        // console.log('reload', res)
+      },
 
       Component() {
         // let data = useLoaderData();

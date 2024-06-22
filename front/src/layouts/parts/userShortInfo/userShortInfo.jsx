@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ClientOnly } from "react-client-only";
 import './userShortInfo.sass';
 
 const UserShortInfo = () => {
@@ -8,9 +9,11 @@ const UserShortInfo = () => {
     
     if (userName) {
         return (
-            <div className='user-short-info'>
-                {userName}
-            </div>
+            <ClientOnly>
+                <div className='user-short-info'>
+                    {userName}
+                </div>
+            </ClientOnly>
         )
     }
 

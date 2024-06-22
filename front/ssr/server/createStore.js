@@ -1,24 +1,34 @@
-import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { withExtraArgument } from "redux-thunk"
 import { matchRoutes } from 'react-router-dom';
 import axios from "axios";
-import reducers from "../../src/store/reducers";
-import { routesArray } from '../../src/routes/routesData.js';
-
-export default async (req) => {
-    const axiosInstance = axios.create({
-        baseURL: '/',
-        headers: {
-            cookie: req.get('cookie') || '',
-        },
-    });
+import reducers from "@/store/reducers";
+import { setupUser } from "@/store/reducers/user/userReducer.js"
+import { routesArray } from '@/routes/routesData.js';
+import { getCookie } from '@/utils/getCookie.js';
+import { reAuthorizeWithJWT } from '@/graphql/reAuthorizeWithJWT.js';
+export default async (req, res) => {
+    // const axiosInstance = axios.create({
+    //     baseURL: '/',
+    //     headers: {
+    //         cookie: req.get('cookie') || '',
+    //     },
+    // });
 
     const store = configureStore({
         reducer: reducers,
-        middleware: ()=>[withExtraArgument(axiosInstance)],
+        // middleware: ()=>[withExtraArgument(axiosInstance)],
         // devTools: process.env.NODE_ENV !== 'production',
     });
-    
+
+    const accessToken = getCookie('token', req.get('cookie'))
+    if (accessToken) {
+        const userData = await reAuthorizeWithJWT(accessToken, 'accessToken', req, res)
+        if (userData) {
+            store.dispatch(setupUser(userData))
+        }
+    }
+
     const PromiseArray = matchRoutes(routesArray, req.path);
 
     let promises = [];
@@ -39,6 +49,7 @@ export default async (req) => {
     }
 
     await Promise.all(promises);
+
 
     return store;
 };

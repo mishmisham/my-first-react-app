@@ -3,7 +3,7 @@
 
 import { userDB } from '#userDB/userDB.js';
 import jwt from 'jsonwebtoken';
-import { AuthenticationError } from 'apollo-server-express';
+// import { AuthenticationError } from 'apollo-server-express';
 import { accessGroupsByUserID } from '#userDB_fun/accessGroups/accessGroupsByUserID.js'
 import { getFullUserByID } from '#userDB_fun/user/getUserByID.js'
 
@@ -11,7 +11,7 @@ const verifyToken = async (token) => {
 
   const {
     users,
-    accessList
+    // accessList
   } = userDB.data;
 
   try {

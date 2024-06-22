@@ -181,7 +181,7 @@ const AuthSubmitButton = ({
       delete data.refreshToken;
       delete data.__typename;
       dispatch((0,_store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_1__.setupUser)(data));
-      // navigate('/');
+      navigate('/');
     });
   };
   const computedStyle = {

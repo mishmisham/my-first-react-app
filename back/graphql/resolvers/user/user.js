@@ -7,6 +7,22 @@ import { getAllUsers } from '#userDB_fun/user/getAllUsers.js';
 import { getUserByID } from '#userDB_fun/user/getUserByID.js';
 import { getUserByEmail } from '#userDB_fun/user/getUserByEmail.js';
 import { logoutUser } from '#userDB_fun/userSession/logoutUser.js';
+import { authUserByToken } from '#userDB_fun/user/authUserByToken.js';
+
+import {
+  ACCESS_TOKEN_TIMEOUT,
+  REFRESH_TOKEN_TIMEOUT
+} from '#configs/config.js'
+
+const setContextToken = (context, token, isAccess=true) => {
+  context.token = token;
+  context.response.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      path: '/',
+      maxAge: isAccess ? ACCESS_TOKEN_TIMEOUT : REFRESH_TOKEN_TIMEOUT,
+  });
+}
 
 export const userResolvers = {
   Mutation: {
@@ -21,17 +37,21 @@ export const userResolvers = {
       const result = await authUser(input);
 
       if (!result.errors) {
-        context.token = result.data.accessToken;
-        context.response.cookie('token', result.data.accessToken, {
-            httpOnly: true,
-            secure: true,
-            path: '/',
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-        });
+        setContextToken(context, result.data.accessToken);
       }
 
-      console.log(context.user)
-     
+      // console.log(context.user)
+      return result;
+    },
+
+    async reAuthorize(root, { input }, context) {
+      
+      const result = await authUserByToken(input);
+      
+      if (!result.errors) {
+        setContextToken(context, result.data.accessToken);
+      }
+
       return result;
     },
 

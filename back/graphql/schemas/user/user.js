@@ -13,10 +13,16 @@ export const userType = gql`
         name: String
     }
 
+    type LoginDataResp {
+        data: LoginResponse
+        errors: ErrorResp
+    }
+
     extend type Mutation {
         register(input: RegisterInput): RegisterResponse
         login(input: LoginInput): LoginDataResp
         logout(input: UserAuthData): Boolean
+        reAuthorize(input: ReAuthByTokenInput): LoginDataResp
     }
 
     extend type Query {
@@ -36,6 +42,11 @@ export const userType = gql`
         email: String
         password: String
     }
+    
+    input ReAuthByTokenInput {
+        token: String
+        mode: String
+    }
 
     input LoginInput {
         email: String
@@ -52,10 +63,6 @@ export const userType = gql`
         errors: [String]
     }
 
-    type LoginDataResp {
-        data: LoginResponse
-        errors: ErrorResp
-    }
 
     type LoginResponse {
         id: Int

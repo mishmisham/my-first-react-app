@@ -43,7 +43,7 @@ app.use(express.static("dist"));
 app.get("*", async (req, res) => {
 
   const context = {};
-  const store = await createStore(req);
+  const store = await createStore(req, res);
   await renderer(req, res, store, context);
 
   try {

@@ -1,4 +1,3 @@
-import { userDB } from '#userDB/userDB.js';
 import { initUserSession } from '#userDB_fun/userSession/initUserSession.js';
 import { checkAuthErrors } from './validation/checkAuthErrors.js';
 

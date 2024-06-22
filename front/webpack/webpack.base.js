@@ -21,6 +21,7 @@ module.exports = {
       '@/router': path.resolve(__dirname, '../src/routes'),
       '@/graphql': path.resolve(__dirname, '../src/graphql'),
       '@/websocket': path.resolve(__dirname, '../src/websocket'),
+      '@/utils': path.resolve(__dirname, '../src/utils'),
     },
   },
   module: {

@@ -6,7 +6,7 @@ const {
 export const logoutUser = async (id) => {
     await users.session.destroy({
         where: {
-            user_id: id
+            user_id: id,
         }
     });
 }

@@ -17,8 +17,6 @@ const REFRESH_JWT_TOKEN = `
 `;
 
 export const refreshJWT = async () => {
-    console.log('refresh token')
-
     const qlHost = process.env.GRAPHQL_HOST;
 
     try {

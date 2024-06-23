@@ -3,6 +3,89 @@ exports.id = "src_layouts_default_jsx";
 exports.ids = ["src_layouts_default_jsx"];
 exports.modules = {
 
+/***/ "./src/components/combined/logout/logoutButton.jsx":
+/*!*********************************************************!*\
+  !*** ./src/components/combined/logout/logoutButton.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "@apollo/client");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/layouts/parts/GlobalLayoutContext */ "./src/layouts/parts/GlobalLayoutContext.js");
+/* harmony import */ var _store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/store/reducers/user/userReducer.js */ "./src/store/reducers/user/userReducer.js");
+let _ = t => t,
+  _t;
+
+
+
+
+
+
+
+const LOGOUT_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.gql)(_t || (_t = _`
+    mutation LogoutAction($input: LoginInput!) {
+        logout(input: $input) {
+            result
+        }
+    }
+`));
+const LogoutButton = () => {
+  const userID = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.user.about.id);
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_5__.GlobalLayoutContext);
+  const [logout] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation)(LOGOUT_ACTION, {
+    onError: ({
+      operation,
+      response,
+      graphQLErrors,
+      networkError
+    }) => {
+      layoutContext.showNotify({
+        text: 'graphql error' + graphQLErrors.join(' ')
+      });
+    }
+  });
+  const letsLogout = () => {
+    try {
+      logout({
+        variables: {
+          input: {
+            id: userID
+          }
+        }
+      }).then(res => {
+        dispatch((0,_store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_6__.logoutUser)());
+        localStorage.removeItem('refreshToken');
+        js_cookie__WEBPACK_IMPORTED_MODULE_3___default().set('token', '');
+        navigate('/');
+      });
+    } catch (err) {
+      layoutContext.showNotify({
+        text: 'graphql error' + JSON.stringify(err)
+      });
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: letsLogout
+  }, "Log out");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LogoutButton);
+
+/***/ }),
+
 /***/ "./src/components/primitives/notifyComponent/notifyComponent.jsx":
 /*!***********************************************************************!*\
   !*** ./src/components/primitives/notifyComponent/notifyComponent.jsx ***!
@@ -200,13 +283,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const NavMenu = () => {
+  const userID = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.user.about.id);
+  const filteredRoutes = _routes_routesData__WEBPACK_IMPORTED_MODULE_3__.routesArray.filter(route => {
+    if (userID > 0) {
+      return route.path !== '/auth';
+    }
+    return true;
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
     className: "nav-menu"
-  }, _routes_routesData__WEBPACK_IMPORTED_MODULE_3__.routesArray.map((item, key) => {
+  }, filteredRoutes.map((item, key) => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
       className: "nav-menu_item",
       to: item.path,
-      key: key
+      key: item.path
     }, item.name);
   }));
 };
@@ -254,7 +344,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-client-only */ "react-client-only");
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_client_only__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _userShortInfo_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userShortInfo.sass */ "./src/layouts/parts/userShortInfo/userShortInfo.sass");
+/* harmony import */ var _components_combined_logout_logoutButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/combined/logout/logoutButton */ "./src/components/combined/logout/logoutButton.jsx");
+/* harmony import */ var _userShortInfo_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./userShortInfo.sass */ "./src/layouts/parts/userShortInfo/userShortInfo.sass");
+
 
 
 
@@ -264,7 +356,7 @@ const UserShortInfo = () => {
   if (userName) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_2__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "user-short-info"
-    }, userName));
+    }, userName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_combined_logout_logoutButton__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   }
   return null;
 };

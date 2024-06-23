@@ -43,7 +43,7 @@ const verifyToken = async (token) => {
     const user = await getFullUserByID(data.id);
     const { rows } = await accessGroupsByUserID(data.id)
     return {
-      user,
+      about: user.dataValues,
       access: rows
     }
   } catch (error) {
@@ -54,7 +54,9 @@ const verifyToken = async (token) => {
 
 export const context = async ({ req, res }) => {
   const { token } = req.cookies;
+ 
   const user = await verifyToken(token);
+
   return { 
     user,
     request: req,

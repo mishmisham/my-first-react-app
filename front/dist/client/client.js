@@ -192,7 +192,6 @@ const REFRESH_JWT_TOKEN = `
     }
 `;
 const refreshJWT = async () => {
-  console.log('refresh token');
   const qlHost = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST;
   try {
     var _response, _response2, _response3, _response4;
@@ -317,7 +316,7 @@ const routesArray = [{
 }, {
   path: '/auth',
   name: 'Auth',
-  // это server side функция 
+  // это server side мидлвара
   // (редиректим на главную если авторизован)
   loadData: async (store, req, res) => {
     var _store$getState$user$;
@@ -329,6 +328,7 @@ const routesArray = [{
     // редирект авторизованным если переходят по внутреннему роутеру
     const userID = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(state => state.user.about.id);
     try {
+      // useNavigate почему то не срабатывает
       if (userID > 0 && window) {
         window.location.replace('/');
       }
@@ -377,6 +377,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   logoutUser: () => (/* binding */ logoutUser),
 /* harmony export */   setupUser: () => (/* binding */ setupUser),
 /* harmony export */   userSlice: () => (/* binding */ userSlice)
 /* harmony export */ });
@@ -395,11 +396,17 @@ const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
         ...state.about,
         ...action.payload
       };
+    },
+    logoutUser: state => {
+      state.about = {
+        name: ''
+      };
     }
   }
 });
 const {
-  setupUser
+  setupUser,
+  logoutUser
 } = userSlice.actions;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userSlice.reducer);
 

@@ -1,8 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { json } from "react-router-dom";
 import { useSelector } from 'react-redux';
-
-
 import Preloader from '@/components/primitives/Preloader/preloader';
 
 const LayoutComponent = lazy(()=>import('@/layouts/default'));
@@ -58,11 +56,12 @@ export const routesArray = [
             </LayoutComponent>
         },
     },
-    
+
     {
       path: '/auth',
       name: 'Auth',
-      // это server side функция 
+
+      // это server side мидлвара
       // (редиректим на главную если авторизован)
       loadData: async (store, req, res) => {
         if (store.getState().user.about?.id > 0) {
@@ -74,7 +73,7 @@ export const routesArray = [
         // редирект авторизованным если переходят по внутреннему роутеру
         const userID = useSelector((state) => state.user.about.id);
         try { 
-         
+         // useNavigate почему то не срабатывает
           if (userID > 0 && window) {
             window.location.replace('/')
           }
@@ -82,7 +81,6 @@ export const routesArray = [
           console.log("Oops, `window` is not defined")
         }
         
-
         return <LayoutComponent title="Login">
             <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
               <LoginPage />

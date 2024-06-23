@@ -68,9 +68,20 @@ export const userResolvers = {
     },
 
     async logout (root, { input }, context) { 
-      const result = await logoutUser(input.id);
-      // context.response.cookie('token', '');
-      return result;
+
+      if (!context.user || parseInt(context.user.about.id) !== parseInt(input.id)) {
+        return {
+          result: false
+        };
+      }
+
+      await logoutUser(input.id);
+      context.response.cookie('token', '');
+
+
+      return {
+          result: true
+      };
     }
   },
 

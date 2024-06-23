@@ -18,10 +18,18 @@ export const userType = gql`
         errors: ErrorResp
     }
 
+    type LogoutResp {
+        result: Boolean
+    }
+
+    input LogoutInput {
+        id: ID!
+    }
+
     extend type Mutation {
         register(input: RegisterInput): RegisterResponse
         login(input: LoginInput): LoginDataResp
-        logout(input: UserAuthData): Boolean
+        logout(input: LogoutInput): LogoutResp
         reAuthorize(input: ReAuthByTokenInput): LoginDataResp
         refreshTokens(input: RefreshTokensInput): RefreshTokensResponse
     }

@@ -177,14 +177,6 @@ const RegisterSubmitButton = ({
       }
     }
   };
-
-  // if (error || data?.errors.length) {
-  //     // console.log(data?.errors[0].message)
-  //     layoutContext.showNotify({
-  //         text: 'error || data'
-  //     })
-  // }
-
   const computedStyle = {
     marginTop: '12px'
   };

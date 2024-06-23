@@ -132,8 +132,9 @@ let _ = t => t,
 const REGISTER_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql)(_t || (_t = _`
     mutation RegisterAction($input: RegisterInput!) {
         register(input: $input) {
-            name
-            email
+            data {
+                name
+            }
         }
     }
 `));
@@ -141,7 +142,7 @@ const RegisterSubmitButton = ({
   registerData,
   clearFormValues
 }) => {
-  const [login, {
+  const [register, {
     data,
     loading,
     error
@@ -154,8 +155,9 @@ const RegisterSubmitButton = ({
       password,
       name
     } = registerData;
+    console.log(email, password, name);
     try {
-      await login({
+      await register({
         variables: {
           input: {
             name: name.value,
@@ -163,18 +165,24 @@ const RegisterSubmitButton = ({
             password: password.value
           }
         }
+      }).then(response => {
+        const {
+          errors,
+          data
+        } = response.data.register;
+        if (errors) {
+          layoutContext.showNotify({
+            text: errors.message
+          });
+          return;
+        }
+        clearFormValues();
+        loginFormsContext.changeAuthMode(true);
       });
     } catch (err) {
       layoutContext.showNotify({
         text: 'error || data'
       });
-    } finally {
-      var _data$errors;
-      console.log(data);
-      if (!error && !(data !== null && data !== void 0 && (_data$errors = data.errors) !== null && _data$errors !== void 0 && _data$errors.length) && !loading) {
-        clearFormValues();
-        loginFormsContext.changeAuthMode(true);
-      }
     }
   };
   const computedStyle = {

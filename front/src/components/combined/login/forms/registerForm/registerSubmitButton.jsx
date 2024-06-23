@@ -10,24 +10,25 @@ import {
 const REGISTER_ACTION = gql`
     mutation RegisterAction($input: RegisterInput!) {
         register(input: $input) {
-            name
-            email
+            data {
+                name
+            }
         }
     }
 `;
 
 const RegisterSubmitButton = ({registerData, clearFormValues}) => {
 
-    const [login, { data, loading, error }] = useMutation(REGISTER_ACTION);
+    const [register, { data, loading, error }] = useMutation(REGISTER_ACTION);
 
     const loginFormsContext = useContext(LoginFormsContext);
     const layoutContext = useContext(GlobalLayoutContext);
 
     const submit = async () => {
         const { email, password, name } = registerData;
-
+        console.log(email, password, name)
         try {
-            await login({
+            await register({
                 variables: {
                     input: {
                         name: name.value,
@@ -35,17 +36,23 @@ const RegisterSubmitButton = ({registerData, clearFormValues}) => {
                         password: password.value
                     }
                 } 
+            }).then(response=>{
+                const { errors, data } = response.data.register;
+
+                if (errors) {
+                    layoutContext.showNotify({
+                        text: errors.message
+                    });
+                    return;
+                }
+                clearFormValues();
+                loginFormsContext.changeAuthMode(true);
+
             });
         } catch (err) {
             layoutContext.showNotify({
                 text: 'error || data'
             })
-        } finally {
-            console.log(data)
-            if (!error && !data?.errors?.length && !loading) {
-                clearFormValues();
-                loginFormsContext.changeAuthMode(true);
-            }
         }
     }
 

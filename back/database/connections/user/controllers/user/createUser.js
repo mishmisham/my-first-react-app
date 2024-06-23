@@ -10,8 +10,8 @@ export const createUser = async (input) => {
     const errorList = await validateRegisterUser(input);
     if (errorList.length) {
         return {
-            error: {
-                message: errorList.join(', '),
+            errors: {
+                message: errorList.join(',\n'),
                 errors: errorList
             }
         }
@@ -30,9 +30,11 @@ export const createUser = async (input) => {
         email,
         password: encryptedPass,
     });
-    
+
     return {
-        name: result.name,
-        email: result.email
+        data: {
+            name: result.name,
+            email: result.email
+        }
     };
 }

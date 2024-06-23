@@ -11,7 +11,6 @@ const verifyToken = async (token) => {
 
   const {
     users,
-    // accessList
   } = userDB.data;
 
   try {

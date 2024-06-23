@@ -2,13 +2,11 @@ import React, { lazy, Suspense } from "react";
 import { json } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import Preloader from '@/components/primitives/Preloader/preloader';
+import PageFirst from '@/pages/PageFirst';
 
 const LayoutComponent = lazy(()=>import('@/layouts/default'));
-const HomePage = lazy(()=>import('@/pages/PageFirst'));
 const SecondPage = lazy(()=>import('@/pages/PageSecond'));
 const LoginPage = lazy(()=>import('@/pages/AuthPage/AuthPage'));
-
-
 
 export const routesArray = [
     {
@@ -31,9 +29,7 @@ export const routesArray = [
                 title="Homepage"
                 description='home page seo description'
               >
-              <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
-                <HomePage />
-              </Suspense>
+                <PageFirst />
             </LayoutComponent>;
       },
     },

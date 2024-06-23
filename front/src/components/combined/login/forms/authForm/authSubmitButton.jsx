@@ -32,6 +32,8 @@ const AuthSubmitButton = ({authData}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const layoutContext = useContext(GlobalLayoutContext);
+
     const [login] = useMutation(AUTH_ACTION, {
         onError: ({ operation, response, graphQLErrors, networkError }) => {
             layoutContext.showNotify({
@@ -39,8 +41,7 @@ const AuthSubmitButton = ({authData}) => {
             })
         }
     });
-    const layoutContext = useContext(GlobalLayoutContext);
-
+    
     const submit = async () => {
         const { email, password } = authData;
         login({
@@ -66,9 +67,7 @@ const AuthSubmitButton = ({authData}) => {
             delete data.__typename;
 
             dispatch(setupUser(data));
-
             runJWTRefresher();
-
             navigate('/');
         });
     }

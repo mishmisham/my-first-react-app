@@ -143,6 +143,7 @@ const AuthSubmitButton = ({
 }) => {
   const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useDispatch)();
+  const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__.GlobalLayoutContext);
   const [login] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_7__.useMutation)(AUTH_ACTION, {
     onError: ({
       operation,
@@ -155,7 +156,6 @@ const AuthSubmitButton = ({
       });
     }
   });
-  const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__.GlobalLayoutContext);
   const submit = async () => {
     const {
       email,

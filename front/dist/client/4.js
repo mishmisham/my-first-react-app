@@ -30,7 +30,7 @@ let _ = t => t,
 
 
 const LOGOUT_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.gql)(_t || (_t = _`
-    mutation LogoutAction($input: LoginInput!) {
+    mutation LogoutAction($input: LogoutInput!) {
         logout(input: $input) {
             result
         }
@@ -68,6 +68,7 @@ const LogoutButton = () => {
         navigate('/');
       });
     } catch (err) {
+      console.log(err);
       layoutContext.showNotify({
         text: 'graphql error' + JSON.stringify(err)
       });

@@ -39,6 +39,7 @@ export const routesArray = [
             </LayoutComponent>;
       },
     },
+
     {
         path: "/second",
         name: 'Second page',
@@ -57,6 +58,7 @@ export const routesArray = [
             </LayoutComponent>
         },
     },
+    
     {
       path: '/auth',
       name: 'Auth',

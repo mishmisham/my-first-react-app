@@ -16,6 +16,7 @@ export const authUserByToken = async (input) => {
     
     const userSession = await users.session.findOne({ where: checkRule });
 
+    console.log('userSession', userSession)
     if (!userSession) {
         return null;
     }

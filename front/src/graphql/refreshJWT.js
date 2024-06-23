@@ -43,15 +43,19 @@ export const refreshJWT = async () => {
 
         response = await response.json();
 
-        const issetData = response?.data?.refreshTokens?.data && !response.errors && !response?.data?.refreshTokens?.errors;
-
+        const issetData = response?.data?.refreshTokens?.data
+            && !response.errors 
+            && !response?.data?.refreshTokens?.errors
+            && response?.data?.refreshTokens?.data.refreshToken
+            && response?.data?.refreshTokens?.data.accessToken;
+            
         if (issetData) {
-            // Cookies.set('token', response.data.refreshTokens.data.accessToken)
+            Cookies.set('token', response.data.refreshTokens.data.accessToken)
             localStorage.setItem('refreshToken', response.data.refreshTokens.data.refreshToken)
             return response.data.refreshTokens.data;
         } else {
-            localStorage.removeItem('refreshToken');
-            Cookies.set('token', '');
+            // localStorage.removeItem('refreshToken');
+            // Cookies.set('token', '');
             // window.location.href = '/';
         }
 

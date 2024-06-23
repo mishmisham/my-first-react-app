@@ -35,7 +35,7 @@ export default async (req, res) => {
     let promises = [];
 
     const promiseList = PromiseArray ? PromiseArray.map(({ route }) => {
-        return route && route?.loadData ? route?.loadData(store) : null;
+        return route && route?.loadData ? route?.loadData(store, req, res) : null;
     }) : null;
     
     if (promiseList) {
@@ -50,7 +50,6 @@ export default async (req, res) => {
     }
 
     await Promise.all(promises);
-
 
     return store;
 };

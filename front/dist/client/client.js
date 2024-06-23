@@ -174,6 +174,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   runJWTRefresher: () => (/* binding */ runJWTRefresher)
 /* harmony export */ });
 /* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/config.js */ "./src/config/config.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+
 
 const REFRESH_JWT_TOKEN = `
     mutation RefreshJWTToken($input: RefreshTokensInput!) {
@@ -193,7 +195,7 @@ const refreshJWT = async () => {
   console.log('refresh token');
   const qlHost = {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST;
   try {
-    var _response, _response2;
+    var _response, _response2, _response3, _response4;
     const refresh_token = localStorage.getItem('refreshToken');
     if (!refresh_token) {
       return;
@@ -213,14 +215,15 @@ const refreshJWT = async () => {
       })
     });
     response = await response.json();
-    const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.reAuthorize) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.reAuthorize) !== null && _response2 !== void 0 && _response2.errors);
-    if (issetData && res) {
-      res.cookie('token', response.data.refreshTokens.data.accessToken, {
-        maxAge: _config_config_js__WEBPACK_IMPORTED_MODULE_0__.ACCESS_TOKEN_TIMEOUT
-      });
-    }
+    const issetData = ((_response = response) === null || _response === void 0 || (_response = _response.data) === null || _response === void 0 || (_response = _response.refreshTokens) === null || _response === void 0 ? void 0 : _response.data) && !response.errors && !((_response2 = response) !== null && _response2 !== void 0 && (_response2 = _response2.data) !== null && _response2 !== void 0 && (_response2 = _response2.refreshTokens) !== null && _response2 !== void 0 && _response2.errors) && ((_response3 = response) === null || _response3 === void 0 || (_response3 = _response3.data) === null || _response3 === void 0 || (_response3 = _response3.refreshTokens) === null || _response3 === void 0 ? void 0 : _response3.data.refreshToken) && ((_response4 = response) === null || _response4 === void 0 || (_response4 = _response4.data) === null || _response4 === void 0 || (_response4 = _response4.refreshTokens) === null || _response4 === void 0 ? void 0 : _response4.data.accessToken);
     if (issetData) {
+      js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('token', response.data.refreshTokens.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshTokens.data.refreshToken);
       return response.data.refreshTokens.data;
+    } else {
+      // localStorage.removeItem('refreshToken');
+      // Cookies.set('token', '');
+      // window.location.href = '/';
     }
     return null;
   } catch (err) {
@@ -254,7 +257,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/@remix-run/router/dist/router.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
 /* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
+
 
 
 
@@ -312,7 +317,24 @@ const routesArray = [{
 }, {
   path: '/auth',
   name: 'Auth',
+  // это server side функция 
+  // (редиректим на главную если авторизован)
+  loadData: async (store, req, res) => {
+    var _store$getState$user$;
+    if (((_store$getState$user$ = store.getState().user.about) === null || _store$getState$user$ === void 0 ? void 0 : _store$getState$user$.id) > 0) {
+      res.redirect(301, '/');
+    }
+  },
   Component() {
+    // редирект авторизованным если переходят по внутреннему роутеру
+    const userID = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(state => state.user.about.id);
+    try {
+      if (userID > 0 && window) {
+        window.location.replace('/');
+      }
+    } catch (err) {
+      console.log("Oops, `window` is not defined");
+    }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
       title: "Login"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
@@ -470,7 +492,7 @@ const onBeforeInitStoreMiddleware = async () => {
     isAuthorized = true;
   }
   if ('accessToken' in currentState.user.about) {
-    // Cookies.set('token', currentState.user.about.accessToken)
+    js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].set('token', currentState.user.about.accessToken);
     delete window.__INITIAL_STATE__.user.about.accessToken;
     isAuthorized = true;
   }

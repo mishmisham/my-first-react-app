@@ -34,7 +34,12 @@ export default async (req, res, store, contextData) => {
   const context = await handler.query(fetchRequest);
   const router = createStaticRouter(
     handler.dataRoutes,
-    context
+    context,
+    {
+      future: {
+        v7_partialHydration: true,
+      }
+    },
   );
 
   const initialApolloState = apolloClient.extract();

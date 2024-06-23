@@ -1,11 +1,16 @@
 import React, { lazy, Suspense } from "react";
-import { json, useLoaderData }from "react-router-dom";
+import { json } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
+
 import Preloader from '@/components/primitives/Preloader/preloader';
 
 const LayoutComponent = lazy(()=>import('@/layouts/default'));
 const HomePage = lazy(()=>import('@/pages/PageFirst'));
 const SecondPage = lazy(()=>import('@/pages/PageSecond'));
 const LoginPage = lazy(()=>import('@/pages/AuthPage/AuthPage'));
+
+
 
 export const routesArray = [
     {
@@ -55,7 +60,27 @@ export const routesArray = [
     {
       path: '/auth',
       name: 'Auth',
+      // это server side функция 
+      // (редиректим на главную если авторизован)
+      loadData: async (store, req, res) => {
+        if (store.getState().user.about?.id > 0) {
+          res.redirect(301, '/');
+        }
+      },
+
       Component() {
+        // редирект авторизованным если переходят по внутреннему роутеру
+        const userID = useSelector((state) => state.user.about.id);
+        try { 
+         
+          if (userID > 0 && window) {
+            window.location.replace('/')
+          }
+        } catch (err) {
+          console.log("Oops, `window` is not defined")
+        }
+        
+
         return <LayoutComponent title="Login">
             <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
               <LoginPage />

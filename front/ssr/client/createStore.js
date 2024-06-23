@@ -18,7 +18,7 @@ const onBeforeInitStoreMiddleware = async () => {
         isAuthorized = true;
     }
     if ('accessToken' in currentState.user.about) {
-        // Cookies.set('token', currentState.user.about.accessToken)
+        Cookies.set('token', currentState.user.about.accessToken)
         delete window.__INITIAL_STATE__.user.about.accessToken;
         isAuthorized = true;
     }

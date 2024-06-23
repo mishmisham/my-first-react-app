@@ -18,9 +18,9 @@ import {
 const setContextToken = (context, token, isAccess=true) => {
   context.token = token;
   context.response.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      path: '/',
+      // httpOnly: true,
+      // secure: true,
+      // path: '/',
       maxAge: isAccess ? ACCESS_TOKEN_TIMEOUT : REFRESH_TOKEN_TIMEOUT,
   });
 }

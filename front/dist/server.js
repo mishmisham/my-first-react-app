@@ -179,7 +179,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
+
 
 
 
@@ -210,7 +213,7 @@ const routesArray = [{
       description: "home page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(HomePage, null)));
@@ -229,7 +232,7 @@ const routesArray = [{
       description: "other page seo description"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SecondPage, null)));
@@ -237,12 +240,29 @@ const routesArray = [{
 }, {
   path: '/auth',
   name: 'Auth',
+  // это server side функция 
+  // (редиректим на главную если авторизован)
+  loadData: async (store, req, res) => {
+    var _store$getState$user$;
+    if (((_store$getState$user$ = store.getState().user.about) === null || _store$getState$user$ === void 0 ? void 0 : _store$getState$user$.id) > 0) {
+      res.redirect(301, '/');
+    }
+  },
   Component() {
+    // редирект авторизованным если переходят по внутреннему роутеру
+    const userID = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.user.about.id);
+    try {
+      if (userID > 0 && window) {
+        window.location.replace('/');
+      }
+    } catch (err) {
+      console.log("Oops, `window` is not defined");
+    }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
       title: "Login"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       isDeferred: true,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LoginPage, null)));
@@ -390,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
   const promiseList = PromiseArray ? PromiseArray.map(({
     route
   }) => {
-    return route && route !== null && route !== void 0 && route.loadData ? route === null || route === void 0 ? void 0 : route.loadData(store) : null;
+    return route && route !== null && route !== void 0 && route.loadData ? route === null || route === void 0 ? void 0 : route.loadData(store, req, res) : null;
   }) : null;
   if (promiseList) {
     promises = [...promises, promiseList.map(promise => {
@@ -531,7 +551,11 @@ __webpack_require__.r(__webpack_exports__);
   const handler = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticHandler)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_2__.routesArray);
   const fetchRequest = (0,_request__WEBPACK_IMPORTED_MODULE_6__.createFetchRequest)(req, res);
   const context = await handler.query(fetchRequest);
-  const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticRouter)(handler.dataRoutes, context);
+  const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticRouter)(handler.dataRoutes, context, {
+    future: {
+      v7_partialHydration: true
+    }
+  });
   const initialApolloState = apolloClient.extract();
   const App = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("html", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("head", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meta", {
@@ -878,6 +902,17 @@ module.exports = require("dotenv");
 
 "use strict";
 module.exports = require("express");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("js-cookie");
 
 /***/ }),
 

@@ -1247,6 +1247,17 @@ module.exports = require("three");
 
 /***/ }),
 
+/***/ "three/addons/loaders/OBJLoader.js":
+/*!****************************************************!*\
+  !*** external "three/addons/loaders/OBJLoader.js" ***!
+  \****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three/addons/loaders/OBJLoader.js");
+
+/***/ }),
+
 /***/ "webpack":
 /*!**************************!*\
   !*** external "webpack" ***!

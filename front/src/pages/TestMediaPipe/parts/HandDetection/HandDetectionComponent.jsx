@@ -69,7 +69,7 @@ const HandDetectionComponent = (props) => {
         if (res.landmarks) {
 
             const color = "#FF0000";
-            const lineWidth = 20;
+            const lineWidth = 5;
 
             const canvasXPersent = webcam.current.videoWidth
             const canvasYPersent = webcam.current.videoHeight
@@ -94,7 +94,7 @@ const HandDetectionComponent = (props) => {
                     canvasCtx.strokeStyle = color;
                     canvasCtx.lineWidth = lineWidth;
                     canvasCtx.moveTo(realX,realY);
-                    canvasCtx.lineTo(realX+2, realY+2);
+                    canvasCtx.lineTo(realX+4, realY+4);
                     canvasCtx.stroke();
                 // }
                

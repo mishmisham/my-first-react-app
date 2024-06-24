@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const TestMediaPipe = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestMediaPipe);
 
@@ -98,7 +98,7 @@ const HandDetectionComponent = props => {
     canvasCtx.clearRect(0, 0, canvas.current.width, canvas.current.height);
     if (res.landmarks) {
       const color = "#FF0000";
-      const lineWidth = 20;
+      const lineWidth = 5;
       const canvasXPersent = webcam.current.videoWidth;
       const canvasYPersent = webcam.current.videoHeight;
       for (const landmarks of res.landmarks) {
@@ -124,7 +124,7 @@ const HandDetectionComponent = props => {
           canvasCtx.strokeStyle = color;
           canvasCtx.lineWidth = lineWidth;
           canvasCtx.moveTo(realX, realY);
-          canvasCtx.lineTo(realX + 2, realY + 2);
+          canvasCtx.lineTo(realX + 4, realY + 4);
           canvasCtx.stroke();
           // }
         });
@@ -192,7 +192,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var three_addons_loaders_OBJLoader_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/addons/loaders/OBJLoader.js */ "./node_modules/three/examples/jsm/loaders/OBJLoader.js");
 /* harmony import */ var _testWebGLComponent_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./testWebGLComponent.sass */ "./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass");
+
 
 
 
@@ -200,28 +202,45 @@ __webpack_require__.r(__webpack_exports__);
 const TestWebGLComponent = props => {
   const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const canvas = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const canvasWrapper = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const init = async () => {
-    const width = window.innerWidth,
-      height = window.innerHeight;
+    const {
+      width,
+      height
+    } = canvasWrapper.current.getBoundingClientRect();
     const camera = new three__WEBPACK_IMPORTED_MODULE_3__.PerspectiveCamera(70, width / height, 0.01, 10);
     camera.position.z = 1;
     const scene = new three__WEBPACK_IMPORTED_MODULE_3__.Scene();
-    const geometry = new three__WEBPACK_IMPORTED_MODULE_3__.BoxGeometry(0.2, 0.2, 0.2);
+    // текстура
     const material = new three__WEBPACK_IMPORTED_MODULE_3__.MeshNormalMaterial();
-    const mesh = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(geometry, material);
-    scene.add(mesh);
+    const objLoader = new three_addons_loaders_OBJLoader_js__WEBPACK_IMPORTED_MODULE_4__.OBJLoader();
+    let stoneOne = null;
+    // load model
+    objLoader.load('./client/stone-models/1.obj', object => {
+      // add texture
+      object.traverse(function (node) {
+        if (node.isMesh) node.material = material;
+      });
+
+      // x, y, z координаты
+      object.position.set(0, 0, -2.15);
+      stoneOne = object;
+      scene.add(stoneOne);
+      // console.log(stoneOne)
+    });
     const renderer = new three__WEBPACK_IMPORTED_MODULE_3__.WebGLRenderer({
-      antialias: true
+      antialias: true,
+      canvas: canvas.current
     });
     renderer.setSize(width, height);
     renderer.setAnimationLoop(animate);
-    document.body.appendChild(renderer.domElement);
-    console.log(renderer.domElement);
-    // animation
 
+    // animation
     function animate(time) {
-      mesh.rotation.x = time / 2000;
-      mesh.rotation.y = time / 1000;
+      if (stoneOne) {
+        stoneOne.rotation.x = time / 5000;
+        stoneOne.rotation.y = time / 1000;
+      }
       renderer.render(scene, camera);
     }
   };
@@ -235,7 +254,8 @@ const TestWebGLComponent = props => {
     }, 100);
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "test-web-gl-component"
+    className: "test-web-gl-component",
+    ref: canvasWrapper
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
     ref: canvas
   })));

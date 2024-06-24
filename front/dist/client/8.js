@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[8],{
 
-/***/ "./src/pages/TestMediaPipe/TestMediaPipe.jsx":
-/*!***************************************************!*\
-  !*** ./src/pages/TestMediaPipe/TestMediaPipe.jsx ***!
-  \***************************************************/
+/***/ "./src/components/combined/login/LoginForms.jsx":
+/*!******************************************************!*\
+  !*** ./src/components/combined/login/LoginForms.jsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,172 +13,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/HandDetection/HandDetectionComponent */ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx");
+/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
+/* harmony import */ var _loginFormsContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loginFormsContext */ "./src/components/combined/login/loginFormsContext.js");
+/* harmony import */ var _loginForms_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loginForms.sass */ "./src/components/combined/login/loginForms.sass");
 
 
 
-const TestMediaPipe = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+
+const LoginForms = () => {
+  const [authMode, setAuthMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const changeAuthMode = (mode = undefined) => {
+    const newMode = mode !== undefined ? mode : !authMode;
+    setAuthMode(newMode);
+  };
+  const contextData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    authMode,
+    changeAuthMode
+  }), []);
+  const CurrentForm = authMode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/authForm/authForm */ "./src/components/combined/login/forms/authForm/authForm.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/registerForm/registerForm */ "./src/components/combined/login/forms/registerForm/registerForm.jsx")));
+  const buttonText = authMode ? 'Create account' : 'Go to login';
+  const titleText = authMode ? 'Please login' : 'Registration';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "login-forms"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, titleText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      height: "300px"
+    })
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_loginFormsContext__WEBPACK_IMPORTED_MODULE_2__.LoginFormsContext.Provider, {
+    value: contextData
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CurrentForm, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "login-forms_mode-btn btn",
+    onClick: e => changeAuthMode()
+  }, buttonText));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestMediaPipe);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginForms);
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx":
-/*!********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx ***!
-  \********************************************************************************/
+/***/ "./src/components/combined/login/loginFormsContext.js":
+/*!************************************************************!*\
+  !*** ./src/components/combined/login/loginFormsContext.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   LoginFormsContext: () => (/* binding */ LoginFormsContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _handDetectionComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handDetectionComponent.sass */ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass");
-/* harmony import */ var _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mediapipe/tasks-vision */ "./node_modules/@mediapipe/tasks-vision/vision_bundle.mjs");
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
 
-
-
-
-
-const HandDetectionComponent = props => {
-  const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [handLandmarker, setHandLandmarker] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
-  const [lastVideoTime, setLastVideoTime] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
-  const [webcamRunning, setWebcamRunning] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  let runningMode = 'VIDEO';
-  const webcam = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const canvas = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const createHandLandmarker = async () => {
-    const vision = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.FilesetResolver.forVisionTasks("./client/wasm");
-    const handLandmarkerLoad = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.HandLandmarker.createFromOptions(vision, {
-      baseOptions: {
-        // копируется при сборке в dist/client
-        modelAssetPath: "./client/hand_landmarker.task",
-        delegate: "GPU"
-      },
-      runningMode: "VIDEO",
-      numHands: 2
-    });
-    setHandLandmarker(handLandmarkerLoad);
-  };
-  async function predictWebcam() {
-    const canvasCtx = canvas.current.getContext("2d");
-    canvas.current.style.width = webcam.current.videoWidth;
-    ;
-    canvas.current.style.height = webcam.current.videoHeight;
-    canvas.current.width = webcam.current.videoWidth;
-    canvas.current.height = webcam.current.videoHeight;
-    if (runningMode === "IMAGE") {
-      runningMode = "VIDEO";
-      await handLandmarker.setOptions({
-        runningMode: "VIDEO"
-      });
-    }
-    let startTimeMs = performance.now();
-    let res = {};
-    if (lastVideoTime !== webcam.current.currentTime) {
-      setLastVideoTime(webcam.current.currentTime);
-      res = handLandmarker.detectForVideo(webcam.current, startTimeMs);
-    }
-    canvasCtx.save();
-
-    // if (res.landmarks.length) {
-    //     console.log(res)
-    //     console.log(HAND_CONNECTIONS)
-    // }
-
-    canvasCtx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-    if (res.landmarks) {
-      const color = "#FF0000";
-      const lineWidth = 20;
-      const canvasXPersent = webcam.current.videoWidth;
-      const canvasYPersent = webcam.current.videoHeight;
-      for (const landmarks of res.landmarks) {
-        // drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-        //   color: "#00FF00",
-        //   lineWidth: 5
-        // });
-        // drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
-
-        landmarks.forEach(coords => {
-          const {
-            x,
-            y,
-            z,
-            visibility
-          } = coords;
-
-          // minVisibility = 0
-          // if (visibility > minVisibility) {
-          const realX = x * canvasXPersent;
-          const realY = y * canvasYPersent;
-          canvasCtx.beginPath();
-          canvasCtx.strokeStyle = color;
-          canvasCtx.lineWidth = lineWidth;
-          canvasCtx.moveTo(realX, realY);
-          canvasCtx.lineTo(realX + 2, realY + 2);
-          canvasCtx.stroke();
-          // }
-        });
-      }
-    }
-    canvasCtx.restore();
-    if (webcamRunning === true) {
-      window.requestAnimationFrame(predictWebcam);
-    }
-  }
-  const enableCam = event => {
-    if (!handLandmarker) {
-      console.log("Wait! objectDetector not loaded yet.");
-      return;
-    }
-    setWebcamRunning(true);
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    navigator.mediaDevices.getUserMedia({
-      video: true
-    }, predictWebcam, e => console.log(e)).then(stream => {
-      webcam.current.srcObject = stream;
-      webcam.current.addEventListener("loadeddata", predictWebcam);
-      setReady(true);
-    });
-  };
-  const init = async () => {
-    if (ready) {
-      return;
-    }
-    await createHandLandmarker();
-    enableCam();
-  };
-  if (typeof window !== undefined) {
-    setTimeout(() => {
-      init();
-    }, 100);
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_3__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "hand-detection"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("video", {
-    ref: webcam,
-    autoPlay: true,
-    playsInline: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-    ref: canvas
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: enableCam
-  }, "setEnabledCamera"));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HandDetectionComponent);
+const LoginFormsContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  authMode: true,
+  changeAuthMode: () => {}
+});
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass":
-/*!*********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass ***!
-  \*********************************************************************************/
+/***/ "./src/components/combined/login/loginForms.sass":
+/*!*******************************************************!*\
+  !*** ./src/components/combined/login/loginForms.sass ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

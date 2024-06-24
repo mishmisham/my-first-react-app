@@ -1236,6 +1236,17 @@ module.exports = require("serialize-javascript");
 
 /***/ }),
 
+/***/ "three":
+/*!************************!*\
+  !*** external "three" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three");
+
+/***/ }),
+
 /***/ "webpack":
 /*!**************************!*\
   !*** external "webpack" ***!

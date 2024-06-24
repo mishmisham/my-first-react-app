@@ -101,6 +101,8 @@ button {
   color: #444;
   font-weight: 300;
   transition: 0.15s;
+  font-size: 12px;
+  white-space: nowrap;
 }
 .nav-menu_item:first-of-type {
   margin-left: 0;
@@ -124,6 +126,7 @@ button {
   margin: auto 0 auto auto;
   font-weight: 600;
   padding: 0 8px;
+  font-size: 12px;
 }
 /*!*********************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/primitives/notifyComponent/notifyComponent.sass ***!

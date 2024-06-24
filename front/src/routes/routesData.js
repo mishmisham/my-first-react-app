@@ -7,24 +7,13 @@ import PageFirst from '@/pages/PageFirst';
 const LayoutComponent = lazy(()=>import('@/layouts/default'));
 const SecondPage = lazy(()=>import('@/pages/PageSecond'));
 const LoginPage = lazy(()=>import('@/pages/AuthPage/AuthPage'));
+const TestMediaPipe = lazy(()=>import('@/pages/TestMediaPipe/TestMediaPipe'));
 
 export const routesArray = [
     {
       path: "/",
       name: 'Home',
-      async loader() {
-        // console.log('LOADER', res)
-        return json({ message: "Welcome to React Router!" });
-      },
-
-      loadData: async ({ dispatch }) => {
-        // console.log('reload', res)
-      },
-
       Component() {
-        // let data = useLoaderData();
-        // console.log(data)
-
         return <LayoutComponent
                 title="Homepage"
                 description='home page seo description'
@@ -37,11 +26,18 @@ export const routesArray = [
     {
         path: "/second",
         name: 'Second page',
-        loader() {
+        async loader() {
+          // console.log('LOADER', res)
           return json({ message: "Welcome to React Router!" });
+        },
+  
+        loadData: async ({ dispatch }) => {
+          // console.log('reload', res)
         },
 
         Component() {
+          // let data = useLoaderData();
+          // console.log(data)
           return <LayoutComponent
               title="Second page"
               description='other page seo description'
@@ -51,6 +47,20 @@ export const routesArray = [
               </Suspense>
             </LayoutComponent>
         },
+    },
+
+    {
+      path: "/media-pipe",
+      name: 'MediaPipe',
+      Component() {
+        return <LayoutComponent
+              title="Test MediaPipe"
+            >
+              <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
+                <TestMediaPipe />
+              </Suspense>
+            </LayoutComponent>
+      }
     },
 
     {

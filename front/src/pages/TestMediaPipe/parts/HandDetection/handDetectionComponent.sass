@@ -1,0 +1,25 @@
+.hand-detection
+    width: 100%
+    display: flex
+    position: relative
+
+    video
+        width: 472px
+        height: 354px
+        z-index: 1
+        clear: both
+        display: block
+        transform: rotateY(180deg)
+        -webkit-transform: rotateY(180deg)
+        -moz-transform: rotateY(180deg)
+
+    canvas
+        width: 100%
+        position: absolute
+        pointer-events: none
+        left: 0
+        top: 0
+        z-index: 2
+        transform: rotateY(180deg)
+        -webkit-transform: rotateY(180deg)
+        -moz-transform: rotateY(180deg)

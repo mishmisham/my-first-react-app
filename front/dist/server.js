@@ -340,9 +340,19 @@ __webpack_require__.r(__webpack_exports__);
 const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_layouts_default_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/layouts/default */ "./src/layouts/default.jsx")));
 const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageSecond_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageSecond */ "./src/pages/PageSecond.jsx")));
 const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_AuthPage_AuthPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
+const TestMediaPipe = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_TestMediaPipe_TestMediaPipe_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/TestMediaPipe/TestMediaPipe */ "./src/pages/TestMediaPipe/TestMediaPipe.jsx")));
 const routesArray = [{
   path: "/",
   name: 'Home',
+  Component() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
+      title: "Homepage",
+      description: "home page seo description"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageFirst__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }
+}, {
+  path: "/second",
+  name: 'Second page',
   async loader() {
     // console.log('LOADER', res)
     return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.json)({
@@ -357,21 +367,6 @@ const routesArray = [{
   Component() {
     // let data = useLoaderData();
     // console.log(data)
-
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
-      title: "Homepage",
-      description: "home page seo description"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_PageFirst__WEBPACK_IMPORTED_MODULE_4__["default"], null));
-  }
-}, {
-  path: "/second",
-  name: 'Second page',
-  loader() {
-    return (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.json)({
-      message: "Welcome to React Router!"
-    });
-  },
-  Component() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
       title: "Second page",
       description: "other page seo description"
@@ -381,6 +376,19 @@ const routesArray = [{
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SecondPage, null)));
+  }
+}, {
+  path: "/media-pipe",
+  name: 'MediaPipe',
+  Component() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
+      title: "Test MediaPipe"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        height: "300px"
+      })
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TestMediaPipe, null)));
   }
 }, {
   path: '/auth',
@@ -921,6 +929,11 @@ module.exports = {
     }, {
       test: imageExtensions,
       type: 'asset/resource'
+    }, {
+      test: /\.(png|jpe?g|gif|task)$/i,
+      use: [{
+        loader: 'file-loader'
+      }]
     }]
   },
   plugins: [new webpack.DefinePlugin({
@@ -967,6 +980,28 @@ module.exports = require("@apollo/client");
 
 "use strict";
 module.exports = require("@loadable/component");
+
+/***/ }),
+
+/***/ "@mediapipe/hands":
+/*!***********************************!*\
+  !*** external "@mediapipe/hands" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@mediapipe/hands");
+
+/***/ }),
+
+/***/ "@mediapipe/tasks-vision":
+/*!******************************************!*\
+  !*** external "@mediapipe/tasks-vision" ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@mediapipe/tasks-vision");
 
 /***/ }),
 
@@ -1429,7 +1464,7 @@ module.exports = require("path");
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"src_layouts_default_jsx":1,"components-componentA":1,"src_components_combined_login_LoginForms_jsx":1,"src_components_combined_login_forms_authForm_authForm_jsx":1,"src_components_combined_login_forms_registerForm_registerForm_jsx":1};
+/******/ 			var cssChunks = {"src_layouts_default_jsx":1,"src_pages_TestMediaPipe_TestMediaPipe_jsx":1,"components-componentA":1,"src_components_combined_login_LoginForms_jsx":1,"src_components_combined_login_forms_authForm_authForm_jsx":1,"src_components_combined_login_forms_registerForm_registerForm_jsx":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {

@@ -47,6 +47,14 @@ module.exports = {
         test: imageExtensions,
         type: 'asset/resource',
       },
+      {
+        test: /\.(png|jpe?g|gif|task)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   plugins: [

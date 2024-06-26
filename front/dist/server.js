@@ -983,17 +983,6 @@ module.exports = require("@loadable/component");
 
 /***/ }),
 
-/***/ "@mediapipe/hands":
-/*!***********************************!*\
-  !*** external "@mediapipe/hands" ***!
-  \***********************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("@mediapipe/hands");
-
-/***/ }),
-
 /***/ "@mediapipe/tasks-vision":
 /*!******************************************!*\
   !*** external "@mediapipe/tasks-vision" ***!
@@ -1244,6 +1233,17 @@ module.exports = require("serialize-javascript");
 
 "use strict";
 module.exports = require("three");
+
+/***/ }),
+
+/***/ "three/addons/loaders/MTLLoader.js":
+/*!****************************************************!*\
+  !*** external "three/addons/loaders/MTLLoader.js" ***!
+  \****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three/addons/loaders/MTLLoader.js");
 
 /***/ }),
 

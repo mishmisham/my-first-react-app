@@ -1,19 +1,15 @@
 import React, { useRef, useState } from 'react';
 import './handDetectionComponent.sass';
 import { HandLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
-import { HAND_CONNECTIONS } from  '@mediapipe/hands';
 import { ClientOnly } from "react-client-only";
+import { getDistance } from '@/utils/getDistance.js'
 
-
-const HandDetectionComponent = (props) => { 
+const HandDetectionComponent = ({onValues}) => { 
 
     const [ready, setReady] = useState(false);
     const [handLandmarker, setHandLandmarker] = useState(undefined);
     const [lastVideoTime, setLastVideoTime] = useState(-1);
-
     const [webcamRunning, setWebcamRunning] = useState(false);
-
-    let runningMode = 'VIDEO';
 
     const webcam = useRef(null);
     const canvas = useRef(null);
@@ -43,45 +39,78 @@ const HandDetectionComponent = (props) => {
         canvas.current.style.height = webcam.current.videoHeight;
         canvas.current.width = webcam.current.videoWidth;
         canvas.current.height = webcam.current.videoHeight;
-      
-        if (runningMode === "IMAGE") {
-            runningMode = "VIDEO";
-            await handLandmarker.setOptions({ runningMode: "VIDEO" });
-        }
+
+        canvasCtx.fillStyle = "#94d505";
+        canvasCtx.font = "14px sans-serif";
 
         let startTimeMs = performance.now();
         let res = {}
+
         if (lastVideoTime !== webcam.current.currentTime) {
             setLastVideoTime(webcam.current.currentTime)
             res = handLandmarker.detectForVideo(webcam.current, startTimeMs)
         }
         
         canvasCtx.save();
-
-        // if (res.landmarks.length) {
-        //     console.log(res)
-        //     console.log(HAND_CONNECTIONS)
-        // }
-
         canvasCtx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-
 
         if (res.landmarks) {
 
-            const color = "#FF0000";
-            const lineWidth = 5;
+            onValues(res);
 
+            const color = "#94d505";
+            const lineWidth = 5;
             const canvasXPersent = webcam.current.videoWidth
             const canvasYPersent = webcam.current.videoHeight
-           
+                
           for (const landmarks of res.landmarks) {
-            // drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-            //   color: "#00FF00",
-            //   lineWidth: 5
-            // });
-            // drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+            /*
+                0 - основание ладони
+                1 - большой палец -1
+                2 - большой палец -2
+                3 - большой палец -3
+                4 - большой палец -4
+                5 - указательный палец -1
+                6 - указательный палец -2
+                7 - указательный палец -3
+                8 - указательный палец -4
+                9 - средний палец -1
+                10 - средний палец -2
+                11 - средний палец -3
+                12 - средний палец -4
+                13 - безымянный палец -1
+                14 - безымянный палец -2
+                15 - безымянный палец -3
+                16 - безымянный палец -4
+                17 - мизинец -1
+                18 - мизинец -2
+                19 - мизинец -3
+                20 - мизинец -4
+            */
 
-            landmarks.forEach(coords => {
+            // const WRIST = landmarks[0];
+            const THUMB_CMC = landmarks[1];
+            // const THUMB_MCP = landmarks[2];
+            // const THUMB_IP = landmarks[3];
+            const THUMB_TIP = landmarks[4];
+            // const INDEX_FINGER_MCP = landmarks[5];
+            // const INDEX_FINGER_PIP = landmarks[6];
+            // const INDEX_FINGER_DIP = landmarks[7];
+            const INDEX_FINGER_TIP = landmarks[8];
+            // const MIDDLE_FINGER_MCP = landmarks[9];
+            // const MIDDLE_FINGER_PIP = landmarks[10];
+            // const MIDDLE_FINGER_DIP = landmarks[11];
+            // const MIDDLE_FINGER_TIP = landmarks[12];
+            // const RING_FINGER_MCP = landmarks[13];
+            // const RING_FINGER_PIP = landmarks[14];
+            // const RING_FINGER_DIP = landmarks[15];
+            // const RING_FINGER_TIP = landmarks[16];
+            const PINKY_MCP = landmarks[17];
+            // const PINKY_PIP = landmarks[18];
+            // const PINKY_DIP = landmarks[19];
+            // const PINKY_TIP = landmarks[20];
+
+            landmarks.forEach((coords, i) => {
                
                 const { x, y, z, visibility } = coords;
 
@@ -96,6 +125,7 @@ const HandDetectionComponent = (props) => {
                     canvasCtx.moveTo(realX,realY);
                     canvasCtx.lineTo(realX+4, realY+4);
                     canvasCtx.stroke();
+                    canvasCtx.fillText(i, realX,realY);
                 // }
                
             })
@@ -109,16 +139,9 @@ const HandDetectionComponent = (props) => {
         }
     }
 
-
     const enableCam = (event) => {
-        if (!handLandmarker) {
-            console.log("Wait! objectDetector not loaded yet.");
-            return;
-        }
-
         setWebcamRunning(true);
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-        
         navigator.mediaDevices.getUserMedia({
             video: true
         }, predictWebcam, e=>console.log(e)).then((stream) => {
@@ -140,11 +163,10 @@ const HandDetectionComponent = (props) => {
     if (typeof window !== undefined) {
         setTimeout(() => {
             init()
-        }, 100)
+        }, 1000)
     }
 
-    return (<div>
-
+    return (<>
         <ClientOnly>
             <div className='hand-detection'>
                 <video
@@ -156,7 +178,7 @@ const HandDetectionComponent = (props) => {
             </div>
         </ClientOnly>
         <button onClick={enableCam}>setEnabledCamera</button>
-    </div>);
+    </>);
 };
 
 export default HandDetectionComponent;

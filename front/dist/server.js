@@ -1236,6 +1236,17 @@ module.exports = require("three");
 
 /***/ }),
 
+/***/ "three/addons/controls/OrbitControls.js":
+/*!*********************************************************!*\
+  !*** external "three/addons/controls/OrbitControls.js" ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three/addons/controls/OrbitControls.js");
+
+/***/ }),
+
 /***/ "three/addons/loaders/MTLLoader.js":
 /*!****************************************************!*\
   !*** external "three/addons/loaders/MTLLoader.js" ***!

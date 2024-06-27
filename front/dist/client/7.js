@@ -230,9 +230,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _parts_modelLoader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/modelLoader */ "./src/pages/TestMediaPipe/parts/three/parts/modelLoader.js");
-/* harmony import */ var _parts_sceneInit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/sceneInit */ "./src/pages/TestMediaPipe/parts/three/parts/sceneInit.js");
-/* harmony import */ var _testWebGLComponent_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./testWebGLComponent.sass */ "./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass");
+/* harmony import */ var _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/modelsDict */ "./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js");
+/* harmony import */ var _parts_modelLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/modelLoader */ "./src/pages/TestMediaPipe/parts/three/parts/modelLoader.js");
+/* harmony import */ var _parts_sceneInit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/sceneInit */ "./src/pages/TestMediaPipe/parts/three/parts/sceneInit.js");
+/* harmony import */ var _testWebGLComponent_sass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./testWebGLComponent.sass */ "./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass");
 
 
 
@@ -251,49 +252,34 @@ const TestWebGLComponent = props => {
     const {
       scene,
       renderer,
-      camera
-    } = (0,_parts_sceneInit__WEBPACK_IMPORTED_MODULE_3__.sceneInit)({
+      camera,
+      lights
+    } = (0,_parts_sceneInit__WEBPACK_IMPORTED_MODULE_4__.sceneInit)({
       width,
       height,
       canvas: canvas.current
     });
 
-    // текстура
-    // const material = new THREE.MeshNormalMaterial();
-
-    // const loader = new THREE.TextureLoader();
-    // const texture = loader.load( './client/textures/stones/1.jpg' );
-    // texture.needsUpdate = true;
-
-    // const material = new THREE.MeshBasicMaterial({
-    //     map: texture,
-    // });
-
     // load model
-    const stoneOne = await (0,_parts_modelLoader__WEBPACK_IMPORTED_MODULE_2__.modelLoader)('1.obj', './client/stone-models/', '1.mtl', scene);
-    // stoneOne.scale.set(0.25, 0.25, 0.25)
+    const stoneOne = await (0,_parts_modelLoader__WEBPACK_IMPORTED_MODULE_3__.modelLoader)(_parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].file, _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].mtl, _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].path);
+    // масштаб
+    stoneOne.scale.set(0.15, 0.15, 0.15);
     // x, y, z координаты
-    stoneOne.position.set(0, 0, 1);
-    // add texture
-    // stoneOne.traverse( function ( node ) {
-    //     if ( node.isMesh ) {
-    //         node.material = material;
-    //     }
-    // });
+    // stoneOne.position.set(0,0,1)
 
-    // scene.add(stoneOne);
-
-    renderer.setAnimationLoop(animate);
+    scene.add(stoneOne);
 
     // animation
     function animate(time) {
-      if (stoneOne) {
-        stoneOne.rotation.x = time / 5000;
-        stoneOne.rotation.y = time / 1000;
-        stoneOne.rotation.z = time / 10000;
-      }
+      // if (stoneOne) {
+      // stoneOne.rotation.x = time / 5000;
+      // stoneOne.rotation.y = time / 2000;
+      // stoneOne.rotation.z = time / 10000;
+      // }
+
       renderer.render(scene, camera);
     }
+    renderer.setAnimationLoop(animate);
     setReady(true);
   };
   if (typeof window !== undefined) {
@@ -329,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_addons_loaders_MTLLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/addons/loaders/MTLLoader.js */ "./node_modules/three/examples/jsm/loaders/MTLLoader.js");
 
 
-const modelLoader = (filename, mtlPath, mtlFile, scene) => {
+const modelLoader = (filename, mtlFile, mtlPath) => {
   const objLoader = new three_addons_loaders_OBJLoader_js__WEBPACK_IMPORTED_MODULE_0__.OBJLoader();
   const mtlLoad = new three_addons_loaders_MTLLoader_js__WEBPACK_IMPORTED_MODULE_1__.MTLLoader();
   return new Promise(resolve => {
@@ -337,12 +323,29 @@ const modelLoader = (filename, mtlPath, mtlFile, scene) => {
       materials.preload();
       objLoader.setMaterials(materials);
       objLoader.load(mtlPath + '' + filename, object => {
-        scene.add(object);
         resolve(object);
       });
     });
   });
 };
+
+/***/ }),
+
+/***/ "./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js":
+/*!*****************************************************************!*\
+  !*** ./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   modelsDict: () => (/* binding */ modelsDict)
+/* harmony export */ });
+const modelsDict = [{
+  file: '1.obj',
+  mtl: '1.mtl',
+  path: './client/stone-models/'
+}];
 
 /***/ }),
 
@@ -359,30 +362,83 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 
 
-const sceneInit = params => {
+
+const initLights = scene => {
+  const mainLight = new three__WEBPACK_IMPORTED_MODULE_0__.DirectionalLight('#f7e0e4', 5);
+  mainLight.position.set(10, 10, 10);
+  mainLight.castShadow = true;
+  const d = 20;
+  mainLight.shadow.camera.left = -d;
+  mainLight.shadow.camera.right = d;
+  mainLight.shadow.camera.top = d;
+  mainLight.shadow.camera.bottom = -d;
+  mainLight.shadow.camera.near = 2;
+  mainLight.shadow.camera.far = 50;
+  mainLight.shadow.mapSize.x = 1024;
+  mainLight.shadow.mapSize.y = 1024;
+
+  // const ambientLight = new AmbientLight('#e3d5c9', 2);
+
+  // const hemisphereLight = new HemisphereLight(
+  //     'white', // bright sky color
+  //     'darkslategrey', // dim ground color
+  //     3, // intensity
+  // );
+
+  // scene.add(ambientLight);
+  scene.add(mainLight);
+  // scene.add(hemisphereLight);
+
+  return {
+    // ambientLight,
+    mainLight
+    // hemisphereLight
+  };
+};
+const createCamera = params => {
+  const {
+    width,
+    height
+  } = params;
+  const camera = new three__WEBPACK_IMPORTED_MODULE_0__.PerspectiveCamera(45, width / height, 0.01, 20);
+  camera.position.z = 1;
+  camera.lookAt(0, 0, 0);
+  return camera;
+};
+const createScene = () => {
+  const scene = new three__WEBPACK_IMPORTED_MODULE_0__.Scene();
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_0__.Color('rgb(157, 144, 133)');
+  return scene;
+};
+const createRenderer = params => {
   const {
     width,
     height,
     canvas
   } = params;
-  const camera = new three__WEBPACK_IMPORTED_MODULE_0__.PerspectiveCamera(45, width / height, 0.01, 20);
-  camera.position.z = 1;
-  const scene = new three__WEBPACK_IMPORTED_MODULE_0__.Scene();
-  const ambientLight = new three__WEBPACK_IMPORTED_MODULE_0__.AmbientLight('white', 2);
-  const mainLight = new three__WEBPACK_IMPORTED_MODULE_0__.DirectionalLight('white', 5);
-  mainLight.position.set(10, 10, 10);
-  scene.add(ambientLight);
-  scene.add(mainLight);
   const renderer = new three__WEBPACK_IMPORTED_MODULE_0__.WebGLRenderer({
     antialias: true,
     canvas: canvas
   });
   renderer.setSize(width, height);
+  renderer.shadowMap.enabled = true;
+  return renderer;
+};
+const sceneInit = params => {
+  const camera = createCamera(params);
+  const scene = createScene();
+  const lights = initLights(scene);
+  const renderer = createRenderer(params);
+
+  // const controls = new OrbitControls( camera, renderer.domElement );
+  // 		controls.target.set( 0,0, 0 );
+  // 		controls.update();
+
   return {
     scene,
     renderer,
-    camera
-    // light,
+    camera,
+    lights
   };
 };
 

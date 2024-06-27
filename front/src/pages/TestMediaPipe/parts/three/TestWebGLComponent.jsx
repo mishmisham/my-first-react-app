@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { ClientOnly } from "react-client-only";
-import * as THREE from 'three';
 
+import { modelsDict } from './parts/modelsDict'
 import { modelLoader } from './parts/modelLoader';
 import { sceneInit } from './parts/sceneInit';
 
@@ -20,7 +20,7 @@ const TestWebGLComponent = (props) => {
             scene,
             renderer,
             camera,
-            lights
+            lights,
         } = sceneInit({
             width,
             height,
@@ -28,11 +28,11 @@ const TestWebGLComponent = (props) => {
         });
 
         // load model
-        const stoneOne = await modelLoader('1.obj', '1.mtl', './client/stone-models/');
+        const stoneOne = await modelLoader(modelsDict[0].file, modelsDict[0].mtl, modelsDict[0].path);
         // масштаб
         stoneOne.scale.set(0.15, 0.15, 0.15)
         // x, y, z координаты
-        // stoneOne.position.set(0,0,1)
+        stoneOne.position.set(0,0,0.5)
 
         scene.add(stoneOne);
 
@@ -41,7 +41,6 @@ const TestWebGLComponent = (props) => {
             if (stoneOne) {
                 stoneOne.rotation.x = time / 5000;
                 stoneOne.rotation.y = time / 2000;
-                // stoneOne.rotation.z = time / 10000;
             }
           
             renderer.render( scene, camera );

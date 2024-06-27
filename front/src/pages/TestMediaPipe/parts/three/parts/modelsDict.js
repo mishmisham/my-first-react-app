@@ -1,6 +1,7 @@
 export const modelsDict = [
     {
-        file: './client/stone-models/1.obj',
-        texture: './client/textures/stones/1.jpg',
+        file: '1.obj',
+        mtl: '1.mtl',
+        path: './client/stone-models/',
     }
 ]

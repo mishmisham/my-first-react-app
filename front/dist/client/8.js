@@ -229,60 +229,111 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/EffectComposer.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/DepthOfField.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Bloom.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/EffectComposer.js");
 /* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Noise.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Vignette.js");
-/* harmony import */ var _stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stoneOne */ "./src/pages/TestMediaPipe/parts/three/stoneOne.js");
+/* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _stoneOne__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stoneOne */ "./src/pages/TestMediaPipe/parts/three/stoneOne.jsx");
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
 
 
 
+
+
+function Pointer({
+  vec = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3()
+}) {
+  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  const clickEvent = e => {
+    console.log(e);
+  };
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.C)(({
+    mouse,
+    viewport
+  }) => {
+    var _ref$current;
+    vec.lerp({
+      x: mouse.x * viewport.width / 2,
+      y: mouse.y * viewport.height / 2,
+      z: 0
+    }, 0.2);
+    (_ref$current = ref.current) === null || _ref$current === void 0 || _ref$current.setNextKinematicTranslation(vec);
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.RigidBody, {
+    type: "kinematicPosition",
+    colliders: false,
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.BallCollider, {
+    args: [2],
+    onClick: clickEvent
+  }));
+}
 function TestWebGLComponent() {
+  const [gravity, setGravity] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const doSomething = () => {
+    const newGravity = !gravity;
+    setGravity(newGravity);
+  };
+  const sizeBases = [2, 3, 1];
+  const n = 5;
+  const n2 = n / 2; // items spread in the cube
+
+  const items = [...Array(4)].map((_, i) => {
+    const size = sizeBases[i % 3].toFixed();
+    const x = Math.random() * n - n2;
+    const y = Math.random() * n - n2;
+    const z = Math.random() * n - n2;
+    return {
+      position: [x, y, z],
+      sizeMulti: size
+    };
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: '400px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.Canvas, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, {
     camera: {
-      position: [0, 0, 4.2]
+      position: [0, 0, 10.2]
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_3__.OrbitControls, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics, {
+    debug: true,
+    interpolate: true,
+    gravity: gravity ? [0, -5, 0] : [0, 10, 0],
+    timeStep: 1 / 10
+  }, items.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_stoneOne__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+    key: i
+  }, props, {
+    i: i
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Pointer, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__.EffectComposer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__.Noise, {
+    opacity: 0.05
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.OrbitControls, {
     enablePan: true,
     enableZoom: true,
     enableRotate: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
     intensity: 4
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__.EffectComposer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__.DepthOfField, {
-    focusDistance: 0,
-    focalLength: 0.02,
-    bokehScale: 2,
-    height: 480
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__.Bloom, {
-    luminanceThreshold: 0,
-    luminanceSmoothing: 0.9,
-    height: 300
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__.Noise, {
-    opacity: 0.02
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__.Vignette, {
-    eskil: false,
-    offset: 0.1,
-    darkness: 1.1
-  })))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_9__.Environment, {
+    preset: "forest"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: doSomething
+  }, "do something"));
 }
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/stoneOne.js":
-/*!*********************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/stoneOne.js ***!
-  \*********************************************************/
+/***/ "./src/pages/TestMediaPipe/parts/three/stoneOne.jsx":
+/*!**********************************************************!*\
+  !*** ./src/pages/TestMediaPipe/parts/three/stoneOne.jsx ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -291,8 +342,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Gltf.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Gltf.js");
+/* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+
 
 
 const stonePath = './client/stone-models/1.glb';
@@ -301,19 +354,22 @@ function StoneOne(props) {
   const {
     nodes,
     materials
-  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)(stonePath);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", _extends({
-    ref: groupRef
-  }, props, {
+  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF)(stonePath);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.RigidBody, _extends({}, props, {
+    type: "dynamic",
+    mass: 45,
+    collider: "auto"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", {
+    ref: groupRef,
     dispose: null
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     castShadow: true,
     receiveShadow: true,
     geometry: nodes[1].geometry,
     material: materials["Материал"]
-  }));
+  })));
 }
-_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload(stonePath);
+_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF.preload(stonePath);
 
 /***/ }),
 

@@ -1027,6 +1027,17 @@ module.exports = require("@react-three/postprocessing");
 
 /***/ }),
 
+/***/ "@react-three/rapier":
+/*!**************************************!*\
+  !*** external "@react-three/rapier" ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@react-three/rapier");
+
+/***/ }),
+
 /***/ "@reduxjs/toolkit":
 /*!***********************************!*\
   !*** external "@reduxjs/toolkit" ***!
@@ -1255,6 +1266,17 @@ module.exports = require("redux-thunk");
 
 "use strict";
 module.exports = require("serialize-javascript");
+
+/***/ }),
+
+/***/ "three":
+/*!************************!*\
+  !*** external "three" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three");
 
 /***/ }),
 

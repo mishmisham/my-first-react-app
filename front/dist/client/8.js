@@ -231,11 +231,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/EffectComposer.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/DepthOfField.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Bloom.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Noise.js");
-/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Vignette.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/EffectComposer.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/DepthOfField.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Bloom.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Noise.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/postprocessing */ "./node_modules/@react-three/postprocessing/dist/effects/Vignette.js");
 /* harmony import */ var _stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stoneOne */ "./src/pages/TestMediaPipe/parts/three/stoneOne.js");
 
 

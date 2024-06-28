@@ -43,8 +43,27 @@ export default function TestWebGLComponent() {
       <Canvas
         camera={{ position: [0, 8, 7] }}
         lookat={[0,0,0]}
+        shadows
       >
         <Suspense fallback={null}>
+
+        <directionalLight
+              position={[
+                5,
+                5,
+                5,
+              ]}
+              castShadow={{
+                visible: true,
+                position: {
+                  x: 2,
+                  y: 2,
+                  z: 2,
+                },
+                castShadow: true,
+              }}
+            />
+            
             
             <Physics
               interpolate
@@ -60,9 +79,7 @@ export default function TestWebGLComponent() {
 
             </Physics>
           
-            <ambientLight intensity={0.75} />
-
-            <directionalLight intensity={0.75} position={[2, 15, 4]} />
+            <ambientLight intensity={0.15} />
             
             <Sky sunPosition={[10, 2, 10]} />
             

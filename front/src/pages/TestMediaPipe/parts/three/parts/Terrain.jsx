@@ -22,6 +22,7 @@ const Terrain = () => {
           ref={mesh}
           position={[0, 0, 0]} 
           rotation={[-Math.PI/2, 0, 0]}
+          receiveShadow
         >
           <planeGeometry attach="geometry" args={[199, 199, 199, 199]} />
           <meshPhongMaterial

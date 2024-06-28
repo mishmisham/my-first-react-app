@@ -17,7 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const AuthPage = () => {
-  const LoginForms = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(__webpack_require__, /*! @/components/combined/login/LoginForms */ "./src/components/combined/login/LoginForms.jsx")));
+  const LoginForms = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(__webpack_require__, /*! @/components/combined/login/LoginForms */ "./src/components/combined/login/LoginForms.jsx")));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__["default"], {
       height: "300px"

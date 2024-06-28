@@ -1,48 +1,22 @@
-/*!******************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass ***!
-  \******************************************************************************************************************************************************************/
-.hand-detection {
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/combined/login/loginForms.sass ***!
+  \****************************************************************************************************************************************/
+.login-forms h2 {
+  font-size: 20px;
   width: 100%;
-  display: flex;
-  position: relative;
+  color: #555;
+  text-align: center;
+  margin-bottom: 48px;
 }
-.hand-detection video {
-  width: 472px;
-  height: 354px;
-  z-index: 1;
-  clear: both;
-  display: block;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-}
-.hand-detection canvas {
+.login-forms_mode-btn {
+  margin: 12px auto 0;
   width: 100%;
-  position: absolute;
-  pointer-events: none;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
+  border: 1px solid #420068;
+  color: #420068;
 }
-/*!******************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass ***!
-  \******************************************************************************************************************************************************/
-.test-web-gl-component {
-  width: 100%;
-  display: flex;
-  position: relative;
-  height: 354px;
-}
-.test-web-gl-component canvas {
-  width: 100%;
-  position: absolute;
-  pointer-events: none;
-  left: 0;
-  top: 0;
-  z-index: 2;
+.login-forms_mode-btn:hover {
+  border: 1px solid #7300b5;
+  color: #7300b5;
 }
 
 /*# sourceMappingURL=7.css.map*/

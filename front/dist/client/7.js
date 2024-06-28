@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[7],{
 
-/***/ "./src/pages/TestMediaPipe/TestMediaPipe.jsx":
-/*!***************************************************!*\
-  !*** ./src/pages/TestMediaPipe/TestMediaPipe.jsx ***!
-  \***************************************************/
+/***/ "./src/components/combined/login/LoginForms.jsx":
+/*!******************************************************!*\
+  !*** ./src/components/combined/login/LoginForms.jsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,474 +13,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/HandDetection/HandDetectionComponent */ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx");
-/* harmony import */ var _parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/three/TestWebGLComponent */ "./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx");
-/* harmony import */ var _utils_getDistance_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/utils/getDistance.js */ "./src/utils/getDistance.js");
+/* harmony import */ var _components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/primitives/Preloader/preloader */ "./src/components/primitives/Preloader/preloader.jsx");
+/* harmony import */ var _loginFormsContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loginFormsContext */ "./src/components/combined/login/loginFormsContext.js");
+/* harmony import */ var _loginForms_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loginForms.sass */ "./src/components/combined/login/loginForms.sass");
 
 
 
 
-
-const TestMediaPipe = () => {
-  const onValues = hand => {
-    /*
-      const maxDistance = getDistance(THUMB_CMC, PINKY_MCP);
-      const catchDistance = getDistance(THUMB_TIP, INDEX_FINGER_TIP);
-      console.log('max, catch', maxDistance, catchDistance)
-    */
+const LoginForms = () => {
+  const [authMode, setAuthMode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const changeAuthMode = (mode = undefined) => {
+    const newMode = mode !== undefined ? mode : !authMode;
+    setAuthMode(newMode);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  const contextData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    authMode,
+    changeAuthMode
+  }), []);
+  const CurrentForm = authMode ? /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/authForm/authForm */ "./src/components/combined/login/forms/authForm/authForm.jsx"))) : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(__webpack_require__, /*! ./forms/registerForm/registerForm */ "./src/components/combined/login/forms/registerForm/registerForm.jsx")));
+  const buttonText = authMode ? 'Create account' : 'Go to login';
+  const titleText = authMode ? 'Please login' : 'Registration';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "login-forms"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, titleText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      height: "300px"
+    })
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_loginFormsContext__WEBPACK_IMPORTED_MODULE_2__.LoginFormsContext.Provider, {
+    value: contextData
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CurrentForm, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "login-forms_mode-btn btn",
+    onClick: e => changeAuthMode()
+  }, buttonText));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestMediaPipe);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginForms);
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx":
-/*!********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx ***!
-  \********************************************************************************/
+/***/ "./src/components/combined/login/loginFormsContext.js":
+/*!************************************************************!*\
+  !*** ./src/components/combined/login/loginFormsContext.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   LoginFormsContext: () => (/* binding */ LoginFormsContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _handDetectionComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handDetectionComponent.sass */ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass");
-/* harmony import */ var _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mediapipe/tasks-vision */ "./node_modules/@mediapipe/tasks-vision/vision_bundle.mjs");
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _utils_getDistance_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/utils/getDistance.js */ "./src/utils/getDistance.js");
 
-
-
-
-
-const HandDetectionComponent = ({
-  onValues
-}) => {
-  const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [handLandmarker, setHandLandmarker] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(undefined);
-  const [lastVideoTime, setLastVideoTime] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
-  const [webcamRunning, setWebcamRunning] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const webcam = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const canvas = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const createHandLandmarker = async () => {
-    // копируется при сборке из public в dist/client
-    const vision = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.FilesetResolver.forVisionTasks("./client/wasm");
-    const handLandmarkerLoad = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.HandLandmarker.createFromOptions(vision, {
-      baseOptions: {
-        // копируется при сборке из public в dist/client
-        modelAssetPath: "./client/hand_landmarker.task",
-        delegate: "GPU"
-      },
-      runningMode: "VIDEO",
-      numHands: 2
-    });
-    setHandLandmarker(handLandmarkerLoad);
-  };
-  async function predictWebcam() {
-    const canvasCtx = canvas.current.getContext("2d");
-    canvas.current.style.width = webcam.current.videoWidth;
-    ;
-    canvas.current.style.height = webcam.current.videoHeight;
-    canvas.current.width = webcam.current.videoWidth;
-    canvas.current.height = webcam.current.videoHeight;
-    canvasCtx.fillStyle = "#94d505";
-    canvasCtx.font = "14px sans-serif";
-    let startTimeMs = performance.now();
-    let res = {};
-    if (lastVideoTime !== webcam.current.currentTime) {
-      setLastVideoTime(webcam.current.currentTime);
-      res = handLandmarker.detectForVideo(webcam.current, startTimeMs);
-    }
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-    if (res.landmarks) {
-      onValues(res);
-      const color = "#94d505";
-      const lineWidth = 5;
-      const canvasXPersent = webcam.current.videoWidth;
-      const canvasYPersent = webcam.current.videoHeight;
-      for (const landmarks of res.landmarks) {
-        /*
-            0 - основание ладони
-            1 - большой палец -1
-            2 - большой палец -2
-            3 - большой палец -3
-            4 - большой палец -4
-            5 - указательный палец -1
-            6 - указательный палец -2
-            7 - указательный палец -3
-            8 - указательный палец -4
-            9 - средний палец -1
-            10 - средний палец -2
-            11 - средний палец -3
-            12 - средний палец -4
-            13 - безымянный палец -1
-            14 - безымянный палец -2
-            15 - безымянный палец -3
-            16 - безымянный палец -4
-            17 - мизинец -1
-            18 - мизинец -2
-            19 - мизинец -3
-            20 - мизинец -4
-        */
-
-        // const WRIST = landmarks[0];
-        const THUMB_CMC = landmarks[1];
-        // const THUMB_MCP = landmarks[2];
-        // const THUMB_IP = landmarks[3];
-        const THUMB_TIP = landmarks[4];
-        // const INDEX_FINGER_MCP = landmarks[5];
-        // const INDEX_FINGER_PIP = landmarks[6];
-        // const INDEX_FINGER_DIP = landmarks[7];
-        const INDEX_FINGER_TIP = landmarks[8];
-        // const MIDDLE_FINGER_MCP = landmarks[9];
-        // const MIDDLE_FINGER_PIP = landmarks[10];
-        // const MIDDLE_FINGER_DIP = landmarks[11];
-        // const MIDDLE_FINGER_TIP = landmarks[12];
-        // const RING_FINGER_MCP = landmarks[13];
-        // const RING_FINGER_PIP = landmarks[14];
-        // const RING_FINGER_DIP = landmarks[15];
-        // const RING_FINGER_TIP = landmarks[16];
-        const PINKY_MCP = landmarks[17];
-        // const PINKY_PIP = landmarks[18];
-        // const PINKY_DIP = landmarks[19];
-        // const PINKY_TIP = landmarks[20];
-
-        landmarks.forEach((coords, i) => {
-          const {
-            x,
-            y,
-            z,
-            visibility
-          } = coords;
-
-          // minVisibility = 0
-          // if (visibility > minVisibility) {
-          const realX = x * canvasXPersent;
-          const realY = y * canvasYPersent;
-          canvasCtx.beginPath();
-          canvasCtx.strokeStyle = color;
-          canvasCtx.lineWidth = lineWidth;
-          canvasCtx.moveTo(realX, realY);
-          canvasCtx.lineTo(realX + 4, realY + 4);
-          canvasCtx.stroke();
-          canvasCtx.fillText(i, realX, realY);
-          // }
-        });
-      }
-    }
-    canvasCtx.restore();
-    if (webcamRunning === true) {
-      window.requestAnimationFrame(predictWebcam);
-    }
-  }
-  const enableCam = event => {
-    setWebcamRunning(true);
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    navigator.mediaDevices.getUserMedia({
-      video: true
-    }, predictWebcam, e => console.log(e)).then(stream => {
-      webcam.current.srcObject = stream;
-      webcam.current.addEventListener("loadeddata", predictWebcam);
-      setReady(true);
-    });
-  };
-  const init = async () => {
-    if (ready) {
-      return;
-    }
-    await createHandLandmarker();
-    enableCam();
-  };
-  if (typeof window !== undefined) {
-    setTimeout(() => {
-      init();
-    }, 1000);
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_3__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "hand-detection"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("video", {
-    ref: webcam,
-    autoPlay: true,
-    playsInline: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-    ref: canvas
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: enableCam
-  }, "setEnabledCamera"));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HandDetectionComponent);
+const LoginFormsContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  authMode: true,
+  changeAuthMode: () => {}
+});
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx":
-/*!********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/modelsDict */ "./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js");
-/* harmony import */ var _parts_modelLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/modelLoader */ "./src/pages/TestMediaPipe/parts/three/parts/modelLoader.js");
-/* harmony import */ var _parts_sceneInit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/sceneInit */ "./src/pages/TestMediaPipe/parts/three/parts/sceneInit.js");
-/* harmony import */ var _testWebGLComponent_sass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./testWebGLComponent.sass */ "./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass");
-
-
-
-
-
-
-const TestWebGLComponent = props => {
-  const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const canvas = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const canvasWrapper = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const init = async () => {
-    const {
-      width,
-      height
-    } = canvasWrapper.current.getBoundingClientRect();
-    const {
-      scene,
-      renderer,
-      camera,
-      lights
-    } = (0,_parts_sceneInit__WEBPACK_IMPORTED_MODULE_4__.sceneInit)({
-      width,
-      height,
-      canvas: canvas.current
-    });
-
-    // load model
-    const stoneOne = await (0,_parts_modelLoader__WEBPACK_IMPORTED_MODULE_3__.modelLoader)(_parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].file, _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].mtl, _parts_modelsDict__WEBPACK_IMPORTED_MODULE_2__.modelsDict[0].path);
-    // масштаб
-    stoneOne.scale.set(0.15, 0.15, 0.15);
-    // x, y, z координаты
-    // stoneOne.position.set(0,0,1)
-
-    scene.add(stoneOne);
-
-    // animation
-    function animate(time) {
-      // if (stoneOne) {
-      // stoneOne.rotation.x = time / 5000;
-      // stoneOne.rotation.y = time / 2000;
-      // stoneOne.rotation.z = time / 10000;
-      // }
-
-      renderer.render(scene, camera);
-    }
-    renderer.setAnimationLoop(animate);
-    setReady(true);
-  };
-  if (typeof window !== undefined) {
-    setTimeout(() => {
-      if (ready) {
-        return;
-      }
-      init();
-    }, 100);
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "test-web-gl-component",
-    ref: canvasWrapper
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
-    ref: canvas
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestWebGLComponent);
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/modelLoader.js":
-/*!******************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/modelLoader.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   modelLoader: () => (/* binding */ modelLoader)
-/* harmony export */ });
-/* harmony import */ var three_addons_loaders_OBJLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/addons/loaders/OBJLoader.js */ "./node_modules/three/examples/jsm/loaders/OBJLoader.js");
-/* harmony import */ var three_addons_loaders_MTLLoader_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/addons/loaders/MTLLoader.js */ "./node_modules/three/examples/jsm/loaders/MTLLoader.js");
-
-
-const modelLoader = (filename, mtlFile, mtlPath) => {
-  const objLoader = new three_addons_loaders_OBJLoader_js__WEBPACK_IMPORTED_MODULE_0__.OBJLoader();
-  const mtlLoad = new three_addons_loaders_MTLLoader_js__WEBPACK_IMPORTED_MODULE_1__.MTLLoader();
-  return new Promise(resolve => {
-    mtlLoad.load(mtlPath + '' + mtlFile, materials => {
-      materials.preload();
-      objLoader.setMaterials(materials);
-      objLoader.load(mtlPath + '' + filename, object => {
-        resolve(object);
-      });
-    });
-  });
-};
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js":
-/*!*****************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/modelsDict.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   modelsDict: () => (/* binding */ modelsDict)
-/* harmony export */ });
-const modelsDict = [{
-  file: '1.obj',
-  mtl: '1.mtl',
-  path: './client/stone-models/'
-}];
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/sceneInit.js":
-/*!****************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/sceneInit.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   sceneInit: () => (/* binding */ sceneInit)
-/* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-
-
-
-const initLights = scene => {
-  const mainLight = new three__WEBPACK_IMPORTED_MODULE_0__.DirectionalLight('#f7e0e4', 5);
-  mainLight.position.set(10, 10, 10);
-  mainLight.castShadow = true;
-  const d = 20;
-  mainLight.shadow.camera.left = -d;
-  mainLight.shadow.camera.right = d;
-  mainLight.shadow.camera.top = d;
-  mainLight.shadow.camera.bottom = -d;
-  mainLight.shadow.camera.near = 2;
-  mainLight.shadow.camera.far = 50;
-  mainLight.shadow.mapSize.x = 1024;
-  mainLight.shadow.mapSize.y = 1024;
-
-  // const ambientLight = new AmbientLight('#e3d5c9', 2);
-
-  // const hemisphereLight = new HemisphereLight(
-  //     'white', // bright sky color
-  //     'darkslategrey', // dim ground color
-  //     3, // intensity
-  // );
-
-  // scene.add(ambientLight);
-  scene.add(mainLight);
-  // scene.add(hemisphereLight);
-
-  return {
-    // ambientLight,
-    mainLight
-    // hemisphereLight
-  };
-};
-const createCamera = params => {
-  const {
-    width,
-    height
-  } = params;
-  const camera = new three__WEBPACK_IMPORTED_MODULE_0__.PerspectiveCamera(45, width / height, 0.01, 20);
-  camera.position.z = 1;
-  camera.lookAt(0, 0, 0);
-  return camera;
-};
-const createScene = () => {
-  const scene = new three__WEBPACK_IMPORTED_MODULE_0__.Scene();
-  scene.background = new three__WEBPACK_IMPORTED_MODULE_0__.Color('rgb(157, 144, 133)');
-  return scene;
-};
-const createRenderer = params => {
-  const {
-    width,
-    height,
-    canvas
-  } = params;
-  const renderer = new three__WEBPACK_IMPORTED_MODULE_0__.WebGLRenderer({
-    antialias: true,
-    canvas: canvas
-  });
-  renderer.setSize(width, height);
-  renderer.shadowMap.enabled = true;
-  return renderer;
-};
-const sceneInit = params => {
-  const camera = createCamera(params);
-  const scene = createScene();
-  const lights = initLights(scene);
-  const renderer = createRenderer(params);
-
-  // const controls = new OrbitControls( camera, renderer.domElement );
-  // 		controls.target.set( 0,0, 0 );
-  // 		controls.update();
-
-  return {
-    scene,
-    renderer,
-    camera,
-    lights
-  };
-};
-
-/***/ }),
-
-/***/ "./src/utils/getDistance.js":
-/*!**********************************!*\
-  !*** ./src/utils/getDistance.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getDistance: () => (/* binding */ getDistance)
-/* harmony export */ });
-/*
-    расстояние по координатам
-    d = √[(x2 − x1)² + (y2 − y1)²]
-*/
-
-const getDistance = (a, b) => {
-  return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
-};
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass":
-/*!*********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass":
-/*!*********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/testWebGLComponent.sass ***!
-  \*********************************************************************/
+/***/ "./src/components/combined/login/loginForms.sass":
+/*!*******************************************************!*\
+  !*** ./src/components/combined/login/loginForms.sass ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

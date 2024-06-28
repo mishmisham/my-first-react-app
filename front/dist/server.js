@@ -994,6 +994,28 @@ module.exports = require("@mediapipe/tasks-vision");
 
 /***/ }),
 
+/***/ "@react-three/drei":
+/*!************************************!*\
+  !*** external "@react-three/drei" ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@react-three/drei");
+
+/***/ }),
+
+/***/ "@react-three/fiber":
+/*!*************************************!*\
+  !*** external "@react-three/fiber" ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@react-three/fiber");
+
+/***/ }),
+
 /***/ "@reduxjs/toolkit":
 /*!***********************************!*\
   !*** external "@reduxjs/toolkit" ***!
@@ -1222,50 +1244,6 @@ module.exports = require("redux-thunk");
 
 "use strict";
 module.exports = require("serialize-javascript");
-
-/***/ }),
-
-/***/ "three":
-/*!************************!*\
-  !*** external "three" ***!
-  \************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("three");
-
-/***/ }),
-
-/***/ "three/addons/controls/OrbitControls.js":
-/*!*********************************************************!*\
-  !*** external "three/addons/controls/OrbitControls.js" ***!
-  \*********************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("three/addons/controls/OrbitControls.js");
-
-/***/ }),
-
-/***/ "three/addons/loaders/MTLLoader.js":
-/*!****************************************************!*\
-  !*** external "three/addons/loaders/MTLLoader.js" ***!
-  \****************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("three/addons/loaders/MTLLoader.js");
-
-/***/ }),
-
-/***/ "three/addons/loaders/OBJLoader.js":
-/*!****************************************************!*\
-  !*** external "three/addons/loaders/OBJLoader.js" ***!
-  \****************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("three/addons/loaders/OBJLoader.js");
 
 /***/ }),
 

@@ -340,7 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_layouts_default_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/layouts/default */ "./src/layouts/default.jsx")));
 const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageSecond_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageSecond */ "./src/pages/PageSecond.jsx")));
 const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_AuthPage_AuthPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
-const TestMediaPipe = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_TestMediaPipe_TestMediaPipe_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/TestMediaPipe/TestMediaPipe */ "./src/pages/TestMediaPipe/TestMediaPipe.jsx")));
+const TestMediaPipe = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => Promise.all(/*! import() */[__webpack_require__.e("vendors-node_modules_react-three_postprocessing_dist_effects_Bloom_js-node_modules_react-thre-ddcfed"), __webpack_require__.e("src_pages_TestMediaPipe_TestMediaPipe_jsx")]).then(__webpack_require__.bind(__webpack_require__, /*! @/pages/TestMediaPipe/TestMediaPipe */ "./src/pages/TestMediaPipe/TestMediaPipe.jsx")));
 const routesArray = [{
   path: "/",
   name: 'Home',
@@ -1214,6 +1214,17 @@ module.exports = require("react-router-dom/server");
 
 /***/ }),
 
+/***/ "react/jsx-runtime":
+/*!************************************!*\
+  !*** external "react/jsx-runtime" ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("react/jsx-runtime");
+
+/***/ }),
+
 /***/ "redux":
 /*!************************!*\
   !*** external "redux" ***!
@@ -1244,6 +1255,28 @@ module.exports = require("redux-thunk");
 
 "use strict";
 module.exports = require("serialize-javascript");
+
+/***/ }),
+
+/***/ "three":
+/*!************************!*\
+  !*** external "three" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three");
+
+/***/ }),
+
+/***/ "three-stdlib":
+/*!*******************************!*\
+  !*** external "three-stdlib" ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("three-stdlib");
 
 /***/ }),
 

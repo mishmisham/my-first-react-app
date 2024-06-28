@@ -230,21 +230,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/EffectComposer.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/DepthOfField.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Bloom.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Noise.js");
+/* harmony import */ var _react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/postprocessing */ "../node_modules/@react-three/postprocessing/dist/effects/Vignette.js");
 /* harmony import */ var _stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stoneOne */ "./src/pages/TestMediaPipe/parts/three/stoneOne.js");
 
 
 
 
+
 function TestWebGLComponent() {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "App"
-  }, /*#__PURE__*/React.createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.Canvas, null, /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: {
+      height: '400px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.Canvas, {
+    camera: {
+      position: [0, 0, 4.2]
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
-  }, /*#__PURE__*/React.createElement(_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/React.createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_3__.Environment, {
-    preset: "sunset",
-    background: true
-  }))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_3__.OrbitControls, {
+    enablePan: true,
+    enableZoom: true,
+    enableRotate: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
+    intensity: 4
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_4__.EffectComposer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_5__.DepthOfField, {
+    focusDistance: 0,
+    focalLength: 0.02,
+    bokehScale: 2,
+    height: 480
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_6__.Bloom, {
+    luminanceThreshold: 0,
+    luminanceSmoothing: 0.9,
+    height: 300
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_7__.Noise, {
+    opacity: 0.02
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_postprocessing__WEBPACK_IMPORTED_MODULE_8__.Vignette, {
+    eskil: false,
+    offset: 0.1,
+    darkness: 1.1
+  })))));
 }
 
 /***/ }),
@@ -272,11 +302,15 @@ function StoneOne(props) {
     nodes,
     materials
   } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)(stonePath);
-  console.log(nodes, materials);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", _extends({
     ref: groupRef
   }, props, {
     dispose: null
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    castShadow: true,
+    receiveShadow: true,
+    geometry: nodes[1].geometry,
+    material: materials["Материал"]
   }));
 }
 _react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload(stonePath);

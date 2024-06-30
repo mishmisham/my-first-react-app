@@ -347,18 +347,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Billboard.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
 /* harmony import */ var leva__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leva */ "./node_modules/leva/dist/leva.esm.js");
 /* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx");
 /* harmony import */ var _parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/EffectsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx");
-/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx");
-/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx");
-/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Terrain */ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx");
-/* harmony import */ var _components_Ocean__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Ocean */ "./src/pages/TestMediaPipe/parts/three/components/Ocean.jsx");
+/* harmony import */ var _parts_CameraComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/CameraComponent */ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx");
+/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx");
+/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx");
+/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Terrain */ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx");
+/* harmony import */ var _components_Ocean__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Ocean */ "./src/pages/TestMediaPipe/parts/three/components/Ocean.jsx");
 
 
 
@@ -371,61 +369,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const width = 472;
+const height = 354;
 function TestWebGLComponent({
   pointers
 }) {
-  const camera = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-
-  // if (props.handCoords?.landmarks?.length) {
-  //   console.log(props.handCoords?.landmarks)
-  // }
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log(camera)
-
-  //   }, 1000)
-  // }, [camera])
-
-  // const checkClick = (e) => {
-  //   const { clientX, clientY, target } = e;
-  //   const { x, y, width, height } = target.getBoundingClientRect();
-  //   const xEvt = clientX - x;
-  //   const yEvt = clientY - y;
-
-  //   // const coords = createVector(xEvt, yEvt, 0, camera.current, width, height);
-  //   // console.log(coords)
-  // }
-
-  const orbit = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [isMouseDown, setIsMouseDown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const setMouseDown = value => {
+    setIsMouseDown(value);
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
-      height: '354px'
+      height: height + 'px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_9__.Canvas, {
-    shadows: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_10__.Canvas, {
+    shadows: true,
+    onMouseDown: e => setMouseDown(true),
+    onMouseUp: e => setMouseDown(false),
+    onMouseLeave: e => setMouseDown(false)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera, {
-    ref: camera,
-    makeDefault: true,
-    position: [0, 8, 7]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics
-  // interpolation={false}
-  // colliders={false}
-  , {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CameraComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    isMouseDown: isMouseDown,
+    width: width,
+    height: height
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics, {
     gravity: [0, -10, 0],
     timeStep: 1 / 10
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_11__.Billboard, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Ocean__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     pointers: pointers,
-    orbit: orbit === null || orbit === void 0 ? void 0 : orbit.current
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_12__.OrbitControls, {
-    ref: orbit,
-    enablePan: true,
-    enableZoom: true,
-    enableRotate: true,
-    enableDamping: true
-  }))));
+    width: width,
+    height: height
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
 }
 
 /***/ }),
@@ -554,67 +530,45 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 function FingersComponent({
   pointers,
-  orbit
+  width,
+  height
 }) {
   const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const state = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.A)();
   (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.C)(frame => {
+    const {
+      camera
+    } = frame;
+    if (!camera || !pointers.length) {
+      return;
+    }
+    const {
+      rotation
+    } = camera;
+    const cameraPosition = camera.position;
+    const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
+    const distance = 4;
+    const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+    objectPosition.copy(cameraPosition);
+    objectPosition.addScaledVector(cameraDirection, distance);
+    const {
+      x,
+      y,
+      z
+    } = objectPosition;
+
+    // console.log(objectPosition, camera)
+
     const items = [];
     pointers.forEach(pointer => {
-      const {
-        camera
-      } = state;
-      const cameraPosition = camera.position;
-      const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
-      const distance = 4;
-
-      // const quaternion = new THREE.Quaternion();
-      // cameraDirection.applyQuaternion(quaternion)
-
-      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
-      objectPosition.copy(cameraPosition);
-      objectPosition.addScaledVector(cameraDirection, distance);
-
-      // const quaternion = new THREE.Quaternion();
-      // const vector = new THREE.Vector3();
-      // vector.subVectors(camera.position, objectPosition);
-      // quaternion.setFromUnitVectors(objectPosition, pointer);
-
-      // console.log(quaternion);
-
-      // console.log(camera)
-
-      // const topLeftCorner = new THREE.Vector3(
-      //     geometry.boundingBox.min.x,
-      //     geometry.boundingBox.max.y,
-      //     geometry.boundingBox.min.z
-      // );
-      // console.log(topLeftCorner); 
-
-      console.log(frame.viewport.width);
-      const {
-        x,
-        y,
-        z
-      } = objectPosition; // pointer; //getCameraCenterView(pointer);
-
+      const pointerX = 4.72 * pointer.x + 2.1 + x;
+      const pointerY = 3.53 * pointer.y + 1.4 + y;
       items.push({
         // position: [
         //     x, y, z
         // ]
-        // position: [
-
-        // x - (frame.viewport.width / distance),
-        // y - (frame.viewport.height / distance),
-        // z
-
-        // x + (pointer.x * frame.viewport.width),
-        // y + (pointer.y * frame.viewport.height),
-        // z + pointer.z,
-
-        // ],
-
-        rotation: [camera.rotation._x, camera.rotation._y, camera.rotation._z]
+        position: [pointerX, pointerY, pointer.z + z],
+        rotation: [rotation.x, rotation.y, rotation.z]
       });
     });
     setFingers(items);
@@ -789,6 +743,50 @@ function StoneOne(props) {
   })));
 }
 _react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF.preload(stonePath);
+
+/***/ }),
+
+/***/ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx":
+/*!***********************************************************************!*\
+  !*** ./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CameraComponent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
+
+
+
+function CameraComponent({
+  isMouseDown,
+  width,
+  height
+  // onUpdateCamera
+}) {
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.C)(frame => {
+    if (!isMouseDown) {
+      return;
+    }
+    const {
+      x,
+      y
+    } = frame.pointer;
+    const rotationX = y / height * Math.PI * 2;
+    const rotationY = x / width * Math.PI * 2;
+    frame.camera.rotation.x += rotationX;
+    frame.camera.rotation.y -= rotationY;
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera, {
+    makeDefault: true,
+    position: [0, 0, 0]
+  });
+}
 
 /***/ }),
 

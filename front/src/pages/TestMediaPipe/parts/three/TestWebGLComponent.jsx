@@ -55,9 +55,9 @@ export default function TestWebGLComponent({pointers}) {
 
               <RocksComponent />
 
-              {/* <Ocean /> */}
+              <Ocean />
               
-              {/* <Terrain /> */}
+              <Terrain />
 
           </Physics>
 

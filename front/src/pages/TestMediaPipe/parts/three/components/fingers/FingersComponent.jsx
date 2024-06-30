@@ -34,7 +34,7 @@ export default function FingersComponent({pointers, width, height}) {
 
         const {
             x, y, z
-        } = objectPosition // pointer; //getCameraCenterView(pointer);
+        } = objectPosition 
 
         // console.log(objectPosition, camera)
 
@@ -45,8 +45,8 @@ export default function FingersComponent({pointers, width, height}) {
            
           
             
-            const pointerX = ( 4.72 * pointer.x ) + 2.1 + x//(x - ((frame.viewport.width / 2)))
-            const pointerY = ( 3.53 * pointer.y ) + 1.4 + y//(y - ((frame.viewport.height / 2)))
+            const pointerX = ( 4.72 * pointer.x ) + 2.1 + x
+            const pointerY = ( 3.53 * pointer.y ) + 1.4 + y
 
             items.push({
                 // position: [
@@ -57,15 +57,6 @@ export default function FingersComponent({pointers, width, height}) {
                     pointerX,
                     pointerY,
                     pointer.z + z
-
-
-                    // x - (frame.viewport.width / distance),
-                    // y - (frame.viewport.height / distance),
-                    // z
-                  
-                    // x + (pointer.x * frame.viewport.width),
-                    // y + (pointer.y * frame.viewport.height),
-                    // z + pointer.z,
                    
                 ],
 

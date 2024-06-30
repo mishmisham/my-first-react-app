@@ -46,7 +46,7 @@ const HandDetectionComponent = ({onValues}) => {
         let startTimeMs = performance.now();
         let res = {}
 
-        if (lastVideoTime !== webcam.current.currentTime) {
+        if (lastVideoTime !== webcam.current.currentTime && handLandmarker) {
             setLastVideoTime(webcam.current.currentTime)
             res = handLandmarker.detectForVideo(webcam.current, startTimeMs)
         }

@@ -1,101 +1,106 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, {
+  Suspense,
+  useRef,
+  useState,
+  useMemo,
+  useEffect
+} from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Environment, Sky } from '@react-three/drei';
-import { Bloom, DepthOfField, EffectComposer, Vignette, Noise } from '@react-three/postprocessing';
+import { OrbitControls, PerspectiveCamera, Environment, Sky, Billboard } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody, CylinderCollider } from "@react-three/rapier";
 import * as THREE from 'three';
 import { useControls } from 'leva'
 
-import StoneOne from './parts/stoneOne'
-import Terrain from './parts/Terrain'
+import LightsComponent from './parts/LightsComponent'
+import EffectsComponent from './parts/EffectsComponent'
+
+import FingersComponent from './components/fingers/FingersComponent'
+import RocksComponent from './components/rocks/RocksComponent'
+import Terrain from './components/Terrain'
+import Ocean from './components/Ocean'
 
 
-export default function TestWebGLComponent() {
+export default function TestWebGLComponent({pointers}) {
 
-    const [gravity, setGravity] = useState(false);
+  const camera = useRef(null);
 
-    const doSomething = () => {
-        const newGravity = !gravity;
-        setGravity(newGravity);
-    }
+  // if (props.handCoords?.landmarks?.length) {
+  //   console.log(props.handCoords?.landmarks)
+  // }
 
-    const sizeBases = [2, 15, 1]
-    const n = 5
-    const n2 = n / 2 // items spread in the cube
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log(camera)
 
-    const items = [...Array(4)].map((_, i) => {
-        const size = sizeBases[i % 3].toFixed()
-    
-        const x = Math.random() * n - n2
-        const y = Math.random()
-        const z = Math.random() * n - n2
-    
-        return {
-          position: [x, y, z],
-          sizeMulti: size,
-        }
-    })
+  //   }, 1000)
+  // }, [camera])
+  
 
-  const gravityValue = [0, -5, 0];
+  // const checkClick = (e) => {
+  //   const { clientX, clientY, target } = e;
+  //   const { x, y, width, height } = target.getBoundingClientRect();
+  //   const xEvt = clientX - x;
+  //   const yEvt = clientY - y;
+
+  //   // const coords = createVector(xEvt, yEvt, 0, camera.current, width, height);
+  //   // console.log(coords)
+  // }
+  
+  const orbit = useRef(null)
 
   return (
-    <div style={{height: '400px'}}>
+    <div style={{height: '354px'}}>
       <Canvas
-        camera={{ position: [0, 8, 7] }}
-        lookat={[0,0,0]}
         shadows
       >
         <Suspense fallback={null}>
 
-        <directionalLight
-              position={[
-                5,
-                5,
-                5,
-              ]}
-              castShadow={{
-                visible: true,
-                position: {
-                  x: 2,
-                  y: 2,
-                  z: 2,
-                },
-                castShadow: true,
-              }}
-            />
-            
-            
-            <Physics
-              interpolate
-              gravity={gravityValue}
-              timeStep={1 / 10}
-            >
- 
-                {items.map((props, i) => (
-                    <StoneOne key={i} {...props} i={i} />
-                ))}
-                
-                <Terrain />
+          <PerspectiveCamera
+            ref={camera}
+            makeDefault
+            position={[0, 8, 7]}
+          />
 
-            </Physics>
-          
-            <ambientLight intensity={0.15} />
-            
-            <Sky sunPosition={[10, 2, 10]} />
-            
-            <EffectComposer>
-                {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
-                <Noise opacity={0.025} />
-            </EffectComposer>
 
-            <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+          <Physics
+            // interpolation={false}
+            // colliders={false}
+            gravity={[0, -10, 0]}
+            timeStep={1 / 10}
+          >
 
+              {/* <RocksComponent /> */}
+
+              {/* <Ocean /> */}
+              
+              {/* <Terrain /> */}
+
+          </Physics>
+
+
+        <Billboard>
+
+          <FingersComponent
+            pointers={pointers}
+            orbit={orbit?.current}
+          />
+
+        </Billboard>
+
+
+          <LightsComponent />
+          <EffectsComponent />
+          <OrbitControls
+            ref={orbit}
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            enableDamping={true}
+          />
         </Suspense>
       </Canvas>
 
-        <button onClick={doSomething}>
-            do something
-        </button>
+   
     </div>
 
   )

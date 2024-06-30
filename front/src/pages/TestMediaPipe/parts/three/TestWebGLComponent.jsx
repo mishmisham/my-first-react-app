@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useEffect
 } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, Sky, Billboard } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody, CylinderCollider } from "@react-three/rapier";
 import * as THREE from 'three';
@@ -13,6 +13,7 @@ import { useControls } from 'leva'
 
 import LightsComponent from './parts/LightsComponent'
 import EffectsComponent from './parts/EffectsComponent'
+import CameraComponent from './parts/CameraComponent'
 
 import FingersComponent from './components/fingers/FingersComponent'
 import RocksComponent from './components/rocks/RocksComponent'
@@ -20,56 +21,39 @@ import Terrain from './components/Terrain'
 import Ocean from './components/Ocean'
 
 
+
+const width = 472
+const height = 354
 export default function TestWebGLComponent({pointers}) {
 
-  const camera = useRef(null);
+  const [isMouseDown, setIsMouseDown] = useState(false)
 
-  // if (props.handCoords?.landmarks?.length) {
-  //   console.log(props.handCoords?.landmarks)
-  // }
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log(camera)
-
-  //   }, 1000)
-  // }, [camera])
-  
-
-  // const checkClick = (e) => {
-  //   const { clientX, clientY, target } = e;
-  //   const { x, y, width, height } = target.getBoundingClientRect();
-  //   const xEvt = clientX - x;
-  //   const yEvt = clientY - y;
-
-  //   // const coords = createVector(xEvt, yEvt, 0, camera.current, width, height);
-  //   // console.log(coords)
-  // }
-  
-  const orbit = useRef(null)
+  const setMouseDown = (value) => {
+    setIsMouseDown(value);
+  }
 
   return (
-    <div style={{height: '354px'}}>
+    <div style={{height: height+'px'}}>
       <Canvas
         shadows
+        onMouseDown={e=>setMouseDown(true)}
+        onMouseUp={e=>setMouseDown(false)}
+        onMouseLeave={e=>setMouseDown(false)}
       >
         <Suspense fallback={null}>
 
-          <PerspectiveCamera
-            ref={camera}
-            makeDefault
-            position={[0, 8, 7]}
+          <CameraComponent 
+            isMouseDown={isMouseDown}
+            width={width}
+            height={height}
           />
 
-
           <Physics
-            // interpolation={false}
-            // colliders={false}
             gravity={[0, -10, 0]}
             timeStep={1 / 10}
           >
 
-              {/* <RocksComponent /> */}
+              <RocksComponent />
 
               {/* <Ocean /> */}
               
@@ -77,26 +61,21 @@ export default function TestWebGLComponent({pointers}) {
 
           </Physics>
 
-
-        <Billboard>
-
           <FingersComponent
             pointers={pointers}
-            orbit={orbit?.current}
+            width={width}
+            height={height}
           />
-
-        </Billboard>
-
 
           <LightsComponent />
           <EffectsComponent />
-          <OrbitControls
+          {/* <OrbitControls
             ref={orbit}
             enablePan={true}
             enableZoom={true}
             enableRotate={true}
             enableDamping={true}
-          />
+          /> */}
         </Suspense>
       </Canvas>
 

@@ -15,6 +15,11 @@ const HandDetectionComponent = ({onValues}) => {
     const canvas = useRef(null);
 
     const createHandLandmarker = async () => {
+        
+        if (document.querySelector('[src="./client/wasm/vision_wasm_internal.js"]')) {
+            return
+        }
+
         // копируется при сборке из public в dist/client
         const vision = await FilesetResolver.forVisionTasks(
             "./client/wasm"

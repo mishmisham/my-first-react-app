@@ -28,6 +28,18 @@ const TestMediaPipe = () => {
   const width = 472;
   const height = 354;
   const [pointers, setPointers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const getTranslatedXYZ = xyz => {
+    const {
+      x,
+      y,
+      z
+    } = xyz;
+    return {
+      x: x * -1,
+      y: y * -1,
+      z: z * -1
+    };
+  };
   const onValues = handData => {
     /*
       const maxDistance = getDistance(THUMB_CMC, PINKY_MCP);
@@ -44,15 +56,9 @@ const TestMediaPipe = () => {
       // обе руки
       landmarks.forEach(hand => {
         // кончик большого пальца
-        newPointers.push({
-          x: hand[4].x,
-          y: hand[4].y
-        });
+        newPointers.push(getTranslatedXYZ(hand[4]));
         // кончик указательного пальца
-        newPointers.push({
-          x: hand[8].x,
-          y: hand[8].y
-        });
+        newPointers.push(getTranslatedXYZ(hand[8]));
       });
       setPointers(newPointers);
     } else {
@@ -175,6 +181,10 @@ const HandDetectionComponent = ({
   const webcam = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const canvas = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const createHandLandmarker = async () => {
+    if (document.querySelector('[src="./client/wasm/vision_wasm_internal.js"]')) {
+      return;
+    }
+
     // копируется при сборке из public в dist/client
     const vision = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.FilesetResolver.forVisionTasks("./client/wasm");
     const handLandmarkerLoad = await _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__.HandLandmarker.createFromOptions(vision, {
@@ -339,7 +349,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Billboard.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/OrbitControls.js");
 /* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
 /* harmony import */ var leva__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leva */ "./node_modules/leva/dist/leva.esm.js");
 /* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx");
@@ -369,40 +380,30 @@ function TestWebGLComponent({
   //   console.log(props.handCoords?.landmarks)
   // }
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setTimeout(() => {
-      console.log(camera);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log(camera)
 
-      // console.log(new THREE.Vector3().unproject(camera.current))
+  //   }, 1000)
+  // }, [camera])
 
-      console.log();
-    }, 1000);
-  }, [camera]);
-  const checkClick = e => {
-    const {
-      clientX,
-      clientY,
-      target
-    } = e;
-    const {
-      x,
-      y,
-      width,
-      height
-    } = target.getBoundingClientRect();
-    const xEvt = clientX - x;
-    const yEvt = clientY - y;
+  // const checkClick = (e) => {
+  //   const { clientX, clientY, target } = e;
+  //   const { x, y, width, height } = target.getBoundingClientRect();
+  //   const xEvt = clientX - x;
+  //   const yEvt = clientY - y;
 
-    // const coords = createVector(xEvt, yEvt, 0, camera.current, width, height);
-    // console.log(coords)
-  };
+  //   // const coords = createVector(xEvt, yEvt, 0, camera.current, width, height);
+  //   // console.log(coords)
+  // }
+
+  const orbit = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: '354px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_9__.Canvas, {
-    shadows: true,
-    onClick: checkClick
+    shadows: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_10__.PerspectiveCamera, {
@@ -415,12 +416,15 @@ function TestWebGLComponent({
   , {
     gravity: [0, -10, 0],
     timeStep: 1 / 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Ocean__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    pointers: pointers
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_11__.OrbitControls, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_11__.Billboard, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    pointers: pointers,
+    orbit: orbit === null || orbit === void 0 ? void 0 : orbit.current
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_12__.OrbitControls, {
+    ref: orbit,
     enablePan: true,
     enableZoom: true,
-    enableRotate: true
+    enableRotate: true,
+    enableDamping: true
   }))));
 }
 
@@ -451,7 +455,7 @@ __webpack_require__.r(__webpack_exports__);
 function Ocean() {
   const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   const gl = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.A)(state => state.gl);
-  const waterNormals = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.F)(three__WEBPACK_IMPORTED_MODULE_3__.TextureLoader, "https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/waternormals.jpg");
+  const waterNormals = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.F)(three__WEBPACK_IMPORTED_MODULE_3__.TextureLoader, "./client/images/waternormals.jpg");
   waterNormals.wrapS = waterNormals.wrapT = three__WEBPACK_IMPORTED_MODULE_3__.RepeatWrapping;
   const geom = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => new three__WEBPACK_IMPORTED_MODULE_3__.PlaneGeometry(30000, 30000), []);
   const config = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
@@ -540,23 +544,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/SphereComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
+
+
 function FingersComponent({
-  pointers
+  pointers,
+  orbit
 }) {
   const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  const state = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.A)();
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.C)(frame => {
     const items = [];
     pointers.forEach(pointer => {
       const {
+        camera
+      } = state;
+      const cameraPosition = camera.position;
+      const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
+      const distance = 4;
+
+      // const quaternion = new THREE.Quaternion();
+      // cameraDirection.applyQuaternion(quaternion)
+
+      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+      objectPosition.copy(cameraPosition);
+      objectPosition.addScaledVector(cameraDirection, distance);
+
+      // const quaternion = new THREE.Quaternion();
+      // const vector = new THREE.Vector3();
+      // vector.subVectors(camera.position, objectPosition);
+      // quaternion.setFromUnitVectors(objectPosition, pointer);
+
+      // console.log(quaternion);
+
+      // console.log(camera)
+
+      // const topLeftCorner = new THREE.Vector3(
+      //     geometry.boundingBox.min.x,
+      //     geometry.boundingBox.max.y,
+      //     geometry.boundingBox.min.z
+      // );
+      // console.log(topLeftCorner); 
+
+      console.log(frame.viewport.width);
+      const {
         x,
-        y
-      } = pointer;
+        y,
+        z
+      } = objectPosition; // pointer; //getCameraCenterView(pointer);
+
       items.push({
-        position: [x, y, 0]
+        // position: [
+        //     x, y, z
+        // ]
+        // position: [
+
+        // x - (frame.viewport.width / distance),
+        // y - (frame.viewport.height / distance),
+        // z
+
+        // x + (pointer.x * frame.viewport.width),
+        // y + (pointer.y * frame.viewport.height),
+        // z + pointer.z,
+
+        // ],
+
+        rotation: [camera.rotation._x, camera.rotation._y, camera.rotation._z]
       });
     });
     setFingers(items);
@@ -588,14 +646,6 @@ const SphereComponent = props => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", _extends({
     visible: true // object gets render if true
     ,
-    userData: {
-      test: "hello"
-    } // An object that can be used to store custom data about the Object3d
-    ,
-    position: [0, 0, 0] // The position on the canvas of the object [x,y,x]
-    ,
-    rotation: [0, 0, 0] // The rotation of the object
-    ,
     castShadow: true // Sets whether or not the object cats a shadow
   }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("sphereGeometry", {
     attach: "geometry",
@@ -604,12 +654,6 @@ const SphereComponent = props => {
     attach: "material" // How the element should attach itself to its parent
     ,
     color: "#f9c80a" // The color of the material
-    ,
-    transparent: true // Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. When set to true, the extent to which the material is transparent is controlled by setting it's .opacity property.
-    ,
-    roughness: 0.1 // The roughness of the material - Defaults to 1
-    ,
-    metalness: 0.1 // The metalness of the material - Defaults to 0
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SphereComponent);

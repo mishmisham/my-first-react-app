@@ -4,7 +4,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import SphereComponent from './parts/SphereComponent';
 
-export default function FingersComponent({pointers, orbit}) {
+export default function FingersComponent({pointers, width, height}) {
  
 
     const [fingers, setFingers] = useState([])
@@ -14,52 +14,49 @@ export default function FingersComponent({pointers, orbit}) {
 
     useFrame((frame) => {
 
+        const { camera } = frame
+        
+        if (!camera || !pointers.length) {
+            return;
+        }
+ 
+        const { rotation } = camera;
+
+
+        const cameraPosition = camera.position;
+        const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
+        const distance = 4; 
+        
+
+        const objectPosition = new THREE.Vector3();
+        objectPosition.copy(cameraPosition);
+        objectPosition.addScaledVector(cameraDirection, distance);
+
+        const {
+            x, y, z
+        } = objectPosition // pointer; //getCameraCenterView(pointer);
+
+        // console.log(objectPosition, camera)
+
+
+
         const items = [];
         pointers.forEach(pointer => {
-
            
-            const { camera } = state;
-
-            const cameraPosition = camera.position;
-            const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
-            const distance = 4; 
+          
             
-            // const quaternion = new THREE.Quaternion();
-            // cameraDirection.applyQuaternion(quaternion)
-
-            const objectPosition = new THREE.Vector3();
-            objectPosition.copy(cameraPosition);
-            objectPosition.addScaledVector(cameraDirection, distance);
-
-            // const quaternion = new THREE.Quaternion();
-            // const vector = new THREE.Vector3();
-            // vector.subVectors(camera.position, objectPosition);
-            // quaternion.setFromUnitVectors(objectPosition, pointer);
-
-            // console.log(quaternion);
-
-            // console.log(camera)
-
-
-            // const topLeftCorner = new THREE.Vector3(
-            //     geometry.boundingBox.min.x,
-            //     geometry.boundingBox.max.y,
-            //     geometry.boundingBox.min.z
-            // );
-            // console.log(topLeftCorner); 
-
-
-            console.log(frame.viewport.width)
-
-            const {
-                x, y, z
-            } = objectPosition // pointer; //getCameraCenterView(pointer);
+            const pointerX = ( 4.72 * pointer.x ) + 2.1 + x//(x - ((frame.viewport.width / 2)))
+            const pointerY = ( 3.53 * pointer.y ) + 1.4 + y//(y - ((frame.viewport.height / 2)))
 
             items.push({
                 // position: [
                 //     x, y, z
                 // ]
-                // position: [
+                position: [
+
+                    pointerX,
+                    pointerY,
+                    pointer.z + z
 
 
                     // x - (frame.viewport.width / distance),
@@ -70,12 +67,12 @@ export default function FingersComponent({pointers, orbit}) {
                     // y + (pointer.y * frame.viewport.height),
                     // z + pointer.z,
                    
-                // ],
+                ],
 
                 rotation: [
-                    camera.rotation._x,
-                    camera.rotation._y,
-                    camera.rotation._z
+                    rotation.x,
+                    rotation.y,
+                    rotation.z
                 ],
 
             })

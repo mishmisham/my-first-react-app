@@ -59,25 +59,27 @@ export default function FingersComponent({pointers, width, height}) {
             // }
 
             // координаты углов вьюпорта
-            // const xRight = viewPortSize.x / 2 + objectPosition.x;
-            // const yBottom = viewPortSize.y / 2 + objectPosition.y;
+            const xRight = objectPosition.x - (viewPortSize.x / 2);
+            const yBottom = objectPosition.y - (viewPortSize.y / 2);
 
-            // const xLeft = xRight - viewPortSize.x;
-            // const yTop = yBottom - viewPortSize.y;
-
-            const xLeft2 = objectPosition.x - viewPortSize.x / 2;
-            const yTop2 = objectPosition.y - viewPortSize.y / 2;
+            const xLeft = objectPosition.x + (viewPortSize.x / 2);
+            const yTop = objectPosition.y + (viewPortSize.y / 2);
             
-           
-            const pointerX = viewPortSize.x * pointer.x - xLeft2
-            const pointerY = viewPortSize.y * pointer.y - yTop2
-           
+            // плоские координаты
+            const pointerX = (viewPortSize.x * pointer.x) + xLeft
+            const pointerY = (viewPortSize.y * pointer.y) + yTop
+            const pointerZ = objectPosition.z + rotation._z
 
-            const {
-                x, y, z
-            } = objectPosition    
-           
-            const pointerZ = z
+
+            console.log('---------------------------------')
+            console.log('cameraPosition', cameraPosition)
+            console.log('objectPosition', objectPosition)
+            console.log('viewPortSize', viewPortSize)
+            console.log('xLeft2, yTop2', xLeft, yTop)
+            console.log('rotation', rotation)
+            console.log('pointer.x, pointer.y',  pointer.x,  pointer.y)
+            console.log('pointerX, pointerY', pointerX, pointerY)
+            console.log('---------------------------------')
 
 
             items.push({

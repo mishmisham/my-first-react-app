@@ -16,11 +16,16 @@ export default function CameraComponent({
     // onUpdateCamera
 }) {
     
+    if (typeof window !== undefined) {
+
+    }
 
     useFrame((frame) => {
       if (!isMouseDown) {
         return;
       }
+
+      console.log(frame.camera)
   
       const {
         x, y
@@ -37,6 +42,7 @@ export default function CameraComponent({
         <PerspectiveCamera
             makeDefault
             position={[0, 0, 0]}
+            rotation={[0, 0, 0]}
         />
     )
 }

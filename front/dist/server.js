@@ -1291,17 +1291,6 @@ module.exports = require("three");
 
 /***/ }),
 
-/***/ "three/examples/jsm/objects/Water.js":
-/*!******************************************************!*\
-  !*** external "three/examples/jsm/objects/Water.js" ***!
-  \******************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("three/examples/jsm/objects/Water.js");
-
-/***/ }),
-
 /***/ "webpack":
 /*!**************************!*\
   !*** external "webpack" ***!

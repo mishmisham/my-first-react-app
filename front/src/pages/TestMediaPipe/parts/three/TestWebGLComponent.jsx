@@ -18,8 +18,10 @@ import CameraComponent from './parts/CameraComponent'
 import FingersComponent from './components/fingers/FingersComponent'
 import RocksComponent from './components/rocks/RocksComponent'
 import Terrain from './components/Terrain'
-import Ocean from './components/Ocean'
+// import Ocean from './components/Ocean'
 
+              // {/* <Ocean /> */}
+           
 
 
 const width = 472
@@ -53,11 +55,9 @@ export default function TestWebGLComponent({pointers}) {
             timeStep={1 / 10}
           >
 
-              <RocksComponent />
-
-              <Ocean />
-              
-              <Terrain />
+              {/* <RocksComponent /> */}
+   
+              {/* <Terrain /> */}
 
           </Physics>
 

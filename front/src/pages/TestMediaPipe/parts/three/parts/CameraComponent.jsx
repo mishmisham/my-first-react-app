@@ -25,7 +25,7 @@ export default function CameraComponent({
         return;
       }
 
-      console.log(frame.camera)
+      // console.log(frame.camera)
   
       const {
         x, y

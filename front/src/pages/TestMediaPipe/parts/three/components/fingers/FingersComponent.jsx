@@ -6,11 +6,9 @@ import SphereComponent from './parts/SphereComponent';
 
 export default function FingersComponent({pointers, width, height}) {
  
-
     const [fingers, setFingers] = useState([])
 
     const state = useThree()
-
 
     useFrame((frame) => {
 
@@ -19,81 +17,60 @@ export default function FingersComponent({pointers, width, height}) {
         if (!camera || !pointers.length) {
             return;
         }
-        /*
-        
-        при повороте камеры по x вычитаем z
-        при повороте по y вычитаем x
-        
-        */
  
         const { rotation } = camera;
 
+        // при 0 0 - левый верхний угол, 1 1 - gправый нижний
+        // const val = {
+        //     x: (objectPosition.x + 1) / 2,
+        //     y: (-objectPosition.y + 1) / 2
+        // }
 
+        const distance = 4; 
 
-        // console.log(objectPosition, camera)
+        // размеры видимой области "на заданной дистанции"
+        const viewPortSize = camera.getViewSize( distance, new THREE.Vector2() );
+        // абсолютные x / y краев вьюпорта
+        const xLeftAbs = viewPortSize.x / 2;
+        const yTopAbs = viewPortSize.y / 2;
+        
+        const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
 
         const items = [];
         pointers.forEach(pointer => {
-           
-            
-            const cameraPosition = camera.position;
-            const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
-            const distance = 4; 
-            
+            // плоские координаты
+            const flatCoords = {
+                x: (viewPortSize.x * pointer.x) + xLeftAbs,
+                y: (viewPortSize.y * pointer.y) + yTopAbs,
+                z: ((viewPortSize.y / 2) * pointer.z)
+            }
 
+            const euler = new THREE.Euler();
+            euler.copy(rotation)
             // центр вьюпорта
             const objectPosition = new THREE.Vector3();
-            objectPosition.copy(cameraPosition);
-            objectPosition.addScaledVector(cameraDirection, distance);
-          
-            // размеры видимой области "на заданной дистанции"
-            const target = new THREE.Vector2();
-            const viewPortSize = camera.getViewSize( distance, target );
-            // console.log(viewPortSize)
-
-
-            // при 0 0 - левый верхний угол, 1 1 - gправый нижний
-            // const val = {
-            //     x: (objectPosition.x + 1) / 2,
-            //     y: (-objectPosition.y + 1) / 2
-            // }
-
-            // координаты углов вьюпорта
-            const xRight = objectPosition.x - (viewPortSize.x / 2);
-            const yBottom = objectPosition.y - (viewPortSize.y / 2);
-
-            const xLeft = objectPosition.x + (viewPortSize.x / 2);
-            const yTop = objectPosition.y + (viewPortSize.y / 2);
+            // objectPosition.copy(camera.position); // центр вьюпорта
+            objectPosition.copy(flatCoords);
             
-            // плоские координаты
-            const pointerX = (viewPortSize.x * pointer.x) + xLeft
-            const pointerY = (viewPortSize.y * pointer.y) + yTop
-            const pointerZ = objectPosition.z + rotation._z
+            objectPosition.applyEuler(euler);
+            objectPosition.addScaledVector(cameraDirection, distance);
 
-
-            console.log('---------------------------------')
-            console.log('cameraPosition', cameraPosition)
-            console.log('objectPosition', objectPosition)
-            console.log('viewPortSize', viewPortSize)
-            console.log('xLeft2, yTop2', xLeft, yTop)
-            console.log('rotation', rotation)
-            console.log('pointer.x, pointer.y',  pointer.x,  pointer.y)
-            console.log('pointerX, pointerY', pointerX, pointerY)
-            console.log('---------------------------------')
-
-
+            const rotateX = rotation._x || 0;
+            const rotateY = rotation._y || 0;
+            const rotateZ = rotation._z || 0;
+           
             items.push({
            
                 position: [
-                    pointerX,
-                    pointerY,
-                    pointerZ
+                    objectPosition.x,
+                    objectPosition.y,
+                    objectPosition.z,
                 ],
 
                 rotation: [
-                    rotation._x,
-                    rotation._y,
-                    rotation._z
+                    rotateX,
+                    rotateY,
+                    rotateZ
                 ],
 
             })

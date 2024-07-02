@@ -507,27 +507,46 @@ function FingersComponent({
     pointers.forEach(pointer => {
       const cameraPosition = camera.position;
       const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
-      const distance = pointer.z + 2;
+      const distance = 4;
+
+      // центр вьюпорта
       const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
       objectPosition.copy(cameraPosition);
       objectPosition.addScaledVector(cameraDirection, distance);
-      const {
-        x,
-        y,
-        z
-      } = objectPosition;
 
-      // const rX = Math.max(rotation._x, 1)
-      // const rY = Math.max(rotation._y, 1)
-      const pointerX = 4 * pointer.x + 2.2 - x + rotation._x;
-      const pointerY = 2 * pointer.y + 1.2 - y + rotation._y;
-      const pointerZ = z;
+      // размеры видимой области "на заданной дистанции"
+      const target = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2();
+      const viewPortSize = camera.getViewSize(distance, target);
+      // console.log(viewPortSize)
+
+      // при 0 0 - левый верхний угол, 1 1 - gправый нижний
+      // const val = {
+      //     x: (objectPosition.x + 1) / 2,
+      //     y: (-objectPosition.y + 1) / 2
+      // }
+
+      // координаты углов вьюпорта
+      const xRight = objectPosition.x - viewPortSize.x / 2;
+      const yBottom = objectPosition.y - viewPortSize.y / 2;
+      const xLeft = objectPosition.x + viewPortSize.x / 2;
+      const yTop = objectPosition.y + viewPortSize.y / 2;
+
+      // плоские координаты
+      const pointerX = viewPortSize.x * pointer.x + xLeft;
+      const pointerY = viewPortSize.y * pointer.y + yTop;
+      const pointerZ = objectPosition.z;
+      console.log('---------------------------------');
+      console.log('cameraPosition', cameraPosition);
+      console.log('objectPosition', objectPosition);
+      console.log('viewPortSize', viewPortSize);
+      console.log('xLeft2, yTop2', xLeft, yTop);
+      console.log('rotation', rotation);
+      console.log('pointer.x, pointer.y', pointer.x, pointer.y);
+      console.log('pointerX, pointerY', pointerX, pointerY);
+      console.log('---------------------------------');
       items.push({
-        // position: [
-        //     x, y, z
-        // ]
         position: [pointerX, pointerY, pointerZ],
-        rotation: [-rotation._x, -rotation._y, -rotation._z]
+        rotation: [rotation._x, rotation._y, rotation._z]
       });
     });
     setFingers(items);
@@ -745,7 +764,8 @@ function CameraComponent({
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera, {
     makeDefault: true,
-    position: [0, 0, 0]
+    position: [0, 0, 0],
+    rotation: [0, 0, 0]
   });
 }
 

@@ -1,4 +1,5 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
+import * as THREE from 'three'
 
 const SphereComponent = (props) => {
     

@@ -63,8 +63,6 @@ export default function TestWebGLComponent({pointers}) {
 
           <FingersComponent
             pointers={pointers}
-            width={width}
-            height={height}
           />
 
           <LightsComponent />

@@ -13,8 +13,8 @@ const SphereComponent = (props) => {
             <sphereGeometry attach="geometry" args={[0.25, 0.25, 0.25]} />
             {/* A standard mesh material*/}
             <meshStandardMaterial
-                attach="material" // How the element should attach itself to its parent
-                color="#f9c80a" // The color of the material
+                attach="material"
+                color="#afff00" 
             />
         </mesh>
     )

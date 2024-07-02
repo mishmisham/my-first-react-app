@@ -4,7 +4,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import SphereComponent from './parts/SphereComponent';
 
-export default function FingersComponent({pointers, width, height}) {
+export default function FingersComponent({pointers}) {
  
     const [fingers, setFingers] = useState([])
 

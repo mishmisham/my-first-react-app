@@ -35,7 +35,7 @@ export default function FingersComponent({pointers, width, height}) {
             const flatCoords = {
                 x: (viewPortSize.x * pointer.x) + xLeftAbs,
                 y: (viewPortSize.y * pointer.y) + yTopAbs,
-                z: ((viewPortSize.y / 2) * pointer.z)
+                z: 0//((viewPortSize.y / 2) * pointer.z)
             }
 
             // угол поворота - берем вращение камеры вокруг своих координат 

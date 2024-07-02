@@ -8,45 +8,51 @@ export default function FingersComponent({pointers}) {
  
     const [fingers, setFingers] = useState([])
 
-    const state = useThree()
-
     useFrame((frame) => {
 
         const { camera } = frame
         
-        if (!camera || !pointers.length) {
+        if (!camera) {
             return;
         }
  
-        const { rotation } = camera;
+        const { rotation, position, quaternion } = camera;
         const distance = 4; 
 
+        // куда смортрит камера
+        const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
         // размеры видимой области "на заданной дистанции"
         const viewPortSize = camera.getViewSize(distance, new THREE.Vector2() );
         // абсолютные x / y краев вьюпорта
         const xLeftAbs = viewPortSize.x / 2;
         const yTopAbs = viewPortSize.y / 2;
         
-        const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
-
         const items = [];
         pointers.forEach(pointer => {
             // плоские координаты
             const flatCoords = {
-                x: (viewPortSize.x * pointer.x) + xLeftAbs,
-                y: (viewPortSize.y * pointer.y) + yTopAbs,
-                z: 0//((viewPortSize.y / 2) * pointer.z)
+                x: (viewPortSize.x * pointer.x) + xLeftAbs + position.x,
+                y: (viewPortSize.y * pointer.y) + yTopAbs + position.y,
+                z: ((viewPortSize.y / 2) * pointer.z) + position.z
             }
 
-            // угол поворота - берем вращение камеры вокруг своих координат 
-            const euler = new THREE.Euler();
-            euler.copy(rotation)
+           
             const objectPosition = new THREE.Vector3();
-            // objectPosition.copy(camera.position); // центр вьюпорта
+
+            // центр вьюпорта - camera.position
             // добавляем абсолютные координаты пальца 
             objectPosition.copy(flatCoords);
             // вращаем координаты 
-            objectPosition.applyEuler(euler);
+            // угол поворота - берем вращение камеры вокруг своих координат 
+            
+            const quaternion = new THREE.Quaternion();
+            quaternion.copy(quaternion);
+            objectPosition.applyQuaternion(quaternion);
+
+            // const euler = new THREE.Euler();
+            // euler.copy(rotation)
+            // objectPosition.applyEuler(euler);
+
             // проецируем координаты перед камерой
             objectPosition.addScaledVector(cameraDirection, distance);
 

@@ -60,7 +60,11 @@ const TestMediaPipe = () => {
   return (
     <ClientOnly>
         <div style={{position: 'relative'}}>
-          <TestWebGLComponent pointers={pointers}/>
+          <TestWebGLComponent
+            pointers={pointers}
+            width={width}
+            height={height}
+          />
 
           {/* <CanvasMaskComponent
             width={472}

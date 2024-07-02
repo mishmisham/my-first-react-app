@@ -24,14 +24,34 @@ import Terrain from './components/Terrain'
            
 
 
-const width = 472
-const height = 354
-export default function TestWebGLComponent({pointers}) {
+export default function TestWebGLComponent({pointers, width, height}) {
 
-  const [isMouseDown, setIsMouseDown] = useState(false)
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isKeyPressed, setIsKeyPressed] = useState(false);
+  const [keyCode, setKeyCode] = useState('');
 
   const setMouseDown = (value) => {
     setIsMouseDown(value);
+  }
+
+  const setKeyPressed = (isPressed, value) => {
+    setIsKeyPressed(isPressed);
+    setKeyCode(value);
+  }
+
+  const onKeyPress = (e) => {
+    setKeyPressed(true, e.keyCode)
+    
+    console.log(e.keyCode)
+  }
+
+  const onKeyUp = (e) => {
+    setKeyPressed(false, '')
+  }
+
+  if (typeof window !== undefined) {
+    document.addEventListener('keydown', onKeyPress)
+    document.addEventListener('keyup', onKeyUp)
   }
 
   return (
@@ -46,6 +66,8 @@ export default function TestWebGLComponent({pointers}) {
 
           <CameraComponent 
             isMouseDown={isMouseDown}
+            isKeyPressed={isKeyPressed}
+            keyCode={keyCode}
             width={width}
             height={height}
           />
@@ -55,9 +77,9 @@ export default function TestWebGLComponent({pointers}) {
             timeStep={1 / 10}
           >
 
-              {/* <RocksComponent /> */}
+              <RocksComponent />
    
-              {/* <Terrain /> */}
+              <Terrain />
 
           </Physics>
 

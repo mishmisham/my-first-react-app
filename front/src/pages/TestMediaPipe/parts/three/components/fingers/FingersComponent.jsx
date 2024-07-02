@@ -19,17 +19,10 @@ export default function FingersComponent({pointers, width, height}) {
         }
  
         const { rotation } = camera;
-
-        // при 0 0 - левый верхний угол, 1 1 - gправый нижний
-        // const val = {
-        //     x: (objectPosition.x + 1) / 2,
-        //     y: (-objectPosition.y + 1) / 2
-        // }
-
         const distance = 4; 
 
         // размеры видимой области "на заданной дистанции"
-        const viewPortSize = camera.getViewSize( distance, new THREE.Vector2() );
+        const viewPortSize = camera.getViewSize(distance, new THREE.Vector2() );
         // абсолютные x / y краев вьюпорта
         const xLeftAbs = viewPortSize.x / 2;
         const yTopAbs = viewPortSize.y / 2;
@@ -45,14 +38,16 @@ export default function FingersComponent({pointers, width, height}) {
                 z: ((viewPortSize.y / 2) * pointer.z)
             }
 
+            // угол поворота - берем вращение камеры вокруг своих координат 
             const euler = new THREE.Euler();
             euler.copy(rotation)
-            // центр вьюпорта
             const objectPosition = new THREE.Vector3();
             // objectPosition.copy(camera.position); // центр вьюпорта
+            // добавляем абсолютные координаты пальца 
             objectPosition.copy(flatCoords);
-            
+            // вращаем координаты 
             objectPosition.applyEuler(euler);
+            // проецируем координаты перед камерой
             objectPosition.addScaledVector(cameraDirection, distance);
 
             const rotateX = rotation._x || 0;

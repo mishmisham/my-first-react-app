@@ -16,7 +16,7 @@ export default function FingersComponent({pointers}) {
             return;
         }
  
-        const { rotation, position, quaternion } = camera;
+        const { rotation, position } = camera;
         const distance = 4; 
 
         // куда смортрит камера
@@ -29,49 +29,33 @@ export default function FingersComponent({pointers}) {
         
         const items = [];
         pointers.forEach(pointer => {
+            
             // плоские координаты
             const flatCoords = {
-                x: (viewPortSize.x * pointer.x) + xLeftAbs + position.x,
-                y: (viewPortSize.y * pointer.y) + yTopAbs + position.y,
-                z: ((viewPortSize.y / 2) * pointer.z) + position.z
+                x: (viewPortSize.x * pointer.x) + xLeftAbs,
+                y: (viewPortSize.y * pointer.y) + yTopAbs,
+                z: ((viewPortSize.x / 2) * pointer.z),
             }
 
-           
             const objectPosition = new THREE.Vector3();
 
-            // центр вьюпорта - camera.position
             // добавляем абсолютные координаты пальца 
             objectPosition.copy(flatCoords);
-            // вращаем координаты 
-            // угол поворота - берем вращение камеры вокруг своих координат 
             
-            const quaternion = new THREE.Quaternion();
-            quaternion.copy(quaternion);
-            objectPosition.applyQuaternion(quaternion);
-
-            // const euler = new THREE.Euler();
-            // euler.copy(rotation)
-            // objectPosition.applyEuler(euler);
+            // вращение вокруг камеры
+            const euler = new THREE.Euler();
+            euler.copy(rotation)
+            objectPosition.applyEuler(euler);
 
             // проецируем координаты перед камерой
             objectPosition.addScaledVector(cameraDirection, distance);
 
-            const rotateX = rotation._x || 0;
-            const rotateY = rotation._y || 0;
-            const rotateZ = rotation._z || 0;
-           
             items.push({
            
                 position: [
-                    objectPosition.x,
-                    objectPosition.y,
-                    objectPosition.z,
-                ],
-
-                rotation: [
-                    rotateX,
-                    rotateY,
-                    rotateZ
+                    objectPosition.x + position.x,
+                    objectPosition.y + position.y,
+                    objectPosition.z + position.z,
                 ],
 
             })

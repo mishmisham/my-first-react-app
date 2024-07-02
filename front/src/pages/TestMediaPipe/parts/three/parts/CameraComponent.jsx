@@ -15,6 +15,8 @@ export default function CameraComponent({
     height,
     keyCode,
     isKeyPressed,
+    position,
+    rotation
     // onUpdateCamera
 }) {
 
@@ -81,8 +83,8 @@ export default function CameraComponent({
     return (
         <PerspectiveCamera
             makeDefault
-            position={[0, 0, 0]}
-            rotation={[0, 0, 0]}
+            position={position}
+            rotation={rotation}
         />
     )
 }

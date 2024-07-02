@@ -23,7 +23,6 @@ import Terrain from './components/Terrain'
               // {/* <Ocean /> */}
            
 
-
 export default function TestWebGLComponent({pointers, width, height}) {
 
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -41,8 +40,6 @@ export default function TestWebGLComponent({pointers, width, height}) {
 
   const onKeyPress = (e) => {
     setKeyPressed(true, e.keyCode)
-    
-    console.log(e.keyCode)
   }
 
   const onKeyUp = (e) => {
@@ -70,6 +67,8 @@ export default function TestWebGLComponent({pointers, width, height}) {
             keyCode={keyCode}
             width={width}
             height={height}
+            position={[0,0,0]}
+            rotation={[0,0,0]}
           />
 
           <Physics
@@ -85,6 +84,7 @@ export default function TestWebGLComponent({pointers, width, height}) {
 
           <FingersComponent
             pointers={pointers}
+            distance={2}
           />
 
           <LightsComponent />

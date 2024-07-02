@@ -4,7 +4,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import SphereComponent from './parts/SphereComponent';
 
-export default function FingersComponent({pointers}) {
+export default function FingersComponent({pointers, distance}) {
  
     const [fingers, setFingers] = useState([])
 
@@ -17,8 +17,7 @@ export default function FingersComponent({pointers}) {
         }
  
         const { rotation, position } = camera;
-        const distance = 4; 
-
+        
         // куда смортрит камера
         const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
         // размеры видимой области "на заданной дистанции"

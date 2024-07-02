@@ -10,7 +10,7 @@ const SphereComponent = (props) => {
             {...props}
         >
             {/* A spherical shape*/}
-            <sphereGeometry attach="geometry" args={[0.25, 0.25, 0.25]} />
+            <sphereGeometry attach="geometry" args={[0.1, 0.1, 0.1]} />
             {/* A standard mesh material*/}
             <meshStandardMaterial
                 attach="material"

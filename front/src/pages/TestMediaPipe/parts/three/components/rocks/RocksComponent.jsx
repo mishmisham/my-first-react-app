@@ -1,39 +1,29 @@
 import React, { Suspense, useRef, useState } from 'react';
-
+import { useThree, useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 import StoneOne from './parts/stoneOne'
 
+function get2DCoordinates(position, camera, width, height) {
+    const vector = new THREE.Vector3(position.x, position.y, position.z);
+    vector.project(camera);
 
-function toScreenXY( position, camera, div ) {
-    var pos = position.clone();
-    projScreenMat = new THREE.Matrix4();
-    projScreenMat.multiply( camera.projectionMatrix, camera.matrixWorldInverse );
-    projScreenMat.multiplyVector3( pos );
+    const x = (vector.x + 1) / 2 * width;
+    const y = -(vector.y - 1) / 2 * height;
   
-    var offset = findOffset(div);
-  
-    return { x: ( pos.x + 1 ) * div.width / 2 + offset.left,
-         y: ( - pos.y + 1) * div.height / 2 + offset.top };
-  
-  }
-  function findOffset(element) { 
-  var pos = new Object();
-  pos.left = pos.top = 0;        
-  if (element.offsetParent)  
-  { 
-    do  
-    { 
-      pos.left += element.offsetLeft; 
-      pos.top += element.offsetTop; 
-    } while (element = element.offsetParent); 
-  } 
-  return pos;
-} 
+    return { 
+        cameraX: vector.x,
+        cameraY: vector.y,
+        canvasX: x,
+        canvasY: y,
+    };
+}
 
-
-export default function RocksComponent({camera, canvas}) {
+export default function RocksComponent({width, height, onGetItems}) {
 
     const [ready, setReady] = useState(false)
-    const [items, setItems] = useState([]);
+    const [rocks, setRocks] = useState([]);
+
+
 
     const initStartRandomPositions = () => {
         if (ready) {
@@ -55,23 +45,32 @@ export default function RocksComponent({camera, canvas}) {
                 _id: i,
                 position: [x, y, z],
                 sizeMulti: size,
+                
             }
-            
-            // result.xyPosiiton = toScreenXY( result.position, camera, canvas )
 
             return result
         });
 
-        console.log(items)
-        setItems(items);
+        setRocks(items);
         setReady(true);
     }
+
+
+    useFrame((frame) => {
+        const positionedRocks = [...rocks];
+        // 2D координаты каждого камня
+        positionedRocks.forEach(rock => {
+            rock.xy = get2DCoordinates(rock.position, frame.camera, width, height)
+        })
+
+        onGetItems(positionedRocks);
+    })
 
     initStartRandomPositions();
 
     return (
         <>
-            {items.map((props, i) => (
+            {rocks.map((props, i) => (
                 <StoneOne key={i} {...props} i={i} />
             ))}
         </>

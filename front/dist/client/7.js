@@ -70,7 +70,9 @@ const TestMediaPipe = () => {
       position: 'relative'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    pointers: pointers
+    pointers: pointers,
+    width: width,
+    height: height
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onValues: onValues
   })));
@@ -372,15 +374,31 @@ __webpack_require__.r(__webpack_exports__);
 
 // {/* <Ocean /> */}
 
-const width = 472;
-const height = 354;
 function TestWebGLComponent({
-  pointers
+  pointers,
+  width,
+  height
 }) {
   const [isMouseDown, setIsMouseDown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [isKeyPressed, setIsKeyPressed] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [keyCode, setKeyCode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const setMouseDown = value => {
     setIsMouseDown(value);
   };
+  const setKeyPressed = (isPressed, value) => {
+    setIsKeyPressed(isPressed);
+    setKeyCode(value);
+  };
+  const onKeyPress = e => {
+    setKeyPressed(true, e.keyCode);
+  };
+  const onKeyUp = e => {
+    setKeyPressed(false, '');
+  };
+  if (typeof window !== undefined) {
+    document.addEventListener('keydown', onKeyPress);
+    document.addEventListener('keyup', onKeyUp);
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: height + 'px'
@@ -394,15 +412,18 @@ function TestWebGLComponent({
     fallback: null
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CameraComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     isMouseDown: isMouseDown,
+    isKeyPressed: isKeyPressed,
+    keyCode: keyCode,
     width: width,
-    height: height
+    height: height,
+    position: [0, 0, 0],
+    rotation: [0, 0, 0]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics, {
     gravity: [0, -10, 0],
     timeStep: 1 / 10
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     pointers: pointers,
-    width: width,
-    height: height
+    distance: 2
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
 }
 
@@ -478,75 +499,50 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 function FingersComponent({
   pointers,
-  width,
-  height
+  distance
 }) {
   const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const state = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.A)();
   (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.C)(frame => {
     const {
       camera
     } = frame;
-    if (!camera || !pointers.length) {
+    if (!camera) {
       return;
     }
-    /*
-    
-    при повороте камеры по x вычитаем z
-    при повороте по y вычитаем x
-    
-    */
-
     const {
-      rotation
+      rotation,
+      position
     } = camera;
 
-    // console.log(objectPosition, camera)
-
+    // куда смортрит камера
+    const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
+    // размеры видимой области "на заданной дистанции"
+    const viewPortSize = camera.getViewSize(distance, new three__WEBPACK_IMPORTED_MODULE_3__.Vector2());
+    // абсолютные x / y краев вьюпорта
+    const xLeftAbs = viewPortSize.x / 2;
+    const yTopAbs = viewPortSize.y / 2;
     const items = [];
     pointers.forEach(pointer => {
-      const cameraPosition = camera.position;
-      const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
-      const distance = 4;
-
-      // центр вьюпорта
-      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
-      objectPosition.copy(cameraPosition);
-      objectPosition.addScaledVector(cameraDirection, distance);
-
-      // размеры видимой области "на заданной дистанции"
-      const target = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2();
-      const viewPortSize = camera.getViewSize(distance, target);
-      // console.log(viewPortSize)
-
-      // при 0 0 - левый верхний угол, 1 1 - gправый нижний
-      // const val = {
-      //     x: (objectPosition.x + 1) / 2,
-      //     y: (-objectPosition.y + 1) / 2
-      // }
-
-      // координаты углов вьюпорта
-      const xRight = objectPosition.x - viewPortSize.x / 2;
-      const yBottom = objectPosition.y - viewPortSize.y / 2;
-      const xLeft = objectPosition.x + viewPortSize.x / 2;
-      const yTop = objectPosition.y + viewPortSize.y / 2;
-
       // плоские координаты
-      const pointerX = viewPortSize.x * pointer.x + xLeft;
-      const pointerY = viewPortSize.y * pointer.y + yTop;
-      const pointerZ = objectPosition.z;
-      console.log('---------------------------------');
-      console.log('cameraPosition', cameraPosition);
-      console.log('objectPosition', objectPosition);
-      console.log('viewPortSize', viewPortSize);
-      console.log('xLeft2, yTop2', xLeft, yTop);
-      console.log('rotation', rotation);
-      console.log('pointer.x, pointer.y', pointer.x, pointer.y);
-      console.log('pointerX, pointerY', pointerX, pointerY);
-      console.log('---------------------------------');
+      const flatCoords = {
+        x: viewPortSize.x * pointer.x + xLeftAbs,
+        y: viewPortSize.y * pointer.y + yTopAbs,
+        z: viewPortSize.x / 2 * pointer.z
+      };
+      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+
+      // добавляем абсолютные координаты пальца 
+      objectPosition.copy(flatCoords);
+
+      // вращение вокруг камеры
+      const euler = new three__WEBPACK_IMPORTED_MODULE_3__.Euler();
+      euler.copy(rotation);
+      objectPosition.applyEuler(euler);
+
+      // проецируем координаты перед камерой
+      objectPosition.addScaledVector(cameraDirection, distance);
       items.push({
-        position: [pointerX, pointerY, pointerZ],
-        rotation: [rotation._x, rotation._y, rotation._z]
+        position: [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z]
       });
     });
     setFingers(items);
@@ -574,6 +570,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
+
 const SphereComponent = props => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", _extends({
     visible: true // object gets render if true
@@ -581,11 +578,10 @@ const SphereComponent = props => {
     castShadow: true // Sets whether or not the object cats a shadow
   }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("sphereGeometry", {
     attach: "geometry",
-    args: [0.25, 0.25, 0.25]
+    args: [0.1, 0.1, 0.1]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
-    attach: "material" // How the element should attach itself to its parent
-    ,
-    color: "#f9c80a" // The color of the material
+    attach: "material",
+    color: "#afff00"
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SphereComponent);
@@ -744,28 +740,71 @@ __webpack_require__.r(__webpack_exports__);
 function CameraComponent({
   isMouseDown,
   width,
-  height
+  height,
+  keyCode,
+  isKeyPressed,
+  position,
+  rotation
   // onUpdateCamera
 }) {
-  if (typeof window !== undefined) {}
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.C)(frame => {
+  const refreshCameraRotation = frame => {
     if (!isMouseDown) {
       return;
     }
-    console.log(frame.camera);
+    const {
+      pointer,
+      camera
+    } = frame;
     const {
       x,
       y
-    } = frame.pointer;
+    } = pointer;
     const rotationX = y / height * Math.PI * 2;
     const rotationY = x / width * Math.PI * 2;
-    frame.camera.rotation.x += rotationX;
-    frame.camera.rotation.y -= rotationY;
+    camera.rotation.x += rotationX;
+    camera.rotation.y -= rotationY;
+  };
+  const refreshCameraPosiiton = frame => {
+    if (!isKeyPressed) {
+      return;
+    }
+    const {
+      camera
+    } = frame;
+
+    // w
+    if (keyCode === 87) {
+      camera.position.z -= 1;
+    }
+    // s
+    if (keyCode === 83) {
+      camera.position.z += 1;
+    }
+    // a
+    if (keyCode === 65) {
+      camera.position.x -= 1;
+    }
+    // d
+    if (keyCode === 68) {
+      camera.position.x += 1;
+    }
+    // q
+    if (keyCode === 81) {
+      camera.position.y -= 1;
+    }
+    // e
+    if (keyCode === 69) {
+      camera.position.y += 1;
+    }
+  };
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.C)(frame => {
+    refreshCameraRotation(frame);
+    refreshCameraPosiiton(frame);
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera, {
     makeDefault: true,
-    position: [0, 0, 0],
-    rotation: [0, 0, 0]
+    position: position,
+    rotation: rotation
   });
 }
 

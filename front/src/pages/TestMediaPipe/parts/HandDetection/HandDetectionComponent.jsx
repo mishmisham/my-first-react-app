@@ -182,7 +182,7 @@ const HandDetectionComponent = ({onValues}) => {
                 <canvas ref={canvas}></canvas>
             </div>
         </ClientOnly>
-        <button onClick={enableCam}>setEnabledCamera</button>
+        {/* <button onClick={enableCam}>setEnabledCamera</button> */}
     </>);
 };
 

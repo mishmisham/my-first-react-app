@@ -9,7 +9,6 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, Sky, Billboard } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody, CylinderCollider } from "@react-three/rapier";
 import * as THREE from 'three';
-import { useControls } from 'leva'
 
 import LightsComponent from './parts/LightsComponent'
 import EffectsComponent from './parts/EffectsComponent'
@@ -21,8 +20,6 @@ import Terrain from './components/Terrain'
 // import Ocean from './components/Ocean'
 
               // {/* <Ocean /> */}
-           
-
 export default function TestWebGLComponent({pointers, width, height}) {
 
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -51,6 +48,10 @@ export default function TestWebGLComponent({pointers, width, height}) {
     document.addEventListener('keyup', onKeyUp)
   }
 
+  const onGetItems = (rocks) => {
+    console.log('rocks', rocks)
+  }
+
   return (
     <div style={{height: height+'px'}}>
       <Canvas
@@ -67,8 +68,8 @@ export default function TestWebGLComponent({pointers, width, height}) {
             keyCode={keyCode}
             width={width}
             height={height}
-            position={[0,0,0]}
-            rotation={[0,0,0]}
+            position={[1,9,12]}
+            rotation={[-0.7,-0.2,0]}
           />
 
           <Physics
@@ -76,7 +77,11 @@ export default function TestWebGLComponent({pointers, width, height}) {
             timeStep={1 / 10}
           >
 
-              <RocksComponent />
+              <RocksComponent
+                onGetItems={onGetItems}
+                width={width}
+                height={height}
+              />
    
               <Terrain />
 
@@ -88,7 +93,7 @@ export default function TestWebGLComponent({pointers, width, height}) {
           />
 
           <LightsComponent />
-          <EffectsComponent />
+          {/* <EffectsComponent /> */}
           {/* <OrbitControls
             ref={orbit}
             enablePan={true}

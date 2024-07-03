@@ -21,7 +21,7 @@ export default function FingersComponent({pointers, distance}) {
         // куда смортрит камера
         const cameraDirection = camera.getWorldDirection(new THREE.Vector3());
         // размеры видимой области "на заданной дистанции"
-        const viewPortSize = camera.getViewSize(distance, new THREE.Vector2() );
+        const viewPortSize = camera.getViewSize(distance, new THREE.Vector2());
         // абсолютные x / y краев вьюпорта
         const xLeftAbs = viewPortSize.x / 2;
         const yTopAbs = viewPortSize.y / 2;
@@ -33,7 +33,7 @@ export default function FingersComponent({pointers, distance}) {
             const flatCoords = {
                 x: (viewPortSize.x * pointer.x) + xLeftAbs,
                 y: (viewPortSize.y * pointer.y) + yTopAbs,
-                z: ((viewPortSize.x / 2) * pointer.z),
+                z: pointer.z,
             }
 
             const objectPosition = new THREE.Vector3();
@@ -46,8 +46,11 @@ export default function FingersComponent({pointers, distance}) {
             euler.copy(rotation)
             objectPosition.applyEuler(euler);
 
+            // относительно камеры удаленность пальца
+            const zPositioner = distance// + pointer.z;
+
             // проецируем координаты перед камерой
-            objectPosition.addScaledVector(cameraDirection, distance);
+            objectPosition.addScaledVector(cameraDirection, zPositioner);
 
             items.push({
            

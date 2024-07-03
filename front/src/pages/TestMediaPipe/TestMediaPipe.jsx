@@ -14,6 +14,7 @@ const TestMediaPipe = () => {
 
   const [pointers, setPointers] = useState([])
 
+  // делаем зеркальное отражение координат
   const getTranslatedXYZ = (xyz) => {
     const {
       x,
@@ -72,7 +73,9 @@ const TestMediaPipe = () => {
             pointers={pointers}
           /> */}
           
-          <HandDetectionComponent onValues={onValues}/>
+          <HandDetectionComponent
+            onValues={onValues}
+          />
         </div>
     </ClientOnly>
   );

@@ -1137,17 +1137,6 @@ module.exports = require("js-cookie");
 
 /***/ }),
 
-/***/ "leva":
-/*!***********************!*\
-  !*** external "leva" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("leva");
-
-/***/ }),
-
 /***/ "mini-css-extract-plugin":
 /*!******************************************!*\
   !*** external "mini-css-extract-plugin" ***!

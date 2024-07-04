@@ -9,11 +9,11 @@ export default function StoneOne(props) {
   const { nodes, materials } = useGLTF(stonePath)
 
   const handlePointerOver = (e) => {
-    // console.log(e)
+    // console.log('mouse over on rock', e)
   }
 
   const handlePointerClick = (e) => {
-    console.log(e)
+    // console.log('mouse click on rock', e)
   }
 
   return (

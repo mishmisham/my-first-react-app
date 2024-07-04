@@ -28,6 +28,8 @@ const TestMediaPipe = () => {
   const width = 472;
   const height = 354;
   const [pointers, setPointers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+
+  // делаем зеркальное отражение координат
   const getTranslatedXYZ = xyz => {
     const {
       x,
@@ -329,9 +331,7 @@ const HandDetectionComponent = ({
     playsInline: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("canvas", {
     ref: canvas
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: enableCam
-  }, "setEnabledCamera"));
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HandDetectionComponent);
 
@@ -349,16 +349,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
-/* harmony import */ var leva__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leva */ "./node_modules/leva/dist/leva.esm.js");
-/* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx");
-/* harmony import */ var _parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/EffectsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx");
-/* harmony import */ var _parts_CameraComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/CameraComponent */ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx");
-/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx");
-/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx");
-/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Terrain */ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx");
-
+/* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx");
+/* harmony import */ var _parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/EffectsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx");
+/* harmony import */ var _parts_CameraComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/CameraComponent */ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx");
+/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx");
+/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx");
+/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Terrain */ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx");
 
 
 
@@ -371,9 +369,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import Ocean from './components/Ocean'
-
 // {/* <Ocean /> */}
-
 function TestWebGLComponent({
   pointers,
   width,
@@ -382,6 +378,10 @@ function TestWebGLComponent({
   const [isMouseDown, setIsMouseDown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [isKeyPressed, setIsKeyPressed] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [keyCode, setKeyCode] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const rocksComponent = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const getRocksScreenPositions = () => {
+    rocksComponent.current.setNeedNewData(true);
+  };
   const setMouseDown = value => {
     setIsMouseDown(value);
   };
@@ -399,32 +399,42 @@ function TestWebGLComponent({
     document.addEventListener('keydown', onKeyPress);
     document.addEventListener('keyup', onKeyUp);
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  const onGetItems = rocks => {
+    console.log('rocks', rocks);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: height + 'px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_9__.Canvas, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_8__.Canvas, {
     shadows: true,
     onMouseDown: e => setMouseDown(true),
     onMouseUp: e => setMouseDown(false),
     onMouseLeave: e => setMouseDown(false)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CameraComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CameraComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isMouseDown: isMouseDown,
     isKeyPressed: isKeyPressed,
     keyCode: keyCode,
     width: width,
     height: height,
-    position: [0, 0, 0],
-    rotation: [0, 0, 0]
+    position: [1, 9, 12],
+    rotation: [-0.7, -0.2, 0]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics, {
     gravity: [0, -10, 0],
     timeStep: 1 / 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onGetItems: onGetItems,
+    width: width,
+    height: height,
+    ref: rocksComponent
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     pointers: pointers,
     distance: 2
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: getRocksScreenPositions
+  }, " get Rocks Screen Positions "));
 }
 
 /***/ }),
@@ -489,8 +499,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/SphereComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
@@ -502,10 +512,14 @@ function FingersComponent({
   distance
 }) {
   const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.C)(frame => {
-    const {
-      camera
-    } = frame;
+  let camera = null;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    // if (pointers.length !== fingers.length) {
+
+    // }
+    refreshPointers();
+  });
+  const refreshPointers = () => {
     if (!camera) {
       return;
     }
@@ -515,9 +529,9 @@ function FingersComponent({
     } = camera;
 
     // куда смортрит камера
-    const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_3__.Vector3());
+    const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_2__.Vector3());
     // размеры видимой области "на заданной дистанции"
-    const viewPortSize = camera.getViewSize(distance, new three__WEBPACK_IMPORTED_MODULE_3__.Vector2());
+    const viewPortSize = camera.getViewSize(distance, new three__WEBPACK_IMPORTED_MODULE_2__.Vector2());
     // абсолютные x / y краев вьюпорта
     const xLeftAbs = viewPortSize.x / 2;
     const yTopAbs = viewPortSize.y / 2;
@@ -527,25 +541,34 @@ function FingersComponent({
       const flatCoords = {
         x: viewPortSize.x * pointer.x + xLeftAbs,
         y: viewPortSize.y * pointer.y + yTopAbs,
-        z: viewPortSize.x / 2 * pointer.z
+        z: pointer.z
       };
-      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
 
       // добавляем абсолютные координаты пальца 
       objectPosition.copy(flatCoords);
 
       // вращение вокруг камеры
-      const euler = new three__WEBPACK_IMPORTED_MODULE_3__.Euler();
+      const euler = new three__WEBPACK_IMPORTED_MODULE_2__.Euler();
       euler.copy(rotation);
       objectPosition.applyEuler(euler);
 
+      // относительно камеры удаленность пальца
+      const zPositioner = distance; // + pointer.z;
+
       // проецируем координаты перед камерой
-      objectPosition.addScaledVector(cameraDirection, distance);
+      objectPosition.addScaledVector(cameraDirection, zPositioner);
       items.push({
         position: [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z]
       });
     });
     setFingers(items);
+  };
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.C)(frame => {
+    if (camera) {
+      return;
+    }
+    camera = frame.camera;
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, fingers.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
     key: i
@@ -596,42 +619,41 @@ const SphereComponent = props => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ RocksComponent)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/stoneOne */ "./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
-function toScreenXY(position, camera, div) {
-  var pos = position.clone();
-  projScreenMat = new THREE.Matrix4();
-  projScreenMat.multiply(camera.projectionMatrix, camera.matrixWorldInverse);
-  projScreenMat.multiplyVector3(pos);
-  var offset = findOffset(div);
+
+
+function get2DCoordinates(position, camera, width, height) {
+  const vector = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(position.x, position.y, position.z);
+  vector.project(camera);
+  const x = (vector.x + 1) / 2 * width;
+  const y = -(vector.y - 1) / 2 * height;
   return {
-    x: (pos.x + 1) * div.width / 2 + offset.left,
-    y: (-pos.y + 1) * div.height / 2 + offset.top
+    cameraX: vector.x,
+    cameraY: vector.y,
+    canvasX: x,
+    canvasY: y
   };
 }
-function findOffset(element) {
-  var pos = new Object();
-  pos.left = pos.top = 0;
-  if (element.offsetParent) {
-    do {
-      pos.left += element.offsetLeft;
-      pos.top += element.offsetTop;
-    } while (element = element.offsetParent);
-  }
-  return pos;
-}
-function RocksComponent({
-  camera,
-  canvas
-}) {
+const RocksComponent = ({
+  width,
+  height,
+  onGetItems
+}, ref) => {
   const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [rocks, setRocks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [needNewData, setNeedNewData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, () => ({
+    setNeedNewData
+  }));
   const initStartRandomPositions = () => {
     if (ready) {
       return;
@@ -649,22 +671,31 @@ function RocksComponent({
         position: [x, y, z],
         sizeMulti: size
       };
-
-      // result.xyPosiiton = toScreenXY( result.position, camera, canvas )
-
       return result;
     });
-    console.log(items);
-    setItems(items);
+    setRocks(items);
     setReady(true);
   };
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.A)(frame => {
+    if (!needNewData) {
+      return;
+    }
+    const positionedRocks = [...rocks];
+    // 2D координаты каждого камня
+    positionedRocks.forEach(rock => {
+      rock.xy = get2DCoordinates(rock.position, frame.camera, width, height);
+    });
+    setNeedNewData(false);
+    onGetItems(positionedRocks);
+  });
   initStartRandomPositions();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, items.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
-    key: i
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, rocks.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+    key: props._id
   }, props, {
     i: i
   }))));
-}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(RocksComponent));
 
 /***/ }),
 
@@ -694,10 +725,10 @@ function StoneOne(props) {
     materials
   } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF)(stonePath);
   const handlePointerOver = e => {
-    // console.log(e)
+    console.log('mouse over on rock', e);
   };
   const handlePointerClick = e => {
-    console.log(e);
+    console.log('mouse click on rock', e);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.RigidBody, _extends({}, props, {
     type: "dynamic",
@@ -764,6 +795,7 @@ function CameraComponent({
     camera.rotation.x += rotationX;
     camera.rotation.y -= rotationY;
   };
+  const onseStepMoveValue = 0.1;
   const refreshCameraPosiiton = frame => {
     if (!isKeyPressed) {
       return;
@@ -774,30 +806,31 @@ function CameraComponent({
 
     // w
     if (keyCode === 87) {
-      camera.position.z -= 1;
+      camera.position.z -= onseStepMoveValue;
     }
     // s
     if (keyCode === 83) {
-      camera.position.z += 1;
+      camera.position.z += onseStepMoveValue;
     }
     // a
     if (keyCode === 65) {
-      camera.position.x -= 1;
+      camera.position.x -= onseStepMoveValue;
     }
     // d
     if (keyCode === 68) {
-      camera.position.x += 1;
+      camera.position.x += onseStepMoveValue;
     }
     // q
     if (keyCode === 81) {
-      camera.position.y -= 1;
+      const minYPos = Math.max(0, camera.position.y - onseStepMoveValue);
+      camera.position.y = minYPos;
     }
     // e
     if (keyCode === 69) {
-      camera.position.y += 1;
+      camera.position.y += onseStepMoveValue;
     }
   };
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.C)(frame => {
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.A)(frame => {
     refreshCameraRotation(frame);
     refreshCameraPosiiton(frame);
   });

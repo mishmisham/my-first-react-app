@@ -43,13 +43,18 @@ const TestMediaPipe = () => {
         // обе руки
         landmarks.forEach(hand => {
           // кончик большого пальца
-          newPointers.push( 
-            getTranslatedXYZ(hand[4])
-          );
+          const thumbTip = {
+            finger: 'THUMB_TIP',
+            ...getTranslatedXYZ(hand[4]),
+          }
+          newPointers.push( thumbTip );
+
           // кончик указательного пальца
-          newPointers.push( 
-            getTranslatedXYZ(hand[8])
-          )
+          const indexFingerTip = {
+            finger: 'INDEX_FINGER_TIP',
+            ...getTranslatedXYZ(hand[8])
+          }
+          newPointers.push( indexFingerTip )
         });
 
         setPointers(newPointers);

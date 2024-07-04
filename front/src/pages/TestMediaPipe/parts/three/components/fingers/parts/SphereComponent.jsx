@@ -1,23 +1,34 @@
-import React, { Suspense, useRef, useState, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import * as THREE from 'three'
 
-const SphereComponent = (props) => {
+const SphereComponent = (props, ref) => {
     
+    let color = '#fff';
+
+    if (props?.finger === 'THUMB_TIP') {
+        color = '#e60d0d';
+    }
+
+    if (props?.finger === 'INDEX_FINGER_TIP') {
+        color = '#80ff00';
+    }
+
     return (
         <mesh
-            visible // object gets render if true
-            castShadow // Sets whether or not the object cats a shadow
+            ref={ref}
+            visible 
             {...props}
         >
-            {/* A spherical shape*/}
-            <sphereGeometry attach="geometry" args={[0.1, 0.1, 0.1]} />
-            {/* A standard mesh material*/}
+            <sphereGeometry
+                attach="geometry"
+                args={[0.1, 0.1, 0.1, 10]}
+            />
             <meshStandardMaterial
                 attach="material"
-                color="#afff00" 
+                color={color}
             />
         </mesh>
     )
 }
 
-export default SphereComponent;
+export default forwardRef(SphereComponent);

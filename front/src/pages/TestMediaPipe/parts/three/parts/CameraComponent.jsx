@@ -41,6 +41,8 @@ export default function CameraComponent({
       camera.rotation.y -= rotationY;
     }
 
+    const onseStepMoveValue = 0.1;
+
     const refreshCameraPosiiton = (frame) => {
       if (!isKeyPressed) {
         return;
@@ -51,31 +53,32 @@ export default function CameraComponent({
 
       // w
       if (keyCode === 87) {
-        camera.position.z -= 1;
+        camera.position.z -= onseStepMoveValue;
       }
       // s
       if (keyCode === 83) {
-        camera.position.z += 1;
+        camera.position.z += onseStepMoveValue;
       }
       // a
       if (keyCode === 65) {
-        camera.position.x -= 1;
+        camera.position.x -= onseStepMoveValue;
       }
       // d
       if (keyCode === 68) {
-        camera.position.x += 1;
+        camera.position.x += onseStepMoveValue;
       }
       // q
       if (keyCode === 81) {
-        camera.position.y -= 1;
+        const minYPos = Math.max(0, camera.position.y - onseStepMoveValue)
+        camera.position.y = minYPos;
       }
       // e
       if (keyCode === 69) {
-        camera.position.y += 1;
+        camera.position.y += onseStepMoveValue;
       }
     }
   
-    useFrame((frame) => {
+    useThree((frame) => {
       refreshCameraRotation(frame);
       refreshCameraPosiiton(frame);
     });

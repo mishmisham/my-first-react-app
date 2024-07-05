@@ -3,6 +3,7 @@ import React, {
     useRef,
     useState,
     forwardRef,
+    useEffect,
     useImperativeHandle
 } from 'react';
 import { useThree, useFrame } from '@react-three/fiber'
@@ -28,6 +29,7 @@ const RocksComponent = ({width, height, onGetItems}, ref) => {
 
     const [ready, setReady] = useState(false)
     const [rocks, setRocks] = useState([]);
+    const [camera, setCamera] = useState(null);
     const [needNewData, setNeedNewData] = useState(true);
 
     useImperativeHandle(ref, ()=>({
@@ -63,21 +65,27 @@ const RocksComponent = ({width, height, onGetItems}, ref) => {
         setReady(true);
     }
 
-    // useThree((frame) => {
-    //     if (!needNewData) {
-    //         return;
-    //     }
+    useFrame((frame) => {
+        if (!camera) {
+            setCamera(frame.camera);
+        }
+    });
 
-    //     const positionedRocks = [...rocks];
-    //     // 2D координаты каждого камня
-    //     positionedRocks.forEach(rock => {
-    //         rock.xy = get2DCoordinates(rock.position, frame.camera, width, height)
-    //     })
+    useEffect(() => {
+        if (!needNewData || !camera) {
+            return;
+        }
 
-    //     setNeedNewData(false);
+        const positionedRocks = [...rocks];
+       
+        positionedRocks.forEach(rock => {
+            // 2D координаты каждого камня
+            rock.xy = get2DCoordinates(rock.position, camera, width, height)
+        })
 
-    //     onGetItems(positionedRocks);
-    // });
+        setNeedNewData(false);
+        onGetItems(positionedRocks);
+    })
 
     initStartRandomPositions();
 

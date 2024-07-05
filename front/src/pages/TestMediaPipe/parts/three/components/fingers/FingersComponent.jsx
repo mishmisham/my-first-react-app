@@ -98,11 +98,10 @@ export default function FingersComponent({pointers, distance}) {
                     fingerStickRefs.current[i].position.x = item.position[0];
                     fingerStickRefs.current[i].position.y = item.position[1];
                     fingerStickRefs.current[i].position.z = item.position[2];
-
-                    // console.log(fingerStickRefs.current[i])
-
-                    // fingerStickRefs.current[i].rotation.copy(camera.rotation);
-                    fingerStickRefs.current[i].quaternion.copy(camera.quaternion.invert());
+                    
+                    fingerStickRefs.current[i].rotation.x = camera.rotation.x + Math.PI / 2; 
+                    fingerStickRefs.current[i].rotation.y = camera.rotation.y + Math.PI; 
+                    fingerStickRefs.current[i].rotation.z = camera.rotation.z //- Math.PI / 2; 
                 }
             });
         }

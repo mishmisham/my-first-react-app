@@ -522,6 +522,7 @@ function FingersComponent({
   pointers,
   distance
 }) {
+  let cameraDirection = null;
   const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
   const euler = new three__WEBPACK_IMPORTED_MODULE_3__.Euler();
   const wordDirectionVector = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
@@ -557,7 +558,7 @@ function FingersComponent({
       position
     } = camera;
     // куда смотрит камера
-    const cameraDirection = camera.getWorldDirection(wordDirectionVector);
+    cameraDirection = camera.getWorldDirection(wordDirectionVector);
     const items = [];
     pointers.forEach(pointer => {
       // плоские координаты
@@ -605,8 +606,11 @@ function FingersComponent({
           fingerStickRefs.current[i].position.x = item.position[0];
           fingerStickRefs.current[i].position.y = item.position[1];
           fingerStickRefs.current[i].position.z = item.position[2];
-          console.log(fingerStickRefs.current[i]);
-          // fingerStickRefs.current[i].quaternion.copy(item.quaternion);
+
+          // console.log(fingerStickRefs.current[i])
+
+          // fingerStickRefs.current[i].rotation.copy(camera.rotation);
+          // fingerStickRefs.current[i].quaternion.copy(camera.quaternion.invert());
         }
       });
     }
@@ -639,8 +643,11 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 
 const CylinderComponent = (props, ref) => {
-  const cylinderHeight = 100;
-  const globalGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.CylinderGeometry(0.05, 2.45, cylinderHeight, 12);
+  const cylinderHeight = 1;
+  const startWidth = 0.05;
+  const endWidth = 0.1;
+  const smoothness = 12;
+  const globalGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.CylinderGeometry(startWidth, endWidth, cylinderHeight, smoothness);
   globalGeometry.translate(0, -cylinderHeight / 2, 0);
   let color = '#fff';
   if ((props === null || props === void 0 ? void 0 : props.finger) === 'THUMB_TIP') {
@@ -653,9 +660,7 @@ const CylinderComponent = (props, ref) => {
     ref: ref,
     visible: true,
     geometry: globalGeometry
-  }, props, {
-    "rotation-y": Math.PI / 2
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
     attach: "material",
     color: color,
     transparent: true,
@@ -716,6 +721,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/stoneOne */ "./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -742,6 +748,7 @@ const RocksComponent = ({
 }, ref) => {
   const [ready, setReady] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [rocks, setRocks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [camera, setCamera] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [needNewData, setNeedNewData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, () => ({
     setNeedNewData
@@ -768,23 +775,23 @@ const RocksComponent = ({
     setRocks(items);
     setReady(true);
   };
-
-  // useThree((frame) => {
-  //     if (!needNewData) {
-  //         return;
-  //     }
-
-  //     const positionedRocks = [...rocks];
-  //     // 2D координаты каждого камня
-  //     positionedRocks.forEach(rock => {
-  //         rock.xy = get2DCoordinates(rock.position, frame.camera, width, height)
-  //     })
-
-  //     setNeedNewData(false);
-
-  //     onGetItems(positionedRocks);
-  // });
-
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.C)(frame => {
+    if (!camera) {
+      setCamera(frame.camera);
+    }
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!needNewData || !camera) {
+      return;
+    }
+    const positionedRocks = [...rocks];
+    positionedRocks.forEach(rock => {
+      // 2D координаты каждого камня
+      rock.xy = get2DCoordinates(rock.position, camera, width, height);
+    });
+    setNeedNewData(false);
+    onGetItems(positionedRocks);
+  });
   initStartRandomPositions();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, rocks.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
     key: props._id
@@ -875,14 +882,12 @@ function CameraComponent({
   rotation
   // onUpdateCamera
 }) {
-  const refreshCameraRotation = frame => {
+  const [camera, setCamera] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [pointer, setPointer] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const refreshCameraRotation = () => {
     if (!isMouseDown) {
       return;
     }
-    const {
-      pointer,
-      camera
-    } = frame;
     const {
       x,
       y
@@ -893,13 +898,10 @@ function CameraComponent({
     camera.rotation.y -= rotationY;
   };
   const onseStepMoveValue = 0.1;
-  const refreshCameraPosiiton = frame => {
+  const refreshCameraPosiiton = () => {
     if (!isKeyPressed) {
       return;
     }
-    const {
-      camera
-    } = frame;
 
     // w
     if (keyCode === 87) {
@@ -927,9 +929,17 @@ function CameraComponent({
       camera.position.y += onseStepMoveValue;
     }
   };
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.A)(frame => {
-    refreshCameraRotation(frame);
-    refreshCameraPosiiton(frame);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (camera) {
+      refreshCameraRotation();
+      refreshCameraPosiiton();
+    }
+  });
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.C)(frame => {
+    if (!camera) {
+      setCamera(frame.camera);
+      setPointer(frame.pointer);
+    }
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera, {
     makeDefault: true,

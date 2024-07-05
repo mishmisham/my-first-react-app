@@ -6,15 +6,15 @@ import UserShortInfo from './parts/userShortInfo/userShortInfo';
 import NotifyComponent from '@/components/primitives/notifyComponent/notifyComponent';
 import DefaultFooter from './parts/defaultFooter/defaultFooter';
 import {GlobalLayoutContext} from './parts/GlobalLayoutContext';
-// import websocketClient, { websocketSend } from '@/websocket/client';
+import websocketClient, { websocketSend } from '@/websocket/client';
 
 const Layout = ({ children, title, description }) => {
 
-  // useEffect(() => {
-  //   if (typeof window !== undefined) {
-  //     websocketSend('lorem!');
-  //   }
-  // })
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      websocketSend('lorem!');
+    }
+  })
     
 
   const [displayNotify, setDisplayNotify] = useState({

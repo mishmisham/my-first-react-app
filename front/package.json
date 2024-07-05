@@ -47,7 +47,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "rm -rf dist && webpack --mode=development --config webpack/dev/webpack.dev.server.js --config webpack/dev/webpack.dev.client.js && node dist/server.js",
+    "start": "rm -rf dist && webpack --mode=development --config webpack/dev/webpack.dev.server.js --config webpack/dev/webpack.dev.client.js && node dist/server.js --watch",
     "startWatch": "npm-run-all --parallel startWatch:*",
     "startWatch:build-server": "webpack --config webpack/dev/webpack.dev.server.js --watch",
     "startWatch:build-client": "webpack --config  webpack/dev/webpack.dev.client.js --watch --no-cache",

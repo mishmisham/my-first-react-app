@@ -7,6 +7,7 @@ import CylinderComponent from './parts/CylinderComponent';
 
 export default function FingersComponent({pointers, distance}) {
  
+    let cameraDirection = null;
     const objectPosition = new THREE.Vector3();
     const euler = new THREE.Euler();
     const wordDirectionVector = new THREE.Vector3();
@@ -39,7 +40,7 @@ export default function FingersComponent({pointers, distance}) {
  
         const { rotation, position } = camera;
         // куда смотрит камера
-        const cameraDirection = camera.getWorldDirection(wordDirectionVector);
+        cameraDirection = camera.getWorldDirection(wordDirectionVector);
         const items = [];
         pointers.forEach(pointer => {
             // плоские координаты
@@ -98,8 +99,10 @@ export default function FingersComponent({pointers, distance}) {
                     fingerStickRefs.current[i].position.y = item.position[1];
                     fingerStickRefs.current[i].position.z = item.position[2];
 
-                    console.log(fingerStickRefs.current[i])
-                    // fingerStickRefs.current[i].quaternion.copy(item.quaternion);
+                    // console.log(fingerStickRefs.current[i])
+
+                    // fingerStickRefs.current[i].rotation.copy(camera.rotation);
+                    fingerStickRefs.current[i].quaternion.copy(camera.quaternion.invert());
                 }
             });
         }

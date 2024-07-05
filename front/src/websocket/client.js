@@ -20,8 +20,7 @@ const connectionOptions =  {
     // }
 };
 
-
-const websocketClient =io(websocketURL, connectionOptions);
+const websocketClient = io(websocketURL, connectionOptions);
 websocketClient.on('open', e=>{
     console.log('websocket client open');
 })
@@ -39,5 +38,6 @@ export const websocketSend = (value) => {
         console.log(err)
     }
 }
+
 
 export default websocketClient;

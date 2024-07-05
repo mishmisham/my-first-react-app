@@ -20,15 +20,13 @@ export default function CameraComponent({
     // onUpdateCamera
 }) {
 
-    const refreshCameraRotation = (frame) => {
+    const [camera, setCamera] = useState(null);
+    const [pointer, setPointer] = useState(null);
+
+    const refreshCameraRotation = () => {
       if (!isMouseDown) {
         return;
       }
-
-      const{
-        pointer,
-        camera
-      } = frame;
 
       const {
         x, y
@@ -43,13 +41,10 @@ export default function CameraComponent({
 
     const onseStepMoveValue = 0.1;
 
-    const refreshCameraPosiiton = (frame) => {
+    const refreshCameraPosiiton = () => {
       if (!isKeyPressed) {
         return;
       }
-      const{
-        camera
-      } = frame;
 
       // w
       if (keyCode === 87) {
@@ -78,10 +73,19 @@ export default function CameraComponent({
       }
     }
   
-    useThree((frame) => {
-      refreshCameraRotation(frame);
-      refreshCameraPosiiton(frame);
+    useEffect(() => {
+      if (camera) {
+        refreshCameraRotation();
+        refreshCameraPosiiton();
+      }
     });
+
+    useFrame((frame) => {
+      if (!camera) {
+          setCamera(frame.camera);
+          setPointer(frame.pointer);
+      }
+  });
     
     return (
         <PerspectiveCamera

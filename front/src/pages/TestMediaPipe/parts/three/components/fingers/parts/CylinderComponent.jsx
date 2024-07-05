@@ -7,6 +7,7 @@ const CylinderComponent = (props, ref) => {
     const globalGeometry = new THREE.CylinderGeometry(0.05, 2.45, cylinderHeight, 12);
     
     globalGeometry.translate( 0, -cylinderHeight/2, 0 );
+    // globalGeometry.rotate(0, Math.PI / 2, 0);
 
     let color = '#fff';
 
@@ -24,7 +25,6 @@ const CylinderComponent = (props, ref) => {
             visible 
             geometry={globalGeometry}
             {...props}
-            rotation-y={Math.PI / 2}
         >
             <meshBasicMaterial
                 attach="material"

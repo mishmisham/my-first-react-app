@@ -1,25 +1,43 @@
-const websocketClient = new WebSocket('ws://localhost:'+process.env.WS_PORT);
+import { io } from "socket.io-client";
 
-websocketClient.onopen = function () {
-    console.log('подключился');
-};
-websocketClient.onmessage = function (message) {
-    console.log('Message: %s', message.data);
+const websocketURL = 'ws://localhost:'+process.env.WS_PORT;
+
+const connectionOptions =  {
+    "force new connection" : true,
+    "reconnectionAttempts": "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
+    "timeout" : 10000, //before connect_error and connect_timeout are emitted.
+    "transports": [
+        // "polling",
+        "websocket",
+        // "webtransport"
+    ],
+    // withCredentials: true,
+    // extraHeaders: {
+    //   "my-custom-header": "abcd"
+    // }
+    // cors: {
+    //     origin: websocketURL
+    // }
 };
 
-export const websocketSendEcho = (value) => {
+
+const websocketClient =io(websocketURL, connectionOptions);
+websocketClient.on('open', e=>{
+    console.log('websocket client open');
+})
+websocketClient.on('message', message=>{
+    console.log('Message: %s', message);
+})
+
+export const websocketSend = (value) => {
     if (typeof window !== 'object') {
         return
     }
     try {
-        websocketClient.send(JSON.stringify({action: 'ECHO', data: value.toString()}));
+        websocketClient.emit('message', {action: 'ECHO', data: value});
     } catch (err) {
         console.log(err)
     }
 }
 
-export const websocketSendPing = () => {
-    websocketClient.send(JSON.stringify({action: 'PING'}));
-}
-
-export default websocketClient
+export default websocketClient;

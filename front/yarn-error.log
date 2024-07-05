@@ -1,0 +1,142 @@
+Arguments: 
+  /usr/local/Cellar/node/22.2.0/bin/node /usr/local/Cellar/yarn/1.22.19/libexec/bin/yarn.js add node:http
+
+PATH: 
+  /Users/admin/.asdf/shims:/Users/admin/.asdf/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Users/admin/Library/Android/sdk/emulator:/Users/admin/Library/Android/sdk/platform-tools:/Users/admin/Library/Android/sdk/platform-tools:/Users/admin/Library/Android/sdk/cmdline-toolslatestbin:/Users/admin/.rvm/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  22.2.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/node:http: Not found
+      at params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:66145:18)
+      at self.callback (/usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:140890:22)
+      at Request.emit (node:events:520:28)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:141862:10)
+      at Request.emit (node:events:520:28)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:634:28)
+      at IncomingMessage.emit (node:events:532:35)
+      at endReadableNT (node:internal/streams/readable:1696:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "app",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@apollo/client": "^3.10.5",
+      "@loadable/component": "^5.15.0",
+      "@loadable/server": "^5.15.0",
+      "@mediapipe/drawing_utils": "^0.3.1675466124",
+      "@mediapipe/hands": "^0.4.1675469240",
+      "@mediapipe/tasks-vision": "^0.10.14",
+      "@react-three/cannon": "^6.6.0",
+      "@react-three/drei": "^9.107.2",
+      "@react-three/fiber": "^8.16.8",
+      "@react-three/postprocessing": "^2.16.2",
+      "@react-three/rapier": "^1.4.0",
+      "@reduxjs/toolkit": "^2.2.5",
+      "@types/three": "^0.165.0",
+      "ammojs3": "^0.0.11",
+      "axios": "^1.7.2",
+      "classnames": "^2.5.1",
+      "cookie-parser": "^1.4.6",
+      "copy-webpack-plugin": "^12.0.2",
+      "cors": "^2.8.5",
+      "css-loader": "^5.2.6",
+      "dotenv": "^10.0.0",
+      "helmet": "^7.1.0",
+      "js-cookie": "^3.0.5",
+      "mini-css-extract-plugin": "^2.1.0",
+      "prop-types": "^15.8.1",
+      "react": "^18.3.1",
+      "react-client-only": "^1.0.2",
+      "react-dom": "^18.3.1",
+      "react-helmet": "^6.1.0",
+      "react-helmet-async": "^2.0.5",
+      "react-redux": "^9.1.2",
+      "react-router-config": "^5.1.1",
+      "react-router-dom": "^6.23.1",
+      "react-scripts": "4.0.3",
+      "redux-thunk": "^3.1.0",
+      "socket.io": "^4.7.5",
+      "style-loader": "^2.0.0",
+      "styled-components": "^5.3.0",
+      "three": "^0.165.0",
+      "three-orbit-controls": "^82.1.0",
+      "web-vitals": "^1.0.1"
+    },
+    "scripts": {
+      "start": "rm -rf dist && webpack --mode=development --config webpack/dev/webpack.dev.server.js --config webpack/dev/webpack.dev.client.js && node dist/server.js",
+      "startWatch": "npm-run-all --parallel startWatch:*",
+      "startWatch:build-server": "webpack --config webpack/dev/webpack.dev.server.js --watch",
+      "startWatch:build-client": "webpack --config  webpack/dev/webpack.dev.client.js --watch --no-cache",
+      "startWatch:server": "nodemon --watch ./dist --exec node ./dist/server.js",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "build:prod": "rm -rf ./dist && webpack --config webpack/prod/webpack.prod.server.js --config webpack/prod/webpack.prod.client.js",
+      "build:dev": "rm -rf ./dist && webpack --config webpack/dev/webpack.dev.server.js --config webpack/dev/webpack.dev.client.js"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ],
+      "env": {
+        "browser": true,
+        "node": true
+      }
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "@babel/plugin-proposal-class-properties": "^7.13.0",
+      "@babel/preset-env": "^7.14.4",
+      "@babel/preset-react": "^7.13.13",
+      "@dimforge/rapier3d-compat": "^0.13.1",
+      "@loadable/babel-plugin": "^5.13.2",
+      "@loadable/webpack-plugin": "^5.15.0",
+      "@types/loadable__component": "^5.13.9",
+      "babel-loader": "^8.2.2",
+      "babel-plugin-styled-components": "^1.12.0",
+      "file-loader": "^6.2.0",
+      "leva": "^0.9.35",
+      "nodemon": "^2.0.7",
+      "npm-run-all": "^4.1.5",
+      "react-error-overlay": "^6.0.11",
+      "sass": "^1.77.4",
+      "sass-loader": "^14.2.1",
+      "terser-webpack-plugin": "^5.1.2",
+      "webpack": "^5.91.0",
+      "webpack-cli": "^4.7.0",
+      "webpack-dev-server": "^3.11.2",
+      "webpack-hot-middleware": "^2.25.0",
+      "webpack-merge": "^5.7.3",
+      "webpack-node-externals": "^3.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

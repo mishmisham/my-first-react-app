@@ -184,8 +184,10 @@ const Layout = ({
   title,
   description
 }) => {
-  _websocket_client__WEBPACK_IMPORTED_MODULE_7__["default"].addEventListener("open", ev => {
-    (0,_websocket_client__WEBPACK_IMPORTED_MODULE_7__.websocketSendEcho)('lorem!');
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (typeof window !== undefined) {
+      (0,_websocket_client__WEBPACK_IMPORTED_MODULE_7__.websocketSend)('lorem!');
+    }
   });
   const [displayNotify, setDisplayNotify] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     show: false,
@@ -364,33 +366,49 @@ const UserShortInfo = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   websocketSendEcho: () => (/* binding */ websocketSendEcho),
-/* harmony export */   websocketSendPing: () => (/* binding */ websocketSendPing)
+/* harmony export */   websocketSend: () => (/* binding */ websocketSend)
 /* harmony export */ });
-const websocketClient = new WebSocket('ws://localhost:' + {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.WS_PORT);
-websocketClient.onopen = function () {
-  console.log('подключился');
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/build/esm/index.js");
+
+const websocketURL = 'ws://localhost:' + {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.WS_PORT;
+const connectionOptions = {
+  "force new connection": true,
+  "reconnectionAttempts": "Infinity",
+  //avoid having user reconnect manually in order to prevent dead clients after a server restart
+  "timeout": 10000,
+  //before connect_error and connect_timeout are emitted.
+  "transports": [
+  // "polling",
+  "websocket"
+  // "webtransport"
+  ]
+  // withCredentials: true,
+  // extraHeaders: {
+  //   "my-custom-header": "abcd"
+  // }
+  // cors: {
+  //     origin: websocketURL
+  // }
 };
-websocketClient.onmessage = function (message) {
-  console.log('Message: %s', message.data);
-};
-const websocketSendEcho = value => {
+const websocketClient = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)(websocketURL, connectionOptions);
+websocketClient.on('open', e => {
+  console.log('websocket client open');
+});
+websocketClient.on('message', message => {
+  console.log('Message: %s', message);
+});
+const websocketSend = value => {
   if (typeof window !== 'object') {
     return;
   }
   try {
-    websocketClient.send(JSON.stringify({
+    websocketClient.emit('message', {
       action: 'ECHO',
-      data: value.toString()
-    }));
+      data: value
+    });
   } catch (err) {
     console.log(err);
   }
-};
-const websocketSendPing = () => {
-  websocketClient.send(JSON.stringify({
-    action: 'PING'
-  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (websocketClient);
 

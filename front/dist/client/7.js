@@ -58,9 +58,18 @@ const TestMediaPipe = () => {
       // обе руки
       landmarks.forEach(hand => {
         // кончик большого пальца
-        newPointers.push(getTranslatedXYZ(hand[4]));
+        const thumbTip = {
+          finger: 'THUMB_TIP',
+          ...getTranslatedXYZ(hand[4])
+        };
+        newPointers.push(thumbTip);
+
         // кончик указательного пальца
-        newPointers.push(getTranslatedXYZ(hand[8]));
+        const indexFingerTip = {
+          finger: 'INDEX_FINGER_TIP',
+          ...getTranslatedXYZ(hand[8])
+        };
+        newPointers.push(indexFingerTip);
       });
       setPointers(newPointers);
     } else {
@@ -499,10 +508,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/SphereComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx");
+/* harmony import */ var _parts_CylinderComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/CylinderComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+
 
 
 
@@ -511,14 +522,32 @@ function FingersComponent({
   pointers,
   distance
 }) {
-  const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  let camera = null;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    // if (pointers.length !== fingers.length) {
-
-    // }
-    refreshPointers();
+  const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+  const euler = new three__WEBPACK_IMPORTED_MODULE_3__.Euler();
+  const wordDirectionVector = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+  const forViewPortSizeVector = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2();
+  const [camera, setCamera] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [viewPortSize, setViewPortSize] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    x: 0,
+    y: 0
   });
+  const [absoluteXY, setAbsoluteXY] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    x: 0,
+    y: 0
+  });
+  const [fingers, setFingers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const fingerRefs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);
+  const fingerStickRefs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);
+  const getViewportSize = camera => {
+    // размеры видимой области "на заданной дистанции"
+    const viewPort = camera.getViewSize(distance, forViewPortSizeVector);
+    setViewPortSize(viewPort);
+    // абсолютные x / y краев вьюпорта
+    setAbsoluteXY({
+      x: viewPort.x / 2,
+      y: viewPort.y / 2
+    });
+  };
   const refreshPointers = () => {
     if (!camera) {
       return;
@@ -527,55 +556,113 @@ function FingersComponent({
       rotation,
       position
     } = camera;
-
-    // куда смортрит камера
-    const cameraDirection = camera.getWorldDirection(new three__WEBPACK_IMPORTED_MODULE_2__.Vector3());
-    // размеры видимой области "на заданной дистанции"
-    const viewPortSize = camera.getViewSize(distance, new three__WEBPACK_IMPORTED_MODULE_2__.Vector2());
-    // абсолютные x / y краев вьюпорта
-    const xLeftAbs = viewPortSize.x / 2;
-    const yTopAbs = viewPortSize.y / 2;
+    // куда смотрит камера
+    const cameraDirection = camera.getWorldDirection(wordDirectionVector);
     const items = [];
     pointers.forEach(pointer => {
       // плоские координаты
       const flatCoords = {
-        x: viewPortSize.x * pointer.x + xLeftAbs,
-        y: viewPortSize.y * pointer.y + yTopAbs,
+        x: viewPortSize.x * pointer.x + absoluteXY.x,
+        y: viewPortSize.y * pointer.y + absoluteXY.y,
         z: pointer.z
       };
-      const objectPosition = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
-
       // добавляем абсолютные координаты пальца 
       objectPosition.copy(flatCoords);
-
       // вращение вокруг камеры
-      const euler = new three__WEBPACK_IMPORTED_MODULE_2__.Euler();
       euler.copy(rotation);
       objectPosition.applyEuler(euler);
-
       // относительно камеры удаленность пальца
       const zPositioner = distance; // + pointer.z;
-
       // проецируем координаты перед камерой
       objectPosition.addScaledVector(cameraDirection, zPositioner);
       items.push({
-        position: [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z]
+        position: [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z],
+        finger: pointer.finger
       });
     });
-    setFingers(items);
+    return items;
   };
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.C)(frame => {
-    if (camera) {
-      return;
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.C)(frame => {
+    if (!camera) {
+      setCamera(frame.camera);
+      getViewportSize(frame.camera);
     }
-    camera = frame.camera;
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (pointers && pointers.length !== fingers.length) {
+      const items = refreshPointers();
+      setFingers(items);
+    }
+    if (fingerRefs !== null && fingerRefs !== void 0 && fingerRefs.current.length) {
+      const items = refreshPointers();
+      items.forEach((item, i) => {
+        if (fingerRefs.current[i]) {
+          fingerRefs.current[i].position.x = item.position[0];
+          fingerRefs.current[i].position.y = item.position[1];
+          fingerRefs.current[i].position.z = item.position[2];
+        }
+        if (fingerStickRefs.current[i]) {
+          fingerStickRefs.current[i].position.x = item.position[0];
+          fingerStickRefs.current[i].position.y = item.position[1];
+          fingerStickRefs.current[i].position.z = item.position[2];
+          console.log(fingerStickRefs.current[i]);
+          // fingerStickRefs.current[i].quaternion.copy(item.quaternion);
+        }
+      });
+    }
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, fingers.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
-    key: i
-  }, props, {
-    i: i
-  }))));
+    ref: element => fingerRefs.current[i] = element,
+    key: 'finger-' + i
+  }, props))), fingers.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CylinderComponent__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+    ref: element => fingerStickRefs.current[i] = element,
+    key: 'finger-stick-' + i
+  }, props))));
 }
+
+/***/ }),
+
+/***/ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx":
+/*!********************************************************************************************!*\
+  !*** ./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+
+
+const CylinderComponent = (props, ref) => {
+  const cylinderHeight = 100;
+  const globalGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.CylinderGeometry(0.05, 2.45, cylinderHeight, 12);
+  globalGeometry.translate(0, -cylinderHeight / 2, 0);
+  let color = '#fff';
+  if ((props === null || props === void 0 ? void 0 : props.finger) === 'THUMB_TIP') {
+    color = '#e60d0d';
+  }
+  if ((props === null || props === void 0 ? void 0 : props.finger) === 'INDEX_FINGER_TIP') {
+    color = '#80ff00';
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", _extends({
+    ref: ref,
+    visible: true,
+    geometry: globalGeometry
+  }, props, {
+    "rotation-y": Math.PI / 2
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
+    attach: "material",
+    color: color,
+    transparent: true,
+    opacity: 0.3
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(CylinderComponent));
 
 /***/ }),
 
@@ -594,20 +681,26 @@ __webpack_require__.r(__webpack_exports__);
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
-const SphereComponent = props => {
+const SphereComponent = (props, ref) => {
+  let color = '#fff';
+  if ((props === null || props === void 0 ? void 0 : props.finger) === 'THUMB_TIP') {
+    color = '#e60d0d';
+  }
+  if ((props === null || props === void 0 ? void 0 : props.finger) === 'INDEX_FINGER_TIP') {
+    color = '#80ff00';
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", _extends({
-    visible: true // object gets render if true
-    ,
-    castShadow: true // Sets whether or not the object cats a shadow
+    ref: ref,
+    visible: true
   }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("sphereGeometry", {
     attach: "geometry",
-    args: [0.1, 0.1, 0.1]
+    args: [0.1, 0.1, 0.1, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     attach: "material",
-    color: "#afff00"
+    color: color
   }));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SphereComponent);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(SphereComponent));
 
 /***/ }),
 
@@ -623,7 +716,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 /* harmony import */ var _parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/stoneOne */ "./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -676,18 +768,23 @@ const RocksComponent = ({
     setRocks(items);
     setReady(true);
   };
-  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.A)(frame => {
-    if (!needNewData) {
-      return;
-    }
-    const positionedRocks = [...rocks];
-    // 2D координаты каждого камня
-    positionedRocks.forEach(rock => {
-      rock.xy = get2DCoordinates(rock.position, frame.camera, width, height);
-    });
-    setNeedNewData(false);
-    onGetItems(positionedRocks);
-  });
+
+  // useThree((frame) => {
+  //     if (!needNewData) {
+  //         return;
+  //     }
+
+  //     const positionedRocks = [...rocks];
+  //     // 2D координаты каждого камня
+  //     positionedRocks.forEach(rock => {
+  //         rock.xy = get2DCoordinates(rock.position, frame.camera, width, height)
+  //     })
+
+  //     setNeedNewData(false);
+
+  //     onGetItems(positionedRocks);
+  // });
+
   initStartRandomPositions();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, rocks.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
     key: props._id
@@ -725,10 +822,10 @@ function StoneOne(props) {
     materials
   } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF)(stonePath);
   const handlePointerOver = e => {
-    console.log('mouse over on rock', e);
+    // console.log('mouse over on rock', e)
   };
   const handlePointerClick = e => {
-    console.log('mouse click on rock', e);
+    // console.log('mouse click on rock', e)
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.RigidBody, _extends({}, props, {
     type: "dynamic",

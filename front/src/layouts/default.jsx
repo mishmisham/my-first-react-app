@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import './default.sass';
 import NavMenu from './parts/NavMenu/navMenu';
@@ -6,13 +6,16 @@ import UserShortInfo from './parts/userShortInfo/userShortInfo';
 import NotifyComponent from '@/components/primitives/notifyComponent/notifyComponent';
 import DefaultFooter from './parts/defaultFooter/defaultFooter';
 import {GlobalLayoutContext} from './parts/GlobalLayoutContext';
-import websocketClient, { websocketSendEcho, websocketSendPing } from '@/websocket/client';
+import websocketClient, { websocketSend } from '@/websocket/client';
 
 const Layout = ({ children, title, description }) => {
 
-  websocketClient.addEventListener("open", (ev) => {
-    websocketSendEcho('lorem!');
-  });
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      websocketSend('lorem!');
+    }
+  })
+    
 
   const [displayNotify, setDisplayNotify] = useState({
     show: false,

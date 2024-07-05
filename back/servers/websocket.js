@@ -1,4 +1,7 @@
-import WebSocket, { WebSocketServer } from 'ws';
+// import WebSocket, { WebSocketServer } from 'ws';
+import express from 'express';
+import { createServer } from "node:http";
+import { Server } from "socket.io";
 import { onConnect } from '../websocket/onConnect.js';
 /*
     // https://www.npmjs.com/package/ws
@@ -20,25 +23,25 @@ import { onConnect } from '../websocket/onConnect.js';
 
 export const websocketServer = (port) => {
 
-    const wss = new WebSocketServer({
-        port,
-        perMessageDeflate: {
-        zlibDeflateOptions: {
-            chunkSize: 1024,
-            memLevel: 7,
-            level: 3
-        },
-        zlibInflateOptions: {
-            chunkSize: 10 * 1024
-        },
-        clientNoContextTakeover: true, // Defaults to negotiated value.
-        serverNoContextTakeover: true, // Defaults to negotiated value.
-        serverMaxWindowBits: 10, // Defaults to negotiated value.
-        concurrencyLimit: 10, // Limits zlib concurrency for perf.
-        threshold: 1024 // Size (in bytes) below which messages
+    const app = express();
+    const server = createServer(app, {
+        cors: {
+          origin: process.env.CLIENT_HOST
         }
     });
 
-    wss.on('connection', onConnect);
-    console.log("🚀 WebSocket on ws://localhost:%s", port)
+    const io = new Server(server, {
+        transports: [
+            // "polling",
+            "websocket",
+            // "webtransport"
+        ]
+    });
+
+    io.on('connection', onConnect);
+
+    server.listen(port);
+    
+    console.log("🚀 WebSocket on ws://localhost:%s", port);
 }
+

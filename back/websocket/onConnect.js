@@ -1,7 +1,7 @@
 
 export const onConnect = (wsClient) => {
     console.log('Новый пользователь');
-    wsClient.send('ipsum');
+    wsClient.emit('ipsum');
 
     wsClient.on('close', function() {
         console.log('Пользователь отключился');
@@ -10,14 +10,15 @@ export const onConnect = (wsClient) => {
     wsClient.on('message', function(message) {
         console.log('inbox', message);
         try {
-            const jsonMessage = JSON.parse(message);
+            const jsonMessage = message;
+            wsClient.emit('message', 'ping')
             switch (jsonMessage.action) {
                 case 'ECHO':
-                    wsClient.send(jsonMessage.data);
+                    wsClient.emit('message', jsonMessage.data);
                     break;
                 case 'PING':
                     setTimeout(function() {
-                        wsClient.send('PONG');
+                        wsClient.emit('message', 'PONG');
                     }, 2000);
                     break;
                 default:

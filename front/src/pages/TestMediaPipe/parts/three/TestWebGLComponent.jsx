@@ -57,6 +57,13 @@ export default function TestWebGLComponent({pointers, width, height}) {
     console.log('rocks', rocks)
   }
 
+  /*
+  
+    position={[1,9,12]}
+    rotation={[-0.7,-0.2,0]}
+
+  */
+
   return (
     <>
       <div style={{height: height+'px'}}>
@@ -74,8 +81,8 @@ export default function TestWebGLComponent({pointers, width, height}) {
               keyCode={keyCode}
               width={width}
               height={height}
-              position={[1,9,12]}
-              rotation={[-0.7,-0.2,0]}
+              position={[0, 0, 0]}
+              rotation={[0, 0, 0]}
             />
 
             <Physics

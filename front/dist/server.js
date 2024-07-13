@@ -1269,6 +1269,17 @@ module.exports = require("serialize-javascript");
 
 /***/ }),
 
+/***/ "socket.io-client":
+/*!***********************************!*\
+  !*** external "socket.io-client" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("socket.io-client");
+
+/***/ }),
+
 /***/ "three":
 /*!************************!*\
   !*** external "three" ***!

@@ -9,6 +9,7 @@ export default function FingersComponent({pointers, distance}) {
  
     let cameraDirection = null;
     const objectPosition = new THREE.Vector3();
+    const objectPosition2 = new THREE.Vector3();
     const euler = new THREE.Euler();
     const wordDirectionVector = new THREE.Vector3();
     const forViewPortSizeVector = new THREE.Vector2();
@@ -38,7 +39,7 @@ export default function FingersComponent({pointers, distance}) {
             return;
         }
  
-        const { rotation, position } = camera;
+        const { rotation, position, quaternion } = camera;
         // куда смотрит камера
         cameraDirection = camera.getWorldDirection(wordDirectionVector);
         const items = [];
@@ -59,15 +60,29 @@ export default function FingersComponent({pointers, distance}) {
             // проецируем координаты перед камерой
             objectPosition.addScaledVector(cameraDirection, zPositioner);
 
+            const fingerPositions = [
+                objectPosition.x + position.x,
+                objectPosition.y + position.y,
+                objectPosition.z + position.z,
+            ];
+
+
+                const percentOffset = {
+                    x: pointer.x , // * (Math.PI * 2),
+                    y: pointer.y , // * (Math.PI * 2),
+                    z: pointer.z , // * (Math.PI * 2),
+                }
+
             items.push({
-                position: [
-                    objectPosition.x + position.x,
-                    objectPosition.y + position.y,
-                    objectPosition.z + position.z,
-                ],
-                finger: pointer.finger
-            })
-        })
+                position: fingerPositions,
+                finger: pointer.finger,
+                flatRotation: {
+                   x: (rotation.x + Math.PI / 2),
+                   y: rotation.y,
+                   z: rotation.z,
+                }
+            });
+        });
 
         return items;
     }
@@ -94,14 +109,15 @@ export default function FingersComponent({pointers, distance}) {
                     fingerRefs.current[i].position.z = item.position[2];
                 }
                 if (fingerStickRefs.current[i]) {
-                    
+
                     fingerStickRefs.current[i].position.x = item.position[0];
                     fingerStickRefs.current[i].position.y = item.position[1];
                     fingerStickRefs.current[i].position.z = item.position[2];
-                    
-                    fingerStickRefs.current[i].rotation.x = camera.rotation.x + Math.PI / 2; 
-                    fingerStickRefs.current[i].rotation.y = camera.rotation.y + Math.PI; 
-                    fingerStickRefs.current[i].rotation.z = camera.rotation.z //- Math.PI / 2; 
+
+                    fingerStickRefs.current[i].rotation.x = item.flatRotation.x; 
+                    fingerStickRefs.current[i].rotation.y = item.flatRotation.y; 
+                    fingerStickRefs.current[i].rotation.z = item.flatRotation.z; 
+                  
                 }
             });
         }

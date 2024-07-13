@@ -411,6 +411,13 @@ function TestWebGLComponent({
   const onGetItems = rocks => {
     console.log('rocks', rocks);
   };
+
+  /*
+  
+    position={[1,9,12]}
+    rotation={[-0.7,-0.2,0]}
+   */
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: height + 'px'
@@ -428,8 +435,8 @@ function TestWebGLComponent({
     keyCode: keyCode,
     width: width,
     height: height,
-    position: [1, 9, 12],
-    rotation: [-0.7, -0.2, 0]
+    position: [0, 0, 0],
+    rotation: [0, 0, 0]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_rapier__WEBPACK_IMPORTED_MODULE_1__.Physics, {
     gravity: [0, -10, 0],
     timeStep: 1 / 10
@@ -524,6 +531,7 @@ function FingersComponent({
 }) {
   let cameraDirection = null;
   const objectPosition = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+  const objectPosition2 = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
   const euler = new three__WEBPACK_IMPORTED_MODULE_3__.Euler();
   const wordDirectionVector = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
   const forViewPortSizeVector = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2();
@@ -555,7 +563,8 @@ function FingersComponent({
     }
     const {
       rotation,
-      position
+      position,
+      quaternion
     } = camera;
     // куда смотрит камера
     cameraDirection = camera.getWorldDirection(wordDirectionVector);
@@ -576,9 +585,21 @@ function FingersComponent({
       const zPositioner = distance; // + pointer.z;
       // проецируем координаты перед камерой
       objectPosition.addScaledVector(cameraDirection, zPositioner);
+      const fingerPositions = [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z];
+      const percentOffset = {
+        x: fingerPositions[0] / (position.x + 1) * (Math.PI * 2),
+        y: (fingerPositions[0] + 1) / (position.y + 1) * (Math.PI * 2),
+        z: (fingerPositions[0] + 1) / (position.z + 1) * (Math.PI * 2)
+      };
+      console.log(percentOffset, percentOffset.x);
       items.push({
-        position: [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z],
-        finger: pointer.finger
+        position: fingerPositions,
+        finger: pointer.finger,
+        flatRotation: {
+          x: rotation.x + Math.PI / 2 + percentOffset.x,
+          y: rotation.y + percentOffset.y,
+          z: rotation.z + percentOffset.z
+        }
       });
     });
     return items;
@@ -606,11 +627,9 @@ function FingersComponent({
           fingerStickRefs.current[i].position.x = item.position[0];
           fingerStickRefs.current[i].position.y = item.position[1];
           fingerStickRefs.current[i].position.z = item.position[2];
-
-          // console.log(fingerStickRefs.current[i])
-
-          // fingerStickRefs.current[i].rotation.copy(camera.rotation);
-          // fingerStickRefs.current[i].quaternion.copy(camera.quaternion.invert());
+          fingerStickRefs.current[i].rotation.x = item.flatRotation.x;
+          fingerStickRefs.current[i].rotation.y = item.flatRotation.y;
+          fingerStickRefs.current[i].rotation.z = item.flatRotation.z;
         }
       });
     }
@@ -643,9 +662,9 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 
 const CylinderComponent = (props, ref) => {
-  const cylinderHeight = 1;
-  const startWidth = 0.05;
-  const endWidth = 0.1;
+  const cylinderHeight = 0.5;
+  const startWidth = 0.01;
+  const endWidth = 0.05;
   const smoothness = 12;
   const globalGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.CylinderGeometry(startWidth, endWidth, cylinderHeight, smoothness);
   globalGeometry.translate(0, -cylinderHeight / 2, 0);

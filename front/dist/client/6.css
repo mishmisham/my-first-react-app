@@ -1,39 +1,43 @@
-/*!*********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/primitives/inputText/inputText.sass ***!
-  \*********************************************************************************************************************************************/
-.input-text {
-  padding: 8px 0;
-  border: 0;
+/*!***********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/modules/handDetection/handDetectionComponent.sass ***!
+  \***********************************************************************************************************************************************************/
+.hand-detection {
   width: 100%;
   display: flex;
-  flex-direction: column;
   position: relative;
 }
-.input-text label {
-  font-weight: 400;
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 12px;
-  padding-left: 16px;
+.hand-detection video {
+  width: 472px;
+  height: 354px;
+  z-index: 1;
+  clear: both;
+  display: block;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
-.input-text input {
-  padding: 8px 16px;
-  border: 0;
+.hand-detection canvas {
   width: 100%;
-  border-radius: 16px;
-  background: #fff;
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
-.input-text input:focus {
-  outline: none;
-  border: 0;
-}
-/*!*************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/combined/login/forms/registerForm/registerForm.sass ***!
-  \*************************************************************************************************************************************************************/
-.register-form {
-  display: flex;
-  flex-direction: column;
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/modules/handDetection/CanvasMaskComponent/canvasMaskComponent.sass ***!
+  \****************************************************************************************************************************************************************************/
+.canvas-mask-component {
+  position: absolute;
   width: 100%;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
 
 /*# sourceMappingURL=6.css.map*/

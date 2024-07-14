@@ -52,9 +52,6 @@ export default async (req, res, store, contextData) => {
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          
-          <link rel="stylesheet" href="/src_layouts_default_jsx.css"></link>
-
           <link rel="stylesheet" href="/server.css"></link>
           <link rel="icon" type="image/x-icon" href="/client/favicon.ico"></link>
           <title>App</title>

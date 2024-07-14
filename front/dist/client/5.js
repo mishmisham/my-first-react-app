@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[5],{
 
-/***/ "./src/components/combined/login/forms/authForm/authForm.jsx":
-/*!*******************************************************************!*\
-  !*** ./src/components/combined/login/forms/authForm/authForm.jsx ***!
-  \*******************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerForm.jsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerForm.jsx ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,39 +13,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _authSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authSubmitButton */ "./src/components/combined/login/forms/authForm/authSubmitButton.jsx");
+/* harmony import */ var _registerSubmitButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./registerSubmitButton */ "./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx");
 /* harmony import */ var _components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/primitives/inputText/InputText */ "./src/components/primitives/inputText/InputText.jsx");
-/* harmony import */ var _authFormFields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authFormFields */ "./src/components/combined/login/forms/authForm/authFormFields.js");
-/* harmony import */ var _authForm_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./authForm.sass */ "./src/components/combined/login/forms/authForm/authForm.sass");
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
+/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
+/* harmony import */ var _registerFormFields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./registerFormFields */ "./src/components/combined/login/forms/registerForm/registerFormFields.js");
+/* harmony import */ var _registerForm_sass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registerForm.sass */ "./src/components/combined/login/forms/registerForm/registerForm.sass");
 
 
 
 
 
 
-const AuthForm = () => {
-  const [authData, setAuthData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    ..._authFormFields__WEBPACK_IMPORTED_MODULE_3__.authFormFields
-  });
+const RegisterForm = () => {
+  const [registerData, setRegisterData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(JSON.parse(JSON.stringify({
+    ..._registerFormFields__WEBPACK_IMPORTED_MODULE_4__.registerFormFields
+  })));
   const onInput = (val, field) => {
-    const fieldObject = authData[field];
+    const fieldObject = registerData[field];
     fieldObject.value = val;
-    setAuthData({
-      ...authData,
+    setRegisterData({
+      ...registerData,
       [field]: fieldObject
     });
   };
+  const clearFormValues = () => {
+    setRegisterData({
+      ..._registerFormFields__WEBPACK_IMPORTED_MODULE_4__.registerFormFields
+    });
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "auth-form"
-  }, Object.keys(authData).map((inputKey, key) => {
+    className: "register-form"
+  }, Object.keys(registerData).map((inputKey, key) => {
     const {
       value,
       label,
       placeholder,
       type,
       field
-    } = authData[inputKey];
+    } = registerData[inputKey];
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_inputText_InputText__WEBPACK_IMPORTED_MODULE_2__["default"], {
       value: value,
       label: label,
@@ -54,25 +59,33 @@ const AuthForm = () => {
       key: key,
       onInput: newValue => onInput(newValue, field)
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_5__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_authSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    authData: authData
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_3__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_registerSubmitButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    registerData: registerData,
+    clearFormValues: clearFormValues
   })));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthForm);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RegisterForm);
 
 /***/ }),
 
-/***/ "./src/components/combined/login/forms/authForm/authFormFields.js":
-/*!************************************************************************!*\
-  !*** ./src/components/combined/login/forms/authForm/authFormFields.js ***!
-  \************************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerFormFields.js":
+/*!********************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerFormFields.js ***!
+  \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   authFormFields: () => (/* binding */ authFormFields)
+/* harmony export */   registerFormFields: () => (/* binding */ registerFormFields)
 /* harmony export */ });
-const authFormFields = {
+const registerFormFields = {
+  name: {
+    value: '',
+    label: 'Name',
+    placeholder: 'Enter your name',
+    type: 'text',
+    field: 'name'
+  },
   email: {
     value: '',
     label: 'Email',
@@ -91,10 +104,10 @@ const authFormFields = {
 
 /***/ }),
 
-/***/ "./src/components/combined/login/forms/authForm/authSubmitButton.jsx":
-/*!***************************************************************************!*\
-  !*** ./src/components/combined/login/forms/authForm/authSubmitButton.jsx ***!
-  \***************************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx":
+/*!***********************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerSubmitButton.jsx ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -103,15 +116,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
-/* harmony import */ var _store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/store/reducers/user/userReducer.js */ "./src/store/reducers/user/userReducer.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _loginFormsContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../loginFormsContext */ "./src/components/combined/login/loginFormsContext.js");
 /* harmony import */ var _layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/layouts/parts/GlobalLayoutContext */ "./src/layouts/parts/GlobalLayoutContext.js");
-/* harmony import */ var _graphql_refreshJWT_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/graphql/refreshJWT.js */ "./src/graphql/refreshJWT.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
 let _ = t => t,
   _t;
 
@@ -119,73 +129,61 @@ let _ = t => t,
 
 
 
-
-
-
-const AUTH_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.gql)(_t || (_t = _`
-    mutation AuthAction($input: LoginInput!) {
-        login(input: $input) {
+const REGISTER_ACTION = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql)(_t || (_t = _`
+    mutation RegisterAction($input: RegisterInput!) {
+        register(input: $input) {
             data {
                 name
-                id
-                email
-                refreshToken
-            }
-            errors {
-                message
-                errors
             }
         }
     }
 `));
-const AuthSubmitButton = ({
-  authData
+const RegisterSubmitButton = ({
+  registerData,
+  clearFormValues
 }) => {
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useDispatch)();
+  const [register, {
+    data,
+    loading,
+    error
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation)(REGISTER_ACTION);
+  const loginFormsContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_loginFormsContext__WEBPACK_IMPORTED_MODULE_1__.LoginFormsContext);
   const layoutContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_layouts_parts_GlobalLayoutContext__WEBPACK_IMPORTED_MODULE_2__.GlobalLayoutContext);
-  const [login] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_7__.useMutation)(AUTH_ACTION, {
-    onError: ({
-      operation,
-      response,
-      graphQLErrors,
-      networkError
-    }) => {
-      layoutContext.showNotify({
-        text: 'graphql error' + graphQLErrors.join(' ')
-      });
-    }
-  });
   const submit = async () => {
     const {
       email,
-      password
-    } = authData;
-    login({
-      variables: {
-        input: {
-          email: email.value,
-          password: password.value
+      password,
+      name
+    } = registerData;
+    console.log(email, password, name);
+    try {
+      await register({
+        variables: {
+          input: {
+            name: name.value,
+            email: email.value,
+            password: password.value
+          }
         }
-      }
-    }).then(response => {
-      const {
-        errors,
-        data
-      } = response.data.login;
-      if (errors) {
-        layoutContext.showNotify({
-          text: errors.message
-        });
-        return;
-      }
-      localStorage.setItem('refreshToken', data.refreshToken);
-      delete data.refreshToken;
-      delete data.__typename;
-      dispatch((0,_store_reducers_user_userReducer_js__WEBPACK_IMPORTED_MODULE_1__.setupUser)(data));
-      (0,_graphql_refreshJWT_js__WEBPACK_IMPORTED_MODULE_3__.runJWTRefresher)();
-      navigate('/');
-    });
+      }).then(response => {
+        const {
+          errors,
+          data
+        } = response.data.register;
+        if (errors) {
+          layoutContext.showNotify({
+            text: errors.message
+          });
+          return;
+        }
+        clearFormValues();
+        loginFormsContext.changeAuthMode(true);
+      });
+    } catch (err) {
+      layoutContext.showNotify({
+        text: 'error || data'
+      });
+    }
   };
   const computedStyle = {
     marginTop: '12px'
@@ -194,12 +192,13 @@ const AuthSubmitButton = ({
     onClick: submit,
     className: "btn btn--submit",
     style: computedStyle
-  }, "Login");
+  }, "Register");
 };
-AuthSubmitButton.propTypes = {
-  authData: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().object)
+RegisterSubmitButton.propTypes = {
+  registerData: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object),
+  clearFormValues: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func)
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthSubmitButton);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RegisterSubmitButton);
 
 /***/ }),
 
@@ -237,29 +236,10 @@ const InputText = props => {
 
 /***/ }),
 
-/***/ "./src/layouts/parts/GlobalLayoutContext.js":
-/*!**************************************************!*\
-  !*** ./src/layouts/parts/GlobalLayoutContext.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   GlobalLayoutContext: () => (/* binding */ GlobalLayoutContext)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-const GlobalLayoutContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
-  showNotify: () => {}
-});
-
-/***/ }),
-
-/***/ "./src/components/combined/login/forms/authForm/authForm.sass":
-/*!********************************************************************!*\
-  !*** ./src/components/combined/login/forms/authForm/authForm.sass ***!
-  \********************************************************************/
+/***/ "./src/components/combined/login/forms/registerForm/registerForm.sass":
+/*!****************************************************************************!*\
+  !*** ./src/components/combined/login/forms/registerForm/registerForm.sass ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

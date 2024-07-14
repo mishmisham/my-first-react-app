@@ -10,5 +10,203 @@
   justify-content: center;
   padding: 24px;
 }
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/default.sass ***!
+  \*******************************************************************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background: rgb(217, 217, 217);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #eaeaea;
+  margin: 0 0 32px;
+}
+.header-inner {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  display: flex;
+}
+
+button {
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.content {
+  max-width: 520px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 155px);
+  align-content: center;
+  align-items: center;
+}
+.content_page {
+  margin: auto;
+  padding: 24px;
+  background: #eeeded;
+  display: flex;
+  flex-direction: column;
+  border-radius: 32px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.5s ease-out;
+  width: 100%;
+}
+
+.btn {
+  width: auto;
+  display: flex;
+  flex: 0 1 auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 24px;
+  font-size: 16px;
+  border-radius: 24px;
+  transition: 0.15s;
+}
+.btn--submit {
+  background: #1a0941;
+  color: #fff;
+}
+.btn--submit:hover {
+  background: #2a0e6a;
+}
+/*!*********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/NavMenu/navMenu.sass ***!
+  \*********************************************************************************************************************************/
+.nav-menu {
+  margin: 0 auto;
+  display: flex;
+}
+.nav-menu_item {
+  padding: 6px 14px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  font-weight: 300;
+  transition: 0.15s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.nav-menu_item:first-of-type {
+  margin-left: 0;
+}
+.nav-menu_item:hover {
+  color: #040404;
+  background: white;
+}
+.nav-menu_item.active {
+  color: #1e1e1e;
+  background: white;
+}
+/*!*********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/userShortInfo/userShortInfo.sass ***!
+  \*********************************************************************************************************************************************/
+.user-short-info {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0 auto auto;
+  font-weight: 600;
+  padding: 0 8px;
+  font-size: 12px;
+}
+/*!*********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/primitives/notifyComponent/notifyComponent.sass ***!
+  \*********************************************************************************************************************************************************/
+.notify-component {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.notify-component--visible {
+  display: flex;
+}
+.notify-component--hidden {
+  display: none;
+}
+.notify-component_inner {
+  width: calc(100% - 40px);
+  flex: 1 0 auto;
+  max-width: 240px;
+}
+.notify-component_inner-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+.notify-component_inner-content--error {
+  background: #f98ecb;
+}
+.notify-component_inner-content--info {
+  background: #aae7fc;
+}
+.notify-component_inner-content-header {
+  display: flex;
+  margin-bottom: 12px;
+}
+.notify-component_inner-content-header-close {
+  cursor: pointer;
+  margin: auto 0 auto auto;
+  background: none;
+  text-align: center;
+}
+.notify-component_inner-content-body {
+  display: flex;
+  color: #333;
+  font-size: 16px;
+}
+/*!*********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/layouts/parts/defaultFooter/defaultFooter.sass ***!
+  \*********************************************************************************************************************************************/
+.default-footer {
+  width: 100%;
+  max-width: 100vw;
+  padding: 24px;
+  background: #f0f0f0;
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+.default-footer section {
+  max-width: 720px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.default-footer section p {
+  color: #555;
+  text-align: center;
+}
 
 /*# sourceMappingURL=client.css.map*/

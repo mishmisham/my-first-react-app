@@ -6,8 +6,8 @@ const ControlsComponent = (props) => {
         line
     } = props;
 
-    const defaultPointRadius = 30;
-    const defaultBezierPointRadius = 20;
+    const defaultPointRadius = 10;
+    const defaultBezierPointRadius = 5;
 
     /*
         TODO 

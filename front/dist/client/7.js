@@ -602,8 +602,6 @@ function FingersComponent({
           fingerStickRefs.current[i].position.x = item.position[0];
           fingerStickRefs.current[i].position.y = item.position[1];
           fingerStickRefs.current[i].position.z = item.position[2];
-          fingerStickRefs.current[i].euler.copy(item.euler);
-          fingerStickRefs.current[i].quaternion.copy(item.quaternion);
         }
       });
     }

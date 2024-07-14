@@ -82,20 +82,21 @@ const SvgDrawer = () => {
 
     return (
         <div className='svg-drawer'>
+            <span>TODO см example.js и файлы в parts</span>
             {
                 lines.map((lineProps) => {
                     return (
-                    <>
+                    <svg>
+                        <PathComponent
+                            key={'line'+lineProps.id}
+                            {...lineProps}
+                        />
                         <ControlsComponent
-                            key={lineProps.id}
+                            key={'ctrl'+lineProps.id}
                             update={updateLine}
                             {...lineProps}
                         />
-                        <PathComponent
-                            key={lineProps.id}
-                            {...lineProps}
-                        />
-                    </>
+                    </svg>
                     )
                 })
             }

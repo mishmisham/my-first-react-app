@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef, createRef } from 'react'
+import React, { useMemo, useState, useRef, createRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import SphereComponent from './parts/SphereComponent';
@@ -66,12 +66,13 @@ export default function FingersComponent({pointers, distance}) {
                 objectPosition.z + position.z,
             ];
 
+          
 
-                const percentOffset = {
-                    x: pointer.x , // * (Math.PI * 2),
-                    y: pointer.y , // * (Math.PI * 2),
-                    z: pointer.z , // * (Math.PI * 2),
-                }
+                // const percentOffset = {
+                //     x: //pointer.x , // * (Math.PI * 2),
+                //     y: //pointer.y , // * (Math.PI * 2),
+                //     z: //pointer.z , // * (Math.PI * 2),
+                // }
 
             items.push({
                 position: fingerPositions,
@@ -80,7 +81,9 @@ export default function FingersComponent({pointers, distance}) {
                    x: (rotation.x + Math.PI / 2),
                    y: rotation.y,
                    z: rotation.z,
-                }
+                },
+                euler,
+                quaternion
             });
         });
 
@@ -94,11 +97,12 @@ export default function FingersComponent({pointers, distance}) {
         }
     });
 
-    useEffect(() => {
+    useMemo(() => {
         if (pointers && pointers.length !== fingers.length) {
             const items = refreshPointers();
             setFingers(items)
         }
+        
 
         if (fingerRefs?.current.length) {
             const items = refreshPointers();
@@ -114,14 +118,10 @@ export default function FingersComponent({pointers, distance}) {
                     fingerStickRefs.current[i].position.y = item.position[1];
                     fingerStickRefs.current[i].position.z = item.position[2];
 
-                    fingerStickRefs.current[i].rotation.x = item.flatRotation.x; 
-                    fingerStickRefs.current[i].rotation.y = item.flatRotation.y; 
-                    fingerStickRefs.current[i].rotation.z = item.flatRotation.z; 
-                  
                 }
             });
         }
-    });
+    }, [pointers]);
 
     return (
         <>

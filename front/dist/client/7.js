@@ -1,10 +1,10 @@
 "use strict";
 (Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] = Object(typeof self !== 'undefined' ? self : this)["webpackChunkapp"] || []).push([[7],{
 
-/***/ "./src/pages/TestMediaPipe/TestMediaPipe.jsx":
-/*!***************************************************!*\
-  !*** ./src/pages/TestMediaPipe/TestMediaPipe.jsx ***!
-  \***************************************************/
+/***/ "./src/components/modules/handDetection/CanvasMaskComponent/CanvasMaskComponent.jsx":
+/*!******************************************************************************************!*\
+  !*** ./src/components/modules/handDetection/CanvasMaskComponent/CanvasMaskComponent.jsx ***!
+  \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,98 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
-/* harmony import */ var _parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/HandDetection/HandDetectionComponent */ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx");
-/* harmony import */ var _parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/three/TestWebGLComponent */ "./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx");
-/* harmony import */ var _parts_CanvasMaskComponent_CanvasMaskComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/CanvasMaskComponent/CanvasMaskComponent */ "./src/pages/TestMediaPipe/parts/CanvasMaskComponent/CanvasMaskComponent.jsx");
-/* harmony import */ var _utils_getDistance_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/utils/getDistance.js */ "./src/utils/getDistance.js");
-
-
-
-
-
-
-const TestMediaPipe = () => {
-  const width = 472;
-  const height = 354;
-  const [pointers, setPointers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-
-  // делаем зеркальное отражение координат
-  const getTranslatedXYZ = xyz => {
-    const {
-      x,
-      y,
-      z
-    } = xyz;
-    return {
-      x: x * -1,
-      y: y * -1,
-      z: z * -1
-    };
-  };
-  const onValues = handData => {
-    /*
-      const maxDistance = getDistance(THUMB_CMC, PINKY_MCP);
-      const catchDistance = getDistance(THUMB_TIP, INDEX_FINGER_TIP);
-      console.log('max, catch', maxDistance, catchDistance)
-    */
-
-    if (handData !== null && handData !== void 0 && handData.landmarks.length) {
-      const {
-        landmarks
-      } = handData;
-      const newPointers = [];
-
-      // обе руки
-      landmarks.forEach(hand => {
-        // кончик большого пальца
-        const thumbTip = {
-          finger: 'THUMB_TIP',
-          ...getTranslatedXYZ(hand[4])
-        };
-        newPointers.push(thumbTip);
-
-        // кончик указательного пальца
-        const indexFingerTip = {
-          finger: 'INDEX_FINGER_TIP',
-          ...getTranslatedXYZ(hand[8])
-        };
-        newPointers.push(indexFingerTip);
-      });
-      setPointers(newPointers);
-    } else {
-      setPointers([]);
-    }
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      position: 'relative'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    pointers: pointers,
-    width: width,
-    height: height
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_HandDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    onValues: onValues
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestMediaPipe);
-
-/***/ }),
-
-/***/ "./src/pages/TestMediaPipe/parts/CanvasMaskComponent/CanvasMaskComponent.jsx":
-/*!***********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/CanvasMaskComponent/CanvasMaskComponent.jsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _canvasMaskComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvasMaskComponent.sass */ "./src/pages/TestMediaPipe/parts/CanvasMaskComponent/canvasMaskComponent.sass");
+/* harmony import */ var _canvasMaskComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvasMaskComponent.sass */ "./src/components/modules/handDetection/CanvasMaskComponent/canvasMaskComponent.sass");
 
 
 const CanvasMaskComponent = props => {
@@ -163,10 +72,10 @@ const CanvasMaskComponent = props => {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx":
-/*!********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/HandDetectionComponent.jsx ***!
-  \********************************************************************************/
+/***/ "./src/components/modules/handDetection/HandDetectionComponent.jsx":
+/*!*************************************************************************!*\
+  !*** ./src/components/modules/handDetection/HandDetectionComponent.jsx ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -175,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _handDetectionComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handDetectionComponent.sass */ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass");
+/* harmony import */ var _handDetectionComponent_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handDetectionComponent.sass */ "./src/components/modules/handDetection/handDetectionComponent.sass");
 /* harmony import */ var _mediapipe_tasks_vision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mediapipe/tasks-vision */ "./node_modules/@mediapipe/tasks-vision/vision_bundle.mjs");
 /* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
 /* harmony import */ var _utils_getDistance_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/utils/getDistance.js */ "./src/utils/getDistance.js");
@@ -346,10 +255,86 @@ const HandDetectionComponent = ({
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx":
-/*!********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/TestWebGLComponent.jsx ***!
-  \********************************************************************/
+/***/ "./src/components/modules/handDetection/utils/HandsValueHandler.jsx":
+/*!**************************************************************************!*\
+  !*** ./src/components/modules/handDetection/utils/HandsValueHandler.jsx ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const HandsValueHandler = ({
+  setPointers,
+  rawValues
+}) => {
+  // делаем зеркальное отражение координат
+  const getTranslatedXYZ = xyz => {
+    const {
+      x,
+      y,
+      z
+    } = xyz;
+    return {
+      x: x * -1,
+      y: y * -1,
+      z: z * -1
+    };
+  };
+  const onValues = handData => {
+    /*
+    const maxDistance = getDistance(THUMB_CMC, PINKY_MCP);
+    const catchDistance = getDistance(THUMB_TIP, INDEX_FINGER_TIP);
+    console.log('max, catch', maxDistance, catchDistance)
+    */
+
+    if (!handData.hasOwnProperty('landmarks')) {
+      return;
+    }
+    if (handData !== null && handData !== void 0 && handData.landmarks.length) {
+      const {
+        landmarks
+      } = handData;
+      const newPointers = [];
+
+      // обе руки
+      landmarks.forEach(hand => {
+        // кончик большого пальца
+        const thumbTip = {
+          finger: 'THUMB_TIP',
+          ...getTranslatedXYZ(hand[4])
+        };
+        newPointers.push(thumbTip);
+
+        // кончик указательного пальца
+        const indexFingerTip = {
+          finger: 'INDEX_FINGER_TIP',
+          ...getTranslatedXYZ(hand[8])
+        };
+        newPointers.push(indexFingerTip);
+      });
+      setPointers(newPointers);
+    } else {
+      setPointers([]);
+    }
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    onValues(rawValues);
+  }, [rawValues]);
+  return null;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HandsValueHandler);
+
+/***/ }),
+
+/***/ "./src/components/three/TestWebGLComponent.jsx":
+/*!*****************************************************!*\
+  !*** ./src/components/three/TestWebGLComponent.jsx ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -358,14 +343,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var _react_three_rapier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/rapier */ "./node_modules/@react-three/rapier/dist/react-three-rapier.esm.js");
-/* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx");
-/* harmony import */ var _parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/EffectsComponent */ "./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx");
-/* harmony import */ var _parts_CameraComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/CameraComponent */ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx");
-/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx");
-/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx");
-/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Terrain */ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx");
+/* harmony import */ var _parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/LightsComponent */ "./src/components/three/parts/LightsComponent.jsx");
+/* harmony import */ var _parts_EffectsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/EffectsComponent */ "./src/components/three/parts/EffectsComponent.jsx");
+/* harmony import */ var _parts_CameraComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/CameraComponent */ "./src/components/three/parts/CameraComponent.jsx");
+/* harmony import */ var _components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/fingers/FingersComponent */ "./src/components/three/components/fingers/FingersComponent.jsx");
+/* harmony import */ var _components_rocks_RocksComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/rocks/RocksComponent */ "./src/components/three/components/rocks/RocksComponent.jsx");
+/* harmony import */ var _components_Terrain__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Terrain */ "./src/components/three/components/Terrain.jsx");
+/* harmony import */ var _mixin_KeyboardHandler__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/mixin/KeyboardHandler */ "./src/mixin/KeyboardHandler.jsx");
 
 
 
@@ -379,6 +365,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // import Ocean from './components/Ocean'
 // {/* <Ocean /> */}
+
 function TestWebGLComponent({
   pointers,
   width,
@@ -391,42 +378,24 @@ function TestWebGLComponent({
   const getRocksScreenPositions = () => {
     rocksComponent.current.setNeedNewData(true);
   };
-  const setMouseDown = value => {
-    setIsMouseDown(value);
-  };
-  const setKeyPressed = (isPressed, value) => {
-    setIsKeyPressed(isPressed);
-    setKeyCode(value);
-  };
-  const onKeyPress = e => {
-    setKeyPressed(true, e.keyCode);
-  };
-  const onKeyUp = e => {
-    setKeyPressed(false, '');
-  };
-  if (typeof window !== undefined) {
-    document.addEventListener('keydown', onKeyPress);
-    document.addEventListener('keyup', onKeyUp);
-  }
   const onGetItems = rocks => {
     console.log('rocks', rocks);
   };
 
   /*
-  
     position={[1,9,12]}
     rotation={[-0.7,-0.2,0]}
-   */
+  */
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       height: height + 'px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_8__.Canvas, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_9__.Canvas, {
     shadows: true,
-    onMouseDown: e => setMouseDown(true),
-    onMouseUp: e => setMouseDown(false),
-    onMouseLeave: e => setMouseDown(false)
+    onMouseDown: e => setIsMouseDown(true),
+    onMouseUp: e => setIsMouseDown(false),
+    onMouseLeave: e => setIsMouseDown(false)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: null
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_CameraComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -448,17 +417,20 @@ function TestWebGLComponent({
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Terrain__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_fingers_FingersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     pointers: pointers,
     distance: 2
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_LightsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_mixin_KeyboardHandler__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    setKeyCode: setKeyCode,
+    setIsKeyPressed: setIsKeyPressed
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: getRocksScreenPositions
   }, " get Rocks Screen Positions "));
 }
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx":
-/*!********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/Terrain.jsx ***!
-  \********************************************************************/
+/***/ "./src/components/three/components/Terrain.jsx":
+/*!*****************************************************!*\
+  !*** ./src/components/three/components/Terrain.jsx ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -503,10 +475,10 @@ const Terrain = () => {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx":
-/*!*************************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/fingers/FingersComponent.jsx ***!
-  \*************************************************************************************/
+/***/ "./src/components/three/components/fingers/FingersComponent.jsx":
+/*!**********************************************************************!*\
+  !*** ./src/components/three/components/fingers/FingersComponent.jsx ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -517,8 +489,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var _parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/SphereComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx");
-/* harmony import */ var _parts_CylinderComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/CylinderComponent */ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx");
+/* harmony import */ var _parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/SphereComponent */ "./src/components/three/components/fingers/parts/SphereComponent.jsx");
+/* harmony import */ var _parts_CylinderComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/CylinderComponent */ "./src/components/three/components/fingers/parts/CylinderComponent.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
@@ -586,20 +558,23 @@ function FingersComponent({
       // проецируем координаты перед камерой
       objectPosition.addScaledVector(cameraDirection, zPositioner);
       const fingerPositions = [objectPosition.x + position.x, objectPosition.y + position.y, objectPosition.z + position.z];
-      const percentOffset = {
-        x: fingerPositions[0] / (position.x + 1) * (Math.PI * 2),
-        y: (fingerPositions[0] + 1) / (position.y + 1) * (Math.PI * 2),
-        z: (fingerPositions[0] + 1) / (position.z + 1) * (Math.PI * 2)
-      };
-      console.log(percentOffset, percentOffset.x);
+
+      // const percentOffset = {
+      //     x: //pointer.x , // * (Math.PI * 2),
+      //     y: //pointer.y , // * (Math.PI * 2),
+      //     z: //pointer.z , // * (Math.PI * 2),
+      // }
+
       items.push({
         position: fingerPositions,
         finger: pointer.finger,
         flatRotation: {
-          x: rotation.x + Math.PI / 2 + percentOffset.x,
-          y: rotation.y + percentOffset.y,
-          z: rotation.z + percentOffset.z
-        }
+          x: rotation.x + Math.PI / 2,
+          y: rotation.y,
+          z: rotation.z
+        },
+        euler,
+        quaternion
       });
     });
     return items;
@@ -610,7 +585,7 @@ function FingersComponent({
       getViewportSize(frame.camera);
     }
   });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     if (pointers && pointers.length !== fingers.length) {
       const items = refreshPointers();
       setFingers(items);
@@ -627,13 +602,12 @@ function FingersComponent({
           fingerStickRefs.current[i].position.x = item.position[0];
           fingerStickRefs.current[i].position.y = item.position[1];
           fingerStickRefs.current[i].position.z = item.position[2];
-          fingerStickRefs.current[i].rotation.x = item.flatRotation.x;
-          fingerStickRefs.current[i].rotation.y = item.flatRotation.y;
-          fingerStickRefs.current[i].rotation.z = item.flatRotation.z;
+          fingerStickRefs.current[i].euler.copy(item.euler);
+          fingerStickRefs.current[i].quaternion.copy(item.quaternion);
         }
       });
     }
-  });
+  }, [pointers]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, fingers.map((props, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_parts_SphereComponent__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
     ref: element => fingerRefs.current[i] = element,
     key: 'finger-' + i
@@ -645,10 +619,10 @@ function FingersComponent({
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx":
-/*!********************************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/fingers/parts/CylinderComponent.jsx ***!
-  \********************************************************************************************/
+/***/ "./src/components/three/components/fingers/parts/CylinderComponent.jsx":
+/*!*****************************************************************************!*\
+  !*** ./src/components/three/components/fingers/parts/CylinderComponent.jsx ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -690,10 +664,10 @@ const CylinderComponent = (props, ref) => {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx":
-/*!******************************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/fingers/parts/SphereComponent.jsx ***!
-  \******************************************************************************************/
+/***/ "./src/components/three/components/fingers/parts/SphereComponent.jsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/three/components/fingers/parts/SphereComponent.jsx ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -728,10 +702,10 @@ const SphereComponent = (props, ref) => {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx":
-/*!*********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/rocks/RocksComponent.jsx ***!
-  \*********************************************************************************/
+/***/ "./src/components/three/components/rocks/RocksComponent.jsx":
+/*!******************************************************************!*\
+  !*** ./src/components/three/components/rocks/RocksComponent.jsx ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -742,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-99983b2d.esm.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var _parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/stoneOne */ "./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx");
+/* harmony import */ var _parts_stoneOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/stoneOne */ "./src/components/three/components/rocks/parts/stoneOne.jsx");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
@@ -822,10 +796,10 @@ const RocksComponent = ({
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx":
-/*!*********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/components/rocks/parts/stoneOne.jsx ***!
-  \*********************************************************************************/
+/***/ "./src/components/three/components/rocks/parts/stoneOne.jsx":
+/*!******************************************************************!*\
+  !*** ./src/components/three/components/rocks/parts/stoneOne.jsx ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -874,10 +848,10 @@ _react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF.preload(stonePath);
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx":
-/*!***********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/CameraComponent.jsx ***!
-  \***********************************************************************/
+/***/ "./src/components/three/parts/CameraComponent.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/three/parts/CameraComponent.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -969,10 +943,10 @@ function CameraComponent({
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx":
-/*!************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/EffectsComponent.jsx ***!
-  \************************************************************************/
+/***/ "./src/components/three/parts/EffectsComponent.jsx":
+/*!*********************************************************!*\
+  !*** ./src/components/three/parts/EffectsComponent.jsx ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -995,10 +969,10 @@ function EffectsComponent() {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx":
-/*!***********************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/three/parts/LightsComponent.jsx ***!
-  \***********************************************************************/
+/***/ "./src/components/three/parts/LightsComponent.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/three/parts/LightsComponent.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1032,6 +1006,99 @@ function LigtsComponent() {
 
 /***/ }),
 
+/***/ "./src/mixin/KeyboardHandler.jsx":
+/*!***************************************!*\
+  !*** ./src/mixin/KeyboardHandler.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const KeyboardHandler = props => {
+  /*
+  
+      in parent component 
+       const [isKeyPressed, setIsKeyPressed] = useState(false);
+      const [keyCode, setKeyCode] = useState('');
+  */
+
+  const setKeyPressed = (isPressed, value) => {
+    props.setIsKeyPressed(isPressed);
+    props.setKeyCode(value);
+  };
+  const onKeyPress = e => {
+    setKeyPressed(true, e.keyCode);
+  };
+  const onKeyUp = e => {
+    setKeyPressed(false, '');
+  };
+  if (typeof window !== undefined) {
+    document.addEventListener('keydown', onKeyPress);
+    document.addEventListener('keyup', onKeyUp);
+  }
+  return null;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (KeyboardHandler);
+
+/***/ }),
+
+/***/ "./src/pages/TestMediaPipe/TestMediaPipe.jsx":
+/*!***************************************************!*\
+  !*** ./src/pages/TestMediaPipe/TestMediaPipe.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_client_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-client-only */ "./node_modules/react-client-only/index.mjs");
+/* harmony import */ var _components_modules_handDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/modules/handDetection/HandDetectionComponent */ "./src/components/modules/handDetection/HandDetectionComponent.jsx");
+/* harmony import */ var _components_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/three/TestWebGLComponent */ "./src/components/three/TestWebGLComponent.jsx");
+/* harmony import */ var _components_modules_handDetection_CanvasMaskComponent_CanvasMaskComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/modules/handDetection/CanvasMaskComponent/CanvasMaskComponent */ "./src/components/modules/handDetection/CanvasMaskComponent/CanvasMaskComponent.jsx");
+/* harmony import */ var _components_modules_handDetection_utils_HandsValueHandler__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/modules/handDetection/utils/HandsValueHandler */ "./src/components/modules/handDetection/utils/HandsValueHandler.jsx");
+/* harmony import */ var _utils_getDistance_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/utils/getDistance.js */ "./src/utils/getDistance.js");
+
+
+
+
+
+
+
+const TestMediaPipe = () => {
+  const width = 472;
+  const height = 354;
+
+  // данные из media-pipe
+  const [rawValues, setRawValues] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
+  // данные, преобразованные в нужные нам в HandsValueHandler
+  const [pointers, setPointers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_client_only__WEBPACK_IMPORTED_MODULE_1__.ClientOnly, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_three_TestWebGLComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    pointers: pointers,
+    width: width,
+    height: height
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_modules_handDetection_HandDetectionComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onValues: setRawValues
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_modules_handDetection_utils_HandsValueHandler__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    setPointers: setPointers,
+    rawValues: rawValues
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TestMediaPipe);
+
+/***/ }),
+
 /***/ "./src/utils/getDistance.js":
 /*!**********************************!*\
   !*** ./src/utils/getDistance.js ***!
@@ -1053,10 +1120,10 @@ const getDistance = (a, b) => {
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/CanvasMaskComponent/canvasMaskComponent.sass":
-/*!************************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/CanvasMaskComponent/canvasMaskComponent.sass ***!
-  \************************************************************************************/
+/***/ "./src/components/modules/handDetection/CanvasMaskComponent/canvasMaskComponent.sass":
+/*!*******************************************************************************************!*\
+  !*** ./src/components/modules/handDetection/CanvasMaskComponent/canvasMaskComponent.sass ***!
+  \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1065,10 +1132,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass":
-/*!*********************************************************************************!*\
-  !*** ./src/pages/TestMediaPipe/parts/HandDetection/handDetectionComponent.sass ***!
-  \*********************************************************************************/
+/***/ "./src/components/modules/handDetection/handDetectionComponent.sass":
+/*!**************************************************************************!*\
+  !*** ./src/components/modules/handDetection/handDetectionComponent.sass ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

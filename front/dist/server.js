@@ -341,6 +341,7 @@ const LayoutComponent = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)
 const SecondPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_PageSecond_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/PageSecond */ "./src/pages/PageSecond.jsx")));
 const LoginPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_AuthPage_AuthPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/AuthPage/AuthPage */ "./src/pages/AuthPage/AuthPage.jsx")));
 const TestMediaPipe = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_TestMediaPipe_TestMediaPipe_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/TestMediaPipe/TestMediaPipe */ "./src/pages/TestMediaPipe/TestMediaPipe.jsx")));
+const SvgDrawerPage = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(() => __webpack_require__.e(/*! import() */ "src_pages_SvgDrawerPage_SvgDrawerPage_jsx").then(__webpack_require__.bind(__webpack_require__, /*! @/pages/SvgDrawerPage/SvgDrawerPage */ "./src/pages/SvgDrawerPage/SvgDrawerPage.jsx")));
 const routesArray = [{
   path: "/",
   name: 'Home',
@@ -389,6 +390,19 @@ const routesArray = [{
         height: "300px"
       })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TestMediaPipe, null)));
+  }
+}, {
+  path: "/svg-drawer",
+  name: 'SvgDrawerPage',
+  Component() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(LayoutComponent, {
+      title: "Svg drawer"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+      isDeferred: true,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_primitives_Preloader_preloader__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        height: "300px"
+      })
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SvgDrawerPage, null)));
   }
 }, {
   path: '/auth',
@@ -676,18 +690,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/routes/routesData.js */ "./src/routes/routesData.js");
-/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom/server */ "react-router-dom/server");
-/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "@apollo/client");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! serialize-javascript */ "serialize-javascript");
-/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(serialize_javascript__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./request */ "./ssr/server/request.js");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/routes/routesData.js */ "./src/routes/routesData.js");
+/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom/server */ "react-router-dom/server");
+/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_router_dom_server__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "@apollo/client");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! serialize-javascript */ "serialize-javascript");
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(serialize_javascript__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./request */ "./ssr/server/request.js");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -697,9 +714,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (async (req, res, store, contextData) => {
-  const apolloClient = new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloClient({
+  const apolloClient = new _apollo_client__WEBPACK_IMPORTED_MODULE_5__.ApolloClient({
     ssrMode: true,
-    link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.createHttpLink)({
+    link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.createHttpLink)({
       uri: {"env":{"GRAPHQL_HOST":"http://localhost:4000/ql/","FRONTEND_PORT":"3000","WS_PORT":"9000","NODE_ENV":"development"}}.env.GRAPHQL_HOST,
       credentials: 'same-origin',
       // ||  include
@@ -707,17 +724,19 @@ __webpack_require__.r(__webpack_exports__);
         cookie: req.header('Cookie')
       }
     }),
-    cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.InMemoryCache()
+    cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_5__.InMemoryCache()
   });
-  const handler = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticHandler)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_2__.routesArray);
-  const fetchRequest = (0,_request__WEBPACK_IMPORTED_MODULE_6__.createFetchRequest)(req, res);
+  const handler = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_4__.createStaticHandler)(_src_routes_routesData_js__WEBPACK_IMPORTED_MODULE_3__.routesArray);
+  const fetchRequest = (0,_request__WEBPACK_IMPORTED_MODULE_7__.createFetchRequest)(req, res);
   const context = await handler.query(fetchRequest);
-  const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.createStaticRouter)(handler.dataRoutes, context, {
+  const router = (0,react_router_dom_server__WEBPACK_IMPORTED_MODULE_4__.createStaticRouter)(handler.dataRoutes, context, {
     future: {
       v7_partialHydration: true
     }
   });
   const initialApolloState = apolloClient.extract();
+
+  // /src_layouts_default_jsx.css - нужно будет поменять при смене темы
   const App = () => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("html", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("head", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meta", {
       charSet: "utf-8"
@@ -726,18 +745,21 @@ __webpack_require__.r(__webpack_exports__);
       content: "width=device-width, initial-scale=1"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
       rel: "stylesheet",
-      href: "/client/client.css"
+      href: "/src_layouts_default_jsx.css"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
+      rel: "stylesheet",
+      href: "/server.css"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
       rel: "icon",
       type: "image/x-icon",
       href: "/client/favicon.ico"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("title", null, "App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("body", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       id: "root"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_4__.ApolloProvider, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_5__.ApolloProvider, {
       client: apolloClient
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__.Provider, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
       store: store
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_3__.StaticRouterProvider, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_4__.StaticRouterProvider, {
       router: router,
       context: context,
       location: req.url
@@ -746,11 +768,11 @@ __webpack_require__.r(__webpack_exports__);
   const {
     pipe,
     abort
-  } = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_7__.renderToPipeableStream)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(App, null), {
+  } = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_8__.renderToPipeableStream)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(App, null), {
     bootstrapScripts: ['/client/vendor.js', '/client/client.js'],
     bootstrapScriptContent: `
-        window.__APOLLO_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(initialApolloState)};
-        window.__INITIAL_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState())};
+        window.__APOLLO_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_6___default()(initialApolloState)};
+        window.__INITIAL_STATE__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_6___default()(store.getState())};
       `,
     onShellReady() {
       res.setHeader('content-type', 'text/html');
@@ -907,7 +929,8 @@ module.exports = {
       '@/graphql': path.resolve(__dirname, '../src/graphql'),
       '@/websocket': path.resolve(__dirname, '../src/websocket'),
       '@/utils': path.resolve(__dirname, '../src/utils'),
-      '@/config': path.resolve(__dirname, '../src/config')
+      '@/config': path.resolve(__dirname, '../src/config'),
+      '@/mixin': path.resolve(__dirname, '../src/mixin')
     }
   },
   module: {
@@ -1332,6 +1355,17 @@ module.exports = require("webpack-hot-middleware");
 
 "use strict";
 module.exports = require("webpack-merge");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
 
 /***/ }),
 

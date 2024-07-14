@@ -1,4 +1,5 @@
 import React from "react";
+import fs from 'fs';
 import { Provider } from 'react-redux';
 import { routesArray } from '../../src/routes/routesData.js';
 import {
@@ -43,14 +44,18 @@ export default async (req, res, store, contextData) => {
   );
 
   const initialApolloState = apolloClient.extract();
-  
+
+  // /src_layouts_default_jsx.css - нужно будет поменять при смене темы
   const App = () => {
     return (
       <html>
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="/client/client.css"></link>
+          
+          <link rel="stylesheet" href="/src_layouts_default_jsx.css"></link>
+
+          <link rel="stylesheet" href="/server.css"></link>
           <link rel="icon" type="image/x-icon" href="/client/favicon.ico"></link>
           <title>App</title>
         </head>

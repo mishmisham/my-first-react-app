@@ -8,6 +8,7 @@ const LayoutComponent = lazy(()=>import('@/layouts/default'));
 const SecondPage = lazy(()=>import('@/pages/PageSecond'));
 const LoginPage = lazy(()=>import('@/pages/AuthPage/AuthPage'));
 const TestMediaPipe = lazy(()=>import('@/pages/TestMediaPipe/TestMediaPipe'));
+const SvgDrawerPage = lazy(()=>import('@/pages/SvgDrawerPage/SvgDrawerPage'));
 
 export const routesArray = [
     {
@@ -58,6 +59,19 @@ export const routesArray = [
             >
               <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
                 <TestMediaPipe />
+              </Suspense>
+            </LayoutComponent>
+      }
+    },
+    {
+      path: "/svg-drawer",
+      name: 'SvgDrawerPage',
+      Component() {
+        return <LayoutComponent
+              title="Svg drawer"
+            >
+              <Suspense isDeferred={true} fallback={ <Preloader height='300px' />}>
+                <SvgDrawerPage />
               </Suspense>
             </LayoutComponent>
       }

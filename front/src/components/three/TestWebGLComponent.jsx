@@ -19,6 +19,7 @@ import RocksComponent from './components/rocks/RocksComponent'
 import Terrain from './components/Terrain'
 // import Ocean from './components/Ocean'
 // {/* <Ocean /> */}
+import KeyboardHandler from '@/mixin/KeyboardHandler'
 export default function TestWebGLComponent({pointers, width, height}) {
 
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -31,37 +32,13 @@ export default function TestWebGLComponent({pointers, width, height}) {
     rocksComponent.current.setNeedNewData(true);
   }
 
-  const setMouseDown = (value) => {
-    setIsMouseDown(value);
-  }
-
-  const setKeyPressed = (isPressed, value) => {
-    setIsKeyPressed(isPressed);
-    setKeyCode(value);
-  }
-
-  const onKeyPress = (e) => {
-    setKeyPressed(true, e.keyCode)
-  }
-
-  const onKeyUp = (e) => {
-    setKeyPressed(false, '')
-  }
-
-  if (typeof window !== undefined) {
-    document.addEventListener('keydown', onKeyPress)
-    document.addEventListener('keyup', onKeyUp)
-  }
-
   const onGetItems = (rocks) => {
     console.log('rocks', rocks)
   }
 
   /*
-  
     position={[1,9,12]}
     rotation={[-0.7,-0.2,0]}
-
   */
 
   return (
@@ -69,9 +46,9 @@ export default function TestWebGLComponent({pointers, width, height}) {
       <div style={{height: height+'px'}}>
         <Canvas
           shadows
-          onMouseDown={e=>setMouseDown(true)}
-          onMouseUp={e=>setMouseDown(false)}
-          onMouseLeave={e=>setMouseDown(false)}
+          onMouseDown={e=>setIsMouseDown(true)}
+          onMouseUp={e=>setIsMouseDown(false)}
+          onMouseLeave={e=>setIsMouseDown(false)}
         >
           <Suspense fallback={null}>
 
@@ -118,7 +95,10 @@ export default function TestWebGLComponent({pointers, width, height}) {
           </Suspense>
         </Canvas>
 
-        
+        <KeyboardHandler
+          setKeyCode={setKeyCode}
+          setIsKeyPressed={setIsKeyPressed}
+        />
       </div>
 
       <button onClick={getRocksScreenPositions}> get Rocks Screen Positions </button>

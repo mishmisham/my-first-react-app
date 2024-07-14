@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { ClientOnly } from "react-client-only";
 
-import HandDetectionComponent from './parts/HandDetection/HandDetectionComponent'
-import TestWebGLComponent from './parts/three/TestWebGLComponent'
-import CanvasMaskComponent from './parts/CanvasMaskComponent/CanvasMaskComponent'
+import HandDetectionComponent from '@/components/modules/handDetection/HandDetectionComponent'
+import TestWebGLComponent from '@/components/three/TestWebGLComponent'
+import CanvasMaskComponent from '@/components/modules/handDetection/CanvasMaskComponent/CanvasMaskComponent'
+import HandsValueHandler from '@/components/modules/handDetection/utils/HandsValueHandler'
 
 import { getDistance } from '@/utils/getDistance.js'
 
@@ -12,60 +13,15 @@ const TestMediaPipe = () => {
   const width = 472
   const height = 354
 
+  // данные из media-pipe
+  const [rawValues, setRawValues] = useState({})
+  // данные, преобразованные в нужные нам в HandsValueHandler
   const [pointers, setPointers] = useState([])
-
-  // делаем зеркальное отражение координат
-  const getTranslatedXYZ = (xyz) => {
-    const {
-      x,
-      y, 
-      z
-    } = xyz;
-    return {
-      x: x * -1,
-      y: y * -1, 
-      z: z * -1
-    }
-  }
-  
-  const onValues = (handData) => {
-    /*
-      const maxDistance = getDistance(THUMB_CMC, PINKY_MCP);
-      const catchDistance = getDistance(THUMB_TIP, INDEX_FINGER_TIP);
-      console.log('max, catch', maxDistance, catchDistance)
-    */
-
-      if (handData?.landmarks.length) {
-        const { landmarks } = handData;
-
-        const newPointers = [];
-
-        // обе руки
-        landmarks.forEach(hand => {
-          // кончик большого пальца
-          const thumbTip = {
-            finger: 'THUMB_TIP',
-            ...getTranslatedXYZ(hand[4]),
-          }
-          newPointers.push( thumbTip );
-
-          // кончик указательного пальца
-          const indexFingerTip = {
-            finger: 'INDEX_FINGER_TIP',
-            ...getTranslatedXYZ(hand[8])
-          }
-          newPointers.push( indexFingerTip )
-        });
-
-        setPointers(newPointers);
-      } else {
-        setPointers([]);
-      }
-  }
 
   return (
     <ClientOnly>
         <div style={{position: 'relative'}}>
+
           <TestWebGLComponent
             pointers={pointers}
             width={width}
@@ -79,8 +35,14 @@ const TestMediaPipe = () => {
           /> */}
           
           <HandDetectionComponent
-            onValues={onValues}
+            onValues={setRawValues}
           />
+
+          <HandsValueHandler
+            setPointers={setPointers}
+            rawValues={rawValues}
+          />
+
         </div>
     </ClientOnly>
   );

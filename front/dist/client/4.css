@@ -93,7 +93,7 @@ button {
   display: flex;
 }
 .nav-menu_item {
-  padding: 6px 32px;
+  padding: 6px 14px;
   display: flex;
   align-content: center;
   align-items: center;

@@ -23,6 +23,7 @@ module.exports = {
       '@/websocket': path.resolve(__dirname, '../src/websocket'),
       '@/utils': path.resolve(__dirname, '../src/utils'),
       '@/config': path.resolve(__dirname, '../src/config'),
+      '@/mixin': path.resolve(__dirname, '../src/mixin'),
     },
   },
   module: {
